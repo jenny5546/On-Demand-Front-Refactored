@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import "../scss/Step0.scss"
 
 class Step0 extends React.Component{
@@ -8,7 +9,10 @@ class Step0 extends React.Component{
                 <div className="outer_box">
                     <div className="inner_box">
                         <img src="./floor_plan_gif.png" alt="floor_plan" />
-                        <h3> this is our form flow </h3>
+                        <h3> this is Step1 </h3>
+                        <button className="button"><Link to="/step2">
+                            Get Started
+                        </Link></button>
                     </div>
                 </div>
             </div>
