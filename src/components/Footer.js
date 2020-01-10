@@ -5,7 +5,7 @@ class Footer extends React.Component{
     render(){
         return(
             <div className="Footer">
-                <h1> this is footer </h1>
+                <img className="image" src="./Archisketch_Logo.png" alt="logo" />
             </div>
         )
     }

@@ -7,20 +7,16 @@
 > 2. Sass/Scss를 가지고 SMACSS, BEM, OOCSS, Atomic 4가지 방법론을 혼용하여, 최대한 매끄러운 CSS Structure 구성해보기
 > 3. 관리는 Github으로 소통 및 진행하기
 
-![img](https://github.com/sujinleeme/readme-template/raw/master/header.png)
+![img](./public/README_img.png)
 
 
 ### Environment
 ------
 
 Ubuntu 18.0.4
-
 Python 3.6
-
 Node.js 12.14.0
-
 npm 6.13.4
-
 
 
 ### Update
@@ -28,10 +24,12 @@ npm 6.13.4
 
 - 0.1
   - landing page layout
+- 0.2
+  - linking landing page & step 0
 
 
 
-### milestones
+### Milestones
 ------
  -  due date : 1/31
 

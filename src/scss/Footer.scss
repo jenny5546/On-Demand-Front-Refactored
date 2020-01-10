@@ -1,5 +1,13 @@
+@import "./01-base/color";
+
 .Footer{
     //position: absolute;
     width: 100%;
-    background-color: rgb(190, 184, 184);
+    height: 100px;
+    img{
+        height: 50px;
+    }
+    background-color: $bg_primary;
+    text-align: center;
+    border: 1px solid black;
 }

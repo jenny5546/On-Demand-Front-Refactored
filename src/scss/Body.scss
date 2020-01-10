@@ -1,21 +1,26 @@
-.Body {
-    //background-color: rgba(97, 42, 42, 0.5);
+@import "./01-base/color";
 
+.Body {
+    background-color: $bg_secondary;
+    //text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 120px;
     .topcontent {
+        overflow: hidden;
         height: 512px;
         display: flex;
         flex-direction: row;
-
-        //height: 100%;
-        margin-left: 10%;
-        margin-right: 10%;
-        margin-top: 10%;
-        .text {
+        justify-content: center;
+        .description {
             padding: 5px;
             border: 2px solid black;
         }
         .gif{
             margin-left: 5%;
+        }
+        .button{
+            text-align: center;
         }
     }
     

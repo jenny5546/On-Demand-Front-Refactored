@@ -1,4 +1,15 @@
+
+@import "./01-base/typography";
+
 .App{
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.App0{
     height: 100vh;
     overflow-y: scroll;
     display: flex;
