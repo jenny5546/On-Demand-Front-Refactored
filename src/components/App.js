@@ -1,11 +1,17 @@
 import React from 'react';
-import Test from './test';
-import '../scss/test.scss';
+import Headers from './Header';
+import Body from './Body';
+import Footer from './Footer';
+import "../scss/App.scss"
 
 class App extends React.Component{
   render(){
     return (
-      <Test />
+      <div className="App">
+        <Headers />
+        <Body />
+        <Footer />
+      </div>
     )
   }
 }

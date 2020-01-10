@@ -27,11 +27,11 @@ npm 6.13.4
 ------
 
 - 0.1
-  - 전체 layout 설정
+  - landing page layout
 
 
 
 ### milestones
 ------
- -[ ] make plan
+ -  due date : 1/31
 
