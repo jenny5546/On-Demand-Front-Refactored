@@ -8,7 +8,7 @@ class Headers extends React.Component{
             <div className="mainheader">
                 <div className="contents">
                     <div className="logo">
-                        <img className="image" src="./Archisketch_Logo.png" alt="logo" />
+                        <a href="/"><img className="image" src="./Archisketch_Logo.png" alt="logo" /></a>
                     </div>
                     <ul className="menubar">
                         <li className="menu home"> Home </li>

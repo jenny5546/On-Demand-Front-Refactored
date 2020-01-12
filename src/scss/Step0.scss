@@ -1,22 +1,26 @@
 @import "./01-base/color";
 
 .Step0 {
-    background-color: $bg_primary;
+    //background-color: $bg_primary;
     //text-align: center;
 
     margin-top: 100px;
     .outer_box{
-        background-color: $bg_secondary;
+        //background-color: $bg_secondary;
+        background-color: lightblue;
+        position: relative;
+        width: 100%;
         height: 80vh;
-        margin-left: 10%;
-        margin-right: 10%;
-        border: 2px solid black;
         .inner_box{
             display: flex;
             flex-direction: row;
-            margin: 10vh;
+            margin-left: 10%;
+            margin-right: 10%;
+            //margin: 10vh;
             height: 60vh;
             background-color: $bg_thirdary;
+            border: 2px solid black;
+
             color: black;
             img{
                 justify-content: center;

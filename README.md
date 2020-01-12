@@ -29,6 +29,8 @@ npm 6.13.4
   - landing page layout
 - 0.2
   - linking landing page & step 0
+- 0.3
+  - All page frame update / Milestone update 
 
 
 

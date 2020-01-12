@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import "../scss/Step0.scss"
 
-class Step0 extends React.Component{
+class Step1 extends React.Component{
     render() {
         return(
             <div className="Step0">
@@ -11,7 +11,10 @@ class Step0 extends React.Component{
                         <img src="./floor_plan_gif.png" alt="floor_plan" />
                         <h3> this is Step1 </h3>
                         <button className="button"><Link to="/step2">
-                            Get Started
+                            go Step 2
+                        </Link></button>
+                        <button className="button"><Link to="/step0">
+                            back
                         </Link></button>
                     </div>
                 </div>
@@ -20,4 +23,4 @@ class Step0 extends React.Component{
     }
 }
 
-export default Step0
+export default Step1
