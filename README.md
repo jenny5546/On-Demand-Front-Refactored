@@ -10,7 +10,7 @@
 ![img](./public/README_img.png)
 
 
-### Environment
+### Environment / Install
 ------
 
 Ubuntu 18.0.4
@@ -18,6 +18,9 @@ Python 3.6
 Node.js 12.14.0
 npm 6.13.4
 
+<code> npm install -g </code>
+<code> npm install --save react-router-dom </code>
+<code> npm install -g node-sass </code>
 
 ### Update
 ------
@@ -31,5 +34,26 @@ npm 6.13.4
 
 ### Milestones
 ------
- -  due date : 1/31
+ -  [ ] due date : 1/31
+ -  [ ] Page layout
+     -  [ ] step page layout 완성 [1]
+     -  [ ] page contents 제작
+         -  [ ] Landing page GIF [3]
+         -  [ ] Step 0 GIF [3]
+         -  [ ] Interior imgae data set(+ tagging) [1]
+-  [ ] Functions
+   -  [ ] Step별 data에 따른 output 설정
+      -  [ ] data container [1]
+      -  [ ] step 2 format alert [1]
+      -  [ ] step 3 image output [1]
+      -  [ ] step 5(summary & user info 받아오기) [1]
+   -  [ ] Payment [3]
+-  [ ] Design
+   -  [ ] Page transition effects [2]
+   -  [ ] Button effects [2]
+   -  [ ] Progress bar [2]
+   -  [ ] Colors [2]
+-  [ ] Structure
+   -  [ ] Scss 모듈화 / 정리 [2]
+   -  [ ] Components 모듈화 / 정리 [2]
 
