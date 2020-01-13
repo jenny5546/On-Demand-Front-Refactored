@@ -42,6 +42,7 @@ npm 6.13.4
      -  [ ] page contents 제작
          -  [ ] Landing page GIF [3]
          -  [ ] Step 0 GIF [3]
+         -  [ ] Progress bar [3]
          -  [ ] Interior imgae data set(+ tagging) [1]
 -  [ ] Functions
    -  [ ] Step별 data에 따른 output 설정
