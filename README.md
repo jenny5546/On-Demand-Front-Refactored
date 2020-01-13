@@ -46,7 +46,7 @@ npm 6.13.4
          -  [ ] Interior imgae data set(+ tagging) [1]
 -  [ ] Functions
    -  [ ] Step별 data에 따른 output 설정
-      -  [ ] data container [1]
+      -  [x] data container [1] *2020.01.13*
       -  [ ] step 2 format alert [1]
       -  [ ] step 3 image output [1]
       -  [ ] step 5(summary & user info 받아오기) [1]

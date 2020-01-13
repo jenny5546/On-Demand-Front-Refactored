@@ -8,6 +8,8 @@ functions
 commercial 선택시 next 누르면 1-1로 연결하기
 data sturcture에 데이터 모으기
 
+linking state 로 하기
+
 hover를 걸면 value가 제대로 안나옴.
 */
 
@@ -22,9 +24,17 @@ const urlMaker = text => {
 }
 
 class Step0 extends React.Component{
+    constructor(props){
+        super(props)
+
+        this.setState({
+            pagenumber: 0,
+        })
+    }
 
     render() {
-        const {list, onClick} = this.props
+        const {list, getData} = this.props
+        //const {pagenumber} = this.state.pagenumber
         return(
             <div className="Step1">
                 <div className="outer_box">
@@ -34,12 +44,12 @@ class Step0 extends React.Component{
                                 <h3> Progress bar </h3>
                             </div>
                             <div className="choicebox">
-                                <button className="choice" value="residential" onClick={onClick}> 
+                                <button className="choice" value="residential" onClick={(event, pagenumber)=>getData(event, pagenumber)}> 
                                 Residential
                                 {/*<span className="description">Single, Multi-Family Homes, Condominiums, <br/>
                                     Townhouses and Dormatories </span>*/}
                                 </button>
-                                <button className="choice" value="commercial" onClick={onClick}> 
+                                <button className="choice" value="commercial" onClick={(event, pagenumber)=>getData(event, pagenumber)}> 
                                 Commercial
                                 {/*<span className="description">Offices, Restaurant/ Cafes, Shops, Hotels or <br/>
                                 special purpose buildings (schools, hospitals and etc. </span>*/}

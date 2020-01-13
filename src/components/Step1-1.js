@@ -8,8 +8,16 @@ functions
 data sturcture에 데이터 모으기
 */
 class Step0 extends React.Component{
+    constructor(props){
+        super(props)
+
+        this.setState({
+            pagenumber: 1,
+        })
+    }
+
     render() {
-        const {list, onClick} = this.props
+        const {list, getData} = this.props
 
         return(
             <div className="Step1">
@@ -20,11 +28,20 @@ class Step0 extends React.Component{
                                 <h3> Progress bar </h3>
                             </div>
                             <div className="choicebox">
-                                <button className="choice" value="residential" onClick={onClick}> 
-                                Resdsdsddsdal 
+                                <button className="choice" value="Office" onClick={getData}> 
+                                Office
                                 </button>
-                                <button className="choice"> 
-                                Cddal
+                                <button className="choice" value="Restaurant / cafe" onClick={getData}> 
+                                Restaurant / cafe
+                                </button>
+                                <button className="choice" value="Shop" onClick={getData}> 
+                                Shop
+                                </button>
+                                <button className="choice" value="Hotel" onClick={getData}> 
+                                Hotel
+                                </button>
+                                <button className="choice" value="Others" onClick={getData}> 
+                                Othres
                                 </button>
                             </div>
                         </div>
