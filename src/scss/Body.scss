@@ -1,30 +1,44 @@
 @import "./01-base/color";
 
-.Body {
-    background-color: $bg_secondary;
+.ondemand {
+    //overflow: hidden;
+    //background-color: $bg_secondary;
+    background-image: url("./back.jpg");
+    //background-repeat: no-repeat;
     //text-align: center;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 120px;
-    .topcontent {
-        overflow: hidden;
+    //background-color: rgba($color: #000000, $alpha: 0.5);
+    
+
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 120px;
+    min-width: 1000px;
+    color: white;
+    &__top {
+        //overflow: hidden;
         height: 512px;
         display: flex;
         flex-direction: row;
+        flex: auto;
+        min-width: 1000px;
         justify-content: center;
-        .description {
-            padding: 5px;
-            border: 2px solid black;
-        }
-        .gif{
-            margin-left: 5%;
-        }
-        .button{
-            text-align: center;
-        }
     }
-    
-    .bottomcontent{
+    &__description {
+        //background-color: rgba($color: #ffffff, $alpha: 0.5);
+        padding: 10px;
+        flex: auto;
+        //border: 2px solid black;
+    }
+    /*
+    &__gif {
+        margin-left: 5%;
+    }
+    */
+    &__button {
+        text-align: center;
+    }
+
+    &__bottom {
         text-align: center;
     }
 }

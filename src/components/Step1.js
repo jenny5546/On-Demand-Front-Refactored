@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import "../scss/Step0.scss"
+import "../scss/Step.scss"
 
 /*
 functions
@@ -13,7 +13,7 @@ linking state 로 하기
 hover를 걸면 value가 제대로 안나옴.
 */
 
-class Step0 extends React.Component{
+class Step1 extends React.Component{
     constructor(props){
         super(props)
 
@@ -94,4 +94,4 @@ class Step0 extends React.Component{
     }
 }
 
-export default Step0
+export default Step1

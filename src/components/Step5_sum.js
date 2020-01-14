@@ -1,13 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import "../scss/Step0.scss"
+import "../scss/Step.scss"
 
 /*
 functions
 ================
 data 보여주기
 */
-
 /*
   {
     dataContainer: [],

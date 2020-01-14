@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react'
 import { Link } from 'react-router-dom';
-import "../scss/Step0.scss"
+import "../scss/Step.scss"
 import {useDropzone} from 'react-dropzone';
 
 /*
@@ -50,7 +50,7 @@ function Accept(props) {
   }
   
 
-class Step0 extends React.Component{
+class Step2 extends React.Component{
     constructor(props){
         super(props)
 
@@ -106,4 +106,4 @@ class Step0 extends React.Component{
     }
 }
 
-export default Step0
+export default Step2

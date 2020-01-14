@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import "../scss/Step0.scss"
+import "../scss/Step.scss"
 
 /*
 functions
@@ -9,7 +9,7 @@ functions
 일단 랜덤하게 띄우자
 */
 
-class Step0 extends React.Component{
+class Step3 extends React.Component{
     constructor(props){
         super(props)
 
@@ -64,4 +64,4 @@ class Step0 extends React.Component{
     }
 }
 
-export default Step0
+export default Step3

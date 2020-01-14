@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import "../scss/Step0.scss"
+import "../scss/Step.scss"
 
 /*
 functions
@@ -8,7 +8,7 @@ functions
 data input 저장하기
 */
 
-class Step0 extends React.Component{
+class Step4 extends React.Component{
     constructor(props){
         super(props)
 
@@ -54,4 +54,4 @@ class Step0 extends React.Component{
     }
 }
 
-export default Step0
+export default Step4

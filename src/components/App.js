@@ -110,8 +110,8 @@ class App extends React.Component{
           <Route path="/step5" render={(props)=><Step5 list={this.state.list} dataContainer={this.state.dataContainer} isAuthed={true} />}/>
           {/*404page will be here*/}
         </Switch>
-        <Footer />
-      </div>
+        {/*<Footer />*/}
+        </div>
     )
   }
 }
