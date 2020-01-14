@@ -11,13 +11,19 @@ class Step0 extends React.Component{
     constructor(props){
         super(props)
 
-        this.setState({
+        this.state = {
             pagenumber: 1,
-        })
+        }
+
+        this.change=this.change.bind(this)
+    }
+
+    change(e){
+        this.props.changeData(e.target.value, this.state.pagenumber)
     }
 
     render() {
-        const {list, getData} = this.props
+        const {list} = this.props
 
         return(
             <div className="Step1">
@@ -28,19 +34,19 @@ class Step0 extends React.Component{
                                 <h3> Progress bar </h3>
                             </div>
                             <div className="choicebox">
-                                <button className="choice" value="Office" onClick={getData}> 
+                                <button className="choice" value="Office" onClick={this.change}> 
                                 Office
                                 </button>
-                                <button className="choice" value="Restaurant / cafe" onClick={getData}> 
+                                <button className="choice" value="Restaurant / cafe" onClick={this.change}> 
                                 Restaurant / cafe
                                 </button>
-                                <button className="choice" value="Shop" onClick={getData}> 
+                                <button className="choice" value="Shop" onClick={this.change}> 
                                 Shop
                                 </button>
-                                <button className="choice" value="Hotel" onClick={getData}> 
+                                <button className="choice" value="Hotel" onClick={this.change}> 
                                 Hotel
                                 </button>
-                                <button className="choice" value="Others" onClick={getData}> 
+                                <button className="choice" value="Others" onClick={this.change}> 
                                 Othres
                                 </button>
                             </div>

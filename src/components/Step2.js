@@ -20,7 +20,7 @@ class Step0 extends React.Component{
     }
 
     render() {
-        const {list, getdata} = this.props
+        const {list} = this.props
         return(
             <div className="Step0">
                 <div className="outer_box">

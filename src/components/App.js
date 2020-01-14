@@ -46,8 +46,6 @@ class App extends React.Component{
       pagenum: 0,
     }
     this.changeData = this.changeData.bind(this)
-    this.getData = this.getData.bind(this)
-    this.countDown = this.countDown.bind(this)
   }
 
   
@@ -57,30 +55,8 @@ class App extends React.Component{
     this.setState({
       list: newlist,
     })
-    //console.log(num)
   }
   
-  getData = (event, num) => {
-    this.setState({
-      inputData: event.target.value,
-      pagenum: num
-    })
-    
-    this.changeData(event.target.value, this.state.pagenum)
-    console.log(event.target.value)
-    console.log(num)
-  }
-
-  countDown(event){
-
-    this.setState({
-      number: event.target.value-1,
-
-    })
-    console.log("countdown!!!")
-    console.log(event.target.value)
-    console.log(this.state.number)
-  }
 
   render(){
     return (
@@ -88,8 +64,8 @@ class App extends React.Component{
         <Headers />
         <Route exact path="/" component={Body}/>
         <Route path="/step0" render={(props)=><Step0 list={this.state.list} isAuthed={true} />}/>
-        <Route path="/step1" render={(props)=><Step1 list={this.state.list} getData={this.getData} test={this.test} isAuthed={true} />}/>
-        <Route path="/step1-1" render={(props)=><Step1_1 list={this.state.list} getData={this.getData} isAuthed={true} />}/>
+        <Route path="/step1" render={(props)=><Step1 list={this.state.list} changeData={this.changeData} isAuthed={true} />}/>
+        <Route path="/step1-1" render={(props)=><Step1_1 list={this.state.list} changeData={this.changeData} isAuthed={true} />}/>
         <Route path="/step2" component={Step2} />
         <Route path="/step3" component={Step3}/>
         <Route path="/step4" component={Step4}/>

@@ -9,6 +9,13 @@ functions
 */
 
 class Step0 extends React.Component{
+    constructor(props){
+        super(props)
+
+        this.setState({
+            pagenumber: 3,
+        })
+    }
     render() {
         return(
             <div className="Step0">

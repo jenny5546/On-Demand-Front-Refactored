@@ -9,6 +9,14 @@ data input 저장하기
 */
 
 class Step0 extends React.Component{
+    constructor(props){
+        super(props)
+
+        this.setState({
+            pagenumber: 4,
+        })
+    }
+
     render() {
         return(
             <div className="Step4">

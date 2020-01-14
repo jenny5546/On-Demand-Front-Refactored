@@ -27,13 +27,19 @@ class Step0 extends React.Component{
     constructor(props){
         super(props)
 
-        this.setState({
+        this.state={
             pagenumber: 0,
-        })
+        }
+
+        this.change = this.change.bind(this)
+    }
+
+    change(e){
+        this.props.changeData(e.target.value, this.state.pagenumber)
     }
 
     render() {
-        const {list, getData} = this.props
+        const {list, changeData} = this.props
         //const {pagenumber} = this.state.pagenumber
         return(
             <div className="Step1">
@@ -44,15 +50,16 @@ class Step0 extends React.Component{
                                 <h3> Progress bar </h3>
                             </div>
                             <div className="choicebox">
-                                <button className="choice" value="residential" onClick={(event, pagenumber)=>getData(event, pagenumber)}> 
+                                <button className="choice" value="residential" onClick={this.change}> 
                                 Residential
                                 {/*<span className="description">Single, Multi-Family Homes, Condominiums, <br/>
                                     Townhouses and Dormatories </span>*/}
                                 </button>
-                                <button className="choice" value="commercial" onClick={(event, pagenumber)=>getData(event, pagenumber)}> 
+                                <button className="choice" value="commercial" onClick={this.change} > 
                                 Commercial
                                 {/*<span className="description">Offices, Restaurant/ Cafes, Shops, Hotels or <br/>
-                                special purpose buildings (schools, hospitals and etc. </span>*/}
+                                special purpose buildings (schools, hospitals and etc. </span>
+                                onClick={(event, pagenumber)=>getData(event, pagenumber)}*/}
                                 </button>
                             </div>
                         </div>
