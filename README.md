@@ -31,6 +31,8 @@ npm 6.13.4
   - linking landing page & step 0
 - 0.3
   - All page frame update / Milestone update 
+- 0.4
+  - add page contents / build data structure
 
 
 
@@ -38,18 +40,20 @@ npm 6.13.4
 ------
  -  [ ] due date : 1/31
  -  [ ] Page layout
-     -  [ ] step page layout 완성 [1]
+     -  [x] step page layout 완성 [1] *2020.01.14*
      -  [ ] page contents 제작
          -  [ ] Landing page GIF [3]
          -  [ ] Step 0 GIF [3]
          -  [ ] Progress bar [3]
-         -  [ ] Interior imgae data set(+ tagging) [1]
+         -  [x] Interior imgae data set(+ tagging) [1] *2020.01.14*
 -  [ ] Functions
    -  [ ] Step별 data에 따른 output 설정
       -  [x] data container [1] *2020.01.13*
-      -  [ ] step 2 format alert [1]
+      -  [ ] step 2 format alert  / drag & drop[1]
+         -  [x] drag & drop *2020.01.14*
+         -  [ ] backend server 구축
       -  [ ] step 3 image output [1]
-      -  [ ] step 5(summary & user info 받아오기) [1]
+      -  [x] step 5(summary & user info 받아오기) [1] *2020.01.14*
    -  [ ] Payment [3]
 -  [ ] Design
    -  [ ] Page transition effects [2]

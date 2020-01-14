@@ -6,26 +6,44 @@ import "../scss/Step0.scss"
 functions
 ================
 맞춤형 사진 보여주기
+일단 랜덤하게 띄우자
 */
 
 class Step0 extends React.Component{
     constructor(props){
         super(props)
 
-        this.setState({
+        this.state={
             pagenumber: 3,
-        })
+        }
     }
     render() {
         return(
-            <div className="Step0">
+            <div className="Step3">
                 <div className="outer_box">
                     <div className="inner_box">
+                        <div className="progressbar">
+                                <h4> Progress bar </h4>
+                        </div>
                         <div className="contents">
+                            <div className="imgbox">
+                                <div className="img">
+                                    <button className="imgbutton"><img src="./interior_design/modern/1.png"/> </button>
+                                    <button className="imgbutton"><img src="./interior_design/modern/6.png"/> </button>
+                                </div>
+                                <div className="img">
+                                    <button className="imgbutton"><img src="./interior_design/modern/2.png"/> </button>
+                                    <button className="imgbutton"><img src="./interior_design/modern/5.png"/> </button>
+
+                                </div>
+                                <div className="img">
+                                    <button className="imgbutton"><img src="./interior_design/modern/3.png"/> </button>
+                                    <button className="imgbutton"><img src="./interior_design/modern/4.png"/> </button>
+
+                                </div>
+                            </div>
                             <div className="text">
-                                <h5>1. this is step 3</h5>
-                                <h5>2. Choose Floor Styles</h5>
-                                <h5>3. Feel Free to Tell us  Whatever Else You want </h5>
+                                <p>1. this is step 3</p>
                             </div>
                         </div>
                         <div className="button">

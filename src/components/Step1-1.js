@@ -19,7 +19,7 @@ class Step0 extends React.Component{
     }
 
     change(e){
-        this.props.changeData(e.target.value, this.state.pagenumber)
+        this.props.changeData2(e.target.value, e.target.name)
     }
 
     render() {
@@ -29,30 +29,28 @@ class Step0 extends React.Component{
             <div className="Step1">
                 <div className="outer_box">
                     <div className="inner_box">
+                        <div className="progressbar">
+                                <h4> Progress bar </h4>
+                        </div>
                         <div className="contents">
-                            <div className="bar">
-                                <h3> Progress bar </h3>
-                            </div>
                             <div className="choicebox">
-                                <button className="choice" value="Office" onClick={this.change}> 
+                                <button className="choice" value="Office" name="subtype" onClick={this.change}> 
                                 Office
                                 </button>
-                                <button className="choice" value="Restaurant / cafe" onClick={this.change}> 
+                                <button className="choice" value="Restaurant / cafe"  name="subtype" onClick={this.change}> 
                                 Restaurant / cafe
                                 </button>
-                                <button className="choice" value="Shop" onClick={this.change}> 
+                                <button className="choice" value="Shop" name="subtype" onClick={this.change}> 
                                 Shop
                                 </button>
-                                <button className="choice" value="Hotel" onClick={this.change}> 
+                                <button className="choice" value="Hotel" name="subtype" onClick={this.change}> 
                                 Hotel
                                 </button>
-                                <button className="choice" value="Others" onClick={this.change}> 
+                                <button className="choice" value="Others" name="subtype" onClick={this.change}> 
                                 Othres
                                 </button>
                             </div>
                         </div>
-                        <p>{list}</p>
-
                         <div className="button">
                             <button className="button previous"><Link to="/step1">
                                 Previous
