@@ -22,9 +22,6 @@ class Headers extends React.Component {
                             Get Started
                         </Link></button>
                     </div>
-                    <div className="ondemand__gif">
-                        
-                    </div>
                 </div>
 {/*
                 <div className="ondemand__bottom">
@@ -33,6 +30,48 @@ class Headers extends React.Component {
                     <br/>
                     <br/>
 */}
+                <div className="ondemand__step1">
+                    <div className="ondemand__description2">
+                        <h4> get your info </h4>
+                        <p> this is ondemand hahahahahahahah <br/>
+                        Maybe it's hard to believe what's with<br/>
+                        my obvious charm and good looks <br/>
+                        but people used to think that I was a monster<br/>
+                        And for a long time, I believe them <br/>
+
+                        But after a while, <br/>
+                        you learn to ignore the names people calling you<br/>
+                        you just trust who you are
+                        </p>
+
+                    </div>
+                    <div className="ondemand__gif">
+                        <img src="./back4.jpg"/>
+                    </div>
+                </div>
+                <div className="ondemand__deco">
+                    <img src="./deco.jpg" />
+                </div>
+                <div className="ondemand__step2">
+                    <div className="ondemand__gif2">
+                        <img src="./back4.jpg"/>
+                    </div>
+                    <div className="ondemand__description3">
+                        <h4> analysis floor info </h4>
+                        <p> this is ondemand hahahahahahahah <br/>
+                        Maybe it's hard to believe what's with<br/>
+                        my obvious charm and good looks <br/>
+                        but people used to think that I was a monster<br/>
+                        And for a long time, I believe them <br/>
+
+                        But after a while, <br/>
+                        you learn to ignore the names people calling you<br/>
+                        you just trust who you are
+                        </p>
+                    </div>
+
+                </div>
+                <div className="ondemand__finalstep">
                     <button className="button"><Link to="/step0">
                             Get Started
                     </Link></button>
@@ -40,7 +79,7 @@ class Headers extends React.Component {
                     <br/>
                     <br/>
                     <br/>
-                
+                </div>
 
             </div>
         )

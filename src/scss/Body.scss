@@ -3,31 +3,31 @@
 .ondemand {
     //overflow: hidden;
     //background-color: $bg_secondary;
-    background-image: url("./back.jpg");
     //background-repeat: no-repeat;
     //text-align: center;
     //background-color: rgba($color: #000000, $alpha: 0.5);
-    
-
+    //background-size: 100%;
     padding-left: 10%;
     padding-right: 10%;
-    padding-top: 120px;
+    padding-top: 300px;
     min-width: 1000px;
     color: white;
     &__top {
         //overflow: hidden;
         height: 512px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex: auto;
         min-width: 1000px;
+        //margin-bottom: 200px;
         justify-content: center;
     }
     &__description {
-        //background-color: rgba($color: #ffffff, $alpha: 0.5);
+        background-color: rgba($color: #000000, $alpha: 0.5);
+        text-align: right;
+        
         padding: 10px;
         flex: auto;
-        //border: 2px solid black;
     }
     /*
     &__gif {
@@ -38,8 +38,74 @@
         text-align: center;
     }
 
-    &__bottom {
+    &__step1 {
+        display: flex;
+        flex-direction: row;
+        flex: auto;
+        min-width: 1000px;
+        //padding-bottom: 200px;
+        justify-content: center;
+    }
+
+    &__step2 {
+        display: flex;
+        flex-direction: row;
+        flex: auto;
+        min-width: 1000px;
+        //padding-bottom: 200px;
+        justify-content: center;
+    }
+
+    &__finalstep{
         text-align: center;
+    }
+
+    &__description2{
+        display: inline;
+        text-align: left;
+        color: black;
+        padding-top: 100px;
+        padding-left: 100px;
+        min-width: 500px;
+    }
+    &__description3{
+        display: inline;
+        text-align: right;
+        color: black;
+        padding-top: 150px;
+        min-width: 500px;
+    }
+
+    &__gif{
+        flex: 1;
+        border: none;
+        padding-left: 200px;
+        img{
+            size: 100% 100%;
+        }
+        
+    }
+    &__gif2{
+        flex: 1;
+        border: none;
+        padding-left: 200px;
+        img{
+            size: 100% 100%;
+        }
+    }
+
+    &__deco{
+        position: relative;
+        z-index: -1;
+        margin-top: -80px;
+        margin-bottom: -80px;
+        margin-left: auto;
+        margin-right: auto;
+        img{
+            -webkit-filter: grayscale(100%);
+            filter: opacity(0.9) grayscale(100%);
+            width: 100%;
+        }
     }
 }
 
