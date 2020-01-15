@@ -14,12 +14,11 @@ class Step0 extends React.Component{
                 <div className="step__outer-box">
                     <div className="step__inner-box">
                         <div className="step__contents">
-                            <div className="step__img">
-                                {/* <img src="./floor_plan_gif.png" alt="floor_plan" /> */}
+                            {/*<div className="step__img">
                                 <img src="./FloorPlan.jpeg" className="floorplan"/>
-                            </div>
+        </div>*/}
                             <div className="step__text">
-                                <h5> I will get your info and your floor info.
+                                <h4> I will get some info
                                     <br/>
                                     to make 2D and 3D floor model what you want.
                                     <br/>
@@ -28,7 +27,7 @@ class Step0 extends React.Component{
                                     Don`t worry!
                                     <br/>
                                     They are very easy questions.
-                                </h5>
+                                </h4>
                             </div>
                         </div>
                         <div className="step__button">

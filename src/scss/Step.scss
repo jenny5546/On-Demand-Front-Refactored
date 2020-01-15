@@ -11,7 +11,7 @@
         flex: 1;
         //background-color: $bg_secondary;
         padding-top: 4%;
-        background-color: $mainColor_light;
+        background-color: $mainColor;
         position: relative;
         width: 100%;
         text-align: center;
@@ -27,19 +27,30 @@
         margin-bottom: 3%;
         width: 80%;
         //height: 80vh;
-        background-color: $bg_thirdary;
+        background-color: none;
         //border: 2px solid black;
         color: black;
         overflow: hidden;
 
     }
+
+    &__progressbar{
+        color: white;
+        text-align: center;
+    }
     &__contents{
         display: flex;
         flex: 1;
         flex-direction: row;
-        
+        color: white;
+        border-top : 2px solid white;
+        border-bottom : 2px solid white;
+        padding-bottom: 10%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-bottom: 5%;
         height: 100%;
-        margin: auto 0;
+        //margin: auto 0;
 
         .choicebox{
             
@@ -245,6 +256,7 @@
     }
     &__text{
         flex: 1;
+        color: $font100;
         padding: 5%;
         display: inline-block;
         margin: auto 0;
@@ -255,9 +267,10 @@
             color: white;
         }
         display: flex;
+        height: 100px;
         justify-content: space-between;
         //margin-left: auto;
-        background-color: #4CAF50; /* Green */
+        background-color: $mainColor; /* Green */
         border: none;
         padding: 10px 24px;
         text-align: center;
@@ -265,20 +278,21 @@
             display: inline;
             margin-left: auto;
             font-size: 20px;
-            background-color: #4CAF50; /* Green */
-            border: none;
+            background-color: $mainColor; /* Green */
+            border: 1px solid white;
         }
         .previous{
             display: inline;
             font-size: 20px;
-            background-color: #4CAF50; /* Green */
-            border: none;            color: white;
+            background-color: $mainColor; /* Green */
+            border: none;            
+            color: white;
             font-size: 20px;
         }
         .next{
             display: inline;
             font-size: 20px;
-            background-color: #4CAF50; /* Green */
+            background-color: $mainColor; /* Green */
             border: none;            
             color: white;
             font-size: 20px;
