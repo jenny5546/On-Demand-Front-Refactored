@@ -10,6 +10,7 @@ class Body extends React.Component {
                 <div className="ondemand__top">
                     <div className="ondemand__description">
                         <h3>Archisketch On-Demand app</h3>
+                        
                         <p>
                             When our clients give us the images of floorplans, <br/>
                             we create an accurate 2D, 3D models of them and <br/>
@@ -21,6 +22,10 @@ class Body extends React.Component {
                         <button className="ondemand__button"><Link to="/step0">
                             Get Started
                         </Link></button>
+                    </div>
+                    <div className="scroll">
+                        scroll<br/>
+                           |<br/>
                     </div>
                 </div>
 {/*
