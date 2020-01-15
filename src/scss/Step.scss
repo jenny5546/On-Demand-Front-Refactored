@@ -4,20 +4,24 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    //text-transform: default;
     &__outer-box {
+        display: flex;
+        flex-direction: column;
         flex: 1;
         //background-color: $bg_secondary;
         padding-top: 4%;
-        background-color: lightblue;
+        background-color: $mainColor_light;
         position: relative;
         width: 100%;
+        text-align: center;
+        justify-content: center;
         //height: 90vh;
     }
     &__inner-box{
         display: flex;
         flex-direction: column;
         flex:1;
-
         margin: 10%;
         margin-top: 6%;
         margin-bottom: 3%;
@@ -27,16 +31,217 @@
         //border: 2px solid black;
         color: black;
         overflow: hidden;
+
     }
     &__contents{
         display: flex;
+        flex: 1;
+        flex-direction: row;
+        
         height: 100%;
         margin: auto 0;
+
+        .choicebox{
+            
+            display: flex;
+            flex-direction: column;
+            //justify-content: center;
+            margin: 0 auto;
+            text-align: center;
+            .choice{
+                z-index: 1;
+                font-size: 150%;
+                text-align: center;
+                width: 100%;
+                //flex: 1;
+                border: none;
+                padding: 0, 24px;
+                //margin-bottom: 10%;
+                counter-increment: bc;
+            }
+            .choice:before{
+                position: absolute;
+                //padding: 20px;
+            }
+            .button_base {
+                background-color:rgba($color: #000000, $alpha: 0.0);
+                margin: 0;
+                border: 0;
+                font-size: 18px;
+                position: relative;
+                top: 40%;
+                left: 0%;
+                margin-top: -35px;
+                margin-left: -20px;
+                padding-top: 10%;
+                width: 100%;
+                height: 120px;
+                text-align: center;
+                box-sizing: border-box;
+                outline: none;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                -webkit-user-select: none;
+                cursor: default;
+            }
+
+            .button_base:hover {
+                cursor: pointer;
+            }
+
+            
+            .b08_3d_pushback {
+                perspective: 500px;
+                -webkit-perspective: 500px;
+                -moz-perspective: 500px;
+                transform-style: preserve-3d;
+                -webkit-transform-style: preserve-3d;
+            }
+            
+            .b08_3d_pushback div {
+                position: absolute;
+                text-align: center;
+                top: 10%;
+                width: 100%;
+                height: 80px;
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                pointer-events: none;
+                padding: 10px;
+                border: #000000 solid 1px;
+            }
+            
+            .b08_3d_pushback div:nth-child(1) {
+                color: #000000;
+                background-color: #ffffff;
+                transform: rotateX(0deg) translateZ(0px);
+                -webkit-transform: rotateX(0deg) translateZ(0px);
+                -moz-transform: rotateX(0deg) translateZ(0px);
+                transform-origin: 50% 50%;
+                -webkit-transform-origin: 50% 50%;
+                -moz-transform-origin: 50% 50%;
+                transition: all 0.2s ease;
+                -webkit-transition: all 0.2s ease;
+                -moz-transition: all 0.2s ease;
+            }
+            
+            .b08_3d_pushback div:nth-child(2) {
+                color: #ffffff;
+                background-color: #000000;
+                transform: rotateX(-179.5deg) translateZ(1px);
+                -webkit-transform: rotateX(-179.5deg) translateZ(1px);
+                -moz-transform: rotateX(-179.5deg) translateZ(1px);
+                transform-origin: 50% 50%;
+                -webkit-transform-origin: 50% 50%;
+                -moz-transform-origin: 50% 50%;
+                transition: all 0.2s ease;
+                -webkit-transition: all 0.2s ease;
+                -moz-transition: all 0.2s ease;
+            }
+            
+            .b08_3d_pushback:hover div:nth-child(1) {
+                transition: all 0.2s ease;
+                -webkit-transition: all 0.2s ease;
+                -moz-transition: all 0.2s ease;
+                transform: rotateX(179.5deg);
+                -webkit-transform: rotateX(179.5deg);
+                -moz-transform: rotateX(179.5deg);
+            }
+            
+            .b08_3d_pushback:hover div:nth-child(2) {
+                transition: all 0.2s ease;
+                -webkit-transition: all 0.2s ease;
+                -moz-transition: all 0.2s ease;
+                transform: rotateX(0deg) rotateY(0deg) translateZ(1px);
+                -webkit-transform: rotateX(0deg) rotateY(0deg) translateZ(1px);
+                -moz-transform: rotateX(0deg) rotateY(0deg) translateZ(1px);
+            }
+
+        }
+        .filebox{
+            flex: auto;
+            padding: 5%;
+            text-align: center;
+            background-color: rgb(139, 139, 139);
+            border: 5px dotted black;
+            //height: 100%;
+            //margin: 10%;
+        }
+
+        .text{
+            flex: auto;
+            padding: 5%;
+            display: block;
+            margin: auto 0;
+            margin-left: 2%;
+            text-align: left;
+            .input{
+                font-size: 20px;
+            }
+        }
+        .summarybox{
+            flex: auto;
+            padding: 5%;
+            text-align: center;
+            background-color: rgb(139, 139, 139);
+            border: 5px dotted black;
+            //height: 100%;
+            //margin: 10%;
+        }
+
+        .userinfobox{
+            flex: auto;
+            padding: 5%;
+            display: block;
+            margin-left: 2%;
+            .input{
+                font-size: 20px;
+            }
+        }
+        
     }
-    &__img{
+    &__contents--column{
+        display: flex;
+        flex-direction: column;
         flex: 1;
-        padding: 10%;
-        background-color: rgb(130, 211, 141);
+        height: 100%;
+        //margin: auto 0;
+        margin-bottom: 3%;
+        .description{
+            font-size: 30px;
+            text-align: center;
+            line-height: 10%;
+        }
+
+        .textbox{
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 5%;
+            text-align: center;
+            display: inline-block;
+            //margin: auto 0;
+            .textinput{
+                flex: 1;
+                border: 1px solid black;
+                font-size: 30px;
+                width: 100%;
+                height: 300px;
+            }
+        }
+    }
+
+    &__img{
+        display: flex;
+        flex: 1;
+        padding: 5%;
+        text-align: center;
+        justify-content: center;
+        //background-color: rgb(130, 211, 141);
+        img{
+            flex: 1;
+        }
     }
     &__text{
         flex: 1;
@@ -63,241 +268,20 @@
             background-color: #4CAF50; /* Green */
             border: none;
         }
-    }
-}
-
-
-
-.Step0 {
-    //background-color: $bg_primary;
-    //text-align: center;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    
-    .outer_box{
-        //background-color: $bg_secondary;
-        background-color: lightblue;
-        position: relative;
-        width: 100%;
-        height: 90vh;
-        .inner_box{
-            display: flex;
-            flex:1;
-            flex-direction: column;
-            margin: 10%;
-            margin-top: 6%;
-            margin-bottom: 3%;
-            width: 80%;
-            //height: 80vh;
-            background-color: $bg_thirdary;
-            //border: 2px solid black;
-            color: black;
-            overflow: hidden;
-
-            .contents{
-                display: flex;
-                height: 100%;
-                margin: auto 0;
-                .Img{
-                    flex: 1;
-                    padding: 10%;
-                    background-color: rgb(130, 211, 141);
-                    //margin: 10%;
-                }
-
-                .text{
-                    flex: 1;
-                    padding: 5%;
-                    display: inline-block;
-                    margin: auto 0;
-                }
-            }
-            .button{
-                a{
-                    text-decoration:none;
-                    color: white;
-
-                }
-                display: flex;
-                justify-content: space-between;
-                //margin-left: auto;
-                background-color: #4CAF50; /* Green */
-                border: none;
-                padding: 10px 24px;
-                text-align: center;
-                font-size: 16px;
-                .getstarted{
-                    display: inline;
-                    margin-left: auto;
-                }
-            }
+        .previous{
+            display: inline;
+            font-size: 20px;
+            background-color: #4CAF50; /* Green */
+            border: none;            color: white;
+            font-size: 20px;
         }
-    }
-}
-
-.Step1 {
-    //background-color: $bg_primary;
-    //text-align: center;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-
-    //margin-top: 100px;
-    
-    .outer_box{
-        display: flex;
-        //background-color: $bg_secondary;
-        background-color: lightblue;
-        position: relative;
-        width: 100%;
-        flex: 1;
-        //height: 90vh;
-        .inner_box{
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-            margin: 10%;
-            //margin-top: 6%;
-            margin-bottom: 3%;
-            width: 80%;
-            //height: 80vh;
-            background-color: $bg_thirdary;
-            //border: 2px solid black;
-            color: black;
-            overflow: hidden;
-            .progressbar{
-                text-align: center;
-            }
-            .contents{
-                display: flex;
-                flex-direction: column;
-                height: 100%;
-                margin: auto 0;
-                margin-bottom: 3%;
-                .choicebox{
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    margin: 0 auto;
-                    .choice{
-                        a{
-                            text-decoration:none;
-                        }
-                        margin-bottom: 5%;
-                        border: 1px solid black;
-                        color: rgb(2, 1, 53);
-                        padding: 10px 24px;
-                        text-align: center;
-                        font-size: 30px;
-                        .description { display: none; }
-                        &:hover .title { display: none; }
-                        &:hover .description { display: inline; }
-                    }
-                    text-align: center;
-                }
-                
-            }
-            .button{
-                a{
-                    text-decoration:none;
-                    color: white;
-
-                }
-                display: flex;
-                justify-content: space-between;
-                //margin-left: auto;
-                background-color: #4CAF50; /* Green */
-                border: none;
-                padding: 10px 24px;
-                text-align: center;
-                font-size: 16px;
-                .getstarted{
-                    display: inline;
-                    margin-left: auto;
-                }
-            }
-        }
-    }
-}
-
-.Step2 {
-    //background-color: $bg_primary;
-    //text-align: center;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-
-    //width: 100%;
-   
-    .outer_box{
-        display: flex;
-        //background-color: $bg_secondary;
-        flex: 1;
-        background-color: lightblue;
-        position: relative;
-        width: 100%;
-        .inner_box{
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            margin: 10%;
-            margin-top: 6%;
-            margin-bottom: 3%;
-            width: 80%;
-            background-color: $bg_thirdary;
-            color: black;
-            overflow: hidden;
-
-            .progressbar{
-                text-align: center;
-            }
-
-            .contents{
-                display: flex;
-                flex: 1;
-                flex-direction: row;
-                //margin: auto 0;
-                .filebox{
-                    flex: auto;
-                    padding: 5%;
-                    text-align: center;
-                    background-color: rgb(139, 139, 139);
-                    border: 5px dotted black;
-                    //height: 100%;
-                    //margin: 10%;
-                }
-
-                .text{
-                    flex: auto;
-                    padding: 5%;
-                    display: block;
-                    margin: auto 0;
-                    margin-left: 2%;
-                    .input{
-                        font-size: 20px;
-                    }
-                }
-            }
-            .button{
-                a{
-                    text-decoration:none;
-                    color: white;
-
-                }
-                display: flex;
-                justify-content: space-between;
-                //margin-left: auto;
-                background-color: #4CAF50; /* Green */
-                border: none;
-                padding: 10px 24px;
-                text-align: center;
-                font-size: 16px;
-                .getstarted{
-                    display: inline;
-                    margin-left: auto;
-                }
-            }
+        .next{
+            display: inline;
+            font-size: 20px;
+            background-color: #4CAF50; /* Green */
+            border: none;            
+            color: white;
+            font-size: 20px;
         }
     }
 }

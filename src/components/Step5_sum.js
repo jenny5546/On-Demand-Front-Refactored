@@ -30,10 +30,10 @@ class Step5 extends React.Component{
     render() {
         const {dataContainer} = this.props
         return(
-            <div className="Step5">
-                <div className="outer_box">
-                    <div className="inner_box">
-                        <div className="contents">
+            <div className="step">
+                <div className="step__outer-box">
+                    <div className="step__inner-box">
+                        <div className="step__contents">
                             <div className="summarybox">
                                 <div className="title">
                                     <p> this is summary </p>
@@ -55,11 +55,11 @@ class Step5 extends React.Component{
                                 </div>
                             </div>
                         </div>
-                        <div className="button">
-                            <button className="button previous"><Link to="/step4">
+                        <div className="step__button">
+                            <button className="previous"><Link to="/step4">
                                 Previous
                             </Link></button>
-                            <button className="button next"><Link to="/">
+                            <button className="next"><Link to="/">
                                 Go to main page
                             </Link></button>
                         </div>

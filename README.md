@@ -33,6 +33,8 @@ npm 6.13.4
   - All page frame update / Milestone update 
 - 0.4
   - add page contents / build data structure
+- 0.5
+  - clean file structure / main page decorating
 
 
 
@@ -57,10 +59,10 @@ npm 6.13.4
    -  [ ] Payment [3]
 -  [ ] Design
    -  [ ] Page transition effects [2]
-   -  [ ] Button effects [2]
+   -  [x] Button effects [2]  *2020.01.15*
    -  [ ] Progress bar [2]
    -  [ ] Colors [2]
--  [ ] Structure
-   -  [ ] Scss 모듈화 / 정리 [2]
-   -  [ ] Components 모듈화 / 정리 [2]
+-  [x] Structure
+   -  [x] Scss 모듈화 / 정리 [2] *2020.01.15*
+   -  [x] Components 모듈화 / 정리 [2] *2020.01.15*
 

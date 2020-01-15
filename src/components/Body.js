@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import "../scss/Body.scss"
 
-class Headers extends React.Component {
+class Body extends React.Component {
 
     render() {
         return (
@@ -69,8 +69,25 @@ class Headers extends React.Component {
                         you just trust who you are
                         </p>
                     </div>
+                </div>
+                <div className="ondemand__step3">
+                    <div className="ondemand__description4">
+                        <h4> choose your own theme </h4>
+                        <p> this is ondemand hahahahahahahah <br/>
+                        Maybe it's hard to believe what's with<br/>
+                        my obvious charm and good looks <br/>
+                        but people used to think that I was a monster<br/>
+                        And for a long time, I believe them <br/>
+
+                        But after a while, <br/>
+                        you learn to ignore the names people calling you<br/>
+                        you just trust who you are
+                        </p>
+                    </div>
 
                 </div>
+
+                {/*여기에 배경 넣기*/}
                 <div className="ondemand__finalstep">
                     <button className="button"><Link to="/step0">
                             Get Started
@@ -86,4 +103,4 @@ class Headers extends React.Component {
     }
 }
 
-export default Headers
+export default Body

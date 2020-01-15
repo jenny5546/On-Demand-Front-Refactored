@@ -4,6 +4,7 @@ import "../scss/Step.scss"
 
 /*
 Progress bar는 static으로 구현
+여기는 도면을 3d로 만들어 준다는 것을 명확하게 보여주기
 */
 
 class Step0 extends React.Component{
@@ -15,17 +16,24 @@ class Step0 extends React.Component{
                         <div className="step__contents">
                             <div className="step__img">
                                 {/* <img src="./floor_plan_gif.png" alt="floor_plan" /> */}
-                                <p> GIF </p>
+                                <img src="./FloorPlan.jpeg" className="floorplan"/>
                             </div>
                             <div className="step__text">
-                                <h4>1. Upload Your Floor Plan Image</h4>
-                                <h4>2. Choose Floor Styles</h4>
-                                <h4>3. Feel Free to Tell us  Whatever Else You want </h4>
+                                <h5> I will get your info and your floor info.
+                                    <br/>
+                                    to make 2D and 3D floor model what you want.
+                                    <br/>
+                                    Therefore, I will give few questions.ondemand.
+                                    <br/>
+                                    Don`t worry!
+                                    <br/>
+                                    They are very easy questions.
+                                </h5>
                             </div>
                         </div>
                         <div className="step__button">
                             <button className="getstarted"><Link to="/step1">
-                                Get Started
+                                Let`s Go!
                             </Link></button>
                         </div>
                         

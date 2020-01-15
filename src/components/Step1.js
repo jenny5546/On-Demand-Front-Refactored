@@ -31,13 +31,21 @@ class Step1 extends React.Component{
         this.props.changeData(e.target.value, this.state.pagenumber)
 
     }
-    change2(e){
+    async change2(e){
         console.log(e.target.name)
         console.log(e.target.value)
         this.props.changeData2(e.target.value, e.target.name)
         this.setState({
             usertype: e.target.value
         })
+        if(e.target.value === "residential"){
+            document.getElementById("one").style.backgroundColor = "lightblue"
+            document.getElementById("two").style.backgroundColor = "white"
+        }
+        else if(e.target.value === "commercial"){
+            document.getElementById("one").style.backgroundColor = "white"
+            document.getElementById("two").style.backgroundColor = "lightblue"
+        }
     }
     urlMaker(){
         if(this.state.usertype === "commercial"){
@@ -55,34 +63,45 @@ class Step1 extends React.Component{
         const {list} = this.props
         //const {pagenumber} = this.state.pagenumber
         return(
-            <div className="Step1">
-                <div className="outer_box">
-                    <div className="inner_box">
-                        <div className="progressbar">
+            <div className="step">
+                <div className="step__outer-box">
+                    <div className="step__inner-box">
+                        <div className="step__progressbar">
                                 <h4> Progress bar </h4>
                         </div>
-                        <div className="contents">
+                        <div className="step__contents">
 
                             <div className="choicebox">
-                                <button className="choice" value="residential" name="type" onClick={this.change2}> 
-                                Residential
+                                <div className="description">
+                                    <h4>Choose the Type of your Property</h4>
+                                </div>
+                                <div className="choice">
+                                    <button className="button_base b08_3d_pushback" value="residential" name="type" onClick={this.change2}> 
+                                        <div id="one"> residential</div>
+                                        <div > Single, Multi-Family Homes, Condominiums, <br/>
+                                    Townhouses and Dormatories </div>
+                                    </button>
                                 {/*<span className="description">Single, Multi-Family Homes, Condominiums, <br/>
                                     Townhouses and Dormatories </span>*/}
-                                </button>
-                                <button className="choice" value="commercial" name="type" onClick={this.change2} > 
-                                Commercial
+                                </div>
+                                <div className="choice">
+                                    <button className="button_base b08_3d_pushback" value="commercial" name="type" onClick={this.change2}> 
+                                        <div id="two"> commercial </div>
+                                        <div > Offices, Restaurant/ Cafes, Shops, Hotels or <br/>
+                                special purpose buildings (schools, hospitals) </div>
+                                    </button>
                                 {/*<span className="description">Offices, Restaurant/ Cafes, Shops, Hotels or <br/>
                                 special purpose buildings (schools, hospitals and etc. </span>
                                 onClick={(event, pagenumber)=>getData(event, pagenumber)}*/}
-                                </button>
+                                </div>
                             </div>
                         </div>
-                        <div className="button">
-                            <button className="button previous"><Link to="./step0">
-                                Previous
+                        <div className="step__button">
+                            <button className="previous"><Link to="./step0">
+                                ＜
                             </Link></button>
-                            <button className="button next"><Link to={this.urlMaker}>
-                                Next
+                            <button className="next"><Link to={this.urlMaker}>
+                                ＞
                             </Link></button>
                         </div>
                         

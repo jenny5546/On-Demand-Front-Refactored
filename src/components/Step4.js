@@ -11,7 +11,6 @@ data input 저장하기
 class Step4 extends React.Component{
     constructor(props){
         super(props)
-
         this.state={
             pagenumber: 4,
         }
@@ -25,13 +24,13 @@ class Step4 extends React.Component{
 
     render() {
         return(
-            <div className="Step4">
-                <div className="outer_box">
-                    <div className="inner_box">
-                        <div className="progressbar">
+            <div className="step">
+                <div className="step__outer-box">
+                    <div className="step__inner-box">
+                        <div className="step__progressbar">
                                 <h4> Progress bar </h4>
                         </div>
-                        <div className="contents">
+                        <div className="step__contents--column">
                             <div className="description">
                                 <p>feel free to add request</p>
                             </div>
@@ -39,11 +38,11 @@ class Step4 extends React.Component{
                                 <textarea row="1" className="textinput" placeholder="type anything!" name="extra" onChange={this.change}></textarea>
                             </div>
                         </div>
-                        <div className="button">
-                            <button className="button previous"><Link to="/step3">
+                        <div className="step__button">
+                            <button className="previous"><Link to="/step3">
                                 Previous
                             </Link></button>
-                            <button className="button next"><Link to="/step5">
+                            <button className="next"><Link to="/step5">
                                 Next
                             </Link></button>
                         </div>

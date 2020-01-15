@@ -12,7 +12,7 @@ class Headers extends React.Component{
                     </div>
                     <ul className="mainheader__menubar">
                         <li className="mainheader__menu"> Home </li>
-                        <li className="mainheader__menu">uProduct</li>
+                        <li className="mainheader__menu"> Product </li>
                         <li className="mainheader__menu"> Membership </li>
                         <li className="mainheader__menu"> On-Demand </li>
                         <li className="mainheader__menu"> Partnership </li>

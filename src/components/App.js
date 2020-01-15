@@ -56,6 +56,7 @@ class App extends React.Component{
       price: 0,
       number: 0,
       pagenum: 0,
+      url: "./step1-1"
     }
     this.changeData = this.changeData.bind(this)
     this.changeData2 = this.changeData2.bind(this)
@@ -63,9 +64,14 @@ class App extends React.Component{
   }
 
   async changeData2(input, data){
+    let k = "./step1-1"
+    if(input === "Office" || input==="Restaurant / Cafe" || input==="Hotel" || input==="Others" || input==="Shop"){
+      k = "./step2"
+    }
 
     await this.setState({
-      [data] : input
+      [data] : input,
+      url : k,
     })
     console.log(this.state)
     console.log(input)
@@ -103,7 +109,7 @@ class App extends React.Component{
           <Route exact path="/" component={Body}/>
           <Route path="/step0" render={(props)=><Step0 list={this.state.list} isAuthed={true} />}/>
           <Route path="/step1" render={(props)=><Step1 list={this.state.list} changeData={this.changeData} changeData2={this.changeData2} isAuthed={true} />}/>
-          <Route path="/step1-1" render={(props)=><Step1_1 list={this.state.list} changeData2={this.changeData2} subtype={this.state.subtype} isAuthed={true} />}/>
+          <Route path="/step1-1" render={(props)=><Step1_1 list={this.state.list} changeData2={this.changeData2} subtype={this.state.subtype} url={this.state.url} isAuthed={true} />}/>
           <Route path="/step2" render={(props)=><Step2 list={this.state.list} changeData={this.changeData} changeData2={this.changeData2} isAuthed={true} />}/>
           <Route path="/step3" render={(props)=><Step3 list={this.state.list} changeData={this.changeData} changeData2={this.changeData2} isAuthed={true}/>}/>
           <Route path="/step4" render={(props)=><Step4 list={this.state.list} changeData={this.changeData} changeData2={this.changeData2} isAuthed={true}/>}/>
