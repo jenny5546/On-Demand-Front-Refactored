@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import PageTransition from 'react-router-page-transition';
-import { CSSTransitionGroup } from 'react-transition-group'
 import "../scss/Step.scss"
+
 
 /*
 Progress bar는 static으로 구현
@@ -13,6 +12,7 @@ class Step0 extends React.Component{
     render() {
         return(
             <div className="step">
+
                 <div className="step__outer-box">
                     <div className="step__inner-box">
                         <div className="step__contents">

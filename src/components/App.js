@@ -11,6 +11,7 @@ import Step3 from './Step3';
 import Step4 from './Step4';
 import Step5 from './Step5_sum';
 
+
 import "../scss/App.scss"
 
 /*
@@ -104,7 +105,8 @@ class App extends React.Component{
   render(){
     return (
       <div className="App">
-        <Headers />
+        {/*<Headers />*/}
+        
         <Switch>
           <Route exact path="/" component={Body}/>
           <Route path="/step0" render={(props)=><Step0 list={this.state.list} isAuthed={true} />}/>

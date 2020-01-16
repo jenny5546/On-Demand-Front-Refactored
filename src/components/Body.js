@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from './Header'
 import Footer from './Footer';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -12,6 +13,7 @@ AOS.init();
 class Body extends React.Component {
     render() {
         return (
+            
             <div className="ondemand">
 
                 <div className="ondemand__top">
@@ -19,7 +21,7 @@ class Body extends React.Component {
                     <div data-aos="fadeInUp"
                         data-aos-duration="2000"
                         className="ondemand__description">
-                        <h3>Archisketch On-Demand app</h3>
+                        <h2>Archisketch On-Demand app</h2>
                         
                         <p>
                             When our clients give us the images of floorplans, <br/>

@@ -2,7 +2,6 @@ import React, {useCallback} from 'react'
 import { Link } from 'react-router-dom';
 import "../scss/Step.scss"
 import {useDropzone} from 'react-dropzone';
-import { CSSTransitionGroup } from 'react-transition-group'
 
 
 
@@ -62,24 +61,24 @@ class Step2 extends React.Component{
         })
 
         this.change = this.change.bind(this)
-
+        this.backgroundChanger = this.backgroundChanger.bind(this)
     }
 
     change(e){
       this.props.changeData2(e.target.value, e.target.name)
     }
 
+    backgroundChanger(){
+      document.getElementsByClassName("step").style.backgroundColor = "white"
+
+    }
+    
     render() {
         const {list} = this.props
         return(
             <div className="step">
-                <div className="step__outer-box">
-                <CSSTransitionGroup
-            transitionName="worksTransition"
-            transitionAppear={true}
-            transitionAppearTimeout={500}
-            transitionEnter={false}
-            transitionLeave={false}>
+                <div className="step__outer-box--2">
+
                     <div className="step__inner-box">
                         <div className="step__progressbar">
                             <h4> Progress Bar</h4>
@@ -107,8 +106,6 @@ class Step2 extends React.Component{
                         </div>
                         
                     </div>
-                    </CSSTransitionGroup>
-
                 </div>
             </div>
         )
