@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { CSSTransitionGroup } from 'react-transition-group'
+
 import "../scss/Step.scss"
 
 /*
@@ -19,13 +21,22 @@ class Step3 extends React.Component{
     }
     render() {
         return(
-            <div className="Step3">
-                <div className="outer_box">
-                    <div className="inner_box">
-                        <div className="progressbar">
+            <div className="step">
+                <div className="step__outer-box">
+                <CSSTransitionGroup
+            transitionName="worksTransition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={false}
+            transitionLeave={false}>
+                    <div className="step__inner-box">
+                        <div className="step__progressbar">
                                 <h4> Progress bar </h4>
                         </div>
-                        <div className="contents">
+                        <div className="step__contents--column">
+                            <div className="description">
+                                <h4>Choose the Type of your Property</h4>
+                            </div>
                             <div className="imgbox">
                                 <div className="img">
                                     <button className="imgbutton"><img src="./interior_design/modern/1.png"/> </button>
@@ -42,22 +53,20 @@ class Step3 extends React.Component{
 
                                 </div>
                             </div>
-                            <div className="text">
-                                <p>1. this is step 3</p>
-                            </div>
                         </div>
-                        <div className="button">
+                        <div className="step__button">
                             
-                            <button className="button previous"><Link to="/step2">
-                                Previous
-                            </Link></button>
-                            <button className="button next"><Link to="/step4">
-                                Next
-                            </Link></button>
+                            <Link to="/step2"><button className="previous">
+                            ＜
+                            </button></Link>
+                            <Link to="/step4"><button className="next">
+                            ＞
+                            </button></Link>
                         </div>
                         
                     </div>
-                    
+                    </CSSTransitionGroup>
+
                 </div>
             </div>
         )

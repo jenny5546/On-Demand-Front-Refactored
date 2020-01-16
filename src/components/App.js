@@ -113,7 +113,7 @@ class App extends React.Component{
           <Route path="/step2" render={(props)=><Step2 list={this.state.list} changeData={this.changeData} changeData2={this.changeData2} isAuthed={true} />}/>
           <Route path="/step3" render={(props)=><Step3 list={this.state.list} changeData={this.changeData} changeData2={this.changeData2} isAuthed={true}/>}/>
           <Route path="/step4" render={(props)=><Step4 list={this.state.list} changeData={this.changeData} changeData2={this.changeData2} isAuthed={true}/>}/>
-          <Route path="/step5" render={(props)=><Step5 list={this.state.list} dataContainer={this.state.dataContainer} isAuthed={true} />}/>
+          <Route path="/step5" render={(props)=><Step5 dataContainer={this.state.dataContainer} isAuthed={true} />}/>
           {/*404page will be here*/}
         </Switch>
         {/*<Footer />*/}

@@ -1,5 +1,16 @@
 @import "./01-base/color";
 
+.worksTransition-appear{
+    opacity: 0.5;
+    transform: translateX(-1800px);
+  }
+  
+  .worksTransition-appear.worksTransition-appear-active{
+    opacity: 1;
+    transform: translateX(0px);
+    transition: all .4s ease-in-out;
+  }
+
 .step {
     display: flex;
     flex-direction: column;
@@ -45,10 +56,10 @@
         color: white;
         border-top : 2px solid white;
         border-bottom : 2px solid white;
-        padding-bottom: 10%;
+        //padding-bottom: 10%;
         margin-left: 10%;
         margin-right: 10%;
-        margin-bottom: 5%;
+        //margin-bottom: 5%;
         height: 100%;
         //margin: auto 0;
 
@@ -57,6 +68,7 @@
             display: flex;
             flex-direction: column;
             //justify-content: center;
+            padding-bottom: 10%;
             margin: 0 auto;
             text-align: center;
             .choice{
@@ -216,12 +228,21 @@
         display: flex;
         flex-direction: column;
         flex: 1;
+        color: white;
+        border-top : 2px solid white;
+        border-bottom : 2px solid white;
+        padding-bottom: 10%;
+        margin-left: 10%;
+        margin-right: 10%;
+        //margin-bottom: 5%;
         height: 100%;
+        //margin: auto 0;
         //margin: auto 0;
         margin-bottom: 3%;
         .description{
+            flex: 1;
             font-size: 30px;
-            text-align: center;
+            //text-align: center;
             line-height: 10%;
         }
 
@@ -239,6 +260,24 @@
                 font-size: 30px;
                 width: 100%;
                 height: 300px;
+            }
+        }
+        .imgbox{
+            display: flex;
+            //flex: auto;
+            padding: 0;
+            text-align: center;
+            background-color: rgb(255, 255, 255);
+            border: 5px solid black;
+            //height: 100%;
+            //overflow-x: none;
+            overflow-y: scroll;
+            //margin: 10%;
+            .imgbutton{
+                padding: 0;
+                //margin: 3px;
+                border: none;
+                cursor: pointer;
             }
         }
     }
@@ -274,13 +313,19 @@
         border: none;
         padding: 10px 24px;
         text-align: center;
-        .getstarted{
-            display: inline;
+        .start{
             margin-left: auto;
-            font-size: 20px;
-            background-color: $mainColor; /* Green */
-            border: 1px solid white;
+            .getstarted{
+                display: inline;
+                flex: 1;
+                //margin-left:50% ;
+                background-color: $mainColor; /* Green */
+                border: none;            
+                color: white;
+                font-size: 20px;
+            }
         }
+
         .previous{
             display: inline;
             font-size: 20px;
@@ -300,250 +345,3 @@
     }
 }
 
-.Step3 {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-
-    //margin-top: 100px;
-    
-    .outer_box{
-        display: flex;
-        //background-color: $bg_secondary;
-        flex: 1;
-        background-color: lightblue;
-        position: relative;
-        width: 100%;
-        //height: 90vh;
-        .inner_box{
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-            margin: 10%;
-            margin-top: 6%;
-            margin-bottom: 3%;
-            width: 80%;
-            //height: 80vh;
-            background-color: $bg_thirdary;
-            //border: 2px solid black;
-            color: black;
-            overflow: hidden;
-
-            .progressbar{
-                text-align: center;
-            }
-
-            .contents{
-                display: flex;
-                flex-direction: column;
-                //margin: auto 0;
-                .imgbox{
-                    display: flex;
-                    //flex: auto;
-                    padding: 0;
-                    text-align: center;
-                    background-color: rgb(255, 255, 255);
-                    border: 5px dotted black;
-                    //height: 100%;
-                    overflow-y: scroll;
-                    //margin: 10%;
-                    .imgbutton{
-                        padding: 0;
-                        //margin: 3px;
-                        border: none;
-                        cursor: pointer;
-                    }
-                }
-
-                .text{
-                    flex: auto;
-                    padding: 5%;
-                    display: block;
-                    margin: auto 0;
-                    margin-left: 2%;
-                    .input{
-                        font-size: 20px;
-                    }
-                }
-            }
-            .button{
-                a{
-                    text-decoration:none;
-                    color: white;
-                }
-                display: flex;
-                justify-content: space-between;
-                //margin-left: auto;
-                background-color: #4CAF50; /* Green */
-                border: none;
-                padding: 10px 24px;
-                text-align: center;
-                font-size: 16px;
-
-            }
-        }
-    }
-}
-
-.Step4 {
-    //background-color: $bg_primary;
-    //text-align: center;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-
-    //margin-top: 100px;
-    
-    .outer_box{
-        //background-color: $bg_secondary;
-        display: flex;
-        flex: 1;
-        background-color: lightblue;
-        position: relative;
-        width: 100%;
-        height: 90vh;
-        .inner_box{
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            margin: 10%;
-            margin-top: 6%;
-            margin-bottom: 3%;
-            width: 80%;
-            //height: 80vh;
-            background-color: $bg_thirdary;
-            //border: 2px solid black;
-            color: black;
-            //overflow: hidden;
-            .progressbar{
-                text-align: center;
-            }
-
-            .contents{
-                display: flex;
-                flex-direction: column;
-                flex: 1;
-                height: 100%;
-                margin: auto 0;
-                margin-bottom: 3%;
-                .description{
-                    font-size: 20px;
-                    text-align: center;
-                    line-height: 10%;
-                }
-
-                .textbox{
-                    display: flex;
-                    flex-direction: column;
-                    flex: 1;
-                    padding: 5%;
-                    text-align: center;
-                    display: inline-block;
-                    //margin: auto 0;
-                    .textinput{
-                        flex: 1;
-                        border: 1px solid black;
-                        font-size: 30px;
-                        width: 100%;
-                    }
-                }
-            }
-            .button{
-                a{
-                    text-decoration:none;
-                    color: white;
-
-                }
-                display: flex;
-                
-                justify-content: space-between;
-                //margin-left: auto;
-                background-color: #4CAF50; /* Green */
-                border: none;
-                padding: 10px 24px;
-                text-align: center;
-                font-size: 16px;
-                .getstarted{
-                    display: inline;
-                    margin-left: auto;
-                }
-            }
-        }
-    }
-}
-
-.Step5 {
-    //background-color: $bg_primary;
-    //text-align: center;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-
-    //width: 100%;
-   
-    .outer_box{
-        display: flex;
-        //background-color: $bg_secondary;
-        flex: 1;
-        background-color: lightblue;
-        position: relative;
-        width: 100%;
-        .inner_box{
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            margin: 10%;
-            margin-top: 6%;
-            margin-bottom: 3%;
-            width: 80%;
-            background-color: $bg_thirdary;
-            color: black;
-            overflow: hidden;
-
-            .contents{
-                display: flex;
-                flex: 1;
-                flex-direction: row;
-                //margin: auto 0;
-                .summarybox{
-                    flex: auto;
-                    padding: 5%;
-                    text-align: center;
-                    background-color: rgb(139, 139, 139);
-                    border: 5px dotted black;
-                    //height: 100%;
-                    //margin: 10%;
-                }
-
-                .userinfobox{
-                    flex: auto;
-                    padding: 5%;
-                    display: block;
-                    margin-left: 2%;
-                    .input{
-                        font-size: 20px;
-                    }
-                }
-            }
-            .button{
-                a{
-                    text-decoration:none;
-                    color: white;
-
-                }
-                display: flex;
-                justify-content: space-between;
-                //margin-left: auto;
-                background-color: #4CAF50; /* Green */
-                border: none;
-                padding: 10px 24px;
-                text-align: center;
-                font-size: 16px;
-                .getstarted{
-                    display: inline;
-                    margin-left: auto;
-                }
-            }
-        }
-    }
-}

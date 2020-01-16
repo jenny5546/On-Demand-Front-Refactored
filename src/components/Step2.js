@@ -2,6 +2,9 @@ import React, {useCallback} from 'react'
 import { Link } from 'react-router-dom';
 import "../scss/Step.scss"
 import {useDropzone} from 'react-dropzone';
+import { CSSTransitionGroup } from 'react-transition-group'
+
+
 
 /*
 functions
@@ -10,7 +13,6 @@ drag & drop
 format 판별하기
 data input 저장하기
 */
-
 function Accept(props) {
     const {acceptedFiles, rejectedFiles, getRootProps, getInputProps} = useDropzone({
       accept: 'image/jpeg, image/png'
@@ -72,6 +74,12 @@ class Step2 extends React.Component{
         return(
             <div className="step">
                 <div className="step__outer-box">
+                <CSSTransitionGroup
+            transitionName="worksTransition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={false}
+            transitionLeave={false}>
                     <div className="step__inner-box">
                         <div className="step__progressbar">
                             <h4> Progress Bar</h4>
@@ -90,16 +98,17 @@ class Step2 extends React.Component{
                             </div>
                         </div>
                         <div className="step__button">
-                            <button className="previous"><Link to="/step1">
-                                Previous
-                            </Link></button>
-                            <button className="next"><Link to="/step3">
-                                Next
-                            </Link></button>
+                            <Link to="/step1"><button className="previous">
+                            ＜
+                            </button></Link>
+                            <Link to="/step3"><button className="next">
+                            ＞
+                            </button></Link>
                         </div>
                         
                     </div>
-                    
+                    </CSSTransitionGroup>
+
                 </div>
             </div>
         )

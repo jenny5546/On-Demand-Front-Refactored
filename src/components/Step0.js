@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import PageTransition from 'react-router-page-transition';
+import { CSSTransitionGroup } from 'react-transition-group'
 import "../scss/Step.scss"
 
 /*
@@ -22,7 +24,7 @@ class Step0 extends React.Component{
                                     <br/>
                                     to make 2D and 3D floor model what you want.
                                     <br/>
-                                    Therefore, I will give few questions.ondemand.
+                                    Therefore, I will give few questions.
                                     <br/>
                                     Don`t worry!
                                     <br/>
@@ -31,9 +33,9 @@ class Step0 extends React.Component{
                             </div>
                         </div>
                         <div className="step__button">
-                            <button className="getstarted"><Link to="/step1">
+                            <Link className="start" to="/step1"><button className="getstarted">
                                 Let`s Go!
-                            </Link></button>
+                            </button></Link>
                         </div>
                         
                     </div>
