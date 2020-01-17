@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { CSSTransitionGroup } from 'react-transition-group'
+
 
 import "../scss/Step.scss"
 
@@ -26,11 +28,18 @@ class Step4 extends React.Component{
     render() {
         return(
             <div className="step">
+            <CSSTransitionGroup
+            transitionName="worksTransition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={true}
+            transitionLeave={true}>
                 <div className="step__outer-box">
 
                     <div className="step__inner-box">
                         <div className="step__progressbar">
-                                <h4> Progress bar </h4>
+                            <h5> 4 / 4 Extra Order</h5>
+
                         </div>
                         <div className="step__contents--column">
                             <div className="description">
@@ -51,6 +60,7 @@ class Step4 extends React.Component{
                     </div>
 
                 </div>
+                </CSSTransitionGroup>
             </div>
         )
     }

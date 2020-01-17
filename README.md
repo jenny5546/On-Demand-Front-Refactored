@@ -45,8 +45,8 @@ npm 6.13.4
      -  [x] step page layout 완성 [1] *2020.01.14*
      -  [ ] page contents 제작
          -  [ ] Landing page GIF [3]
-         -  [ ] Step 0 GIF [3]
-         -  [ ] Progress bar [3]
+         -  [ ] ~~Step 0 GIF [3]~~
+         -  [ ] ~~Progress bar [3]~~
          -  [x] Interior imgae data set(+ tagging) [1] *2020.01.14*
 -  [ ] Functions
    -  [ ] Step별 data에 따른 output 설정
@@ -58,11 +58,12 @@ npm 6.13.4
       -  [x] step 5(summary & user info 받아오기) [1] *2020.01.14*
    -  [ ] Payment [3]
 -  [ ] Design
-   -  [ ] Page transition effects [2]
+   -  [x] Page transition effects [2] *2020.01.17*
    -  [x] Button effects [2]  *2020.01.15*
-   -  [ ] Progress bar [2]
-   -  [ ] Colors [2]
+   -  [ ]  ~~Progress bar [2]~~ *text 로 대체*
+   -  [x] Colors [2] *2020.01.16*
+   -  [ ] step page redesign
 -  [x] Structure
-   -  [x] Scss 모듈화 / 정리 [2] *2020.01.15*
+   -  [ ] Scss 모듈화 / 정리 [2]
    -  [x] Components 모듈화 / 정리 [2] *2020.01.15*
 

@@ -1,28 +1,29 @@
 @import "./01-base/color";
 
 .worksTransition-appear{
-    opacity: 0.5;
-    transform: translateX(1800px);
+    opacity: 0.1;
+    transform: translateX(400px);
   }
   
   .worksTransition-appear.worksTransition-appear-active{
     opacity: 1;
     transform: translateX(0px);
-    transition: all .7s ease-in-out;
+    transition: all .3s ease-in-out;
   }
+
 
 .step {
     display: flex;
     flex-direction: column;
     flex: 1;
-    background-color: $mainColor;
+    background-color: $mainColor_dark;
     //text-transform: default;
     &__outer-box{
         display: flex;
         flex-direction: column;
         flex: 1;
         //padding-top: 4%;
-        background-color: $mainColor;
+        background-color: $mainColor_dark;
         position: relative;
         width: 100%;
         height: 100vh;
@@ -56,19 +57,22 @@
         justify-content: center;
         //height: 90vh;
     }
-    &__inner-box{
+    &__inner-box{        
+        margin: 0;
+
         display: flex;
         flex-direction: column;
         flex:1;
         margin: 10%;
-        margin-top: 6%;
-        margin-bottom: 3%;
+        margin-top: 0;
+        margin-bottom: 0;
         width: 80%;
-        //height: 80vh;
+        //height: 100vh;
+        height: 80vh;
         background-color: none;
         //border: 2px solid black;
         color: black;
-        overflow: hidden;
+        //overflow: hidden;
 
     }
 
@@ -87,15 +91,16 @@
         margin-left: 10%;
         margin-right: 10%;
         //margin-bottom: 5%;
-        height: 100%;
+        height: 500px;
         //margin: auto 0;
 
         .choicebox{
             
             display: flex;
             flex-direction: column;
+            align-items: center;
             //justify-content: center;
-            padding-bottom: 10%;
+            //padding-bottom: 10%;
             margin: 0 auto;
             text-align: center;
             .choice{
@@ -103,8 +108,8 @@
                 font-size: 150%;
                 text-align: center;
                 width: 100%;
-                //flex: 1;
                 border: none;
+                //justify-content: center;
                 padding: 0, 24px;
                 //margin-bottom: 10%;
                 counter-increment: bc;
@@ -141,6 +146,7 @@
 
             
             .b08_3d_pushback {
+                display: flex;
                 perspective: 500px;
                 -webkit-perspective: 500px;
                 -moz-perspective: 500px;
@@ -159,11 +165,13 @@
                 -moz-box-sizing: border-box;
                 pointer-events: none;
                 padding: 10px;
+
                 border: #000000 solid 1px;
             }
             
             .b08_3d_pushback div:nth-child(1) {
                 color: #000000;
+                padding-top: 5%;
                 background-color: #ffffff;
                 transform: rotateX(0deg) translateZ(0px);
                 -webkit-transform: rotateX(0deg) translateZ(0px);
@@ -177,6 +185,7 @@
             }
             
             .b08_3d_pushback div:nth-child(2) {
+                padding-top: 3%;
                 color: #ffffff;
                 background-color: #000000;
                 transform: rotateX(-179.5deg) translateZ(1px);
@@ -226,18 +235,52 @@
             margin: auto 0;
             margin-left: 2%;
             text-align: left;
-            .input{
-                font-size: 20px;
+            h5{
+                margin-top: 5%;
+                margin-bottom: 5%;
             }
+
+            .input{
+                font-size: 30px;
+                input{
+                    background-color: $mainColor_dark;
+                    border: none;
+                    border-bottom: 1px solid white;
+                    outline: none;
+                    font-size: 20px;
+                    color: white;
+                    
+                }
+                input::placeholder{
+                    color: rgb(253, 253, 253);
+                }
+            }
+
         }
         .summarybox{
-            flex: auto;
+            flex: 1;
+            font-size: 120%;
             padding: 5%;
-            text-align: center;
-            background-color: rgb(139, 139, 139);
-            border: 5px dotted black;
+            padding-top: 3%;
+            text-align: left;
+            //background-color: rgb(139, 139, 139);
+            border-right: 1px solid white;
             //height: 100%;
             //margin: 10%;
+            .title{
+                h5{
+                    margin-top: 5%;
+                    margin-bottom: 5%;
+                }
+                border-bottom: 1px solid white;
+            }
+            .floorinfo{
+                h5{
+                    margin-top: 5%;
+                    margin-bottom: 5%;
+                }
+                border-bottom: 1px solid white;
+            }
         }
 
         .userinfobox{
@@ -294,17 +337,25 @@
             //flex: auto;
             padding: 0;
             text-align: center;
-            background-color: rgb(255, 255, 255);
+            background-color: none;
             border: 5px solid black;
-            //height: 100%;
+            height: 300px;
             //overflow-x: none;
             overflow-y: scroll;
             //margin: 10%;
             .imgbutton{
                 padding: 0;
+                background-color: $mainColor_dark;
                 //margin: 3px;
                 border: none;
                 cursor: pointer;
+                border: none;
+                padding: 10px;
+            }
+            .imgbutton:hover{
+                background-color: $mainColor_light;
+                content: "hidhi";
+                z-index: 100;
             }
         }
     }
@@ -336,7 +387,7 @@
         height: 100px;
         justify-content: space-between;
         //margin-left: auto;
-        background-color: $mainColor; /* Green */
+        background-color: $mainColor_dark; /* Green */
         border: none;
         padding: 10px 24px;
         text-align: center;
@@ -346,7 +397,7 @@
                 display: inline;
                 flex: 1;
                 //margin-left:50% ;
-                background-color: $mainColor; /* Green */
+                background-color: $mainColor_dark; /* Green */
                 border: none;            
                 color: white;
                 font-size: 20px;
@@ -356,7 +407,7 @@
         .previous{
             display: inline;
             font-size: 20px;
-            background-color: $mainColor; /* Green */
+            background-color: $mainColor_dark; /* Green */
             border: none;            
             color: white;
             font-size: 20px;
@@ -364,7 +415,7 @@
         .next{
             display: inline;
             font-size: 20px;
-            background-color: $mainColor; /* Green */
+            background-color: $mainColor_dark; /* Green */
             border: none;            
             color: white;
             font-size: 20px;

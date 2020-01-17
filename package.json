@@ -17,6 +17,7 @@
     "react-router-dom": "^5.1.2",
     "react-router-page-transition": "^3.1.0",
     "react-scripts": "3.3.0",
+    "react-transition-group": "^1.2.1",
     "wow.js": "^1.2.2"
   },
   "scripts": {

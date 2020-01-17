@@ -2,6 +2,8 @@ import React, {useCallback} from 'react'
 import { Link } from 'react-router-dom';
 import "../scss/Step.scss"
 import {useDropzone} from 'react-dropzone';
+import { CSSTransitionGroup } from 'react-transition-group'
+
 
 
 
@@ -77,11 +79,17 @@ class Step2 extends React.Component{
         const {list} = this.props
         return(
             <div className="step">
-                <div className="step__outer-box--2">
+            <CSSTransitionGroup
+            transitionName="worksTransition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={true}
+            transitionLeave={true}>
+                <div className="step__outer-box">
 
                     <div className="step__inner-box">
                         <div className="step__progressbar">
-                            <h4> Progress Bar</h4>
+                          <h5> 2 / 4 Floor Info</h5>
                         </div>
                         <div className="step__contents">
 
@@ -90,9 +98,9 @@ class Step2 extends React.Component{
                                 <Accept />
                             </div>
                             <div className="text">
-                                <form className="input">Number of Floor: <input type="text" name="num_floor" onChange={this.change}/></form>
-                                <form className="input">Size of Floor: <input type="text" name="size_floor" onChange={this.change}/></form>
-                                <form className="input">Height of Floor: <input type="text" name="height_floor" onChange={this.change}/></form>
+                                <form className="input">Number of Floor: <input type="text" name="num_floor" placeholder="ex) 3" onChange={this.change}/></form>
+                                <form className="input">Size of Floor: <input type="text" name="size_floor" placeholder="ex) 140 m^2"onChange={this.change}/></form>
+                                <form className="input">Height of Floor: <input type="text" name="height_floor" placeholder="ex) 220 m"onChange={this.change}/></form>
                                 <form className="input">Address: <br/><input type="text" name="address" onChange={this.change}/></form>
                             </div>
                         </div>
@@ -107,6 +115,7 @@ class Step2 extends React.Component{
                         
                     </div>
                 </div>
+                </CSSTransitionGroup>
             </div>
         )
     }

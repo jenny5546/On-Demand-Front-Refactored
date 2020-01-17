@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { CSSTransitionGroup } from 'react-transition-group'
+
 
 import "../scss/Step.scss"
 
@@ -21,11 +23,18 @@ class Step3 extends React.Component{
     render() {
         return(
             <div className="step">
+            <CSSTransitionGroup
+            transitionName="worksTransition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={true}
+            transitionLeave={true}>
                 <div className="step__outer-box">
 
                     <div className="step__inner-box">
                         <div className="step__progressbar">
-                                <h4> Progress bar </h4>
+                            <h5> 3 / 4 Theme Choice</h5>
+
                         </div>
                         <div className="step__contents--column">
                             <div className="description">
@@ -35,16 +44,17 @@ class Step3 extends React.Component{
                                 <div className="img">
                                     <button className="imgbutton"><img src="./interior_design/modern/1.png"/> </button>
                                     <button className="imgbutton"><img src="./interior_design/modern/6.png"/> </button>
+                                    <button className="imgbutton"><img src="./interior_design/minimalist/1.png"/> </button>
                                 </div>
                                 <div className="img">
                                     <button className="imgbutton"><img src="./interior_design/modern/2.png"/> </button>
                                     <button className="imgbutton"><img src="./interior_design/modern/5.png"/> </button>
-
+                                    <button className="imgbutton"><img src="./interior_design/minimalist/2.png"/> </button>
                                 </div>
                                 <div className="img">
                                     <button className="imgbutton"><img src="./interior_design/modern/3.png"/> </button>
                                     <button className="imgbutton"><img src="./interior_design/modern/4.png"/> </button>
-
+                                    <button className="imgbutton"><img src="./interior_design/minimalist/4.png"/> </button>
                                 </div>
                             </div>
                         </div>
@@ -61,6 +71,7 @@ class Step3 extends React.Component{
                     </div>
 
                 </div>
+                </CSSTransitionGroup>
             </div>
         )
     }

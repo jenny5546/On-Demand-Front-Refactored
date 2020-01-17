@@ -29,12 +29,12 @@ class Body extends React.Component {
                             furnish them according to specifications.<br/>
                         </p>
                         <br/>
-                        <button className="ondemand__button"><Link to="/step0">
+                        <Link to="/step1"><button className="ondemand__button">
                             Get Started
-                        </Link></button>
+                        </button></Link>
                     </div>
                     <div className="scroll">
-                        <p> scroll</p>
+                        <a href="#step1"> scroll</a>
                         <div className="arrow">
                             <img src="./arrow.png" />
                         </div>
@@ -51,9 +51,11 @@ class Body extends React.Component {
 */}
                 <div data-aos="fade-left" 
                     data-aos-duration="1300"
-                    className="ondemand__step1">
+                    className="ondemand__step1"
+                    id='step1'
+                    >
                     <div className="ondemand__description2">
-                        <h4> get your info </h4>
+                        <h4> Step 1 your info </h4>
                         <p> this is ondemand hahahahahahahah <br/>
                         Maybe it's hard to believe what's with<br/>
                         my obvious charm and good looks <br/>
@@ -81,7 +83,7 @@ class Body extends React.Component {
                         <img src="./pexels.jpeg"/>
                     </div>
                     <div className="ondemand__description3">
-                        <h4> analysis floor info </h4>
+                        <h4> Step 2 analysis floor info </h4>
                         <p> this is ondemand hahahahahahahah <br/>
                         Maybe it's hard to believe what's with<br/>
                         my obvious charm and good looks <br/>
@@ -97,7 +99,7 @@ class Body extends React.Component {
                     className="ondemand__step4">
 
                     <div className="ondemand__description5">
-                    <h4> choose your own theme </h4>
+                    <h4> Step 3 choose your own theme </h4>
                         <p> this is ondemand hahahahahahahah <br/>
                         Maybe it's hard to believe what's with<br/>
                         my obvious charm and good looks <br/>
@@ -115,7 +117,7 @@ class Body extends React.Component {
                     data-aos-duration="1000"
                     className="ondemand__step3">
                     <div className="ondemand__description4">
-                        <h4> choose your own theme </h4>
+                        <h4> Get your own 3D model! </h4>
                         <p> this is ondemand hahahahahahahah <br/>
                         Maybe it's hard to believe what's with<br/>
                         my obvious charm and good looks <br/>
@@ -128,12 +130,13 @@ class Body extends React.Component {
                         </p>
                     </div>
                     <div className="buttonclass">
-                    <button className="button"><Link to="/step0">
+                    <Link to="/step1"><button className="ondemand__button">
                             Get Started
-                    </Link></button>
+                    </button></Link>
                     </div>
                 </div>
                 {/*여기에 배경 넣기*/}
+                {/*
                 <div className="right-sidebar">
                     <h4 className="step1"> step 1</h4>
                     <h4 className="step3"> step 3</h4>
@@ -141,6 +144,7 @@ class Body extends React.Component {
                 <div className="left-sidebar">
                     <h4 className="step2"> step 2</h4>
                 </div>
+                */}
             </div>
 
         )
