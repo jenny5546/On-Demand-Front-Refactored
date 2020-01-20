@@ -25,6 +25,19 @@ class Step4 extends React.Component{
         this.props.changeData2(e.target.value, e.target.name)
     }
 
+    urlMaker(){
+        if(this.state.usertype === "commercial"){
+            return "./step1-1"
+        }
+        else if(this.state.usertype === "residential"){
+            return "./step2"
+        }
+        else{
+            //alert("write!!!")
+            return "./step1"
+        }
+    }
+
     render() {
         return(
             <div className="step">
@@ -43,7 +56,7 @@ class Step4 extends React.Component{
                         </div>
                         <div className="step__contents--column">
                             <div className="description">
-                                <p>feel free to add request</p>
+                                <h4>feel free to add request</h4>
                             </div>
                             <div className="textbox">
                                 <textarea row="1" className="textinput" placeholder="type anything!" name="extra" onChange={this.change}></textarea>

@@ -61,7 +61,6 @@ class Step1 extends React.Component{
         }
     }
     render() {
-        const {list} = this.props
         //const {pagenumber} = this.state.pagenumber
         return(
 
@@ -86,7 +85,7 @@ class Step1 extends React.Component{
                                 </div>
                                 <div className="choice">
                                     <button className="button_base b08_3d_pushback" value="residential" name="type" onClick={this.change2}> 
-                                        <div id="one"> residential</div>
+                                        <div id="one"> Residential</div>
                                         <div > Single, Multi-Family Homes, Condominiums, <br/>
                                     Townhouses and Dormatories </div>
                                     </button>
@@ -95,7 +94,7 @@ class Step1 extends React.Component{
                                 </div>
                                 <div className="choice">
                                     <button className="button_base b08_3d_pushback" value="commercial" name="type" onClick={this.change2}> 
-                                        <div id="two"> commercial </div>
+                                        <div id="two"> Commercial </div>
                                         <div > Offices, Restaurant/ Cafes, Shops, Hotels or <br/>
                                 special purpose buildings (schools, hospitals) </div>
                                     </button>
@@ -107,10 +106,10 @@ class Step1 extends React.Component{
                         </div>
                         <div className="step__button">
                             <Link to="./"><button className="previous">
-                                ＜
+                                <h5>＜</h5>
                             </button></Link>
                             <Link to={this.urlMaker}><button className="next">
-                                ＞
+                                <h5>＞</h5>
                             </button></Link>
                         </div>
                         

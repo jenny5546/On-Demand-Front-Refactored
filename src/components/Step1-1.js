@@ -19,6 +19,7 @@ class Step1_1 extends React.Component{
             usertype: "",
         }
         this.change=this.change.bind(this)
+        
     }
 
     change(e){
@@ -65,8 +66,6 @@ class Step1_1 extends React.Component{
 
     
     render() {
-        const {list} = this.props
-
         return(
             <div className="step">
                         <div className="step__progressbar">
@@ -85,44 +84,39 @@ class Step1_1 extends React.Component{
                             <div className="description">
                                     <h4>Choose the Type of your Property</h4>
                                 </div>
-                                <div className="choice">
-                                    <button className="button_base b08_3d_pushback" value="Office" name="subtype" onClick={this.change}> 
-                                        <div id="one"> Office </div>
-                                        <div > Hover </div>
+                                <div className="choice2">
+                                    <button id="one" className="button_base2" value="Office" name="subtype" onClick={this.change}> 
+                                        <div > Office </div>
                                     </button>
                                 </div>
-                                <div className="choice">
-                                    <button className="button_base b08_3d_pushback" value="Restaurant / Cafe" name="subtype" onClick={this.change}> 
-                                        <div id="two"> Restaurant / Cafe </div>
-                                        <div > Hover </div>
+                                <div className="choice2">
+                                    <button id="two" className="button_base2" value="Restaurant / Cafe" name="subtype" onClick={this.change}> 
+                                        <div > Restaurant / Cafe </div>
                                     </button>
                                 </div>
-                                <div className="choice">
-                                    <button className="button_base b08_3d_pushback" value="Shop" name="subtype" onClick={this.change}> 
-                                        <div id="three"> Shop </div>
-                                        <div > Hover </div>
+                                <div className="choice2">
+                                    <button id="three" className="button_base2" value="Shop" name="subtype" onClick={this.change}> 
+                                        <div > Shop </div>
                                     </button>
                                 </div>
-                                <div className="choice">
-                                    <button className="button_base b08_3d_pushback" value="Hotel" name="subtype" onClick={this.change}> 
-                                        <div id="four"> Hotel </div>
-                                        <div > Hover </div>
+                                <div className="choice2">
+                                    <button id="four" className="button_base2" value="Hotel" name="subtype" onClick={this.change}> 
+                                        <div > Hotel </div>
                                     </button>
                                 </div>
-                                <div className="choice">
-                                    <button className="button_base b08_3d_pushback" value="Others" name="subtype" onClick={this.change}> 
-                                        <div id="five"> Others </div>
-                                        <div > Hover </div>
+                                <div className="choice2">
+                                    <button id="five" className="button_base2" value="Others" name="subtype" onClick={this.change}> 
+                                        <div > Others </div>
                                     </button>
                                 </div>
                             </div>
                         </div>
                         <div className="step__button">
                             <Link to="/step1"><button className="previous">
-                                ＜
+                                <h5>＜</h5>
                             </button></Link>
                             <Link to={this.props.url}><button className="next">
-                                ＞
+                                <h5>＞</h5>
                             </button></Link>
                         </div>
                         

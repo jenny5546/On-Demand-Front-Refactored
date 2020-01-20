@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom';
 import "../scss/Step.scss"
 import {useDropzone} from 'react-dropzone';
@@ -14,39 +14,76 @@ drag & drop
 format 판별하기
 data input 저장하기
 */
-function Accept(props) {
-    const {acceptedFiles, rejectedFiles, getRootProps, getInputProps} = useDropzone({
-      accept: 'image/jpeg, image/png'
+
+  const thumbsContainer = {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 16
+  };
+  
+  const thumb = {
+    display: 'inline-flex',
+    borderRadius: 2,
+    border: '1px solid #eaeaea',
+    marginBottom: 8,
+    marginRight: 8,
+    width: 100,
+    height: 100,
+    padding: 4,
+    boxSizing: 'border-box'
+  };
+  
+  const thumbInner = {
+    display: 'flex',
+    minWidth: 0,
+    overflow: 'hidden'
+  };
+  
+  const img = {
+    display: 'block',
+    width: 'auto',
+    height: '100%'
+  };
+  
+  
+  function Previews(props) {
+    const [files, setFiles] = useState([]);
+    const {getRootProps, getInputProps} = useDropzone({
+      accept: 'image/jpeg, image/png',
+      onDrop: acceptedFiles => {
+        setFiles(acceptedFiles.map(file => Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })));
+      }
     });
     
-    const acceptedFilesItems = acceptedFiles.map(file => (
-      <li key={file.path}>
-        {file.path} - {file.size} bytes
-      </li>
+    const thumbs = files.map(file => (
+      <div style={thumb} key={file.name}>
+        <div style={thumbInner}>
+          <img
+            src={file.preview}
+            style={img}
+          />
+        </div>
+      </div>
     ));
   
-    const rejectedFilesItems = rejectedFiles.map(file => (
-      <li key={file.path}>
-        {file.path} - {file.size} bytes
-      </li>
-    ));
+    useEffect(() => () => {
+      // Make sure to revoke the data uris to avoid memory leaks
+      files.forEach(file => URL.revokeObjectURL(file.preview));
+    }, [files]);
   
     return (
       <section className="container">
         <div {...getRootProps({className: 'dropzone'})}>
           <input {...getInputProps()} />
           <p>Drag 'n' drop some files here, or click to select files</p>
-          <em>(Only *.jpeg and *.png images will be accepted)</em>
+          <p>(Only *.jpeg and *.png images will be accepted)</p>
+
         </div>
-        <aside>
-          <p>Accepted files</p>
-          <ul>
-            {acceptedFilesItems}
-          </ul>
-          <p>Rejected files</p>
-          <ul>
-            {rejectedFilesItems}
-          </ul>
+        <aside style={thumbsContainer}>
+          {thumbs}
         </aside>
       </section>
     );
@@ -57,16 +94,24 @@ class Step2 extends React.Component{
     constructor(props){
         super(props)
 
-        this.setState({
+        this.state ={
+            num: 1,
             pagenumber: 2,
             input: "",
-        })
+            num_floor: "",
+            size_floor: "",
+            height_floor: "",
+        }
 
         this.change = this.change.bind(this)
         this.backgroundChanger = this.backgroundChanger.bind(this)
+        this.urlMaker = this.urlMaker.bind(this)
     }
 
     change(e){
+      this.setState({
+        [e.target.name]: e.target.value
+      }, ()=>console.log(this.state))
       this.props.changeData2(e.target.value, e.target.name)
     }
 
@@ -74,6 +119,22 @@ class Step2 extends React.Component{
       document.getElementsByClassName("step").style.backgroundColor = "white"
 
     }
+
+    urlMaker(){
+      if(this.state.num === 1){
+        this.setState({
+          num: 2
+        })
+        return false
+      }
+      if(this.state.num_floor !== "" && this.state.size_floor !== "" && this.state.height_floor !==""){
+          return "./step3"
+      }
+      else{
+          //alert("write!!!")
+          return "./step2"
+      }
+  }
     
     render() {
         const {list} = this.props
@@ -95,21 +156,21 @@ class Step2 extends React.Component{
 
                             <div className="filebox">
                                 <img src="data:image/png;base64,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"/>
-                                <Accept />
+                                <Previews />
                             </div>
                             <div className="text">
                                 <form className="input">Number of Floor: <input type="text" name="num_floor" placeholder="ex) 3" onChange={this.change}/></form>
-                                <form className="input">Size of Floor: <input type="text" name="size_floor" placeholder="ex) 140 m^2"onChange={this.change}/></form>
-                                <form className="input">Height of Floor: <input type="text" name="height_floor" placeholder="ex) 220 m"onChange={this.change}/></form>
-                                <form className="input">Address: <br/><input type="text" name="address" onChange={this.change}/></form>
+                                <form className="input">Size of Floor(m^2): <input type="text" name="size_floor" placeholder="ex) 140 m^2"onChange={this.change}/></form>
+                                <form className="input">Height of Floor(m): <input type="text" name="height_floor" placeholder="ex) 220 m"onChange={this.change}/></form>
+                                <form className="input2">Address: <br/><input type="text" name="address" onChange={this.change} placeholder="ex)39W. 29ST 9FL, Manhattan, New York, United States, 10001" /></form>
                             </div>
                         </div>
                         <div className="step__button">
                             <Link to="/step1"><button className="previous">
-                            ＜
+                            <h5>＜</h5>
                             </button></Link>
-                            <Link to="/step3"><button className="next">
-                            ＞
+                            <Link to={this.urlMaker}><button className="next">
+                              <h5>＞</h5>
                             </button></Link>
                         </div>
                         

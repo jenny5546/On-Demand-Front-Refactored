@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from './Header'
-import Footer from './Footer';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import "../scss/Body.scss"
@@ -50,21 +48,16 @@ class Body extends React.Component {
                     <br/>
 */}
                 <div data-aos="fade-left" 
-                    data-aos-duration="1300"
+                    data-aos-duration="1000"
                     className="ondemand__step1"
                     id='step1'
                     >
                     <div className="ondemand__description2">
-                        <h4> Step 1 your info </h4>
-                        <p> this is ondemand hahahahahahahah <br/>
-                        Maybe it's hard to believe what's with<br/>
-                        my obvious charm and good looks <br/>
-                        but people used to think that I was a monster<br/>
-                        And for a long time, I believe them <br/>
-
-                        But after a while, <br/>
-                        you learn to ignore the names people calling you<br/>
-                        you just trust who you are
+                        <h4> Step 1 User info </h4>
+                        <p> Enter your basic info <br/>
+                        don`t worry, the questions are very easy<br />
+                        <br/>
+                        more description...
                         </p>
 
                     </div>
@@ -76,7 +69,7 @@ class Body extends React.Component {
                     <img src="./yellow.jpg" />
                 </div>
                 <div data-aos="fade-right" 
-                    data-aos-offset="800" 
+                    data-aos-offset="600" 
                     data-aos-duration="1300"
                     className="ondemand__step2">
                     <div className="ondemand__gif2">
@@ -84,27 +77,27 @@ class Body extends React.Component {
                     </div>
                     <div className="ondemand__description3">
                         <h4> Step 2 analysis floor info </h4>
-                        <p> this is ondemand hahahahahahahah <br/>
-                        Maybe it's hard to believe what's with<br/>
-                        my obvious charm and good looks <br/>
-                        but people used to think that I was a monster<br/>
-                        And for a long time, I believe them <br/>
+                        <p> You should enter your floor info <br/>
+                        we analysis your floor by<br/>
+                       floor plan, size, height... etc.. <br/>
+                       <br/>
+                        more description... <br/>
                         </p>
                     </div>
                 </div>
 
                 <div data-aos="fade-left" 
-                    data-aos-offset="1200" 
+                    data-aos-offset="600" 
                     data-aos-duration="1300"
                     className="ondemand__step4">
 
                     <div className="ondemand__description5">
                     <h4> Step 3 choose your own theme </h4>
-                        <p> this is ondemand hahahahahahahah <br/>
-                        Maybe it's hard to believe what's with<br/>
-                        my obvious charm and good looks <br/>
-                        but people used to think that I was a monster<br/>
-                        And for a long time, I believe them <br/>
+                        <p> You can choose your own theme <br/>
+                        we give design examples that<br/>
+                        help your decision. <br/>
+                        <br/>
+                        More description.. <br/>
                         </p>
                     </div>
                     <div className="ondemand__gif3">
@@ -113,20 +106,17 @@ class Body extends React.Component {
 
                 </div>
                 <div data-aos="fadeInUp" 
-                    data-aos-offset="1200"  
+                    data-aos-offset="300"  
                     data-aos-duration="1000"
                     className="ondemand__step3">
                     <div className="ondemand__description4">
                         <h4> Get your own 3D model! </h4>
-                        <p> this is ondemand hahahahahahahah <br/>
-                        Maybe it's hard to believe what's with<br/>
-                        my obvious charm and good looks <br/>
-                        but people used to think that I was a monster<br/>
-                        And for a long time, I believe them <br/>
-
-                        But after a while, <br/>
-                        you learn to ignore the names people calling you<br/>
-                        you just trust who you are
+                        <p> So easy! <br/>
+                        description..<br/>
+                        description.. <br/>
+                        description..<br/>
+                        <br/>
+                        more description...
                         </p>
                     </div>
                     <div className="buttonclass">
