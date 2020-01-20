@@ -17,49 +17,41 @@
     flex-direction: column;
     flex: 1;
     background-color: $mainColor_dark;
-    //text-transform: default;
     &__outer-box{
         display: flex;
         flex-direction: column;
         flex: 1;
-        //padding-top: 4%;
         background-color: $mainColor_dark;
         position: relative;
         width: 100%;
         height: 100vh;
         text-align: center;
         justify-content: center;
-        //height: 90vh;
     }
     &__outer-box--1 {
         display: flex;
         flex-direction: column;
         flex: 1;
-        //padding-top: 4%;
         background-color: #A5B584;
         position: relative;
         width: 100%;
         height: 100vh;
         text-align: center;
         justify-content: center;
-        //height: 90vh;
     }
     &__outer-box--2 {
         display: flex;
         flex-direction: column;
         flex: 1;
-        //padding-top: 4%;
         background-color: #9ABAFA;
         position: relative;
         width: 100%;
         height: 100vh;
         text-align: center;
         justify-content: center;
-        //height: 90vh;
     }
     &__inner-box{        
         margin: 0;
-
         display: flex;
         flex-direction: column;
         flex:1;
@@ -67,13 +59,9 @@
         margin-top: 0;
         margin-bottom: 0;
         width: 80%;
-        //height: 100vh;
         height: 80vh;
         background-color: none;
-        //border: 2px solid black;
         color: black;
-        //overflow: hidden;
-
     }
 
     &__progressbar{
@@ -86,32 +74,21 @@
         flex-direction: row;
         border-radius: 20px;
         background-color: $bg_primary;
-        //color: white;
         color: black;
         border-top : 2px solid white;
         border-bottom : 2px solid white;
-        //padding-bottom: 10%;
         margin-left: 10%;
         margin-right: 10%;
-        //margin-bottom: 5%;
         max-height: 700px;
-        //margin: auto 0;
         .description{
-            //flex: 1;
-            //font-size: 30px;
-            //text-align: center;
-            //line-height: 10%;
             border-bottom: 2px solid $mainColor_light;
             margin-bottom: 50px;
         }
 
         .choicebox{
-            
             display: flex;
             flex-direction: column;
             align-items: center;
-            //justify-content: center;
-            //padding-bottom: 10%;
             margin: 0 auto;
             text-align: center;
             .choice{
@@ -120,9 +97,7 @@
                 text-align: center;
                 width: 100%;
                 border: none;
-                //justify-content: center;
                 padding: 0, 24px;
-                //margin-bottom: 10%;
                 counter-increment: bc;
             }
             .choice2{
@@ -131,13 +106,9 @@
                 text-align: center;
                 width: 100%;
                 border: none;
-                //justify-content: center;
-                //padding: 0, 24px;
-                //margin-bottom: 10%;
             }
             .choice:before{
                 position: absolute;
-                //padding: 20px;
             }
             .button_base {
                 background-color:rgba($color: #000000, $alpha: 0.0);
@@ -272,11 +243,7 @@
             flex-direction: column;
             padding: 5%;
             text-align: center;
-            //border-radius: 20px;
-            //background-color: $bg_secondary;
             border-right: 2px solid $mainColor_light;
-            //height: 100%;
-            //margin: 10%;
             img{
                 min-width: 200px;
                 max-height: 200px;
@@ -285,8 +252,6 @@
                 margin: 0 auto;
             }
             .container{
-                //display: flex;
-                //flex: 1;
                 text-align: center;
                 .dropzone{
                     flex: 1;
@@ -350,11 +315,7 @@
             padding: 5%;
             padding-top: 3%;
             text-align: left;
-            //background-color: $mainColor_light;
             border-right: 2px solid $mainColor_light;
-            
-            //height: 100%;
-            //margin: 10%;
             .title{
                 h5{
                     margin-top: 5%;
@@ -399,17 +360,13 @@
         flex: 1;
         border-radius: 20px;
         background-color: $bg_primary;
-        //color: white;
         color: black;
         border-top : 2px solid white;
         border-bottom : 2px solid white;
         padding-bottom: 10%;
         margin-left: 10%;
         margin-right: 10%;
-        //margin-bottom: 5%;
         height: 100%;
-        //margin: auto 0;
-        //margin: auto 0;
         margin-bottom: 3%;
         max-height: 500px;
         .description{
@@ -417,7 +374,6 @@
             margin-right: 80px;
             flex: 1;
             font-size: 30px;
-            //text-align: center;
             line-height: 10%;
             border-bottom: 2px solid $mainColor_light;
         }
@@ -429,7 +385,6 @@
             padding: 5%;
             text-align: center;
             display: inline-block;
-            //margin: auto 0;
             .textinput{
                 flex: 1;
                 border-radius: 10px;
@@ -442,19 +397,15 @@
         }
         .imgbox{
             display: flex;
-            //flex: auto;
             padding: 0;
             text-align: center;
             background-color: none;
             border: 3px solid $mainColor_light;
             height: 300px;
-            //overflow-x: none;
             overflow-y: scroll;
-            //margin: 10%;
             .imgbutton{
                 padding: 0;
                 background-color: $mainColor_dark;
-                //margin: 3px;
                 border: none;
                 cursor: pointer;
                 border: none;
@@ -474,25 +425,17 @@
         flex: 1;
         border-radius: 20px;
         background-color: $bg_primary;
-        //color: white;
         color: black;        border-top : 2px solid white;
         border-bottom : 2px solid white;
         margin-left: 10%;
         margin-right: 10%;
-        //margin-bottom: 5%;
-        //height: 100%;
         max-height: 700px;
-        //margin: auto 0;
-        //margin: auto 0;
         margin-bottom: 3%;
         .description{
             flex: auto;
             max-height: 150px;
             font-size: 30px;
             border-bottom: 2px solid $mainColor_light;
-
-            //text-align: center;
-            //line-height: 10%;
         }
 
         .textbox{
@@ -502,7 +445,6 @@
             padding: 5%;
             text-align: center;
             display: inline-block;
-            //margin: auto 0;
             .textinput{
                 flex: 1;
                 border: 1px solid black;
@@ -513,26 +455,18 @@
         }
         .imgbox{
             display: flex;
-            //flex: auto;
             padding: 0;
             text-align: center;
             border-radius: 20px;
-            //background-color: $bg_primary;
             border: 3px solid black;
             height: 300px;
-            //overflow-x: none;
             overflow-y: scroll;
-            //margin: 10%;
             .imgbutton{
                 padding: 0;
-                //border-radius: 20px;
                 background-color: $bg_primary;
-                //color: white;
                 color: black;
-                //margin: 3px;
                 border: none;
                 cursor: pointer;
-                //border: none;
                 padding: 10px;
             }
             .imgbutton:hover{
@@ -558,7 +492,6 @@
         padding: 5%;
         text-align: center;
         justify-content: center;
-        //background-color: rgb(130, 211, 141);
         img{
             flex: 1;
         }
@@ -575,12 +508,10 @@
             text-decoration:none;
             color: white;
         }
-        //outline: none;
         overflow: hidden;
         display: flex;
         height: 100px;
         justify-content: space-between;
-        //margin-left: auto;
         background-color: $mainColor_dark; /* Green */
         border: none;
         padding: 10px 24px;
@@ -590,7 +521,6 @@
             .getstarted{
                 display: inline;
                 flex: 1;
-                //margin-left:50% ;
                 background-color: $mainColor_dark; /* Green */
                 border: none;            
                 color: white;
@@ -623,7 +553,6 @@
         display: flex;
         height: 100px;
         justify-content: space-between;
-        //margin-left: auto;
         background-color: #A5B584; /* Green */
         border: none;
         padding: 10px 24px;

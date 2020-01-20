@@ -1,40 +1,4 @@
 @import "./01-base/color";
-
-.right-sidebar {
-    position: absolute;
-    top: 130vh;
-    right: 0;
-    .step1 {
-        right: 0;
-        color: rgba($color: rgb(0, 204, 255), $alpha: 1.0);
-    }
-    .step3 {
-        position: relative;
-        top: 1200px;
-        color: rgba($color: rgb(0, 204, 255), $alpha: 1.0);
-    }
-}
-.left-sidebar {
-    position: absolute;
-    top: 130vh;
-    left: 0;
-    .step1 {
-        right: 0;
-        color: rgba($color: #000000, $alpha: 0.7);
-    }
-    .step2 {
-        position: relative;
-        top: 800px;
-        color: rgba($color: rgb(0, 204, 255), $alpha: 1.0);
-    }
-    .step3 {
-        right: 0;
-
-        color: rgba($color: #000000, $alpha: 0.7);
-    }
-}
-
-
 .ondemand {
     scroll-behavior: smooth;
     position: relative;
@@ -50,7 +14,6 @@
     color: $font100;
     text-align: center;
     &__top {
-        //overflow: hidden;
         height: 70vh;
         display: flex;
         flex-direction: column;
@@ -58,62 +21,40 @@
         min-width: 1000px;
         margin-bottom: 20vh;
         justify-content: center;
-
         .scroll{
             .arrow{
             text-align: center;
             flex: none;
-            //padding-bottom: -20px;
-
             img{
                 size : 10%;
-                //border: 1px solid gray;
             }
 
         }
         p{
             margin: -5px;
            text-transform: lowercase;
-        }
+            }
         }
     }
     &__description {
 
         background-color: rgba($color: #000000, $alpha: 0.3);
         text-align: center;
-        //margin-top: 15vh;
         padding-top: 15px;
-        //padding-right: 15%;
         flex: auto;
-        //font-size: 150%;
     }
-    /*
-    &__gif {
-        margin-left: 5%;
-    }
-    */
     &__step1 {
         text-align: center;
         display: flex;
         flex-direction: row;
-        //flex: auto;
         min-width: 1000px;
-        //padding-left: 20%;
-        //padding-right: 20%;
         padding-bottom: 20px;
-        //margin-top: 65vh;
         justify-content: center;
     }
 
     &__description2 {
-        //flex: 1;
-        //display: inline;
         text-align: right;
-        //font-size: 120%;
         color: black;
-        //padding-top: 100px;
-
-        //padding-left: 100px;
         padding-right: 100px;
         min-width: 300px;
     }
@@ -121,11 +62,8 @@
     &__gif {
         display: flex;
         flex-direction: column;
-        //flex: 1;
         border: none;
         margin-top: -5%;
-        //padding-left: 200px;
-        //padding-right: 5%;
         img {
             width: auto;
             height: auto;
@@ -141,7 +79,6 @@
         text-align: center;
         display: flex;
         flex-direction: row;
-        //flex: auto;
         min-width: 1000px;
 
         justify-content: center;
@@ -152,28 +89,16 @@
     }
 
     &__description3 {
-        //flex: 1;
-        //display: inline;
         text-align: left;
-        //font-size: 120%;
         color: white;
         padding-top: 40px;
-
-        //padding-left: 100px;
         padding-left: 40px;
         min-width: 300px;
     }
-
-
-
     &__gif2 {
         display: flex;
         flex-direction: column;
-        //flex: 1;
         border: none;
-        //margin-top: 5%;
-        //padding-left: 200px;
-        //padding-right: 5%;
         img {
             width: auto;
             height: auto;
@@ -184,14 +109,9 @@
 
     &__step4 {
         display: flex;
-        //margin-top: -380px;
-        //margin-bottom: -300px;
-        //overflow: hidden;
         text-align: right;
         margin-right: 12%;
         display: flex;
-        //flex-direction: row;
-        //flex: auto;
         min-width: 1000px;
         min-height: 700px;
 
@@ -204,10 +124,8 @@
             margin-bottom: 0%;
         }
         flex: auto;
-        //display: inline;
         height: 100%;
         text-align: right;
-        //font-size: 120%;
         color: black;
         border-radius: 20px;
         padding-top: 350px;
@@ -250,12 +168,7 @@
         margin-top: -2%;
         margin-left: -12.5%;
         margin-right: -12.5%;
-
-        //margin: -10%;
-        //padding-left: 20%;
-        //padding-right: 20%;
         padding-bottom: 20px;
-        //margin-top: 65vh;
         justify-content: center;
         z-index: -1;
         .bottonclass{
@@ -265,11 +178,7 @@
 
     &__description4 {
         text-align: center;
-        //font-size: 120%;
         color: white;
-        //padding-top: 100px;
-
-        //padding-left: 100px;
         min-width: 300px;
     }
 
