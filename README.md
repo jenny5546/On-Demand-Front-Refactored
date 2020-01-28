@@ -1,3 +1,3 @@
-## eval “$(pyenv init -)”
-## eval “$(pyenv virtualenv-init -)”
-## pyenv activate ondemand
+eval “$(pyenv init -)”
+eval “$(pyenv virtualenv-init -)”
+pyenv activate ondemand
