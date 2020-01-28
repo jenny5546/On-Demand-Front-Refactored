@@ -17,9 +17,13 @@ from django.contrib import admin
 from django.urls import path
 import adminpage.views
 from django.conf.urls import include 
+from django.conf import settings # 추가
+from django.conf.urls.static import static # 추가
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', adminpage.views.index, name='index'),
     path('adminpage/', include('adminpage.urls')),
 ]
+urlpatterns +=  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

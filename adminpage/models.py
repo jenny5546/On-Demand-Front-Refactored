@@ -1,16 +1,16 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.postgres.fields import ArrayField
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
-class Theme(models.Model):
+class SelectedTheme(models.Model):
+    option = models.TextField(blank=True, null=True)
 
-    photo = models.TextField()
+class UploadedTheme(models.Model):
+    photo = models.FileField(upload_to='floor_theme', blank=True, null=True)
 
-class FloorPlan(models.Model):
-
-    photo = models.TextField()
+class Plan(models.Model):
+    photo = models.FileField(upload_to='floor_plan', blank=True, null=True)
 
 class Request(models.Model):
 
@@ -33,7 +33,7 @@ class Request(models.Model):
         default = ''
     )
     floor_plan = models.ManyToManyField(
-        FloorPlan, 
+        Plan, 
         blank=False, 
         related_name='plan_image'
     )
@@ -62,7 +62,7 @@ class Request(models.Model):
         blank = True,
     )
     floor_theme = models.ManyToManyField(
-        Theme,
+        UploadedTheme,
         blank=False, 
         related_name='theme_image'
     )

@@ -4,7 +4,8 @@ from adminpage import views
 urlpatterns = [
 
     path('plan/', views.plan),
-    # path('theme/', views.theme),
+    path('themeSelect/', views.themeSelect),
+    path('themeUpload/', views.themeUpload),
     # path('request/', views.request),
     path('', views.index, name='index'),
 ]
