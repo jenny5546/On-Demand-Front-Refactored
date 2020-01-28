@@ -8,7 +8,6 @@ from django.views.decorators.csrf import csrf_exempt
 def request(request):
     if request.method == 'POST':
         #변수 받아오기
-        
         floor_type = request.POST.get('floor_type')
         commercial_type = request.POST.get('commercial_type')
         floor_number = request.POST.get('floor_number')
@@ -60,4 +59,6 @@ def request(request):
 
 
 def index(request):
-    return render(request, 'adminpage/index.html')
+    if request.method == 'GET':
+        requests = Request.objects.all()
+        return render(request, 'adminpage/index.html', {'requests': requests})

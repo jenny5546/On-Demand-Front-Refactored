@@ -1,7 +1,4 @@
 from django.contrib import admin
-from adminpage.models import Request, UploadedTheme, SelectedTheme, Plan
+from adminpage.models import *
 # Register your models here.
-
-admin.site.register(UploadedTheme)
-admin.site.register(Plan)
 admin.site.register(Request)
