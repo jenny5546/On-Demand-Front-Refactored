@@ -14,20 +14,10 @@ class Plan(models.Model):
 
 class Request(models.Model):
 
-    class FloorType(models.TextChoices):
-        RESIDENTIAL = 'RES', _('Residential')
-        COMMERCIAL  = 'COM', _('Commercial')
-
-    class Unit(models.TextChoices):
-        METER = 'MT', _('Meter')
-        FEET = 'FT', _('Feet')
-
     floor_type = models.CharField(
-        max_length = 3,
-        choices = FloorType.choices,
-        default = FloorType.RESIDENTIAL,
+        max_length = 20,
+        default = 'Residential',
     )
-    
     commercial_type = models.CharField(
         max_length = 256, 
         default = ''
@@ -45,8 +35,7 @@ class Request(models.Model):
     )
     floor_size_unit = models.CharField(
         max_length = 2,
-        choices = Unit.choices,
-        default = Unit.METER,
+        default = 'm',
     )
     floor_height = models.IntegerField(
         blank = True,
@@ -54,8 +43,7 @@ class Request(models.Model):
     )
     floor_height_unit = models.CharField(
         max_length = 2,
-        choices = Unit.choices,
-        default = Unit.METER,
+        default = 'm',
     )
     floor_address = models.TextField(
         null= True,
