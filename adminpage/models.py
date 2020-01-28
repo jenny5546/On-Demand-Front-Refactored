@@ -13,7 +13,9 @@ class Plan(models.Model):
     photo = models.FileField(upload_to='floor_plan', blank=True, null=True)
 
 class Request(models.Model):
-
+    
+    requested_at = models.DateTimeField(default=timezone.now)
+    progress = models.IntegerField(default=1)
     floor_type = models.CharField(
         max_length = 20,
         default = 'Residential',
@@ -37,7 +39,8 @@ class Request(models.Model):
         max_length = 2,
         default = 'm',
     )
-    floor_height = models.IntegerField(
+    floor_height = models.CharField(
+        max_length = 256,
         blank = True,
         null = True,
     )
