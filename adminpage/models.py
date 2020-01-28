@@ -49,10 +49,13 @@ class Request(models.Model):
         null= True,
         blank = True,
     )
-    floor_theme = models.ManyToManyField(
+    uploaded_theme = models.ManyToManyField(
         UploadedTheme,
         blank=False, 
-        related_name='theme_image'
+    )
+    selected_theme = models.ManyToManyField(
+        SelectedTheme,
+        blank=False, 
     )
     add_request = models.TextField(
         null = True,

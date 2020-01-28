@@ -4,43 +4,6 @@ from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedire
 import json
 from django.views.decorators.csrf import csrf_exempt
 
-# @csrf_exempt
-# def plan(request):
-#     if request.method == 'POST':
-#         # print(request.FILES.getlist('plan'))
-#         for afile in request.FILES.getlist('plan'):
-#             files = Plan()
-#             files.photo = afile
-#             files.save()
-#         return HttpResponse(status=200)
-#     else:
-#         return HttpResponseNotAllowed(['POST'])
-
-# @csrf_exempt
-# def themeSelect(request):
-#     if request.method == 'POST':
-#         print(request.POST.getlist('theme'))
-#         for afile in request.POST.getlist('theme'):
-#             images = SelectedTheme()
-#             images.photo = afile
-#             images.save()
-#         return HttpResponse(status=200)
-#     else:
-#         return HttpResponseNotAllowed(['POST'])
-        
-# @csrf_exempt
-# def themeUpload(request):
-#     if request.method == 'POST':
-#         print(request.FILES.getlist('theme'))
-#         for afile in request.FILES.getlist('theme'):
-#             images = UploadedTheme()
-#             images.photo = afile
-#             images.save()
-#         return HttpResponse(status=200)
-#     else:
-#         return HttpResponseNotAllowed(['POST'])
-
-
 @csrf_exempt
 def request(request):
     if request.method == 'POST':
@@ -76,11 +39,18 @@ def request(request):
             newRequest.floor_plan.add(files)
             newRequest.save()
 
-        for afile in request.FILES.getlist('floor_theme'):
+        for afile in request.FILES.getlist('uploaded_theme'):
             files = UploadedTheme()
             files.photo = afile
             files.save()
-            newRequest.floor_theme.add(files)
+            newRequest.uploaded_theme.add(files)
+            newRequest.save()
+
+        for afile in request.POST.getlist('selected_theme'):
+            themes = SelectedTheme()
+            themes.option = afile
+            themes.save()
+            newRequest.selected_theme.add(themes)
             newRequest.save()
         
         return HttpResponse(status=200)
