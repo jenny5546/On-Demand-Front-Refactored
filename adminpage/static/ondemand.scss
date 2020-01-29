@@ -42,7 +42,7 @@ header {
     nav {
         position: absolute;
         right: 0;
-        width: 150px;
+        width: 120px;
         margin-right: 50px;
         
         ul {
@@ -65,7 +65,7 @@ header {
     flex: 1;
     .sidenav {
         width: 300px;
-        background-color:  $mainColor_light;
+        background-color:  #c0dde5;
         //border: 1px solid black;
         border-top: 0;
         a{
