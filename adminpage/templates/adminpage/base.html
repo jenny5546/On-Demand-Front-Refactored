@@ -5,12 +5,6 @@
     <head>
         <title>ondeamnd service</title>
         <link href="{% sass_src 'ondemand.scss' %}" rel="stylesheet" type="text/css" />
-        <!--<script src="../../static/ondemand.js"></script>-->
-        <script>
-            function color(){
-                document.getElementsByClassName("dashboard").style.backgroundColor = "red";
-            }
-        </script>
     </head>
     <body>
         <div class="header">
@@ -25,16 +19,8 @@
             </header>
         </div>
         <div class="mid">
-            <div class="sidenav">
-                <a href="" class="dashboard" onclick="color()"> Dash Board </a>
-                <a href="#" class="request"> Request </a>
-                <a href="#" class="messages"> Messages </a>
-            </div>
-
-            <div class="main">
             {% block content %}
             {% endblock content %}
-            </div>
         </div>
     </body>
 </html>

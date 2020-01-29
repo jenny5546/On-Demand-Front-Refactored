@@ -99,7 +99,9 @@ header {
       color: black;
       padding: 20px;
       border-bottom: 1px solid gray; }
-    .mid .sidenav .dashboard {
+    .mid .sidenav .dashboard_here {
+      background-color: yellow; }
+    .mid .sidenav .request_here {
       background-color: yellow; }
     .mid .sidenav a:hover {
       background-color: white; }
