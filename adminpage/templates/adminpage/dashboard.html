@@ -8,18 +8,19 @@
 </div>
 <div class="main">
     <div class="board">
-    <canvas id="pie-chart"></canvas>
+    <canvas id="doughnut-chart" style="width: auto; height: auto;"></canvas>
+    <canvas id="line-chart" style="width: 150%; height: auto;            overflow: hidden;
+"></canvas>
     
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   <script>
-
     var config = {
       type: 'doughnut',
       data: {
         datasets: [{
           data: {{ data|safe }},
           backgroundColor: [
-            '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+            '#CC3D6C', '#FF776F', '#66FFCB', '#3DAECC', '#7A9299'
           ],
           label: 'Population'
         }],
@@ -30,9 +31,32 @@
       }
     };
 
+    var linedata = {
+        // The type of chart we want to create
+        type: 'line',
+        // The data for our dataset
+        data: {
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            datasets: [{
+                label: "My First dataset",
+                backgroundColor: 'rgb(255, 99, 132)',
+                fill:false, // line의 아래쪽을 색칠할 것인가? 
+                borderColor: 'rgb(255, 99, 132)',
+                lineTension:0.1, // 값을 높이면, line의 장력이 커짐.
+                data: [0, 10, 5, 2, 20, 30, 45, 50, 45, 40, 30, 20],
+            }]
+        },
+        // Configuration options go here
+        options: {
+            responsive: false
+        }
+    }
+
     window.onload = function() {
-      var ctx = document.getElementById('pie-chart').getContext('2d');
+      var ctx = document.getElementById('doughnut-chart').getContext('2d');
+      var ctx2 = document.getElementById('line-chart').getContext('2d');
       window.myPie = new Chart(ctx, config);
+      window.myLine = new Chart(ctx2, linedata);
     };
 
   </script>
