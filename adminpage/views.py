@@ -91,4 +91,3 @@ def each(request, id):
         return render(request, 'adminpage/request.html', {'arequest': arequest})
         requests = Request.objects.all()
         return render(request, 'adminpage/show.html', {'requests': requests})
-    
