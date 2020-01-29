@@ -80,6 +80,17 @@ def dashboard(request):
 
 def show(request):
     if request.method == 'GET':
+<<<<<<< HEAD
+        onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
+        totalRequests = Request.objects.all()
+        return render(request, 'adminpage/show.html', {'totalRequests': totalRequests, 'onrunRequests': onrunRequests})
+
+
+def each(request, id):
+    if request.method == 'GET':
+        arequest= Request.objects.get(id = id)
+        return render(request, 'adminpage/request.html', {'arequest': arequest})
+=======
         requests = Request.objects.all()
         return render(request, 'adminpage/show.html', {'requests': requests})
     
@@ -98,3 +109,4 @@ def pie_chart(request):
         'data': data,
     })
     '''
+>>>>>>> 1df808c95c2788ebfe51cc2e4633a209c5bb082d
