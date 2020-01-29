@@ -8,9 +8,34 @@
 </div>
 <div class="main">
     <div class="board">
-        <h1>
-            chart
-        </h1>
+    <canvas id="pie-chart"></canvas>
+    
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script>
+
+    var config = {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: {{ data|safe }},
+          backgroundColor: [
+            '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+          ],
+          label: 'Population'
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: false
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script>
     </div>
     <h1>
         Request On-Run
@@ -30,7 +55,7 @@
             {% for elem in requests.all %}
                 <tr class="body1">
                     <td>{{elem.id}}</td>
-                    <td>{{elem.requested.at}}</td>
+                    <td>{{elem.requested_at}}</td>
                     <td>{{elem.floor_type}},{{elem.floor_size}}</td>
                     <td>20.02.02</td>
                     <td>{{elem.progress}}</td>
