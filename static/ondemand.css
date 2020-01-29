@@ -58,7 +58,7 @@ html, body {
 header {
   display: flex;
   flex-direction: row;
-  background-color: #a7a7a7;
+  background-color: #499fb6;
   height: 100%;
   color: black;
   align-items: center;

@@ -6,46 +6,5 @@
     <a href="#" class="request_here"> Request </a>
     <a href="#" class="messages"> Messages </a>
 </div>
-<div class="main">
-    <div class="board">
-        <h1>
-            chart
-        </h1>
-    </div>
-    <h1>
-        Request On-Run
-    </h1>
-    <table class="data">
-        <thead>
-            <tr class="head">
-                <th>ID#</th>
-                <th>Application date</th>
-                <th>Type, Size</th>
-                <th>Due</th>
-                <th>Status</th>
-                <th>Detail</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for elem in requests.all %}
-                <tr class="body1">
-                    <td>{{elem.id}}</td>
-                    <td>20.01.28</td>
-                    <td>{{elem.floor_type}},{{elem.floor_size}}</td>
-                    <td>20.02.02</td>
-                    <td>status</td>
-                    <td>button</td>
-                </tr>
-            {% endfor %}
-            <tr class="body2">
-                <td>2</td>
-                <td>20.01.28</td>
-                <td>1</td>
-                <td>commercial, 150m^2</td>
-                <td>20.02.02</td>
-                <td>button</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+
 {% endblock content %}
