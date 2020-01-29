@@ -1,9 +1,9 @@
-{% extends './base.html' %}
+{% extends '../base.html' %}
 
 {% block content %}
 <div class="sidenav">
-    <a href="" class="dashboard_here"> Dash Board </a>
-    <a href="show/" class="request"> Request </a>
+    <a href="" class="dashboard" onclick="color()"> Dash Board </a>
+    <a href="#" class="request_here"> Request </a>
     <a href="#" class="messages"> Messages </a>
 </div>
 <div class="main">
@@ -30,10 +30,10 @@
             {% for elem in requests.all %}
                 <tr class="body1">
                     <td>{{elem.id}}</td>
-                    <td>{{elem.requested.at}}</td>
+                    <td>20.01.28</td>
                     <td>{{elem.floor_type}},{{elem.floor_size}}</td>
                     <td>20.02.02</td>
-                    <td>{{elem.progress}}</td>
+                    <td>status</td>
                     <td>button</td>
                 </tr>
             {% endfor %}
@@ -41,7 +41,7 @@
                 <td>2</td>
                 <td>20.01.28</td>
                 <td>1</td>
-                <td>commercial, test data</td>
+                <td>commercial, 150m^2</td>
                 <td>20.02.02</td>
                 <td>button</td>
             </tr>

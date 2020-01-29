@@ -56,20 +56,12 @@ def request(request):
     else:
         return HttpResponseNotAllowed(['POST'])
 
-
-
-def index(request):
+def dashboard(request):
     if request.method == 'GET':
         requests = Request.objects.all()
-        return render(request, 'adminpage/index.html', {'requests': requests})
-
-
-def ondemand(request):
-    if request.method == 'GET':
-        requests = Request.objects.all()
-        return render(request, 'adminpage/ondemand.html', {'requests' : requests})
+        return render(request, 'adminpage/dashboard.html', {'requests': requests})
 
 def show(request):
     if request.method == 'GET':
         requests = Request.objects.all()
-        return render(request, 'adminpage/request.html', {'requests' : requests})
+        return render(request, 'adminpage/show.html', {'requests': requests})
