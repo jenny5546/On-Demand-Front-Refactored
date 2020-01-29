@@ -1,6 +1,7 @@
-{% load sass_tags %}
 
 <!DOCTYPE html>
+{% load static %}
+{% load sass_tags %}
 <html>
     <head>
         <title>ondemand service</title>
@@ -11,11 +12,15 @@
     <body>
         <div class="header">
             <header>
-                <h2> On-Demand 관리자 페이지</h2>
+                <div class="logo" style="display: flex; flex-direction: column; width: 300px;">
+                    <img src="{% static 'Archisketch_Logo.png' %}"/> 
+                    <h2> On-Demand 관리자 페이지</h2>
+                </div>
+                
                 <nav>
                 <ul>
-					<li><a href=""><i class="fas fa-bell fa-sm" style= "color: #ffffff; font-size: 50px;"></i></a></li>
-					<li><a href=""><i class="fas fa-envelope" style= "color: #ffffff; font-size: 50px;"></i></a></li>
+					<li><a href=""><i class="fas fa-bell fa-sm" style= "color: #ffffff; font-size: 30px;"></i></a></li>
+					<li><a href=""><i class="fas fa-envelope" style= "color: #ffffff; font-size: 30px;"></i></a></li>
 				</ul>
                 </nav>
             </header>
