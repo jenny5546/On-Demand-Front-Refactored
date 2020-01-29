@@ -1,18 +1,83 @@
 {% extends '../base.html' %}
 
 {% block content %}
+
 <div class="sidenav">
-    <a href="" class="dashboard" onclick="color()"> Dash Board </a>
-    <a href="#" class="request_here"> Request </a>
-    <a href="#" class="messages"> Messages </a>
+        <a href="/" class="dashboard" onclick="color()"> Dash Board </a>
+        <a href="/show" class="request_here"> Request </a>
+        <a href="#" class="messages"> Messages </a>
+</div>
+
+<div class="requests">
+
+    <div class= "requests-title">
+        <h1>Request Page</h1> 
+    </div>
+
+    <div class="requests-on-run">
+        <h3>On-Run Requests</h3>
+        <table>
+            <thead>
+                <tr>
+                        <td>Application ID</td>
+                        <td>Application Date</td>
+                        <td>Type, Size</td>
+                        <td>Due Date</td>
+                        <td>Time Remaining</td>
+                        <td>Work Status</td>
+                        <td>Edit</td>
+                        
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in onrunRequests %}
+                <tr>
+                    <td>{{request.id}}</td>
+                    <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
+                    <td>({{request.floor_type}}, {{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup>)</td>
+                    <td>{{request.due_at|date:'Y/m/d'}}</td>
+                    <td>{{request.due_at|timeuntil}}</td>
+                    <td>{{request.progress}}</td>
+                    <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="requests-total">
+        <h3>Total Requests</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Application ID</td>
+                        <td>Application Date</td>
+                        <td>Type, Size</td>
+                        <td>Due Date</td>
+                        <td>Time Remaining</td>
+                        <td>Work Status</td>
+                        <td>Edit</td>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in totalRequests %}
+                    <tr>
+                        <td>{{request.id}}</td>
+                        <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
+                        <td>({{request.floor_type}}, {{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup>)</td>
+                        <td>{{request.due_at|date:'Y/m/d'}}</td>
+                        <td>{{request.due_at|timeuntil}}</td>
+                        <td>{{request.progress}}</td>
+                        <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
+                    </tr>
+        
+                    {% endfor %}
+        
+                </tbody>
+            </table>
+    </div>
 </div>
 
 
-<div class="requests-on-run">
-    <h1>On-Run Requests</h1>
-</div>
-
-<div class="requests-total">
-    <h1>Total Requests</h1>
-</div>
 {% endblock content %}

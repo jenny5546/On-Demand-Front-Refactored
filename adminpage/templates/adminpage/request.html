@@ -1,0 +1,25 @@
+{% extends '../base.html' %}
+
+{% block content %}
+
+<div class="sidenav">
+    <a href="/" class="dashboard" onclick="color()"> Dash Board </a>
+    <a href="/show" class="request_here"> Request </a>
+    <a href="#" class="messages"> Messages </a>
+</div>
+
+<div class="eachRequest">
+    <div class="eachRequest-header">
+        Request # {{arequest.id}}
+    </div>
+    <div class="eachRequest-plan">
+        {% for plan in arequest.floor_plan.all %}
+            <img src="{{ plan.photo.url }}">
+        {% endfor %}
+    </div>
+    <div class="eachRequest-info">
+        {{arequest.floor_type}}({{arequest.commercial_type}})
+        {{arequest.floor_size}} {{arequest.floor_size_unit}} <sup>2</sup>
+    </div>
+</div>
+{% endblock content %}

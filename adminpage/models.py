@@ -15,6 +15,12 @@ class Plan(models.Model):
 class Request(models.Model):
     
     requested_at = models.DateTimeField(default=timezone.now)
+
+    def two_day_hence():
+        return timezone.now() + timezone.timedelta(days=2)
+
+    due_at = models.DateTimeField(default= two_day_hence)
+    
     progress = models.IntegerField(default=1)
     floor_type = models.CharField(
         max_length = 20,

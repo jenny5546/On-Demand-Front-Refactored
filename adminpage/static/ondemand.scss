@@ -120,3 +120,13 @@ header {
         }
     }
 }
+
+.requests{
+    padding: 40px;
+    &-title{
+        color: rgb(54, 54, 54);
+    }
+    &-on-run{
+        margin-top: 20px;
+    }
+}

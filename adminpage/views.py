@@ -63,5 +63,12 @@ def dashboard(request):
 
 def show(request):
     if request.method == 'GET':
-        requests = Request.objects.all()
-        return render(request, 'adminpage/show.html', {'requests': requests})
+        onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
+        totalRequests = Request.objects.all()
+        return render(request, 'adminpage/show.html', {'totalRequests': totalRequests, 'onrunRequests': onrunRequests})
+
+
+def each(request, id):
+    if request.method == 'GET':
+        arequest= Request.objects.get(id = id)
+        return render(request, 'adminpage/request.html', {'arequest': arequest})
