@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Request, Plan, SelectedTheme, UploadedTheme
 from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect
 import json
+from django.db.models import F
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
@@ -56,11 +57,20 @@ def request(request):
     else:
         return HttpResponseNotAllowed(['POST'])
 
+def odd(k):
+    if(k%2 == 0):
+        return 0
+    else:
+        return 1
+
 def dashboard(request):
     if request.method == 'GET':
         #labels = []
         #data = []
+
         requests = Request.objects.all()
+        #requests_odd = Request.objects.annotate(odd=F('id') % 2).filter(odd=False) 
+        #requests_even = Request.objects.annotate(odd=F('id') % 2).filter(odd=True) 
         queryset = Request.objects.order_by('-progress')[:]
         progress = [0,0,0,0,0]
         for user in queryset:
@@ -73,6 +83,7 @@ def dashboard(request):
 
         return render(request, 'adminpage/dashboard.html', {
             'requests': requests,
+            #'requests_even': requests_even,
             'labels': labels,
             'data': data,
         })
