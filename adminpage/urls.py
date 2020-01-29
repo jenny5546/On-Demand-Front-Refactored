@@ -3,5 +3,9 @@ from adminpage import views
 
 urlpatterns = [
     path('request/', views.request),
-    path('', views.index, name='index'),
+    #path('', views.index, name='index'),
+    #path('', views.Classname.as_view(), name='example'),
+    #path('detail/<int:pk>', views.BlogDetail.as_view(), name='detail'),
+    path('', views.ondemand, name="ondemand"),
+    #path('rest/', include(router.urls)),
 ]

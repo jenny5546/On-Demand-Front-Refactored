@@ -62,3 +62,8 @@ def index(request):
     if request.method == 'GET':
         requests = Request.objects.all()
         return render(request, 'adminpage/index.html', {'requests': requests})
+
+
+def ondemand(request):
+    requests = Request.objects
+    return render(request, 'adminpage/ondemand.html', {'requests' : requests})
