@@ -9,17 +9,33 @@
 </div>
 
 <div class="eachRequest">
-    <div class="eachRequest-header">
+    <div class="eachRequest--header">
         Request # {{arequest.id}}
     </div>
-    <div class="eachRequest-plan">
+    <div class="eachRequest--plan">
         {% for plan in arequest.floor_plan.all %}
             <img src="{{ plan.photo.url }}">
         {% endfor %}
     </div>
-    <div class="eachRequest-info">
-        {{arequest.floor_type}}({{arequest.commercial_type}})
-        {{arequest.floor_size}} {{arequest.floor_size_unit}} <sup>2</sup>
+    <div class="eachRequest--info">
+        <div class="eachRequest--info_type">
+            <label>Floor Type :</label>
+            {% if arequest.floor_type == "Residential" %}
+                {{arequest.floor_type}}
+            {% else %}
+                {{arequest.floor_type}} ( {{arequest.commercial_type}} )
+            {% endif %}
+        </div>
+        <div class="eachRequest--info_size">
+            <label>Floor Size:</label>
+            {{arequest.floor_size}} {{arequest.floor_size_unit}} <sup>2</sup>
+        </div>
+        <div class="eachRequest--info_num">
+            <label>Floor Number:</label>
+            {{arequest.floor_number}} 
+        </div>
+        
+        
     </div>
 </div>
 {% endblock content %}
