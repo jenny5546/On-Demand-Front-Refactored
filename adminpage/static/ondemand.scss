@@ -147,6 +147,14 @@ header {
         .head{
             background-color: rgb(0, 148, 185) !important;
             color: white;
+            button{
+                font-size: 20px;
+                background-color: rgb(0, 148, 185);
+                color: white;
+                width: 100%;
+                border: none;
+                outline: none;
+            }
         }
         tr:nth-child(2n) {
             background-color: #bbdefb;
@@ -155,10 +163,23 @@ header {
             background-color: #e3f2fd;
         }
     }
+    &-table-top{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
     &-total{
         .head{
             background-color: rgb(0, 148, 185) !important;
             color: white;
+            button{
+                font-size: 20px;
+                background-color: rgb(0, 148, 185);
+                color: white;
+                width: 100%;
+                border: none;
+                outline: none;
+            }
         }
         tr:nth-child(2n) {
             background-color: #bbdefb;
