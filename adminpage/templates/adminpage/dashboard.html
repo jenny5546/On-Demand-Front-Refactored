@@ -38,12 +38,12 @@
         data: {
             labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
-                label: "num",
+                label: "req_num",
                 backgroundColor: 'rgb(255, 99, 132)',
                 fill:false, // line의 아래쪽을 색칠할 것인가? 
                 borderColor: 'rgb(255, 99, 132)',
                 lineTension:0.1, // 값을 높이면, line의 장력이 커짐.
-                data: [0, 10, 5, 2, 20, 30, 45, 50, 45, 40, 30, 20],
+                data: {{line_data|safe}},
             }]
         },
         // Configuration options go here
@@ -90,7 +90,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for request in requests.all %}
+            {% for request in onrunRequests.all %}
               <tr>
                   <td>{{request.id}}</td>
                   <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>

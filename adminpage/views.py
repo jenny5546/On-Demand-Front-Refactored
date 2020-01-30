@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedire
 from django.views.decorators.csrf import csrf_exempt
 from django.http import FileResponse
 from django.core.files.storage import FileSystemStorage
+import datetime
 import json
 
 @csrf_exempt
@@ -65,7 +66,14 @@ def dashboard(request):
         #data = []
         requests = Request.objects.all()
         queryset = Request.objects.order_by('-progress')[:]
+        onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
+
         progress = [0,0,0,0,0]
+
+        # temp data edit it!
+        line_data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+        #progress 별 counting
         for user in queryset:
             for i in range(5):
                 if(user.progress == i+1):
@@ -75,11 +83,45 @@ def dashboard(request):
         #labels_line = "hihi"
         data = progress.copy()
 
+        
+        #print(Request.objects.filter(requested_at__contains=datetime.date(2020, 1, 20)))        
+        for req in requests:
+            k = str(req.requested_at)
+            a = k[5]+k[6]
+            if(a == "01"):
+                line_data[0] += 1
+            elif(a == "02"):
+                line_data[1]+=1
+            elif(a == "03"):
+                line_data[2]+=1
+            elif(a == "04"):
+                line_data[3]+=1
+            elif(a == "05"):
+                line_data[4]+=1
+            elif(a == "06"):
+                line_data[5]+=1
+            elif(a == "07"):
+                line_data[6]+=1
+            elif(a == "08"):
+                line_data[7]+=1
+            elif(a == "09"):
+                line_data[8]+=1
+            elif(a == "10"):
+                line_data[9]+=1
+            elif(a == "11"):
+                line_data[10]+=1
+            elif(a == "12"):
+                line_data[11]+=1
+            
+
+
         return render(request, 'adminpage/dashboard.html', {
+            'onrunRequests': onrunRequests,
             'requests': requests,
             'labels': labels,
             #'lables_line' : labels_line,
             'data': data,
+            'line_data' : line_data,
         })
 
 
@@ -96,7 +138,6 @@ def each(request, id):
 
     # 보여주기
     if request.method == 'GET':
-
         arequest= Request.objects.get(id = id)
         return render(request, 'adminpage/request.html', {'arequest': arequest})
     
