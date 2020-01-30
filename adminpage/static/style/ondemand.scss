@@ -134,14 +134,25 @@ header {
 
 .requests{
     padding: 40px;
+    
     &-title{
         color: rgb(54, 54, 54);
     }
     &-on-run{
+
         margin-top: 20px;
+
+        table{
+            width: 70vw;
+        }
+        
         .head{
             background-color: rgb(0, 148, 185) !important;
             color: white;
+        }
+        td{
+            padding: 10px;
+            text-align: center;
         }
         tr:nth-child(2n) {
             background-color: #bbdefb;
@@ -151,9 +162,17 @@ header {
         }
     }
     &-total{
+        margin-top: 30px;
         .head{
             background-color: rgb(0, 148, 185) !important;
             color: white;
+        }
+        table{
+            width: 70vw;
+        }
+        td{
+            padding: 10px;
+            text-align: center;
         }
         tr:nth-child(2n) {
             background-color: #bbdefb;
@@ -161,5 +180,35 @@ header {
         tr:nth-child(2n+1) {
             background-color: #e3f2fd;
         }
+    }
+}
+
+.eachRequest{
+    padding: 30px;
+    &--editbtn{
+        position: absolute;
+        right:0;
+        margin-right: 50px;
+    }
+    &--header{
+        margin-bottom: 30px;
+    }
+
+    &--plan{
+        &_wrapper{
+            display: flex;
+
+            &-small{
+                display: flex; 
+                flex-direction: column;
+            }
+        }
+
+    }
+    &--info{
+        margin-top: 30px;
+    }
+    label{
+        font-size: 20px;
     }
 }

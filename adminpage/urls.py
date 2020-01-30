@@ -7,4 +7,6 @@ urlpatterns = [
     path('', views.dashboard, name='dashboard'), #dashboard
     path('show/', views.show, name='show'), #all requests
     path('<int:id>/', views.each, name='each'), #each requests
+    path('<int:id>/edit/', views.edit, name='edit'),
+    path('<int:req_id>/<int:file_id>/download/', views.download, name='download')
 ]

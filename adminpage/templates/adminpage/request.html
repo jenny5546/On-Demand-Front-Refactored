@@ -9,33 +9,92 @@
 </div>
 
 <div class="eachRequest">
+
+    <div class="eachRequest--editbtn">
+        <a href='/adminpage/{{arequest.id}}/edit'>
+          Edit  
+        </a>
+    </div>
+    
     <div class="eachRequest--header">
-        Request # {{arequest.id}}
+        <h2>Request # {{arequest.id}}</h2>
     </div>
+
+    <div class="eachRequest--status">
+            <h1>Status: {{arequest.progress}}</h1>
+    </div>
+
     <div class="eachRequest--plan">
-        {% for plan in arequest.floor_plan.all %}
-            <img src="{{ plan.photo.url }}">
-        {% endfor %}
+        <label>Uploaded Plan Image</label>
+        <div class="eachRequest--plan_wrapper" >
+            {% for plan in arequest.floor_plan.all %}
+                <div class="eachRequest--plan_wrapper-small"> 
+                    <img src="{{ plan.photo.url }}" style="width:350px; height:350px;">
+                    <a href= "/{{arequest.id}}/{{plan.id}}/download" >
+                        Download Plan <i class="fas fa-paperclip"></i>
+                    </a>
+                </div>
+                
+            {% endfor %}
+        </div>
+        
     </div>
+
     <div class="eachRequest--info">
+
         <div class="eachRequest--info_type">
             <label>Floor Type :</label>
+            
             {% if arequest.floor_type == "Residential" %}
                 {{arequest.floor_type}}
             {% else %}
                 {{arequest.floor_type}} ( {{arequest.commercial_type}} )
             {% endif %}
+            
         </div>
+
         <div class="eachRequest--info_size">
             <label>Floor Size:</label>
             {{arequest.floor_size}} {{arequest.floor_size_unit}} <sup>2</sup>
         </div>
+
         <div class="eachRequest--info_num">
             <label>Floor Number:</label>
             {{arequest.floor_number}} 
         </div>
-        
+
+        <!-- Optional Tags -->
+
+        {% if arequest.floor_address != "" %}
+            <div class="eachRequest--info_num">
+                <label>Floor Address:</label>
+                {{arequest.floor_address}} 
+            </div>
+        {% endif %}
+
+        <!-- Optional Tags -->
+
+        {% if arequest.floor_height != "" %}
+            <div class="eachRequest--info_num">
+                <label>Floor Height:</label>
+                {{arequest.floor_height}} {{arequest.floor_height_unit}} 
+            </div>
+        {% endif %}
+
+        {% if arequest.add_request != "" %}
+            <div class="eachRequest--info_num">
+                <label>Additional Requests:</label>
+                {{arequest.add_request}}
+            </div>
+        {% endif %}
         
     </div>
+
+    <div class="eachRequest--theme">
+
+
+
+    </div>
+
 </div>
 {% endblock content %}
