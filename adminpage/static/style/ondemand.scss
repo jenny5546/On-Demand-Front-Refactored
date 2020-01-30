@@ -211,18 +211,66 @@ header {
 
 .eachRequest{
     padding: 30px;
+
     &--editbtn{
         position: absolute;
         right:0;
         margin-right: 50px;
+        text-decoration: none;
+        border-radius: 30px;
+        background-color: $btn_darkColor;
+        color: white;
+        padding: 10px;
     }
+    &--editbtn:hover{
+        background-color: $btn_darkColor_hover;
+    }
+
     &--header{
         margin-bottom: 30px;
     }
 
     &--plan{
+        &_img{
+            width:350px;
+        }
+        &_btn{
+            margin-top: 5px;
+            background-color: $btn_darkColor;
+            border-radius: 30px;
+            height: 30px;
+            color: white;
+            text-align: center;
+        }
+        &_btn:hover{
+            background-color: $btn_darkColor_hover;
+        }
         &_wrapper{
             display: flex;
+            flex-wrap: wrap;
+
+            &-small{
+                display: flex; 
+                flex-direction: column;
+                margin: 10px;
+            }
+        }
+
+    }
+    &--info{
+        margin-top: 30px;
+    }
+
+    &--stheme{
+
+        &_img{
+            margin: 5px;
+            width: 350px;
+            height: 350px;
+        }
+        &_wrapper{
+            display: flex;
+            flex-wrap: wrap;
 
             &-small{
                 display: flex; 
@@ -231,8 +279,24 @@ header {
         }
 
     }
-    &--info{
-        margin-top: 30px;
+
+    &--utheme{
+
+        &_img{
+            margin: 5px;
+            width: 350px;
+            height: 350px;
+        }
+        &_wrapper{
+            display: flex;
+            flex-wrap: wrap;
+
+            &-small{
+                display: flex; 
+                flex-direction: column;
+            }
+        }
+
     }
     label{
         font-size: 20px;

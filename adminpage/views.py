@@ -49,7 +49,8 @@ def request(request):
 
         for afile in request.POST.getlist('selected_theme'):
             themes = SelectedTheme()
-            themes.option = afile
+            newfile = str(afile.split(".")[0]) + ".jpg"
+            themes.option = newfile
             themes.save()
             newRequest.selected_theme.add(themes)
             newRequest.save()
@@ -103,7 +104,7 @@ def each(request, id):
 
         arequest= Request.objects.get(id = id)
 
-        
+
         due_at = request.POST.get('due_at', arequest.due_at)
         progress = request.POST.get('progress', arequest.progress)
         floor_type = request.POST.get('floor_type', arequest.floor_type)
@@ -145,6 +146,6 @@ def download(request, req_id, file_id):
     afile = arequest.floor_plan.get(id = file_id)
     fs = FileSystemStorage('../On-Demand-Back/media')
     response = FileResponse(fs.open(str(afile.photo), 'rb'), content_type='application/force-download')
-    response['Content-Disposition'] = 'attachment; filename= floorplan'
+    response['Content-Disposition'] = 'attachment; filename= floorplan.png'
     
     return response

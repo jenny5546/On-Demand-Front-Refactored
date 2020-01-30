@@ -10,9 +10,9 @@
 
 <div class="eachRequest">
 
-    <div class="eachRequest--editbtn">
-        <a href='/adminpage/{{arequest.id}}/edit'>
-          Edit  
+    <div>
+        <a class="eachRequest--editbtn" href='/adminpage/{{arequest.id}}/edit'>
+          Edit Request
         </a>
     </div>
     
@@ -29,8 +29,8 @@
         <div class="eachRequest--plan_wrapper" >
             {% for plan in arequest.floor_plan.all %}
                 <div class="eachRequest--plan_wrapper-small"> 
-                    <img src="{{ plan.photo.url }}" style="width:350px; height:350px;">
-                    <a href= "/{{arequest.id}}/{{plan.id}}/download" >
+                    <img class="eachRequest--plan_img" src="{{ plan.photo.url }}">
+                    <a class="eachRequest--plan_btn" style = "text-decoration: none;" href= "/{{arequest.id}}/{{plan.id}}/download" >
                         Download Plan <i class="fas fa-paperclip"></i>
                     </a>
                 </div>
@@ -90,11 +90,32 @@
         
     </div>
 
-    <div class="eachRequest--theme">
 
-
-
+    <!-- selected theme -->
+    {% if arequest.selected_theme.all  %}
+    <div class="eachRequest--stheme">
+            <label>Selected Theme Preferences</label>
+            <div class="eachRequest--stheme_wrapper" >
+                {% for theme in arequest.selected_theme.all %}
+                    <img class="eachRequest--stheme_img" src="{{ theme.option }}">
+                {% endfor %}
+            </div>
     </div>
+    {% endif %}
+
+    <!-- uploaded theme -->
+    {% if arequest.uploaded_theme.all  %}
+    <div class="eachRequest--utheme">
+        <label>Uploaded Theme Preferences</label>
+        <div class="eachRequest--utheme_wrapper" >
+            {% for theme in arequest.uploaded_theme.all %}
+                <div class="eachRequest--utheme_wrapper-small"> 
+                    <img class="eachRequest--utheme_img"src="{{ theme.photo.url }}">
+                </div> 
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 
 </div>
 {% endblock content %}
