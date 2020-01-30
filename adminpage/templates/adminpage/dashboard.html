@@ -67,37 +67,39 @@
     <table class="data">
         <thead>
             <tr class="head">
-            
-                <th class="id">
-                  <button class="sorting">ID#</button>
-                </th>
-
-                <th>
-                  <button class="sorting">Application date</button>
+      
+                <th class='id'>
+                    <button class="sorting">ID#</button>
                 </th>
                 <th>
-                  <button class="sorting">Type, Size</button>
+                    <button class="sorting">Application Date</button>
                 </th>
                 <th>
-                  <button class="sorting">Due</button>
+                    <button class="sorting">Type, Size</button>
+                </td>
+                <th>
+                    <button class="sorting">Due Date</button>
                 </th>
                 <th>
-                  <button class="sorting">Status</button>
+                    <button class="sorting">Time Remaining</button>
+                </th>
+                <th>
+                    <button class="sorting">Work Status</button>
                 </th>
                 <th>Detail</th>
             </tr>
         </thead>
         <tbody>
-            {% for elem in requests.all %}
-                <tr class="body1">
-                    <td>{{elem.id}}</td>
-                    <td>{{elem.requested_at}}</td>
-                    <td>{{elem.floor_type}},{{elem.floor_size}}</td>
-                    <td>20.02.02</td>
-                    <td>{{elem.progress}}</td>
-                    <td><button type="button" onclick="location.href='show/'">GO!</button></td>
-                    <!-- 현재는 show로 연결해 둠 -->
-                </tr>
+            {% for request in requests.all %}
+              <tr>
+                  <td>{{request.id}}</td>
+                  <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
+                  <td>({{request.floor_type}}, {{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup>)</td>
+                  <td>{{request.due_at|date:'Y/m/d'}}</td>
+                  <td>{{request.due_at|timeuntil}}</td>
+                  <td>{{request.progress}}</td>
+                  <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
+              </tr>
             {% endfor %}
         </tbody>
     </table>
