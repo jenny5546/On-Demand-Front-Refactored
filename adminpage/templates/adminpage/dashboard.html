@@ -38,7 +38,7 @@
         data: {
             labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
-                label: "My First dataset",
+                label: {{ lables_line|safe }},
                 backgroundColor: 'rgb(255, 99, 132)',
                 fill:false, // line의 아래쪽을 색칠할 것인가? 
                 borderColor: 'rgb(255, 99, 132)',

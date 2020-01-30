@@ -72,11 +72,13 @@ def dashboard(request):
                     progress[i] += 1
 
         labels = ["progress_1", "progress_2", "progress_3", "progress_4", "progress_5"]
+        labels_line = "hihi"
         data = progress.copy()
 
         return render(request, 'adminpage/dashboard.html', {
             'requests': requests,
             'labels': labels,
+            'lables_line' : labels_line,
             'data': data,
         })
 
