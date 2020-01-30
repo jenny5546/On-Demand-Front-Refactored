@@ -1,6 +1,21 @@
 @import './config__typography';
 @import './config__color';
 
+#progressbar {
+    width: 50%;
+    background-color: white;
+    border-radius: 30px;
+    margin: 10px;
+  }
+  
+#progressbar-div {
+    background-color: $mainColor_light;
+    // width: 40%;
+    /* Adjust with JavaScript */
+    height: 30px;
+    border-radius: 10px;
+}
+
 * {
     margin: 0;
     padding: 0;
