@@ -95,7 +95,7 @@ header {
         display: flex;
         flex: 1;
         flex-direction: column;
-        background-color: rgb(233, 233, 233);
+        //background-color: rgb(233, 233, 233);
         padding: 20px;
 
         .board{
@@ -109,7 +109,6 @@ header {
             //border-radius: 20px;
         }
         .data{
-            border: 1px solid black;
             background-color: white;
 
             .head{
@@ -125,6 +124,10 @@ header {
                     border: none;
                     outline: none;
                 }
+            }
+            td{
+                padding: 10px;
+                text-align: center;
             }
             tr:nth-child(2n) {
                 background-color: #bbdefb;
