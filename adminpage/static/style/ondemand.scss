@@ -147,9 +147,7 @@ header {
         color: rgb(54, 54, 54);
     }
     &-on-run{
-
         margin-top: 20px;
-
         table{
             width: 70vw;
         }
@@ -188,8 +186,13 @@ header {
             display: inline;
         }
     }
+    &-table-bottom{
+        max-height: 400px;
+        overflow-y: scroll;
+    }
     &-total{
         margin-top: 30px;
+
         .head{
             background-color: rgb(0, 148, 185) !important;
             color: white;
