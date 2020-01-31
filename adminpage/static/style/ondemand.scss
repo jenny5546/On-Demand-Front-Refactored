@@ -181,6 +181,9 @@ header {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        .search_menu p{
+            display: inline;
+        }
     }
     &-total{
         margin-top: 30px;
