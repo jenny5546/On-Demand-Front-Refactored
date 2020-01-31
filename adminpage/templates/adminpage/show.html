@@ -13,7 +13,6 @@
     <div class= "requests-title">
         <h1>Request Page</h1> 
     </div>
-
     <div class="requests-on-run">
         <div class="requests-table-top">
             <h3>On-Run Requests</h3>
@@ -69,7 +68,7 @@
                     {% if todays_date <= request.due_at|date:'Y/m/d'%}
                     <td>{{request.due_at|timeuntil}}</td>
                     {% else %}
-                    <td class="overdate"> + {{request.due_at|timesince}} </td>
+                    <td class="overdate" style="color:red;">+{{request.due_at|timesince}} </td>
                     {% endif %}
                     <td>{{request.progress}}</td>
                     <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
@@ -135,7 +134,7 @@
                         {% if todays_date <= request.due_at|date:'Y/m/d'%}
                         <td>{{request.due_at|timeuntil}}</td>
                         {% else %}
-                        <td class="overdate"> + {{request.due_at|timesince}} </td>
+                        <td class="overdate">+{{request.due_at|timesince}} </td>
                         {% endif %}
                         <td>{{request.progress}}</td>
                         <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
@@ -161,7 +160,12 @@
         for(var i = 0; i<line; i++) {
             table_html += "<tr>";
             for(var j = 0; j<cols; j++) {
-                table_html += "<td>"+new_array[i][j]+"</td>";
+                if(new_array[i][j][0] == "+"){
+                    table_html += "<td style='color:red;'>"+new_array[i][j]+"</td>";
+                }
+                else{
+                    table_html += "<td>"+new_array[i][j]+"</td>";
+                }
             }
             table_html += "</tr>";
         }
@@ -174,13 +178,22 @@
             //console.log("this is retable2", search_array)
             if(search_array.length === 0){
                 for(var j = 0; j<cols; j++) {
-                    table_html += "<td>"+new_array[i][j]+"</td>";
+                    if(new_array[i][j][0] == "+"){
+                        table_html += "<td style='color:red;'>"+new_array[i][j]+"</td>";
+                    }
+                    else{
+                        table_html += "<td>"+new_array[i][j]+"</td>";
+                    }
                 }            
             }
             else{
                 for(var j = 0; j<cols; j++) {
-                    table_html += "<td>"+search_array[i][j]+"</td>";
-                }
+                    if(search_array[i][j][0] == "+"){
+                        table_html += "<td style='color:red;'>"+search_array[i][j]+"</td>";
+                    }
+                    else{
+                        table_html += "<td>"+search_array[i][j]+"</td>";
+                    }                }
             }
             table_html += "</tr>";
         }

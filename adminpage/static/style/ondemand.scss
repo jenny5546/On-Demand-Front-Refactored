@@ -4,8 +4,7 @@
 * {
     margin: 0;
     padding: 0;
-    //color:#000;
-    
+ 
     font-family: $_base-font-family;
     box-sizing: border-box;
 }
@@ -168,9 +167,7 @@ header {
             padding: 10px;
             text-align: center;
         }
-        .overdate{
-            color:red;
-        }
+
         tr:nth-child(2n) {
             background-color: #bbdefb;
           }
