@@ -2,6 +2,31 @@
 
 {% block content %}
 
+<script type="text/javascript">
+    $(document).ready(function() { 
+        var status = $('#status').text();
+        console.log(status)
+        var active_circle= $('.label:contains(' + status + ')').parent()
+        active_circle.removeClass('circle').addClass('circle active'); 
+
+        var label = $('.label')
+        var circles = label.parent()
+        console.log(circles)
+
+        circles.each(function(){
+            if ($(this).find("span").text() < status){
+
+                console.log($(this).find("span").text())
+                $(this).removeClass('circle').addClass('circle done'); 
+            }
+        })
+
+        
+    });
+
+
+</script>
+
 <div class="sidenav">
     <a href="/" class="dashboard" onclick="color()"> Dash Board </a>
     <a href="/show" class="request_here"> Request </a>
@@ -15,14 +40,51 @@
           Edit Request
         </a>
     </div>
+
     
     <div class="eachRequest--header">
         <h2>Request # {{arequest.id}}</h2>
     </div>
 
+
     <div class="eachRequest--status">
-            <h1>Status: {{arequest.progress}}</h1>
+        <label>Status: </label>
+        <h1 id="status">{{arequest.progress}}</h1>
     </div>
+
+    <div class="progress">
+
+            <div class="circle">
+                <span class="label">1</span>
+                <span class="title">0%</span>
+            </div>
+
+            <span class="bar"></span>
+            <div class="circle">
+                <span class="label">2</span>
+                <span class="title">25%</span>
+            </div>
+
+            <span class="bar"></span>
+            <div class="circle">
+                <span class="label">3</span>
+                <span class="title">50%</span>
+            </div>
+
+            <span class="bar"></span>
+            <div class="circle">
+                <span class="label">4</span>
+                <span class="title">75%</span>
+            </div>
+
+            <span class="bar"></span>
+            <div class="circle">
+                <span class="label">5</span>
+                <span class="title">100%</span>
+            </div>
+    </div>
+
+    
 
     <div class="eachRequest--plan">
         <label>Uploaded Plan Image</label>
