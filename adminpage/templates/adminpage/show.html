@@ -58,6 +58,7 @@
                 </tr>
             </thead>
             <tbody>
+                {% now "Y/m/d" as todays_date %}
                 {% for request in onrunRequests %}
                 <tr>
                     <td>{{request.id}}</td>
@@ -65,7 +66,11 @@
                     <td>{{request.floor_type}}</td>
                     <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>
                     <td>{{request.due_at|date:'Y/m/d'}}</td>
+                    {% if todays_date <= request.due_at|date:'Y/m/d'%}
                     <td>{{request.due_at|timeuntil}}</td>
+                    {% else %}
+                    <td class="overdate"> + {{request.due_at|timesince}} </td>
+                    {% endif %}
                     <td>{{request.progress}}</td>
                     <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
                 </tr>
@@ -125,7 +130,11 @@
                         <td>{{request.floor_type}}</td>
                         <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>
                         <td>{{request.due_at|date:'Y/m/d'}}</td>
+                        {% if todays_date <= request.due_at|date:'Y/m/d'%}
                         <td>{{request.due_at|timeuntil}}</td>
+                        {% else %}
+                        <td class="overdate"> + {{request.due_at|timesince}} </td>
+                        {% endif %}
                         <td>{{request.progress}}</td>
                         <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
                     </tr>
