@@ -1,24 +1,27 @@
 {% extends '../base.html' %}
 
 {% block content %}
+{% load static %}
 
 <script type="text/javascript">
 
     $(document).ready(function() { 
 
-        var status = $('#status').text();
+        //var status = $('#status').text();
+        var status = {{ arequest.progress }}
         console.log(status)
         var active_circle= $('.label:contains(' + status + ')').parent()
         active_circle.removeClass('circle').addClass('circle active'); 
 
+        //$(this) = 
         var label = $('.label')
         var circles = label.parent()
         console.log(circles)
 
         circles.each(function(){
-            if ($(this).find("span").text() < status){
 
-                console.log($(this).find("span").text())
+            if ($(this).find(".label").text() < status){
+                //console.log($(this).find("span").text())
                 $(this).removeClass('circle').addClass('circle done'); 
             }
         })
@@ -45,14 +48,13 @@
 
     
     <div class="eachRequest--header">
-        <h2>Request # {{arequest.id}}</h2>
+        <h1>Request # {{arequest.id}}</h1>
+        <div class="eachRequest--status">
+            <h1 class="slash"> &nbsp; / &nbsp;</h1>
+            <h2 id="status">Status:{{arequest.progress}}</h2>
+        </div>
     </div>
 
-
-    <div class="eachRequest--status">
-        <label>Status: </label>
-        <h1 id="status">{{arequest.progress}}</h1>
-    </div>
 
     <div class="progress">
 
