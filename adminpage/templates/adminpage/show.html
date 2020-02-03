@@ -7,13 +7,22 @@
     <div class= "requests-title">
         <h1>Request Page</h1> 
     </div>
-
     <div class="requests-on-run">
         <div class="requests-table-top">
             <h3>On-Run Requests</h3>
-            <input class="searchbox"/>
+            <div class="search_menu">
+                <p>search: </p>
+                <input class="searchbox" placeholder="search by..." />
+                <select class="selectbox">
+                    <option value="id">ID</option>
+                    <option value="type">Type</option>
+                    <option value="size">Size</option>
+                    <option value="due">Due_date</option>
+                    <option value="status">Work_status</option>
+                </select>
+            </div>
         </div>
-        
+        <div class="requests-table-bottom">
         <table>
             <thead>
                 <tr class="head">
@@ -24,8 +33,11 @@
                             <button class="sorting">Application Date</button>
                         </th>
                         <th>
-                            <button class="sorting">Type, Size</button>
-                        </td>
+                            <button class="sorting">Type</button>
+                        </th>
+                        <th>
+                            <button class="sorting">Size</button>
+                        </th>
                         <th>
                             <button class="sorting">Due Date</button>
                         </th>
@@ -39,26 +51,44 @@
                 </tr>
             </thead>
             <tbody>
+                {% now "Y/m/d" as todays_date %}
                 {% for request in onrunRequests %}
                 <tr>
                     <td>{{request.id}}</td>
                     <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
-                    <td>({{request.floor_type}}, {{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup>)</td>
+                    <td>{{request.floor_type}}</td>
+                    <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>
                     <td>{{request.due_at|date:'Y/m/d'}}</td>
+                    {% if todays_date <= request.due_at|date:'Y/m/d'%}
                     <td>{{request.due_at|timeuntil}}</td>
+                    {% else %}
+                    <td class="overdate" style="color:red;">+{{request.due_at|timesince}} </td>
+                    {% endif %}
                     <td>{{request.progress}}</td>
                     <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+        </div>
     </div>
     
     <div class="requests-total">
         <div class="requests-table-top">
             <h3>Total Requests</h3>
-            <input class="searchbox"/>
+            <div class="search_menu">
+                <p>search: </p>
+                <input class="searchbox" placeholder="search by..." />
+                <select class="selectbox">
+                    <option value="id">ID</option>
+                    <option value="type">Type</option>
+                    <option value="size">Size</option>
+                    <option value="due">Due_date</option>
+                    <option value="status">Work_status</option>
+                </select>
+            </div>
         </div>
+        <div class="requests-table-bottom">
             <table>
                 <thead>
                     <tr class="head">
@@ -69,8 +99,11 @@
                             <button class="sorting">Application Date</button>
                         </th>
                         <th>
-                            <button class="sorting">Type, Size</button>
-                        </td>
+                            <button class="sorting">Type</button>
+                        </th>
+                        <th>
+                            <button class="sorting">Size</button>
+                        </th>
                         <th>
                             <button class="sorting">Due Date</button>
                         </th>
@@ -89,9 +122,14 @@
                     <tr>
                         <td>{{request.id}}</td>
                         <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
-                        <td>({{request.floor_type}}, {{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup>)</td>
+                        <td>{{request.floor_type}}</td>
+                        <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>
                         <td>{{request.due_at|date:'Y/m/d'}}</td>
+                        {% if todays_date <= request.due_at|date:'Y/m/d'%}
                         <td>{{request.due_at|timeuntil}}</td>
+                        {% else %}
+                        <td class="overdate">+{{request.due_at|timesince}} </td>
+                        {% endif %}
                         <td>{{request.progress}}</td>
                         <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
                     </tr>
@@ -100,6 +138,7 @@
         
                 </tbody>
             </table>
+            </div>
     </div>
 </div>
 
@@ -115,7 +154,12 @@
         for(var i = 0; i<line; i++) {
             table_html += "<tr>";
             for(var j = 0; j<cols; j++) {
-                table_html += "<td>"+new_array[i][j]+"</td>";
+                if(new_array[i][j][0] == "+"){
+                    table_html += "<td style='color:red;'>"+new_array[i][j]+"</td>";
+                }
+                else{
+                    table_html += "<td>"+new_array[i][j]+"</td>";
+                }
             }
             table_html += "</tr>";
         }
@@ -125,16 +169,25 @@
         table_html = "";
         for(var i = 0; i<line; i++) {
             table_html += "<tr>";
-            console.log("this is retable2", search_array)
+            //console.log("this is retable2", search_array)
             if(search_array.length === 0){
                 for(var j = 0; j<cols; j++) {
-                    table_html += "<td>"+new_array[i][j]+"</td>";
+                    if(new_array[i][j][0] == "+"){
+                        table_html += "<td style='color:red;'>"+new_array[i][j]+"</td>";
+                    }
+                    else{
+                        table_html += "<td>"+new_array[i][j]+"</td>";
+                    }
                 }            
             }
             else{
                 for(var j = 0; j<cols; j++) {
-                    table_html += "<td>"+search_array[i][j]+"</td>";
-                }
+                    if(search_array[i][j][0] == "+"){
+                        table_html += "<td style='color:red;'>"+search_array[i][j]+"</td>";
+                    }
+                    else{
+                        table_html += "<td>"+search_array[i][j]+"</td>";
+                    }                }
             }
             table_html += "</tr>";
         }
@@ -168,10 +221,10 @@
             new_array.sort(function (a, b) { 
 
                 if(k % 2 == 0) {
-                    console.log(k)
+                    //console.log(k)
                     return a[$this_start_number] < b[$this_start_number] ? -1 : a[$this_start_number] > b[$this_start_number]? 1 : 0;  
                 } else {
-                  console.log("hahd")
+                  //console.log("hahd")
                     return a[$this_start_number] > b[$this_start_number] ? -1 : a[$this_start_number] < b[$this_start_number]? 1 : 0;  
                 }
                 
@@ -183,6 +236,8 @@
             $this_table.find("tbody").empty();
             re_table(table_tr_length, table_th_length, $this_table);
         });
+
+
         var table_th_length2 = 0
         var table_tr_length2 = 0
         $("input.searchbox").on("input", function() {
@@ -190,6 +245,8 @@
             var $this_table = $this.parents("div.requests-table-top").next();
             var $this_start_number = $this.parents("div.requests-table-top").next().index();
             var input_text = $this.val();
+            var search_elem = $this.next().val()
+            //console.log(search_elem)
             var search_elem_num = 0;
             if(search_try_num == 0){
                 table_th_length2 = $this.parents("div.requests-table-top").next().find("thead th").length; //테이블 칸의 갯수
@@ -209,22 +266,54 @@
                         new_array[i][j] = text_array;
                     }   
                 }
-                console.log("hihi")
+                //console.log("hihi")
             }
 
             for(var i =0; i<table_tr_length2; i++){
-                if(new_array[i][0] === input_text){
-                    search_array.push(new_array[i])
-                    search_elem_num++;
+                if(search_elem == "id"){
+                    if(new_array[i][0] === input_text){
+                        search_array.push(new_array[i])
+                        search_elem_num++;
+                    }
+                }
+                else if(search_elem=="type"){
+                    var input_len = input_text.length
+                    if(new_array[i][2].toLowerCase().slice(0,input_len) === input_text){
+                        search_array.push(new_array[i])
+                        search_elem_num++;
+                    }
+                }
+                else if(search_elem=="size"){
+                    var input_len = input_text.length
+                    if(new_array[i][3].slice(0,input_len) === input_text){
+                        search_array.push(new_array[i])
+                        search_elem_num++;
+                    }
+                }
+                else if(search_elem=="due"){
+                    var input_len = input_text.length
+                    //console.log(input_len)
+                    //console.log(typeof(new_array[i][3]))
+                    if(new_array[i][4].slice(0,input_len) === input_text){
+                        search_array.push(new_array[i])
+                        search_elem_num++;
+                    }
+                }
+                else if(search_elem=="status"){
+                    if(new_array[i][6] === input_text){
+                        search_array.push(new_array[i])
+                        search_elem_num++;
+                    }
                 }
             }
             if(search_elem_num == 0){
                 search_elem_num = table_tr_length2;
             }
             //값 들어오는지 확인
-            console.log(input_text);
-            console.log(search_array);
-            console.log(table_tr_length2)
+            //console.log(input_text);
+            //console.log(search_array);
+            //console.log(table_tr_length2)
+            
             search_try_num++;
             searching(search_elem_num, table_th_length2, $this_table);
         })

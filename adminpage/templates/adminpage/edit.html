@@ -6,16 +6,74 @@
     
 </script>
 
-<h1>Edit Request # {{arequest.id}}</h1>
+<div class="edit">
+  <div class="edit__title">
+    <h3 class="edit__title-label"> EDIT </h3>
+    <h1 class="edit__title-num">
+        Request #
+        {{arequest.id}}</h1>
+  </div>
+  <div class="edit__mid">
+    <div class="edit__data">
     <form action="/adminpage/{{ arequest.id }}/" method="POST">
-      {% csrf_token %}
-      <label>Progress</label>
-      <input name="progress" value="{{arequest.progress}}"/> <br />
-      <label>Due Date</label>
-      <input name="due_at" type= "date" value="{{arequest.due_at}}"/> <br />
-      <label>Additional Requests</label>
-      <input name="add_request" type= "text" value="{{arequest.add_request}}"/> <br />
-      <input type="submit" value="submit" />
+        {% now "Y-m-d" as arequest.due_at %}
+
+        {% csrf_token %}
+        <label>Progress</label>
+
+        <!-- buttons are not working T T 
+        <div class="progress_buttons">
+          <button class="progress_1" name="progress">1</button>
+          <button class="progress_2" name="progress">2</button>
+          <button class="progress_3" name="progress">3</button>
+          <button class="progress_4" name="progress">4</button>
+          <button class="progress_5" name="progress">5</button>
+        </div>
+        -->
+        <input class="progressbox" name="progress" value="{{arequest.progress}}"></input>
+
+
+        <label>Due Date</label>
+        <input class="due_atbox" name="due_at" type="date" value="{{arequest.due_at|date:'Y-m-d'}}"/>
+        <label>Additional Requests</label>
+        <textarea class="extrabox" name="add_request" type="text" value="{{arequest.add_request}}">{{arequest.add_request}}</textarea>
+        <input class="submit" type="submit" value="submit"/>
     </form>
+    </div>
+    <div class="edit__chat">
+      <h1> chat here! </h1>
+    </div>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+  var name = ".progress_"
+  var class_name = ".progress_" + {{arequest.progress}}
+  //console.log(class_name)
+  $(class_name).css({
+    "background-color": "blue",
+    fontSize: "10px"
+});
+  $(".progress_buttons button").on("click", function(e){
+    e.preventDefault();
+    //console.log(e.target.textContent)
+    myclass_name = name + e.target.textContent
+    //console.log(val)
+    for(var i = 1; i < 6; i++){
+      if(String(i) === e.target.textContent){
+        $(name+String(i)).css({
+          "background-color": "blue",
+        })
+      }
+      else{
+        $(name+String(i)).css({
+          "background-color": "white",
+        })
+      }
+    }
+
+  });
+</script>
 
 {% endblock %}
