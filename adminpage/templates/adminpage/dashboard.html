@@ -2,67 +2,83 @@
 
 {% block content %}
 
-<div class="main">
-    <div class="board">
-    <canvas id="doughnut-chart" style="width: auto; height: 280px;"></canvas>
-    <canvas id="line-chart" style="width: 150%; height: auto;overflow: hidden;"></canvas>
+<div class="dashboard">
+    <div class="dashboard--title">Dashboard</div>
+    <div class="dashboard--board">
+        <div class ="dashboard--board_undone">
+            <div class ="dashboard--board_undone-label">
+                <i class="fas fa-edit"></i>Undone Requests
+            </div>
+            <hr style= "margin-top: 10px; width: 160px; border: 1px solid rgb(196, 187, 165); margin-left: 45px;"/>
+            
+            <div class ="dashboard--board_undone-num">
+                {{requests.count}}
+            </div>
+            
+            
+        </div>
+        <canvas id="doughnut-chart" style="width: 300px; height: 200px;"></canvas>
+        <canvas id="line-chart" style="width: 55%; height: auto;overflow: hidden; "></canvas>
     
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-  <script>
-    var config = {
-      type: 'doughnut',
-      data: {
-        datasets: [{
-          data: {{ data|safe }},
-          backgroundColor: [
-            '#CC3D6C', '#FF776F', '#66FFCB', '#3DAECC', '#7A9299'
-          ],
-          label: 'Population'
-        }],
-        labels: {{ labels|safe }}
-      },
-      options: {
-        responsive: false
-      }
-    };
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <script>
+            var config = {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                data: {{ data|safe }},
+                backgroundColor: [
+                    '#ecb939', '#f0c75e', '#726255', '#372e29', '#000000'
+                ],
+                label: 'Population'
+                }],
+                labels: {{ labels|safe }}
+            },
+            options: {
+                responsive: false
+            }
+            };
 
-    var linedata = {
-        // The type of chart we want to create
-        type: 'line',
-        // The data for our dataset
-        data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            datasets: [{
-                label: "num",
-                backgroundColor: 'rgb(255, 99, 132)',
-                fill:false, // line의 아래쪽을 색칠할 것인가? 
-                borderColor: 'rgb(255, 99, 132)',
-                lineTension:0.1, // 값을 높이면, line의 장력이 커짐.
-                data: [0, 10, 5, 2, 20, 30, 45, 50, 45, 40, 30, 20],
-            }]
-        },
-        // Configuration options go here
-        options: {
-            responsive: false
-        }
-    }
+            var linedata = {
+                // The type of chart we want to create
+                type: 'line',
+                // The data for our dataset
+                data: {
+                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                    datasets: [{
+                        label: "On Demand Requests",
+                        backgroundColor: '#D7B889',
+                        fill:false, // line의 아래쪽을 색칠할 것인가? 
+                        borderColor: '#D7B889',
+                        lineTension:0.1, // 값을 높이면, line의 장력이 커짐.
+                        data: [0, 10, 5, 2, 20, 30, 45, 50, 45, 40, 30, 20],
+                    }]
+                },
+                // Configuration options go here
+                options: {
+                    responsive: false
+                }
+            }
 
-    window.onload = function() {
-      var ctx = document.getElementById('doughnut-chart').getContext('2d');
-      var ctx2 = document.getElementById('line-chart').getContext('2d');
-      window.myPie = new Chart(ctx, config);
-      window.myLine = new Chart(ctx2, linedata);
-    };
+            window.onload = function() {
+            var ctx = document.getElementById('doughnut-chart').getContext('2d');
+            var ctx2 = document.getElementById('line-chart').getContext('2d');
+            window.myPie = new Chart(ctx, config);
+            window.myLine = new Chart(ctx2, linedata);
+            };
 
-  </script>
+            $(document).ready(function() { 
+                const active_menu = $('#dashboard')
+                active_menu.removeClass('sidenav--menu_sub').addClass('sidenav--menu_sub-active'); 
+
+            });
+
+        </script>
     </div>
-    <h1>
-        Request On-Run
-    </h1>
-    <table class="data">
+    <div class="dashboard--title">Request On-Run</div>
+    <table class="dashboard--table">
         <thead>
-            <tr class="head">
-      
+            <tr class="dashboard--table_head">
                 <th class='id'>
                     <button class="sorting">ID#</button>
                 </th>
@@ -81,7 +97,9 @@
                 <th>
                     <button class="sorting">Work Status</button>
                 </th>
-                <th>Detail</th>
+                <th>
+                    <button>Detail</button>
+                </th>
             </tr>
         </thead>
         <tbody>

@@ -230,6 +230,12 @@
         })
 
     })
+    $(document).ready(function() { 
+        
+        const active_menu = $('#requests')
+        active_menu.removeClass('sidenav--menu_sub').addClass('sidenav--menu_sub-active'); 
+
+    });
 </script>   
 
 {% endblock content %}
