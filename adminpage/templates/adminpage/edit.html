@@ -1,6 +1,7 @@
 {% extends '../base.html' %}
 
 {% block content %}
+{% load static %}
 
 <script>
     
@@ -19,7 +20,7 @@
         {% now "Y-m-d" as arequest.due_at %}
 
         {% csrf_token %}
-        <label>Progress</label>
+        <label><img src="{% static 'correct.png' %}"/> Progress</label>
 
         <!-- buttons are not working T T 
         <div class="progress_buttons">
@@ -33,17 +34,16 @@
         <input class="progressbox" name="progress" value="{{arequest.progress}}"></input>
 
 
-        <label>Due Date</label>
+        <label><img src="{% static 'correct.png' %}"/> Due Date</label>
         <input class="due_atbox" name="due_at" type="date" value="{{arequest.due_at|date:'Y-m-d'}}"/>
-        <label>Additional Requests</label>
+        <label><img src="{% static 'correct.png' %}"/> Additional Requests</label>
         <textarea class="extrabox" name="add_request" type="text" value="{{arequest.add_request}}">{{arequest.add_request}}</textarea>
         <input class="submit" type="submit" value="submit"/>
     </form>
     </div>
-    <div class="edit__chat">
-      <h1> chat here! </h1>
-    </div>
+
   </div>
+
 </div>
 
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
