@@ -198,10 +198,79 @@ html, body{
             border-collapse: collapse;
             box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
             width: 90%;
+            margin-left: 20px;
             border-radius: 10px;
 
             &_head{
+                padding: 10px;
                 button{
+                    font-size: 15px;
+                    font-weight: $light;
+                    background-color: rgb(240, 240, 240);
+                    color: rgb(68, 68, 68);
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    height: 40px;
+                    
+                }
+            }
+            
+            td{
+                padding: 10px;
+                text-align: center;
+            }
+            tr{
+                padding: 10px;
+                border-bottom: 0.5px solid rgb(219, 219, 219);
+              }
+            
+
+        }
+    }
+    .requests{
+
+        margin-top: 100px;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: 20px;
+
+        &-table{
+            &-top{
+                position: relative;
+            }
+            &-bottom{
+                margin-top: 30px;
+                margin-bottom: 50px;
+            }
+        }
+        .search_menu{
+            
+            display: flex;
+            position: absolute;
+            right: 10%;
+            bottom: 0;
+    
+        }
+
+        &-on-run{
+            margin-top: 20px;
+            
+            table{
+
+                border-collapse: collapse;
+                box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+                width: 90%;
+                margin-left: 20px;
+                border-radius: 10px;
+            }
+            
+            .head{
+                
+                button{
+                    
+                    padding: 20px;
                     font-size: 15px;
                     font-weight: $light;
                     background-color: rgb(240, 240, 240);
@@ -212,103 +281,80 @@ html, body{
                     height: 40px;
                 }
             }
-            
             td{
                 padding: 10px;
                 text-align: center;
             }
-            tr:nth-child(2n) {
+    
+            tr {
+                padding: 10px;
                 border-bottom: 0.5px solid rgb(219, 219, 219);
               }
-            tr:nth-child(2n+1) {
+            
+        }
+    
+        
+        
+    
+        &-title{
+            font-size: 20px;
+            margin-bottom: 30px;
+            font-family: 'Lato', sans-serif;
+            color: rgb(54, 54, 54);
+            margin-left: 10px;
+            letter-spacing: 0.5px;
+        }
+    
+        
+    
+    
+        &-total{
+            
+            margin-top: 30px;
+            table{
+                width: 90%;
+                border-collapse: collapse;
+                box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+                
+                margin-left: 20px;
+                border-radius: 10px;
+            }
+    
+            .head{
+                button{
+                    padding: 20px;
+                    font-size: 15px;
+                    font-weight: $light;
+                    background-color: rgb(240, 240, 240);
+                    color: rgb(68, 68, 68);
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    height: 40px;
+                }
+            }
+            td{
+                padding: 10px;
+                text-align: center;
+            }
+    
+            tr {
+                padding: 10px;
                 border-bottom: 0.5px solid rgb(219, 219, 219);
             }
-
+            .overdate{
+                color:red;
+            }
+           
         }
     }
 }
 
-.requests{
-    padding: 40px;
-    
-    &-title{
-        color: rgb(54, 54, 54);
-    }
-    &-on-run{
-        margin-top: 20px;
-        table{
-            width: 70vw;
-        }
-        
-        .head{
-            background-color: rgb(0, 148, 185) !important;
-            color: white;
-            button{
-                font-size: 20px;
-                background-color: rgb(0, 148, 185);
-                color: white;
-                width: 100%;
-                border: none;
-                outline: none;
-            }
-        }
-        td{
-            padding: 10px;
-            text-align: center;
-        }
 
-        tr:nth-child(2n) {
-            background-color: #bbdefb;
-          }
-        tr:nth-child(2n+1) {
-            background-color: #e3f2fd;
-        }
-    }
-    &-table-top{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        .search_menu p{
-            display: inline;
-        }
-    }
-    &-table-bottom{
-        max-height: 400px;
-        overflow-y: scroll;
-    }
-    &-total{
-        margin-top: 30px;
 
-        .head{
-            background-color: rgb(0, 148, 185) !important;
-            color: white;
-            button{
-                font-size: 20px;
-                background-color: rgb(0, 148, 185);
-                color: white;
-                width: 100%;
-                border: none;
-                outline: none;
-            }
-        }
-        table{
-            width: 70vw;
-        }
-        td{
-            padding: 10px;
-            text-align: center;
-        }
-        .overdate{
-            color:red;
-        }
-        tr:nth-child(2n) {
-            background-color: #bbdefb;
-          }
-        tr:nth-child(2n+1) {
-            background-color: #e3f2fd;
-        }
-    }
-}
+
+//SHOW.HTML
+
 
 .eachRequest{
     padding: 30px;
