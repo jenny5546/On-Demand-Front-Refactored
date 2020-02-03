@@ -481,9 +481,13 @@ html, body{
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin: 0 100px;
+    margin: 20px 100px;
     padding: 0 100px;
-    background-color: rgb(216, 216, 216);
+    border-radius: 30px;
+    background-color: rgba(248, 248, 248, 0.664);
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
+
     &__title{
         display: flex;
         flex-direction: column;
@@ -497,7 +501,7 @@ html, body{
             width: fit-content;
             margin-top: 10px;
             color: white;
-            background-color: violet;
+            background-color:#30343A;
         }
     }
     &__mid{
@@ -512,42 +516,68 @@ html, body{
         form{
             display: flex;
             flex-direction: column;
-            padding: 10px 100px;
+            padding: 10px;
 
             label{
-                font-size: 20px;
-                margin: 5px 0;
+                font-size: 25px;
+                margin: 7px 0;
             }
             
             .progressbox{
-                width: 100px;
+                width: 50px;
                 height: 40px;
                 font-size: 30px;
+                border:none;
+                border-right:0px;
+                border-top:0px; 
+                border-left:0px; 
+                border-bottom:1px black solid;
+
+                background-color: rgba(248, 248, 248, 0.664);
+                outline: none;
             }
             .due_atbox{
-                width: 300px;
+                width: 250px;
                 height: 40px;
                 font-size: 30px;
+                border:none;
+                border-right:0px;
+                border-top:0px; 
+                border-left:0px; 
+                border-bottom:1px black solid;
+                background-color: rgba(248, 248, 248, 0.664);
+                outline: none;
+
             }
             .extrabox{
                 width: 100%;
                 height: 200px;
                 font-size: 25px;
+                border:none;
+                border-right:0px;
+                border-top:1px black solid;
+                border-left:0px; 
+                border-bottom:1px black solid;
+                background-color: rgba(248, 248, 248, 0.664);
+                outline: none;
+
             }
 
             .submit{
                 width: 100px;
                 height: 50px;
+                margin-top: 10px;
                 font-size: 25px;
                 text-align: center;
-                color: white;
-                background-color: green;
+
+                color:rgb(175, 150, 85);
+                background-color:rgba(248, 248, 248, 0.664);
                 border: none;
+                border-radius: 10px;
                 outline: none;
                 &:hover{
-                    color:green;
-                    background-color: white;
-                }
+                    color: white;
+                    background-color: rgb(175, 150, 85);                }
             }
             .progress_buttons{
                 display: inline-flex;
@@ -564,8 +594,10 @@ html, body{
 
     &__chat{
         width: 40%;
-        background-color: blue;
+        background-color:#D7B889;
         color: white;
-        margin-bottom: 50px;
+        border-radius: 10px;
+        margin: 20px;
+        
     }
 }
