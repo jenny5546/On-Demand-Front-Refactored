@@ -195,18 +195,17 @@ html, body{
 
 
         &--table{
-
+            border-collapse: collapse;
             box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
             width: 90%;
             border-radius: 10px;
 
             &_head{
                 button{
-                    
                     font-size: 15px;
                     font-weight: $light;
-                    background-color: #30343A;
-                    color: white;
+                    background-color: rgb(240, 240, 240);
+                    color: rgb(68, 68, 68);
                     width: 100%;
                     border: none;
                     outline: none;
@@ -219,10 +218,10 @@ html, body{
                 text-align: center;
             }
             tr:nth-child(2n) {
-                background-color: #d2d4dcbd;
+                border-bottom: 0.5px solid rgb(219, 219, 219);
               }
             tr:nth-child(2n+1) {
-                background-color: #f8f8fae0;
+                border-bottom: 0.5px solid rgb(219, 219, 219);
             }
 
         }
