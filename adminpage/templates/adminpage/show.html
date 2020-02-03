@@ -2,12 +2,6 @@
 
 {% block content %}
 
-<div class="sidenav">
-        <a href="/" class="dashboard" onclick="color()"> Dash Board </a>
-        <a href="/show" class="request_here"> Request </a>
-        <a href="#" class="messages"> Messages </a>
-
-</div>
 
 <div class="requests">
     <div class= "requests-title">
@@ -325,6 +319,12 @@
         })
 
     })
+    $(document).ready(function() { 
+        
+        const active_menu = $('#requests')
+        active_menu.removeClass('sidenav--menu_sub').addClass('sidenav--menu_sub-active'); 
+
+    });
 </script>   
 
 {% endblock content %}

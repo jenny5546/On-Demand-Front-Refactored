@@ -79,7 +79,7 @@ def dashboard(request):
                 if(user.progress == i+1):
                     progress[i] += 1
 
-        labels = ["progress_1", "progress_2", "progress_3", "progress_4", "progress_5"]
+        labels = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
         #labels_line = "hihi"
         data = progress.copy()
 

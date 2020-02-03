@@ -3,7 +3,9 @@
 {% block content %}
 
 <script type="text/javascript">
+
     $(document).ready(function() { 
+
         var status = $('#status').text();
         console.log(status)
         var active_circle= $('.label:contains(' + status + ')').parent()
@@ -23,15 +25,15 @@
 
         
     });
+    $(document).ready(function() { 
+        
+        const active_menu = $('#requests')
+        active_menu.removeClass('sidenav--menu_sub').addClass('sidenav--menu_sub-active'); 
+
+    });
 
 
 </script>
-
-<div class="sidenav">
-    <a href="/" class="dashboard" onclick="color()"> Dash Board </a>
-    <a href="/show" class="request_here"> Request </a>
-    <a href="#" class="messages"> Messages </a>
-</div>
 
 <div class="eachRequest">
 
