@@ -17,7 +17,7 @@
 
     </head>
     <body>
-        <div class="header">
+        <!-- <div class="header">
             <header>
                 <div class="logo" style="display: flex; flex-direction: column; width: 300px;">
                     <a href="/"><img src="{% static 'Archisketch_Logo.png' %}"/> </a>
@@ -31,8 +31,29 @@
 				</ul>
                 </nav>
             </header>
+        </div> -->
+        <div class = "header">
+
         </div>
         <div class="mid">
+
+            <div class="sidenav">
+
+                <a href="/" style= "text-align: center">
+                    <img class = "sidenav--logo" src="{% static 'Archisketch_Logo.png' %}"/>
+                </a>
+                <!-- <div class = "sidenav--title">On-Demand Adminpage</div> -->
+                
+                <div class="sidenav--menu">
+                    <a href="" class="sidenav--menu_sub"> <i class="fas fa-chart-line" style = "color: #D7B889; padding: 6px;"></i> Dash Board </a>
+                    <a href="show/" class="sidenav--menu_sub"> <i class="fas fa-clipboard-check" style = "color: #D7B889; padding: 6px; margin-right: 6px;"></i>  Request </a>
+                    <a href="#" class="sidenav--menu_sub"> <i class="fas fa-inbox" style = "color: #D7B889; padding: 6px;""></i> Messages </a>
+                    <a href="#" class="sidenav--menu_sub"> <i class="fas fa-cog" style = "color: #D7B889; padding: 6px;"></i> Settings </a>
+                </div>
+                
+
+            </div>
+
             {% block content %}
             {% endblock content %}
         </div>

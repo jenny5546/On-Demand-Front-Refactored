@@ -3,7 +3,9 @@
 {% block content %}
 
 <script type="text/javascript">
+
     $(document).ready(function() { 
+
         var status = $('#status').text();
         console.log(status)
         var active_circle= $('.label:contains(' + status + ')').parent()
@@ -26,12 +28,6 @@
 
 
 </script>
-
-<div class="sidenav">
-    <a href="/" class="dashboard" onclick="color()"> Dash Board </a>
-    <a href="/show" class="request_here"> Request </a>
-    <a href="#" class="messages"> Messages </a>
-</div>
 
 <div class="eachRequest">
 
