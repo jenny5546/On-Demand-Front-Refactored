@@ -181,7 +181,9 @@ def each(request, id):
 def edit(request, id):
 
     arequest = Request.objects.get(id=id)
-    return render(request, 'adminpage/edit.html', {'arequest':arequest})
+    return render(request, 'adminpage/edit.html', {
+            'arequest':arequest,
+            })
 
 def download(request, req_id, file_id):
 
