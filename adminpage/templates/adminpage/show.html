@@ -11,8 +11,8 @@
                 On Run Requests
             </div>
             <div class="search_menu">
-                <p style="margin-right: 10px;">search: </p>
-                <input style="margin-right: 10px;" class="searchbox" placeholder="search by..." />
+                <p style="margin-right: 10px;">Search: </p>
+                <input style="margin-right: 10px; border-radius: 10px; padding: 5px;" class="searchbox" placeholder="search by..." />
                 <select class="selectbox">
                     <option value="id">ID</option>
                     <option value="type">Type</option>
@@ -27,25 +27,25 @@
             <thead>
                 <tr class="head">
                         <th>
-                            <button class="sorting">ID#</button>
+                            <button class="sorting">ID#<i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Application Date</button>
+                            <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Type</button>
+                            <button class="sorting">Type <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Size</button>
+                            <button class="sorting">Size <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Due Date</button>
+                            <button class="sorting">Due Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Time Remaining</button>
+                            <button class="sorting">Time Remaining <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Work Status</button>
+                            <button class="sorting">Work Status <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th><button>Detail</button></th>
                 </tr>
@@ -65,7 +65,7 @@
                     <td class="overdate" style="color:red;">+{{request.due_at|timesince}} </td>
                     {% endif %}
                     <td>{{request.progress}}</td>
-                    <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
+                    <td><a class= "go_btn" href="/{{request.id}}" >Click</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -82,8 +82,8 @@
                     Total Requests
             </div>
             <div class="search_menu">
-                <p style="margin-right: 10px;">search: </p>
-                <input style="margin-right: 10px;" class="searchbox" placeholder="search by..." />
+                <p style="margin-right: 10px; "> Search: </p>
+                <input style="margin-right: 10px; border-radius: 10px; padding: 5px;" class="searchbox" placeholder="search by..." />
                 <select class="selectbox">
                     <option value="id">ID</option>
                     <option value="type">Type</option>
@@ -98,25 +98,25 @@
                 <thead>
                     <tr class="head">
                         <th>
-                            <button class="sorting">ID#</button>
+                            <button class="sorting">ID# <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Application Date</button>
+                            <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Type</button>
+                            <button class="sorting">Type <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Size</button>
+                            <button class="sorting">Size <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Due Date</button>
+                            <button class="sorting">Due Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Time Remaining</button>
+                            <button class="sorting">Time Remaining <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Work Status</button>
+                            <button class="sorting">Work Status <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th><button>Detail</button></th>
                         
@@ -136,7 +136,7 @@
                         <td class="overdate">+{{request.due_at|timesince}} </td>
                         {% endif %}
                         <td>{{request.progress}}</td>
-                        <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
+                        <td><a class= "go_btn" href="/{{request.id}}">Click</a></td>
                     </tr>
         
                     {% endfor %}

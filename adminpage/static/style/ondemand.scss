@@ -14,12 +14,14 @@ html, body{
    flex-direction: column;
 }
 
-
+*:focus{
+    outline: none;
+}
 
 .header {
     height: 75px;
     position: absolute;
-    right: 2%;
+    right: 8%;
     &--nav{
         
         display: flex;
@@ -38,6 +40,20 @@ html, body{
     display: flex;
     flex-direction: row;
     flex: 1;
+
+    .go_btn{
+        padding: 6px;
+        background-color: $btn_darkColor;
+        border-radius: 10px;
+        font-size: 10px;
+        color: white;
+        text-decoration: none;
+        &:hover{
+            background-color: rgb(77, 77, 77);
+        }
+    }
+    
+
 
     .sidenav {
         
@@ -138,11 +154,12 @@ html, body{
 
     .dashboard{
 
-        margin-top: 100px;
+        margin-top: 80px;
         display: flex;
         flex: 1;
         flex-direction: column;
         padding: 20px;
+
         
         &--title{
             font-size: 20px;
@@ -195,11 +212,13 @@ html, body{
 
 
         &--table{
+
             border-collapse: collapse;
-            box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+            box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
             width: 90%;
             margin-left: 20px;
             border-radius: 10px;
+            margin-bottom: 30px;
 
             &_head{
                 padding: 10px;
@@ -260,7 +279,7 @@ html, body{
             table{
 
                 border-collapse: collapse;
-                box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+                box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
                 width: 90%;
                 margin-left: 20px;
                 border-radius: 10px;
@@ -269,8 +288,8 @@ html, body{
             .head{
                 
                 button{
-                    
-                    padding: 20px;
+                    padding-top: 10px;
+                    padding-bottom: 20px;
                     font-size: 15px;
                     font-weight: $light;
                     background-color: rgb(240, 240, 240);
@@ -314,7 +333,7 @@ html, body{
             table{
                 width: 90%;
                 border-collapse: collapse;
-                box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+                box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
                 
                 margin-left: 20px;
                 border-radius: 10px;
@@ -322,7 +341,8 @@ html, body{
     
             .head{
                 button{
-                    padding: 20px;
+                    padding-top: 10px;
+                    padding-bottom: 20px;
                     font-size: 15px;
                     font-weight: $light;
                     background-color: rgb(240, 240, 240);
@@ -343,7 +363,7 @@ html, body{
                 border-bottom: 0.5px solid rgb(219, 219, 219);
             }
             .overdate{
-                color:red;
+                color: rgb(158, 108, 27);
             }
            
         }
@@ -357,7 +377,11 @@ html, body{
 
 
 .eachRequest{
-    padding: 30px;
+    margin-top: 100px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px;
 
     &--editbtn{
         position: absolute;

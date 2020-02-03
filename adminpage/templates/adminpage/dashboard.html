@@ -80,22 +80,22 @@
         <thead>
             <tr class="dashboard--table_head">
                 <th class='id'>
-                    <button class="sorting">ID#</button>
+                    <button class="sorting">ID# <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                 </th>
                 <th>
-                    <button class="sorting">Application Date</button>
+                    <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                 </th>
                 <th>
-                    <button class="sorting">Type, Size</button>
+                    <button class="sorting">Type, Size <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                 </td>
                 <th>
-                    <button class="sorting">Due Date</button>
+                    <button class="sorting">Due Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                 </th>
                 <th>
-                    <button class="sorting">Time Remaining</button>
+                    <button class="sorting">Time Remaining <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                 </th>
                 <th>
-                    <button class="sorting">Work Status</button>
+                    <button class="sorting">Work Status <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                 </th>
                 <th>
                     <button>Detail</button>
@@ -116,7 +116,7 @@
                   <td class="overdate" style="color:red;">+{{request.due_at|timesince}} </td>
                   {% endif %}
                   <td>{{request.progress}}</td>
-                  <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
+                  <td><a class= "go_btn" href="/{{request.id}}">Click</a></td>
               </tr>
             {% endfor %}
         </tbody>
