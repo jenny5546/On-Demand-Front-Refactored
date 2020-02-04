@@ -20,7 +20,7 @@
             }
         })
     });
-    
+
     $(document).ready(function() { 
         const active_menu = $('#requests')
         active_menu.removeClass('sidenav--menu_sub').addClass('sidenav--menu_sub-active'); 
@@ -39,7 +39,7 @@
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this request",
             icon: "warning",
-            buttons: true,
+            buttons:{ text: "Confirm", cancel: "Cancel"},
             dangerMode: true,
             })
             .then((willDelete) => {
