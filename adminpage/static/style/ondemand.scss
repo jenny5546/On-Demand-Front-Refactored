@@ -14,12 +14,14 @@ html, body{
    flex-direction: column;
 }
 
-
+*:focus{
+    outline: none;
+}
 
 .header {
     height: 75px;
     position: absolute;
-    right: 2%;
+    right: 8%;
     &--nav{
         
         display: flex;
@@ -38,6 +40,20 @@ html, body{
     display: flex;
     flex-direction: row;
     flex: 1;
+
+    .go_btn{
+        padding: 6px;
+        background-color: $btn_darkColor;
+        border-radius: 10px;
+        font-size: 10px;
+        color: white;
+        text-decoration: none;
+        &:hover{
+            background-color: rgb(77, 77, 77);
+        }
+    }
+    
+
 
     .sidenav {
         
@@ -138,11 +154,12 @@ html, body{
 
     .dashboard{
 
-        margin-top: 100px;
+        margin-top: 80px;
         display: flex;
         flex: 1;
         flex-direction: column;
         padding: 20px;
+
         
         &--title{
             font-size: 20px;
@@ -196,21 +213,25 @@ html, body{
 
         &--table{
 
-            box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+            border-collapse: collapse;
+            box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
             width: 90%;
+            margin-left: 20px;
             border-radius: 10px;
+            margin-bottom: 30px;
 
             &_head{
+                padding: 10px;
                 button{
-                    
                     font-size: 15px;
                     font-weight: $light;
-                    background-color: #30343A;
-                    color: white;
+                    background-color: rgb(240, 240, 240);
+                    color: rgb(68, 68, 68);
                     width: 100%;
                     border: none;
                     outline: none;
                     height: 40px;
+                    
                 }
             }
             
@@ -218,98 +239,142 @@ html, body{
                 padding: 10px;
                 text-align: center;
             }
-            tr:nth-child(2n) {
-                background-color: #d2d4dcbd;
+            tr{
+                padding: 10px;
+                border-bottom: 0.5px solid rgb(219, 219, 219);
               }
-            tr:nth-child(2n+1) {
-                background-color: #f8f8fae0;
-            }
+            
 
         }
     }
-}
+    .requests{
 
-.requests{
-    padding: 40px;
-    
-    &-title{
-        color: rgb(54, 54, 54);
-    }
-    &-on-run{
-        margin-top: 20px;
-        table{
-            width: 70vw;
-        }
-        
-        .head{
-            background-color: rgb(0, 148, 185) !important;
-            color: white;
-            button{
-                font-size: 20px;
-                background-color: rgb(0, 148, 185);
-                color: white;
-                width: 100%;
-                border: none;
-                outline: none;
-            }
-        }
-        td{
-            padding: 10px;
-            text-align: center;
-        }
-
-        tr:nth-child(2n) {
-            background-color: #bbdefb;
-          }
-        tr:nth-child(2n+1) {
-            background-color: #e3f2fd;
-        }
-    }
-    &-table-top{
+        margin-top: 100px;
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        .search_menu p{
-            display: inline;
-        }
-    }
-    &-table-bottom{
-        max-height: 400px;
-        overflow-y: scroll;
-    }
-    &-total{
-        margin-top: 30px;
+        flex: 1;
+        flex-direction: column;
+        padding: 20px;
 
-        .head{
-            background-color: rgb(0, 148, 185) !important;
-            color: white;
-            button{
-                font-size: 20px;
-                background-color: rgb(0, 148, 185);
-                color: white;
-                width: 100%;
-                border: none;
-                outline: none;
+        &-table{
+            &-top{
+                position: relative;
+            }
+            &-bottom{
+                margin-top: 30px;
+                margin-bottom: 50px;
             }
         }
-        table{
-            width: 70vw;
+        .search_menu{
+            
+            display: flex;
+            position: absolute;
+            right: 10%;
+            bottom: 0;
+    
         }
-        td{
-            padding: 10px;
-            text-align: center;
+
+        &-on-run{
+            margin-top: 20px;
+            
+            table{
+
+                border-collapse: collapse;
+                box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
+                width: 90%;
+                margin-left: 20px;
+                border-radius: 10px;
+            }
+            
+            .head{
+                
+                button{
+                    padding-top: 10px;
+                    padding-bottom: 20px;
+                    font-size: 15px;
+                    font-weight: $light;
+                    background-color: rgb(240, 240, 240);
+                    color: rgb(68, 68, 68);
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    height: 40px;
+                }
+            }
+            td{
+                padding: 10px;
+                text-align: center;
+            }
+    
+            tr {
+                padding: 10px;
+                border-bottom: 0.5px solid rgb(219, 219, 219);
+              }
+            
         }
-        .overdate{
-            color:red;
+    
+        
+        
+    
+        &-title{
+            font-size: 20px;
+            margin-bottom: 30px;
+            font-family: 'Lato', sans-serif;
+            color: rgb(54, 54, 54);
+            margin-left: 10px;
+            letter-spacing: 0.5px;
         }
-        tr:nth-child(2n) {
-            background-color: #bbdefb;
-          }
-        tr:nth-child(2n+1) {
-            background-color: #e3f2fd;
+    
+        
+    
+    
+        &-total{
+            
+            margin-top: 30px;
+            table{
+                width: 90%;
+                border-collapse: collapse;
+                box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
+                
+                margin-left: 20px;
+                border-radius: 10px;
+            }
+    
+            .head{
+                button{
+                    padding-top: 10px;
+                    padding-bottom: 20px;
+                    font-size: 15px;
+                    font-weight: $light;
+                    background-color: rgb(240, 240, 240);
+                    color: rgb(68, 68, 68);
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    height: 40px;
+                }
+            }
+            td{
+                padding: 10px;
+                text-align: center;
+            }
+    
+            tr {
+                padding: 10px;
+                border-bottom: 0.5px solid rgb(219, 219, 219);
+            }
+            .overdate{
+                color: rgb(158, 108, 27);
+            }
+           
         }
     }
 }
+
+
+
+
+//SHOW.HTML
+
 
 .eachRequest{
     display: flex;
@@ -326,6 +391,7 @@ html, body{
         width: 16px;
         height: 16px;
     }
+
 
     &--editbtn{
         position: absolute;
