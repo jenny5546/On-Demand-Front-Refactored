@@ -258,10 +258,23 @@ html, body{
         &-table{
             &-top{
                 position: relative;
+
             }
             &-bottom{
                 margin-top: 30px;
                 margin-bottom: 50px;
+                .table_scroll{
+                    width: 90%;
+                    box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
+                    margin-left: 20px;
+                    border-radius: 10px;
+                    height: 250px;
+                    overflow-y: scroll;
+                }
+                .table_scroll::-webkit-scrollbar {
+                    display: none;
+                  }
+
             }
         }
         .search_menu{
@@ -277,16 +290,14 @@ html, body{
             margin-top: 20px;
             
             table{
-
+                width: 100%;
                 border-collapse: collapse;
-                box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
-                width: 90%;
-                margin-left: 20px;
-                border-radius: 10px;
+
+
+
             }
-            
+    
             .head{
-                
                 button{
                     padding-top: 10px;
                     padding-bottom: 20px;
@@ -308,7 +319,8 @@ html, body{
             tr {
                 padding: 10px;
                 border-bottom: 0.5px solid rgb(219, 219, 219);
-              }
+            }
+
             
         }
     
@@ -331,12 +343,8 @@ html, body{
             
             margin-top: 30px;
             table{
-                width: 90%;
-                border-collapse: collapse;
-                box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
-                
-                margin-left: 20px;
-                border-radius: 10px;
+                width: 100%;
+
             }
     
             .head{
@@ -362,10 +370,6 @@ html, body{
                 padding: 10px;
                 border-bottom: 0.5px solid rgb(219, 219, 219);
             }
-            .overdate{
-                color: rgb(158, 108, 27);
-            }
-           
         }
     }
 }
