@@ -619,15 +619,17 @@ html, body{
                 font-size: 15px;
                 border-radius: 10px;
                 color: white;
+                border: 0;
                 background-color: $btn_darkColor;
                 margin: 3px;
-                box-shadow:inset 0px -2px 2px 1px rgb(88, 78, 48),
+                box-shadow:inset 0px -2px 2px 1px rgba(85, 85, 85, 0.6),
                 0px 3px 4px rgba(85, 85, 85, 0.6);
                 &:hover {
                     background-color: rgb(226, 198, 122);
                 }
             }
             .clicked{
+                border: 0;
                 color: white;
                 background-color: rgb(226, 198, 122);
                 width: 100%;
@@ -683,6 +685,9 @@ html, body{
                 border: 0;
                 border-radius: 10px;
                 outline: none;
+                box-shadow:inset 0px -2px 2px 1px rgba(85, 85, 85, 0.6),
+                0px 3px 4px rgba(85, 85, 85, 0.6);
+
                 &:hover{
                     background-color: rgb(226, 198, 122);              
                 }
@@ -691,14 +696,5 @@ html, body{
         }
 
     }
-/*
-    &__chat{
-        width: 40%;
-        background-color:#D7B889;
-        color: white;
-        border-radius: 10px;
-        margin: 20px;
-        
-    }
-    */
+
 }
