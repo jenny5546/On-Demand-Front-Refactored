@@ -139,7 +139,11 @@
                         {% else %}
                         <td class="overdate">+{{request.due_at|timesince}} </td>
                         {% endif %}
+                        {% if request.progress == 5 %}
+                        <td>completed</td>
+                        {% else %}
                         <td>{{request.progress}}</td>
+                        {% endif %}                        
                         <td><a class= "go_btn" href="/{{request.id}}">Click</a></td>
                     </tr>
         
