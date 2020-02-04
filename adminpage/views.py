@@ -146,31 +146,29 @@ def each(request, id):
     elif request.method == 'POST':
 
         arequest= Request.objects.get(id = id)
-
-
         due_at = request.POST.get('due_at', arequest.due_at)
         progress = request.POST.get('progress', arequest.progress)
-        floor_type = request.POST.get('floor_type', arequest.floor_type)
-        commercial_type = request.POST.get('commercial_type', arequest.commercial_type)
-        floor_number = request.POST.get('floor_number', arequest.floor_number)
-        floor_size = request.POST.get('floor_size', arequest.floor_size)
-        floor_size_unit = request.POST.get('floor_size_unit', arequest.floor_size_unit)
-        floor_height = request.POST.get('floor_height', arequest.floor_height)
-        floor_height_unit = request.POST.get('floor_height_unit', arequest.floor_height_unit)
-        floor_address = request.POST.get('floor_address', arequest.floor_address)
+        # floor_type = request.POST.get('floor_type', arequest.floor_type)
+        # commercial_type = request.POST.get('commercial_type', arequest.commercial_type)
+        # floor_number = request.POST.get('floor_number', arequest.floor_number)
+        # floor_size = request.POST.get('floor_size', arequest.floor_size)
+        # floor_size_unit = request.POST.get('floor_size_unit', arequest.floor_size_unit)
+        # floor_height = request.POST.get('floor_height', arequest.floor_height)
+        # floor_height_unit = request.POST.get('floor_height_unit', arequest.floor_height_unit)
+        # floor_address = request.POST.get('floor_address', arequest.floor_address)
         add_request = request.POST.get('add_request', arequest.add_request)
 
         
         arequest.due_at = due_at
         arequest.progress = progress
-        arequest.floor_type = floor_type
-        arequest.commercial_type = commercial_type
-        arequest.floor_number = floor_number
-        arequest.floor_size = floor_size
-        arequest.floor_size_unit = floor_size_unit
-        arequest.floor_height = floor_height
-        arequest.floor_height_unit = floor_height_unit
-        arequest.floor_address = floor_address
+        # arequest.floor_type = floor_type
+        # arequest.commercial_type = commercial_type
+        # arequest.floor_number = floor_number
+        # arequest.floor_size = floor_size
+        # arequest.floor_size_unit = floor_size_unit
+        # arequest.floor_height = floor_height
+        # arequest.floor_height_unit = floor_height_unit
+        # arequest.floor_address = floor_address
         arequest.add_request = add_request
 
         arequest.save()
@@ -183,7 +181,7 @@ def edit(request, id):
     arequest = Request.objects.get(id=id)
     return render(request, 'adminpage/edit.html', {
             'arequest':arequest,
-            })
+    })
 
 def download(request, req_id, file_id):
 

@@ -4,15 +4,38 @@
 {% load static %}
 
 <script>
+  // Button Toggle
+  //Clicked -- 안 clicked
+  $(document).ready(function() {  
+        const progress = $('.progress_shower').text();
+        const progress_now = $('.progress_btn').filter('#' + progress);
+        progress_now.toggleClass('clicked');
+        $('.progressbox').val(progress);
+  });
+  
+  $(document).on('click', '.progress_btn', function(e){
+    var value = $(this).attr('value');
+    const progress_now = $('.progress_btn').filter('#' + $('.progress_shower').text());
+    progress_now.toggleClass('clicked')
+    $(this).toggleClass('clicked');
     
+    $('.progress_btn').not(document.getElementById(value)).prop(
+      'disabled',function(i,v){
+        return !v;
+      }
+    );
+    $('.progressbox').val(value);
+    e.preventDefault(); 
+  })
+
 </script>
 
 <div class="edit">
   <div class="edit__title">
-    <h3 class="edit__title-label"> EDIT </h3>
-    <h1 class="edit__title-num">
+    <div class="edit__title-label"> EDITING </div>
+    <div class="edit__title-num">
         Request #
-        {{arequest.id}}</h1>
+        {{arequest.id}}
   </div>
   <div class="edit__mid">
     <div class="edit__data">
@@ -20,25 +43,34 @@
         {% now "Y-m-d" as arequest.due_at %}
 
         {% csrf_token %}
-        <label><img src="{% static 'correct.png' %}"/> Progress</label>
-
-        <!-- buttons are not working T T 
-        <div class="progress_buttons">
-          <button class="progress_1" name="progress">1</button>
-          <button class="progress_2" name="progress">2</button>
-          <button class="progress_3" name="progress">3</button>
-          <button class="progress_4" name="progress">4</button>
-          <button class="progress_5" name="progress">5</button>
+        <div style="display: flex">
+            <div>
+                <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Update Work Progress</label>
+                <div class="progress_btncontainer">
+                  <button type="button" id = "1" class="progress_btn" value="1">Step 1. 접수 완료</button>
+                  <button type="button" id = "2" class="progress_btn" value="2">Step 2. 도면 작업 중 </button>
+                  <button type="button" id = "3" class="progress_btn" value="3">Step 3. Client 전달 완료</button>
+                  <button type="button" id = "4" class="progress_btn" value="4">Step 4. Feedback  </button>
+                  <button type="button" id = "5" class="progress_btn" value="5">Step 5. 처리 완료</button>
+                </div>
+                
+                <input style= "visibility: hidden" class="progressbox" name="progress""></input>
+                <div style= "visibility: hidden" class="progress_shower">{{arequest.progress}}</div>
+        
+                <label><i class="far fa-check-circle" style="margin-right: 5px"></i> Edit Due Date</label>
+                <input class="due_atbox" name="due_at" type="date" value="{{arequest.due_at|date:'Y-m-d'}}"/>
+    
+            </div>
+    
+            <div style="margin-left: 80px; display:flex; flex-direction: column;">
+                <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Edit Requests from Client</label>
+                <textarea class="extrabox" name="add_request" type="text" value="{{arequest.add_request}}">{{arequest.add_request}}</textarea>
+                <input class="submit" type="submit" value="Save Changes and Continue"/>
+            </div>
         </div>
-        -->
-        <input class="progressbox" name="progress" value="{{arequest.progress}}"></input>
+        
 
-
-        <label><img src="{% static 'correct.png' %}"/> Due Date</label>
-        <input class="due_atbox" name="due_at" type="date" value="{{arequest.due_at|date:'Y-m-d'}}"/>
-        <label><img src="{% static 'correct.png' %}"/> Additional Requests</label>
-        <textarea class="extrabox" name="add_request" type="text" value="{{arequest.add_request}}">{{arequest.add_request}}</textarea>
-        <input class="submit" type="submit" value="submit"/>
+        
     </form>
     </div>
 
@@ -46,34 +78,6 @@
 
 </div>
 
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-  var name = ".progress_"
-  var class_name = ".progress_" + {{arequest.progress}}
-  //console.log(class_name)
-  $(class_name).css({
-    "background-color": "blue",
-    fontSize: "10px"
-});
-  $(".progress_buttons button").on("click", function(e){
-    e.preventDefault();
-    //console.log(e.target.textContent)
-    myclass_name = name + e.target.textContent
-    //console.log(val)
-    for(var i = 1; i < 6; i++){
-      if(String(i) === e.target.textContent){
-        $(name+String(i)).css({
-          "background-color": "blue",
-        })
-      }
-      else{
-        $(name+String(i)).css({
-          "background-color": "white",
-        })
-      }
-    }
 
-  });
-</script>
 
 {% endblock %}
