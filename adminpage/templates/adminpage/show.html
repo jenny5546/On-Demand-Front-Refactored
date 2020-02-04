@@ -4,21 +4,21 @@
 
 
 <div class="requests">
-    <div class= "requests-title">
-        <h1>Request Page</h1> 
-    </div>
+
     <div class="requests-on-run">
         <div class="requests-table-top">
-            <h3>On-Run Requests</h3>
+            <div class= "requests-title">
+                On Run Requests
+            </div>
             <div class="search_menu">
-                <p>search: </p>
-                <input class="searchbox" placeholder="search by..." />
+                <p style="margin-right: 10px;">Search: </p>
+                <input style="margin-right: 10px; border-radius: 10px; padding: 5px;" class="searchbox" placeholder="search by..." />
                 <select class="selectbox">
                     <option value="id">ID</option>
                     <option value="type">Type</option>
                     <option value="size">Size</option>
-                    <option value="due">Due_date</option>
-                    <option value="status">Work_status</option>
+                    <option value="due">Due Date</option>
+                    <option value="status">Work Status</option>
                 </select>
             </div>
         </div>
@@ -27,27 +27,27 @@
             <thead>
                 <tr class="head">
                         <th>
-                            <button class="sorting">ID#</button>
+                            <button class="sorting">ID#<i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Application Date</button>
+                            <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Type</button>
+                            <button class="sorting">Type <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Size</button>
+                            <button class="sorting">Size <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Due Date</button>
+                            <button class="sorting">Due Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Time Remaining</button>
+                            <button class="sorting">Time Remaining <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Work Status</button>
+                            <button class="sorting">Work Status <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
-                        <th>Detail</th>
+                        <th><button>Detail</button></th>
                 </tr>
             </thead>
             <tbody>
@@ -65,26 +65,31 @@
                     <td class="overdate" style="color:red;">+{{request.due_at|timesince}} </td>
                     {% endif %}
                     <td>{{request.progress}}</td>
-                    <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
+                    <td><a class= "go_btn" href="/{{request.id}}" >Click</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         </div>
     </div>
+
+
+
     
     <div class="requests-total">
         <div class="requests-table-top">
-            <h3>Total Requests</h3>
+            <div class= "requests-title">
+                    Total Requests
+            </div>
             <div class="search_menu">
-                <p>search: </p>
-                <input class="searchbox" placeholder="search by..." />
+                <p style="margin-right: 10px; "> Search: </p>
+                <input style="margin-right: 10px; border-radius: 10px; padding: 5px;" class="searchbox" placeholder="search by..." />
                 <select class="selectbox">
                     <option value="id">ID</option>
                     <option value="type">Type</option>
                     <option value="size">Size</option>
-                    <option value="due">Due_date</option>
-                    <option value="status">Work_status</option>
+                    <option value="due">Due date</option>
+                    <option value="status">Work Status</option>
                 </select>
             </div>
         </div>
@@ -93,27 +98,27 @@
                 <thead>
                     <tr class="head">
                         <th>
-                            <button class="sorting">ID#</button>
+                            <button class="sorting">ID# <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Application Date</button>
+                            <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Type</button>
+                            <button class="sorting">Type <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Size</button>
+                            <button class="sorting">Size <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Due Date</button>
+                            <button class="sorting">Due Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Time Remaining</button>
+                            <button class="sorting">Time Remaining <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Work Status</button>
+                            <button class="sorting">Work Status <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
-                        <th>Edit</th>
+                        <th><button>Detail</button></th>
                         
                     </tr>
                 </thead>
@@ -131,7 +136,7 @@
                         <td class="overdate">+{{request.due_at|timesince}} </td>
                         {% endif %}
                         <td>{{request.progress}}</td>
-                        <td><a href="/{{request.id}}"><i class="fas fa-chevron-circle-right" style= "color: black"></i></a></td>
+                        <td><a class= "go_btn" href="/{{request.id}}">Click</a></td>
                     </tr>
         
                     {% endfor %}
