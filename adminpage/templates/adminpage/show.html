@@ -23,6 +23,7 @@
             </div>
         </div>
         <div class="requests-table-bottom">
+        <div class="table_scroll">
         <table>
             <thead>
                 <tr class="head">
@@ -62,7 +63,7 @@
                     {% if todays_date <= request.due_at|date:'Y/m/d'%}
                     <td>{{request.due_at|timeuntil}}</td>
                     {% else %}
-                    <td class="overdate" style="color:red;">+{{request.due_at|timesince}} </td>
+                    <td class="overdate">+{{request.due_at|timesince}} </td>
                     {% endif %}
                     <td>{{request.progress}}</td>
                     <td><a class= "go_btn" href="/{{request.id}}" >Click</a></td>
@@ -70,6 +71,7 @@
                 {% endfor %}
             </tbody>
         </table>
+        </div>
         </div>
     </div>
 
@@ -94,6 +96,8 @@
             </div>
         </div>
         <div class="requests-table-bottom">
+                <div class="table_scroll">
+
             <table>
                 <thead>
                     <tr class="head">
@@ -113,7 +117,7 @@
                             <button class="sorting">Due Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sorting">Time Remaining <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                            <button class="sortinthead, g">Time Remaining <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
                             <button class="sorting">Work Status <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
@@ -144,6 +148,7 @@
                 </tbody>
             </table>
             </div>
+            </div>
     </div>
 </div>
 
@@ -160,7 +165,7 @@
             table_html += "<tr>";
             for(var j = 0; j<cols; j++) {
                 if(new_array[i][j][0] == "+"){
-                    table_html += "<td style='color:red;'>"+new_array[i][j]+"</td>";
+                    table_html += "<td class='overdate'>"+new_array[i][j]+"</td>";
                 }
                 else{
                     table_html += "<td>"+new_array[i][j]+"</td>";
@@ -178,7 +183,7 @@
             if(search_array.length === 0){
                 for(var j = 0; j<cols; j++) {
                     if(new_array[i][j][0] == "+"){
-                        table_html += "<td style='color:red;'>"+new_array[i][j]+"</td>";
+                        table_html += "<td class='overdate'>"+new_array[i][j]+"</td>";
                     }
                     else{
                         table_html += "<td>"+new_array[i][j]+"</td>";
@@ -188,7 +193,7 @@
             else{
                 for(var j = 0; j<cols; j++) {
                     if(search_array[i][j][0] == "+"){
-                        table_html += "<td style='color:red;'>"+search_array[i][j]+"</td>";
+                        table_html += "<td class='overdate'>"+search_array[i][j]+"</td>";
                     }
                     else{
                         table_html += "<td>"+search_array[i][j]+"</td>";
@@ -240,6 +245,10 @@
 
             $this_table.find("tbody").empty();
             re_table(table_tr_length, table_th_length, $this_table);
+            $(".overdate").parents("tr").css({
+                "background-color" : "#726255",
+                "color" : "white",
+            })
         });
 
 
@@ -321,6 +330,10 @@
             
             search_try_num++;
             searching(search_elem_num, table_th_length2, $this_table);
+            $(".overdate").parents("tr").css({
+                "background-color" : "#726255",
+                "color" : "white",
+            })
         })
 
     })
@@ -329,6 +342,15 @@
         const active_menu = $('#requests')
         active_menu.removeClass('sidenav--menu_sub').addClass('sidenav--menu_sub-active'); 
 
+    });
+
+
+    /*overdate color change here!*/
+    $(document).ready(function() { 
+        $(".overdate").parents("tr").css({
+            "background-color": "#726255",
+            "color": "white"
+        })
     });
 </script>   
 
