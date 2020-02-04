@@ -24,10 +24,8 @@ html, body{
     position: absolute;
     right: 8%;
     &--nav{
-        
         display: flex;
         list-style: none;
-
         &_menu{
             padding: 30px;
         }
@@ -42,6 +40,7 @@ html, body{
     flex-direction: row;
     flex: 1;
 
+    // in dashboard table, "click" button
     .go_btn{
         padding: 6px;
         background-color: $btn_darkColor;
@@ -55,9 +54,8 @@ html, body{
     }
     
 
-
+    //side navbar
     .sidenav {
-        
         display: flex;
         flex-direction: column;
         width: 280px;
@@ -154,14 +152,12 @@ html, body{
     }
 
     .dashboard{
-
         margin-top: 80px;
         display: flex;
         flex: 1;
         flex-direction: column;
         padding: 20px;
-
-        
+       
         &--title{
             font-size: 20px;
             margin-bottom: 30px;
@@ -287,16 +283,12 @@ html, body{
             bottom: 0;
     
         }
-
         &-on-run{
             margin-top: 20px;
             
             table{
                 width: 100%;
                 border-collapse: collapse;
-
-
-
             }
     
             .head{
@@ -326,10 +318,6 @@ html, body{
 
             
         }
-    
-        
-        
-    
         &-title{
             font-size: 20px;
             margin-bottom: 30px;
@@ -338,10 +326,6 @@ html, body{
             margin-left: 10px;
             letter-spacing: 0.5px;
         }
-    
-        
-    
-    
         &-total{
             
             margin-top: 30px;
@@ -382,8 +366,6 @@ html, body{
 
 
 //SHOW.HTML
-
-
 .eachRequest{
 
     margin-top: 80px;
@@ -527,9 +509,6 @@ html, body{
     }
 }
 
-
-
-
 // PROGRESS BAR //
 .progress {
     width: 1000px;
@@ -597,11 +576,6 @@ html, body{
     color: #f0c75e;
 }
 
-
-
-
-
-
 //Edit Page
 
 .edit{
@@ -612,9 +586,6 @@ html, body{
     margin: 30px 50px;
     padding: 0 50px;
     height: 50%;
-    
-    
-
     &__title{
 
         display: flex;
@@ -658,7 +629,6 @@ html, body{
                 font-size: 15px;
                 font-weight: $bold;
                 margin: 7px 0;
-
             }
 
             .progress_btncontainer{
