@@ -20,6 +20,7 @@
             }
         })
     });
+    
     $(document).ready(function() { 
         const active_menu = $('#requests')
         active_menu.removeClass('sidenav--menu_sub').addClass('sidenav--menu_sub-active'); 
@@ -32,12 +33,38 @@
 });
 
 </script>
+<script>
+    function confirmDelete() {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this request",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("This request has been deleted!", {
+                icon: "success",
+                }).then(()=>{window.location.href = '/adminpage/{{arequest.id}}/delete'});
+            } else {
+                swal("Your request is safe!");
+            }
+        });
+    }
+</script>
 
 <div class="eachRequest">
 
     <div>
         <a class="eachRequest--editbtn" href='/adminpage/{{arequest.id}}/edit'>
           Edit Request
+        </a>
+        <a 
+            class="eachRequest--deletebtn" 
+            onclick=confirmDelete()
+        >
+            Delete Request
         </a>
     </div>
 

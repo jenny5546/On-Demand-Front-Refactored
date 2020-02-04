@@ -395,7 +395,7 @@ html, body{
 
     &--editbtn{
         position: absolute;
-        right: 5%;
+        right: 15%;
         text-decoration: none;
         border-radius: 30px;
         background-color: $btn_darkColor;
@@ -404,6 +404,18 @@ html, body{
     }
     &--editbtn:hover{
         background-color: $btn_darkColor_hover;
+    }
+    &--deletebtn{
+        position: absolute;
+        right: 5%;
+        text-decoration: none;
+        border-radius: 30px;
+        background-color: rgb(112, 10, 10);
+        color: white;
+        padding: 10px;
+    }
+    &--deletebtn:hover{
+        background-color: rgb(161, 19, 19);
     }
 
     &--header{

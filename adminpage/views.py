@@ -192,3 +192,8 @@ def download(request, req_id, file_id):
     response['Content-Disposition'] = 'attachment; filename= floorplan.png'
     
     return response
+
+def delete(request, id):
+    arequest = Request.objects.get(id = id)
+    arequest.delete()
+    return redirect('/show')
