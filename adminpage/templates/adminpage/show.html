@@ -75,8 +75,6 @@
         </div>
     </div>
 
-
-
     
     <div class="requests-total">
         <div class="requests-table-top">
@@ -136,6 +134,8 @@
                         <td>{{request.due_at|date:'Y/m/d'}}</td>
                         {% if todays_date <= request.due_at|date:'Y/m/d'%}
                         <td>{{request.due_at|timeuntil}}</td>
+                        {% elif request.progress == 5 %}
+                        <td> Done! </td>
                         {% else %}
                         <td class="overdate">+{{request.due_at|timesince}} </td>
                         {% endif %}
