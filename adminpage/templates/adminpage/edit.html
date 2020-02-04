@@ -13,8 +13,11 @@
   });
   
   $(document).on('click', '.progress_btn', function(e){
-    var value = $(this).attr('value')
+    var value = $(this).attr('value');
+    const progress_now = $('.progress_btn').filter('#' + $('.progress_shower').text());
+    progress_now.removeClass('clicked').addClass('progress_btn')
     $(this).toggleClass('clicked');
+    
     $('.progress_btn').not(document.getElementById(value)).prop(
       'disabled',function(i,v){
         return !v;

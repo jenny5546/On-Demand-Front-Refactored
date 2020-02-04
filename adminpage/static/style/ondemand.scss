@@ -615,9 +615,9 @@ html, body{
                 margin: 3px;
                 box-shadow:inset 0px -2px 2px 1px rgb(78, 78, 78),
                 0px 3px 4px rgba(85, 85, 85, 0.6);
-                &:active {
-                    box-shadow:inset 0px 0px 4px -1px rgb(78, 78, 78);
-                }
+                // &:active {
+                //     box-shadow:inset 0px 0px 4px -1px rgb(78, 78, 78);
+                // }
             }
             .clicked{
                 width: 300px;
