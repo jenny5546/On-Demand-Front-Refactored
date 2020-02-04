@@ -1,5 +1,6 @@
 @import './config__typography';
 @import './config__color';
+@import "https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/flexslider.min.css";
 
 * {
     margin: 0;
@@ -269,7 +270,7 @@ html, body{
             
             display: flex;
             position: absolute;
-            right: 10%;
+            right: 8%;
             bottom: 0;
     
         }
@@ -380,26 +381,17 @@ html, body{
 
 
 .eachRequest{
+
+    margin-top: 80px;
     display: flex;
-    flex-direction: column;
     flex: 1;
-
-    margin: 30px 100px;
-    padding: 0 100px;
-    border-radius: 30px;
-    background-color: rgba(248, 248, 248, 0.664);
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-
-    label img{
-        width: 16px;
-        height: 16px;
-    }
-
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
 
     &--editbtn{
         position: absolute;
-        right:0;
-        margin-right: 50px;
+        right:10%;
         text-decoration: none;
         border-radius: 30px;
         background-color: $btn_darkColor;
@@ -419,77 +411,76 @@ html, body{
     &--status{
         display: inline-flex;
         align-items: center;
-        h2{
-            //background-color:  rgb(175, 150, 85);
-            color: white;
-            border-radius: 10px;
-            padding: 5px;
-        }
+        
     }
     &--plan{
         margin: 10px;
-
-        border: 2px rgb(143, 142, 142) solid;
-        border-radius: 20px;
         padding: 20px;
 
-        &_img{
-            margin: 20px;
-            width:350px;
-            background-color: rgba(248, 248, 248, 0.664);
-            box-shadow: 0 15px 34px rgba(0,0,0,0.30), 0 11px 8px rgba(0,0,0,0.22);
-        
+        .flexslider{
+            width: 500px;
+            position: relative;
         }
+        
         &_btn{
-            margin-top: 5px;
-            background-color: $btn_darkColor;
-            border-radius: 30px;
-            height: 30px;
-            color: white;
+            font-size: 20px;
+            // padding: 10px;
+            color: $btn_darkColor;
             text-align: center;
+            margin-left: 40%;
+
         }
         &_btn:hover{
-            background-color: $btn_darkColor_hover;
+            background-color: rgba(128, 128, 128, 0.11);
+            border-radius: 50px;
+            color: $btn_darkColor;
         }
-        &_wrapper{
-            display: flex;
-            flex-wrap: wrap;
-            margin-left: 20px;
-
-            &-small{
-                display: flex; 
-                flex-direction: column;
-                margin: 10px;
-            }
-        }
+        
 
     }
     &--info{
-        margin: 10px;
         margin-top: 20px;
-        margin-bottom: 20px;
-        border: 2px rgb(143, 142, 142) solid;
-        border-radius: 20px;
+        margin-left: 30px;
         padding: 20px;
+        width: 500px;
+        height: 400px;
+        background-color: rgba(245, 245, 245, 0.37);
+        .line{
+            width: 100%;
+            margin-bottom:0;
+            margin-top:0;
+            // color: grey;
+            // border: 1px solid grey;
+        }
+        &_num{
+            margin-bottom: 10px;
+        }
+        .floor_info{
+            margin-top: 5px;
+            font-weight: $light;
+            font-size: 15px;
+            word-wrap: break-word;
+        }
     }
 
     &--stheme{
-        display: flex;
-        flex-direction: row;
         margin: 10px;
         margin-bottom: 20px;
-
-        border: 2px rgb(143, 142, 142) solid;
-        border-radius: 20px;
         padding: 20px;
         &_img{
-            margin: 5px;
-            width: 350px;
-            height: 350px;
+            margin: 10px;
+            width: 300px;
+            height: 300px;
         }
+
         &_wrapper{
+            margin-top: 30px;
             display: flex;
             flex-wrap: wrap;
+            padding: 10px;
+            width:80%;
+            border-radius: 10px;
+            background-color: rgba(211, 211, 211, 0.308);
 
             &-small{
                 display: flex; 
@@ -500,21 +491,23 @@ html, body{
     }
 
     &--utheme{
-        display: flex;
-        flex-direction: row;
         margin: 10px;
         margin-bottom: 20px;
-        border: 2px rgb(143, 142, 142) solid;
-        border-radius: 20px;
         padding: 20px;
         &_img{
-            margin: 5px;
-            width: 350px;
-            height: 350px;
+            margin: 10px;
+            width: 300px;
+            height: 300px;
         }
+
         &_wrapper{
+            margin-top: 30px;
             display: flex;
             flex-wrap: wrap;
+            padding: 10px;
+            width:80%;
+            border-radius: 10px;
+            background-color: rgba(211, 211, 211, 0.308);
 
             &-small{
                 display: flex; 
@@ -524,7 +517,9 @@ html, body{
 
     }
     label{
-        font-size: 20px;
+        font-size: 14px;
+        font-weight: $bold;
+       
     }
 }
 
@@ -597,6 +592,11 @@ html, body{
 .progress .circle.active .title {
     color: #f0c75e;
 }
+
+
+
+
+
 
 //Edit Page
 
