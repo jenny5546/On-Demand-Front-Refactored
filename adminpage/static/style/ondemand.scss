@@ -380,11 +380,21 @@ html, body{
 
 
 .eachRequest{
-    margin-top: 100px;
     display: flex;
-    flex: 1;
     flex-direction: column;
-    padding: 20px;
+    flex: 1;
+
+    margin: 30px 100px;
+    padding: 0 100px;
+    border-radius: 30px;
+    background-color: rgba(248, 248, 248, 0.664);
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
+    label img{
+        width: 16px;
+        height: 16px;
+    }
+
 
     &--editbtn{
         position: absolute;
@@ -401,12 +411,34 @@ html, body{
     }
 
     &--header{
-        margin-bottom: 30px;
+        display: inline-flex;
+        margin-top: 50px;
+        margin-bottom: 20px;
     }
 
+    &--status{
+        display: inline-flex;
+        align-items: center;
+        h2{
+            //background-color:  rgb(175, 150, 85);
+            color: white;
+            border-radius: 10px;
+            padding: 5px;
+        }
+    }
     &--plan{
+        margin: 10px;
+
+        border: 2px rgb(143, 142, 142) solid;
+        border-radius: 20px;
+        padding: 20px;
+
         &_img{
+            margin: 20px;
             width:350px;
+            background-color: rgba(248, 248, 248, 0.664);
+            box-shadow: 0 15px 34px rgba(0,0,0,0.30), 0 11px 8px rgba(0,0,0,0.22);
+        
         }
         &_btn{
             margin-top: 5px;
@@ -422,6 +454,7 @@ html, body{
         &_wrapper{
             display: flex;
             flex-wrap: wrap;
+            margin-left: 20px;
 
             &-small{
                 display: flex; 
@@ -432,11 +465,23 @@ html, body{
 
     }
     &--info{
-        margin-top: 30px;
+        margin: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 2px rgb(143, 142, 142) solid;
+        border-radius: 20px;
+        padding: 20px;
     }
 
     &--stheme{
+        display: flex;
+        flex-direction: row;
+        margin: 10px;
+        margin-bottom: 20px;
 
+        border: 2px rgb(143, 142, 142) solid;
+        border-radius: 20px;
+        padding: 20px;
         &_img{
             margin: 5px;
             width: 350px;
@@ -455,7 +500,13 @@ html, body{
     }
 
     &--utheme{
-
+        display: flex;
+        flex-direction: row;
+        margin: 10px;
+        margin-bottom: 20px;
+        border: 2px rgb(143, 142, 142) solid;
+        border-radius: 20px;
+        padding: 20px;
         &_img{
             margin: 5px;
             width: 350px;
@@ -532,7 +583,7 @@ html, body{
 }
 .progress .circle.done .label {
     color: #FFF;
-    background: #81CE97;
+    background: #726255;
     box-shadow: inset 0 0 2px rgba(0,0,0,.2);
 }
 .progress .circle.done .title {
@@ -540,11 +591,11 @@ html, body{
 }
 .progress .circle.active .label {
     color: #FFF;
-    background: #0c95be;
+    background: #f0c75e;
     box-shadow: inset 0 0 2px rgba(0,0,0,.2);
 }
 .progress .circle.active .title {
-    color: #0c95be;
+    color: #f0c75e;
 }
 
 //Edit Page
