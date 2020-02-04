@@ -5,6 +5,7 @@
 
 <script>
   // Button Toggle
+  //Clicked -- 안 clicked
   $(document).ready(function() {  
         const progress = $('.progress_shower').text();
         const progress_now = $('.progress_btn').filter('#' + progress);
@@ -15,7 +16,7 @@
   $(document).on('click', '.progress_btn', function(e){
     var value = $(this).attr('value');
     const progress_now = $('.progress_btn').filter('#' + $('.progress_shower').text());
-    progress_now.removeClass('clicked').addClass('progress_btn')
+    progress_now.toggleClass('clicked')
     $(this).toggleClass('clicked');
     
     $('.progress_btn').not(document.getElementById(value)).prop(
@@ -42,27 +43,34 @@
         {% now "Y-m-d" as arequest.due_at %}
 
         {% csrf_token %}
-        <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Progress</label>
-
+        <div style="display: flex">
+            <div>
+                <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Update Work Progress</label>
+                <div class="progress_btncontainer">
+                  <button type="button" id = "1" class="progress_btn" value="1">Step 1. 접수 완료</button>
+                  <button type="button" id = "2" class="progress_btn" value="2">Step 2. 도면 작업 중 </button>
+                  <button type="button" id = "3" class="progress_btn" value="3">Step 3. Client 전달 완료</button>
+                  <button type="button" id = "4" class="progress_btn" value="4">Step 4. Feedback  </button>
+                  <button type="button" id = "5" class="progress_btn" value="5">Step 5. 처리 완료</button>
+                </div>
+                
+                <input style= "visibility: hidden" class="progressbox" name="progress""></input>
+                <div style= "visibility: hidden" class="progress_shower">{{arequest.progress}}</div>
         
-        <div class="progress_btncontainer">
-          <button type="button" id = "1" class="progress_btn" value="1">Step 1. 접수 완료</button>
-          <button type="button" id = "2" class="progress_btn" value="2">Step 2. 도면 작업 중 </button>
-          <button type="button" id = "3" class="progress_btn" value="3">Step 3. Client 전달 완료</button>
-          <button type="button" id = "4" class="progress_btn" value="4">Step 4. Feedback  </button>
-          <button type="button" id = "5" class="progress_btn" value="5">Step 5. 처리 완료</button>
+                <label><i class="far fa-check-circle" style="margin-right: 5px"></i> Edit Due Date</label>
+                <input class="due_atbox" name="due_at" type="date" value="{{arequest.due_at|date:'Y-m-d'}}"/>
+    
+            </div>
+    
+            <div style="margin-left: 80px; display:flex; flex-direction: column;">
+                <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Edit Requests from Client</label>
+                <textarea class="extrabox" name="add_request" type="text" value="{{arequest.add_request}}">{{arequest.add_request}}</textarea>
+                <input class="submit" type="submit" value="Save Changes and Continue"/>
+            </div>
         </div>
         
-        <input style= "visibility: hidden" class="progressbox" name="progress""></input>
-        <div style= "visibility: hidden" class="progress_shower">{{arequest.progress}}</div>
 
-        <label><i class="far fa-check-circle" style="margin-right: 5px"></i> Due Date</label>
-        <input class="due_atbox" name="due_at" type="date" value="{{arequest.due_at|date:'Y-m-d'}}"/>
-        <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Additional Requests</label>
-        <textarea class="extrabox" name="add_request" type="text" value="{{arequest.add_request}}">{{arequest.add_request}}</textarea>
         
-        
-        <input class="submit" type="submit" value="Save"/>
     </form>
     </div>
 

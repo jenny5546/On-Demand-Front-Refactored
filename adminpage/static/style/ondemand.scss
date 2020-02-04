@@ -554,12 +554,14 @@ html, body{
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin: 50px 50px;
+    margin: 80px 50px;
     padding: 0 50px;
     height: 50%;
     
+    
 
     &__title{
+
         display: flex;
         flex-direction: column;
         margin-top: 80px;
@@ -572,7 +574,7 @@ html, body{
             margin-top: 10px;
             color: white;
             font-weight: $bold;
-            
+            margin-bottom: 20px;
             background-color:rgb(233, 189, 94);
         }
         &-num{
@@ -587,9 +589,11 @@ html, body{
     }
 
     &__data{
-        width: 50%;
+        width: 100%;
+        margin-top: 10px;
 
         form{
+
             display: flex;
             flex-direction: column;
             padding: 10px 0;
@@ -603,106 +607,87 @@ html, body{
             }
 
             .progress_btncontainer{
+
                 display: flex;
                 flex-direction: column;
                 padding: 10px;
             }
             .progress_btn{
-                width: 300px;
+                
+                width: 100%;
                 height: 50px;
                 font-size: 15px;
                 border-radius: 10px;
+                color: white;
+                background-color: $btn_darkColor;
                 margin: 3px;
-                box-shadow:inset 0px -2px 2px 1px rgb(78, 78, 78),
+                box-shadow:inset 0px -2px 2px 1px rgb(88, 78, 48),
                 0px 3px 4px rgba(85, 85, 85, 0.6);
-                // &:active {
-                //     box-shadow:inset 0px 0px 4px -1px rgb(78, 78, 78);
-                // }
+                &:hover {
+                    background-color: rgb(226, 198, 122);
+                }
             }
             .clicked{
-                width: 300px;
+                color: white;
+                background-color: rgb(226, 198, 122);
+                width: 100%;
                 height: 50px;
                 font-size: 15px;
                 border-radius: 10px;
                 margin: 3px;
-                box-shadow:inset 0px 0px 4px -1px rgb(78, 78, 78);
+                box-shadow:inset 0px 0px 4px -1px rgb(88, 78, 48);
+            }
+
+            button:disabled,button[disabled]{
+                opacity: 20%;
+                cursor:not-allowed !important;
             }
             
-            // .progressbox{
-            //     width: 40px;
-            //     height: 30px;
-            //     font-size: 20px;
-            //     margin-left: 20px;
-            //     margin-bottom: 10px;
-            //     text-align: center;
-            //     border:none;
-            //     border-right:0px;
-            //     border-top:0px; 
-            //     border-left:0px; 
-            //     border-bottom:1px black solid;
+            .due_atbox{
+                width: 250px;
+                height: 40px;
+                font-size: 20px;
+                margin-left: 20px;
+                margin-bottom: 10px;
+                border-right:0px;
+                border-top:0px; 
+                border-left:0px; 
+                border-bottom:1px black solid;
 
-            //     background-color: rgba(248, 248, 248, 0.664);
-            //     outline: none;
+            }
+            .extrabox{
+                width: 180%;
+                height: 250px;
+                font-size: 15px;
+                margin: 10px 20px;
+                margin-bottom: 10px;
+                border:2px rgba(0, 0, 0, 0.185) solid;
+                border-radius: 10px;
+                padding: 10px;
+                outline: none;
 
-            // }
-            // .due_atbox{
-            //     width: 250px;
-            //     height: 40px;
-            //     font-size: 20px;
-            //     margin-left: 20px;
-            //     margin-bottom: 10px;
-            //     border:none;
-            //     border-right:0px;
-            //     border-top:0px; 
-            //     border-left:0px; 
-            //     border-bottom:1px black solid;
-            //     background-color: rgba(248, 248, 248, 0.664);
-            //     outline: none;
+            }
 
-            // }
-            // .extrabox{
-            //     width: 90%;
-            //     height: 200px;
-            //     font-size: 20px;
-            //     margin: 0 20px;
-            //     margin-bottom: 10px;
+            .submit{
+                width: 180%;
+                height: 50px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                margin-top: 50px;
+                margin-left: 20px;
+                font-size: 15px;
+                text-align: center;
 
-            //     border:none;
-            //     border-right:0px;
-            //     border-top:1px black solid;
-            //     border-left:0px; 
-            //     border-bottom:1px black solid;
-            //     background-color: rgba(248, 248, 248, 0.664);
-            //     outline: none;
-
-            // }
-
-            // .submit{
-            //     width: 100px;
-            //     height: 50px;
-            //     margin-top: 10px;
-            //     margin-left: 20px;
-            //     font-size: 25px;
-            //     text-align: center;
-
-            //     color: #30343A;
-            //     background-color:rgba(248, 248, 248, 0.664);
-            //     border: 1px #30343A solid;
-            //     border-radius: 10px;
-            //     outline: none;
-            //     &:hover{
-            //         color: white;
-            //         background-color: #30343A;                }
-            // }
-            // .progress_buttons{
-            //     display: inline-flex;
-            //     justify-content: space-around;
-            //     padding: 0 50px;
-            //     button{
-            //         width: 40px;
-            //         height: 40px;
-            //     }
-            // }
+                color: white;
+                background-color: #30343A;
+                border: 0;
+                border-radius: 10px;
+                outline: none;
+                &:hover{
+                    background-color: rgb(226, 198, 122);              
+                }
+            }
+            
         }
 
     }
