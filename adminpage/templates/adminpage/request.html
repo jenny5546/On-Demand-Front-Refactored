@@ -7,13 +7,13 @@
 
     $(document).ready(function() { 
 
+        /* progress bar */
         //var status = $('#status').text();
         var status = {{ arequest.progress }}
         console.log(status)
         var active_circle= $('.label:contains(' + status + ')').parent()
         active_circle.removeClass('circle').addClass('circle active'); 
 
-        //$(this) = 
         var label = $('.label')
         var circles = label.parent()
         console.log(circles)
@@ -26,6 +26,34 @@
             }
         })
 
+        /* status color */
+        //'#ecb939', '#f0c75e', '#726255', '#372e29', '#000000'
+
+        if(status === 1){
+            $(".status").css({
+                "background-color": "#ecb939"
+            })
+        }
+        else if(status === 2){
+            $(".status").css({
+                "background-color": "#f0c75e"
+            })
+        }
+        else if(status === 3){
+            $(".status").css({
+                "background-color": "#726255"
+            })
+        }
+        else if(status === 4){
+            $(".status").css({
+                "background-color": "#372e29"
+            })
+        }
+        else if(status === 5){
+            $(".status").css({
+                "background-color": "#000000"
+            })
+        }
         
     });
     $(document).ready(function() { 
@@ -34,7 +62,6 @@
         active_menu.removeClass('sidenav--menu_sub').addClass('sidenav--menu_sub-active'); 
 
     });
-
 
 </script>
 
@@ -51,7 +78,7 @@
         <h1>Request # {{arequest.id}}</h1>
         <div class="eachRequest--status">
             <h1 class="slash"> &nbsp; / &nbsp;</h1>
-            <h2 id="status">Status:{{arequest.progress}}</h2>
+            <h2 class="status">Status: {{arequest.progress}}</h2>
         </div>
     </div>
 
@@ -91,7 +118,7 @@
     
 
     <div class="eachRequest--plan">
-        <label>Uploaded Plan Image</label>
+        <label><img src="{% static 'correct.png' %}"/>  Uploaded Plan Image</label>
         <div class="eachRequest--plan_wrapper" >
             {% for plan in arequest.floor_plan.all %}
                 <div class="eachRequest--plan_wrapper-small"> 
@@ -109,7 +136,7 @@
     <div class="eachRequest--info">
 
         <div class="eachRequest--info_type">
-            <label>Floor Type :</label>
+            <label><img src="{% static 'correct.png' %}"/> Floor Type :</label>
             
             {% if arequest.floor_type == "Residential" %}
                 {{arequest.floor_type}}
@@ -120,12 +147,12 @@
         </div>
 
         <div class="eachRequest--info_size">
-            <label>Floor Size:</label>
+            <label><img src="{% static 'correct.png' %}"/> Floor Size:</label>
             {{arequest.floor_size}} {{arequest.floor_size_unit}} <sup>2</sup>
         </div>
 
         <div class="eachRequest--info_num">
-            <label>Floor Number:</label>
+            <label><img src="{% static 'correct.png' %}"/> Floor Number:</label>
             {{arequest.floor_number}} 
         </div>
 
@@ -133,7 +160,7 @@
 
         {% if arequest.floor_address != "" %}
             <div class="eachRequest--info_num">
-                <label>Floor Address:</label>
+                <label><img src="{% static 'correct.png' %}"/> Floor Address:</label>
                 {{arequest.floor_address}} 
             </div>
         {% endif %}
@@ -142,25 +169,24 @@
 
         {% if arequest.floor_height != "" %}
             <div class="eachRequest--info_num">
-                <label>Floor Height:</label>
+                <label><img src="{% static 'correct.png' %}"/> Floor Height:</label>
                 {{arequest.floor_height}} {{arequest.floor_height_unit}} 
             </div>
         {% endif %}
 
         {% if arequest.add_request != "" %}
             <div class="eachRequest--info_num">
-                <label>Additional Requests:</label>
+                <label><img src="{% static 'correct.png' %}"/> Additional Requests:</label>
                 {{arequest.add_request}}
             </div>
         {% endif %}
-        
     </div>
 
 
     <!-- selected theme -->
     {% if arequest.selected_theme.all  %}
     <div class="eachRequest--stheme">
-            <label>Selected Theme Preferences</label>
+            <label><img src="{% static 'correct.png' %}"/> Selected Theme Preferences</label>
             <div class="eachRequest--stheme_wrapper" >
                 {% for theme in arequest.selected_theme.all %}
                     <img class="eachRequest--stheme_img" src="{{ theme.option }}">
@@ -172,7 +198,7 @@
     <!-- uploaded theme -->
     {% if arequest.uploaded_theme.all  %}
     <div class="eachRequest--utheme">
-        <label>Uploaded Theme Preferences</label>
+        <label><img src="{% static 'correct.png' %}"/> Uploaded Theme Preferences</label>
         <div class="eachRequest--utheme_wrapper" >
             {% for theme in arequest.uploaded_theme.all %}
                 <div class="eachRequest--utheme_wrapper-small"> 
