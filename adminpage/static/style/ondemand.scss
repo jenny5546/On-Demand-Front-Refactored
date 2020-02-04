@@ -425,6 +425,7 @@ html, body{
     }
     &--plan{
         margin: 10px;
+
         border: 2px rgb(143, 142, 142) solid;
         border-radius: 20px;
         padding: 20px;
@@ -463,6 +464,7 @@ html, body{
     &--info{
         margin: 10px;
         margin-top: 20px;
+        margin-bottom: 20px;
         border: 2px rgb(143, 142, 142) solid;
         border-radius: 20px;
         padding: 20px;
@@ -472,6 +474,8 @@ html, body{
         display: flex;
         flex-direction: row;
         margin: 10px;
+        margin-bottom: 20px;
+
         border: 2px rgb(143, 142, 142) solid;
         border-radius: 20px;
         padding: 20px;
@@ -496,6 +500,7 @@ html, body{
         display: flex;
         flex-direction: row;
         margin: 10px;
+        margin-bottom: 20px;
         border: 2px rgb(143, 142, 142) solid;
         border-radius: 20px;
         padding: 20px;
