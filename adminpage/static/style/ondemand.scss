@@ -22,7 +22,7 @@ html, body{
 .header {
     height: 75px;
     position: absolute;
-    right: 8%;
+    right: 3%;
     &--nav{
         
         display: flex;
@@ -395,7 +395,7 @@ html, body{
 
     &--editbtn{
         position: absolute;
-        right:10%;
+        right: 5%;
         text-decoration: none;
         border-radius: 30px;
         background-color: $btn_darkColor;
@@ -408,14 +408,30 @@ html, body{
 
     &--header{
         display: inline-flex;
-        margin-top: 50px;
+        // margin: auto;
         margin-bottom: 20px;
+        margin-left: 50px;
+        p1 {
+            font-size:30px;
+            font-weight: $light;
+            margin-top: 8px;
+        }
+        
     }
 
     &--status{
         display: inline-flex;
         align-items: center;
-        
+        // background-color: black;
+        // color:white;
+        p2 {
+            margin-left: 20px;
+            background-color: black;
+            color:white;
+            padding: 10px;
+            border-radius: 10px;
+
+        }
     }
     &--plan{
         margin: 10px;
@@ -427,7 +443,7 @@ html, body{
         }
         
         &_btn{
-            font-size: 20px;
+            font-size: 13px;
             // padding: 10px;
             color: $btn_darkColor;
             text-align: center;
@@ -443,6 +459,7 @@ html, body{
 
     }
     &--info{
+
         margin-top: 20px;
         margin-left: 30px;
         padding: 20px;
@@ -472,24 +489,21 @@ html, body{
         margin-bottom: 20px;
         padding: 20px;
         &_img{
-            margin: 10px;
+            margin: 5px;
             width: 300px;
             height: 300px;
         }
 
         &_wrapper{
-            margin-top: 30px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            text-align: center;
             display: flex;
             flex-wrap: wrap;
             padding: 10px;
-            width:80%;
             border-radius: 10px;
-            background-color: rgba(211, 211, 211, 0.308);
-
-            &-small{
-                display: flex; 
-                flex-direction: column;
-            }
+            background-color: rgba(211, 211, 211, 0.137);
         }
 
     }
@@ -505,18 +519,13 @@ html, body{
         }
 
         &_wrapper{
-            margin-top: 30px;
+            margin-top: 20px;
             display: flex;
             flex-wrap: wrap;
             padding: 10px;
-            width:80%;
+            width:100%;
             border-radius: 10px;
-            background-color: rgba(211, 211, 211, 0.308);
-
-            &-small{
-                display: flex; 
-                flex-direction: column;
-            }
+            background-color: rgba(211, 211, 211, 0.137);
         }
 
     }
@@ -611,7 +620,7 @@ html, body{
     flex: 1;
     margin: 30px 50px;
     padding: 0 50px;
-    height: 50%;
+    // height: 50%;
     
     
 
