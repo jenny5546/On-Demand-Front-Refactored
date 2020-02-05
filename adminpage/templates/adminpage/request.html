@@ -230,56 +230,37 @@
             {% endif %}
 
     </div>
+
+    
     <div class = "eachRequest--chatroom">
-            <div>
-    
-            {% for msg in sentMessages %}
-    
-                <div>
-    
-                Sent {{msg.timestamp}}
-    
-              </div>
-    
-                        <div>
-    
-                Content: {{msg.content}}
-    
-              </div>
-    
-            {% endfor %}
 
-    
-            {% for msg in receivedMessages %}
-    
-              
-    
-                <div>
-    
-                {{msg.timestamp}}
-    
-              </div>
-    
-                        <div>
-    
-                Content: {{msg.content}}
-    
-              </div>
-    
-            {% endfor %}
-    
-        </div>
-    
-    
+        <div class = "eachRequest--chatroom_msg">
+            <div>Received</div>
             <div>
-          <form action="/adminpage/{{ arequest.id }}/" method="POST">
-            {% csrf_token %}
-            <input type="text" name="msg_content"></input>
-            <input class="submit" type="submit" value="Send"/>
-          </form>
-        </div>
+                {% for msg in receivedMessages %}
+                    <div>{{msg.title}}</div>
+                    <div>{{msg.content}}</div>
+                {% endfor %}
+            </div>
+            <div>Sent</div>
+            <div>
+                {% for msg in sentMessages %}
+                    {{msg.content}}
+                {% endfor %}
+            </div>
 
-      </div>
+        </div>
+        <div class = "eachRequest--chatroom_send"> 
+            <form action="/adminpage/{{ arequest.id }}/" method="POST">
+                {% csrf_token %}
+                <input type="text" name="msg_content"></input>
+                <input class="submit" type="submit" value="Send"/>
+            </form>
+        </div>
+        
+    </div>
+
+      
     
     
 

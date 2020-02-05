@@ -24,8 +24,8 @@ def decode_mime_words(s):
 
 # 변경 
 
-user = '이메일@naver.com' # 아키드로우
-password = '비밀번호'
+user = 'jenny5546@naver.com' # 아키드로우
+password = 'piaomj5546!'
 
 
 def send_mail(user, password, sendto, msg_body):
@@ -67,25 +67,24 @@ def check_mail_imap(user, password, target):
     # 메일리스트를 받아서 내용을 파일로 저장하는 함수
     for each_mail in id_list:
 
-    #   # fetch the email body (RFC822) for the given ID
+      # fetch the email body (RFC822) for the given ID
       result, data = imapserver.fetch(each_mail, "(RFC822)")
       msg = email.message_from_bytes(data[0][1])
-      #From Address
       message_subject = decode_mime_words(str(msg['Subject']))
       from_address = email.utils.parseaddr(msg['From'])[1]
-      details.append(from_address)
-      details.append(message_subject)
       raw_email = data[0][1]
       raw_email_string = raw_email.decode('utf-8')
       email_message = email.message_from_string(raw_email_string)
 
-      if target == from_address:
+    if target == from_address:
         for part in email_message.walk():
-          if part.get_content_type() == "text/plain":
-            body = part.get_payload(decode=True)
-            message_content = body.decode('utf-8')
-            # print(message_content)
-            details.append(message_content)
+            if part.get_content_type() == "text/plain":
+                body = part.get_payload(decode=True)
+                message_content = body.decode('utf-8')
+                # print(message_content)
+                details.append(from_address)
+                details.append(message_subject)
+                details.append(message_content)
 
     imapserver.close()
     imapserver.logout()
@@ -167,37 +166,18 @@ def dashboard(request):
     requests = Request.objects.all()
     queryset = Request.objects.order_by('-progress')[:]
     onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
-
     progress = [0,0,0,0,0]
-
-
-
     # temp data edit it!
 
     line_data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-
-
     #progress 별 counting
-
     for user in queryset:
-
       for i in range(5):
-
         if(user.progress == i+1):
-
           progress[i] += 1
 
-
-
     labels = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
-
     data = progress.copy()
-
-
-
-    
-
     #print(Request.objects.filter(requested_at__contains=datetime.date(2020, 1, 20)))    
 
     for req in requests:
@@ -207,71 +187,38 @@ def dashboard(request):
       a = k[5]+k[6]
 
       if(a == "01"):
-
         line_data[0] += 1
-
       elif(a == "02"):
-
         line_data[1]+=1
-
       elif(a == "03"):
-
         line_data[2]+=1
-
       elif(a == "04"):
-
-        line_data[3]+=1
-
+        line_data[3]=1
       elif(a == "05"):
-
         line_data[4]+=1
-
       elif(a == "06"):
-
         line_data[5]+=1
-
       elif(a == "07"):
-
         line_data[6]+=1
-
       elif(a == "08"):
-
         line_data[7]+=1
-
       elif(a == "09"):
-
         line_data[8]+=1
-
       elif(a == "10"):
-
         line_data[9]+=1
-
       elif(a == "11"):
-
         line_data[10]+=1
-
       elif(a == "12"):
-
         line_data[11]+=1
-
-      
-
-
-
 
 
     return render(request, 'adminpage/dashboard.html', {
 
       'onrunRequests': onrunRequests,
-
       'requests': requests,
-
       'labels': labels,
-
       #'lables_line' : labels_line,
-
       'data': data,
-
       'line_data' : line_data,
 
     })
@@ -280,11 +227,8 @@ def dashboard(request):
 def show(request):
 
   if request.method == 'GET':
-
     onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
-
     totalRequests = Request.objects.all()
-
     return render(request, 'adminpage/show.html', {'totalRequests': totalRequests, 'onrunRequests': onrunRequests})
 
 
@@ -295,9 +239,7 @@ def each(request, id):
   if request.method == 'GET':
 
     arequest= Request.objects.get(id = id)
-
     sentMessages = SentMessage.objects.filter(request = arequest)
-
     details = check_mail_imap(user, password, arequest.useremail)
 
     # details 는 [발신자 이메일, 제목, 내용] 으로 구성된 배열 
@@ -306,119 +248,68 @@ def each(request, id):
     if(details):
 
     # 이미 존재하는 이메일이면!
-
       if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2]):
-
         print("exists")
 
       else:
-
         newReceivedMessage = ReceivedMessage.objects.create(
-
           request = arequest,
-
           sender = details[0],
-
           title = details[1],
-
           content = details[2]
-
         )
 
-
     receivedMessages = ReceivedMessage.objects.filter(request = arequest)
-
     return render(request, 'adminpage/request.html', {'arequest': arequest, 'sentMessages': sentMessages, 'receivedMessages': receivedMessages})
 
-  
   # 수정하기 + 메세지 보내기
-
   elif request.method == 'POST':
-
-
-
     # 수정 부분
 
     arequest= Request.objects.get(id = id)
-
     due_at = request.POST.get('due_at', arequest.due_at)
-
     progress = request.POST.get('progress', arequest.progress)
-
     add_request = request.POST.get('add_request', arequest.add_request)
 
-
     # Client에게 메일 보내기 
-
     message_content = request.POST['msg_content']
-
     receiver = arequest.useremail
-
     send_mail(user, password, receiver, message_content)
-
     newSentMessage = SentMessage.objects.create(
-
       request = arequest,
-
       content = message_content
-
     )
 
     arequest.due_at = due_at
-
     arequest.progress = progress
-
     arequest.add_request = add_request
-
-
-
     arequest.save()
-
     arequest.update_date()
-
-
 
     return redirect('/'+str(id))
 
 def edit(request, id):
 
-
-
   arequest = Request.objects.get(id=id)
-
   return render(request, 'adminpage/edit.html', {
-
       'arequest':arequest,
-
   })
-
 
 
 def download(request, req_id, file_id):
 
-
   arequest= Request.objects.get(id = req_id)
-
   afile = arequest.floor_plan.get(id = file_id)
-
   fs = FileSystemStorage('../On-Demand-Back/media')
-
   response = FileResponse(fs.open(str(afile.photo), 'rb'), content_type='application/force-download')
-
   response['Content-Disposition'] = 'attachment; filename= floorplan.png'
-
-  
-
   return response
 
 
 
 def delete(request, id):
-
   arequest = Request.objects.get(id = id)
-
   arequest.delete()
-
   return redirect('/show')
 
 
