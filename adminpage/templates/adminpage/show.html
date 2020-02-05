@@ -68,7 +68,7 @@
                     {% if todays_date <= request.due_at|date:'Y/m/d'%}
                     <td>{{request.due_at|timeuntil}}</td>
                     {% else %}
-                    <td class="overdate" style="color: rgb(145, 1, 1); font-weight: 500">{{request.due_at|timesince}} 경과 </td>
+                    <td class="overdate">{{request.due_at|timesince}} 경과 </td>
                     {% endif %}
                     <td>{{request.progress}}</td>
                     <td><a class= "go_btn" href="/{{request.id}}" >Click</a></td>
@@ -124,7 +124,7 @@
                             <button class="sorting">Due Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
-                            <button class="sortinthead, g">Time Remaining <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                            <button class="sorting">Time Remaining <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
                             <button class="sorting">Work Status <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
@@ -142,15 +142,16 @@
                         <td>{{request.floor_type}}</td>
                         <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>
                         <td>{{request.due_at|date:'Y/m/d'}}</td>
-                        {% if todays_date <= request.due_at|date:'Y/m/d'%}
-                        <td>{{request.due_at|timeuntil}}</td>
-                        {% elif request.progress == 5 %}
+
+                        {% if request.progress == 5 %}
                         <td> - </td>
+                        {% elif todays_date <= request.due_at|date:'Y/m/d'%}
+                        <td>{{request.due_at|timeuntil}}</td>
                         {% else %}
-                        <td class="overdate" style="color: rgb(145, 1, 1); font-weight: 500">{{request.due_at|timesince}} 경과 </td>
+                        <td class="overdate">{{request.due_at|timesince}} 경과 </td>
                         {% endif %}
                         {% if request.progress == 5 %}
-                        <td style="color: rgb(214, 145, 18); font-weight: 400"> completed</td>
+                        <td class="complete"> completed </td>
                         {% else %}
                         <td>{{request.progress}}</td>
                         {% endif %}                        
@@ -178,8 +179,11 @@
         for(var i = 0; i<line; i++) {
             table_html += "<tr>";
             for(var j = 0; j<cols; j++) {
-                if(new_array[i][j][0] == "+"){
+                if(new_array[i][j][new_array[i][j].length - 2] == "과"){
                     table_html += "<td class='overdate'>"+new_array[i][j]+"</td>";
+                }
+                else if(new_array[i][j] === " completed "){
+                    table_html += "<td class='complete'>"+new_array[i][j]+"</td>";
                 }
                 else{
                     table_html += "<td>"+new_array[i][j]+"</td>";
@@ -192,26 +196,36 @@
     function searching(line, cols, table_position) {
         table_html = "";
         for(var i = 0; i<line; i++) {
-            table_html += "<tr>";
-            //console.log("this is retable2", search_array)
+            table_html += "<tr>";     
+
+            // there is no search data
             if(search_array.length === 0){
                 for(var j = 0; j<cols; j++) {
-                    if(new_array[i][j][0] == "+"){
+                    if(new_array[i][j][new_array[i][j].length - 2] == "과"){
                         table_html += "<td class='overdate'>"+new_array[i][j]+"</td>";
+                    }
+                    else if(new_array[i][j] === " completed "){
+                        table_html += "<td class='complete'>"+new_array[i][j]+"</td>";
                     }
                     else{
                         table_html += "<td>"+new_array[i][j]+"</td>";
                     }
                 }            
             }
+
+            // print search data
             else{
                 for(var j = 0; j<cols; j++) {
-                    if(search_array[i][j][0] == "+"){
+                    if(search_array[i][j][search_array[i][j].length - 2] == "과"){
                         table_html += "<td class='overdate'>"+search_array[i][j]+"</td>";
+                    }
+                    else if(search_array[i][j] === " completed "){
+                        table_html += "<td class='complete'>"+search_array[i][j]+"</td>";
                     }
                     else{
                         table_html += "<td>"+search_array[i][j]+"</td>";
-                    }                }
+                    }                
+                }
             }
             table_html += "</tr>";
         }
@@ -245,10 +259,8 @@
             new_array.sort(function (a, b) { 
 
                 if(k % 2 == 0) {
-                    //console.log(k)
                     return a[$this_start_number] < b[$this_start_number] ? -1 : a[$this_start_number] > b[$this_start_number]? 1 : 0;  
                 } else {
-                  //console.log("hahd")
                     return a[$this_start_number] > b[$this_start_number] ? -1 : a[$this_start_number] < b[$this_start_number]? 1 : 0;  
                 }
                 
@@ -259,8 +271,9 @@
 
             $this_table.find("tbody").empty();
             re_table(table_tr_length, table_th_length, $this_table);
+            /*overdate color change here!*/
             $(".overdate").parents("tr").css({
-                "background-color" : "#ffedbe",
+                "background-color" : "rgba(214, 70, 65, 0.158)",
             })
         });
 
@@ -349,6 +362,8 @@
             
             search_try_num++;
             searching(search_elem_num, table_th_length2, $this_table);
+            
+            /*overdate color change here!*/
             $(".overdate").parents("tr").css({
                 "background-color" : "rgba(214, 70, 65, 0.158)",
             })
@@ -361,7 +376,6 @@
         active_menu.removeClass('sidenav--menu_sub').addClass('sidenav--menu_sub-active'); 
 
     });
-
 
     /*overdate color change here!*/
     $(document).ready(function() { 
