@@ -24,8 +24,8 @@ def decode_mime_words(s):
 
 # 변경 
 
-user = 'jenny5546@naver.com' # 아키드로우
-password = 'Pinkietoe5546!'
+user = '이메일@naver.com' # 아키드로우
+password = '비밀번호'
 
 
 def send_mail(user, password, sendto, msg_body):
