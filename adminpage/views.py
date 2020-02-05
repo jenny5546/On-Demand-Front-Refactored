@@ -6,10 +6,8 @@ from django.http import FileResponse
 from random_username.generate import generate_username
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
-import json
+import json, os
 import email.header
-
-
 
 # email
 import smtplib, imaplib, poplib, email
@@ -19,20 +17,26 @@ from email.mime.text import MIMEText
 
 def decode_mime_words(s):
   return u''.join(
-    word.decode(encoding or 'utf8') if isinstance(word, bytes) else word
+    word.decode(encoding or 'utf-8') if isinstance(word, bytes) else word
     for word, encoding in email.header.decode_header(s))
 
 # 변경 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # email info locate outside of app folder
+user = "haha"
+password = "haha"
 
-user = '이메일@naver.com' # 아키드로우
-password = '비밀번호'
+secret_file = os.path.join(BASE_DIR, 'secret.json') # email address & password
+with open(secret_file) as f:
+  secret = json.loads(f.read())
+  user = secret["Email"]
+  password = secret["Password"]
 
 
 def send_mail(user, password, sendto, msg_body):
 
   # smtp server
 
-  smtpsrv = "smtp.naver.com" # 발신 메일서버 주소
+  smtpsrv = "smtp.gmail.com" # 발신 메일서버 주소
   smtpserver = smtplib.SMTP(smtpsrv, 587) # 발신 메일서버 포트
 
   smtpserver.ehlo()
@@ -54,7 +58,7 @@ def check_mail_imap(user, password, target):
 
   details = []
   # imap server
-  imapsrv = "imap.naver.com"
+  imapsrv = "imap.gmail.com"
   imapserver = imaplib.IMAP4_SSL(imapsrv, "993")
   imapserver.login(user, password)
   imapserver.select('INBOX')
@@ -106,7 +110,7 @@ def request(request):
 
     #연결해야하는 부분
     username = generate_username(1)[0]
-    useremail = 'piaomj55@naver.com'
+    useremail = 'kimtest0987678@gmail.com'
     # print(user)
     floor_type = request.POST.get('floor_type')
     commercial_type = request.POST.get('commercial_type')
@@ -170,255 +174,131 @@ def dashboard(request):
 
     progress = [0,0,0,0,0]
 
-
-
     # temp data edit it!
-
     line_data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-
-
     #progress 별 counting
-
     for user in queryset:
-
       for i in range(5):
-
         if(user.progress == i+1):
-
           progress[i] += 1
-
-
-
     labels = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
-
     data = progress.copy()
-
-
-
-    
-
     #print(Request.objects.filter(requested_at__contains=datetime.date(2020, 1, 20)))    
 
     for req in requests:
-
       k = str(req.requested_at)
-
       a = k[5]+k[6]
-
       if(a == "01"):
-
         line_data[0] += 1
-
       elif(a == "02"):
-
         line_data[1]+=1
-
       elif(a == "03"):
-
         line_data[2]+=1
-
       elif(a == "04"):
-
         line_data[3]+=1
-
       elif(a == "05"):
-
         line_data[4]+=1
-
       elif(a == "06"):
-
         line_data[5]+=1
-
       elif(a == "07"):
-
         line_data[6]+=1
-
       elif(a == "08"):
-
         line_data[7]+=1
-
       elif(a == "09"):
-
         line_data[8]+=1
-
       elif(a == "10"):
-
         line_data[9]+=1
-
       elif(a == "11"):
-
         line_data[10]+=1
-
       elif(a == "12"):
-
         line_data[11]+=1
 
-      
-
-
-
-
-
     return render(request, 'adminpage/dashboard.html', {
-
       'onrunRequests': onrunRequests,
-
       'requests': requests,
-
       'labels': labels,
-
-      #'lables_line' : labels_line,
-
       'data': data,
-
       'line_data' : line_data,
-
     })
 
 
 def show(request):
-
   if request.method == 'GET':
-
     onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
-
     totalRequests = Request.objects.all()
 
     return render(request, 'adminpage/show.html', {'totalRequests': totalRequests, 'onrunRequests': onrunRequests})
 
-
 def each(request, id):
-
   # 보여주기
-
   if request.method == 'GET':
-
     arequest= Request.objects.get(id = id)
-
     sentMessages = SentMessage.objects.filter(request = arequest)
-
     details = check_mail_imap(user, password, arequest.useremail)
 
     # details 는 [발신자 이메일, 제목, 내용] 으로 구성된 배열 
     #만약 안읽은게 있다면
-
     if(details):
-
     # 이미 존재하는 이메일이면!
-
       if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2]):
-
         print("exists")
 
       else:
-
         newReceivedMessage = ReceivedMessage.objects.create(
-
           request = arequest,
-
           sender = details[0],
-
           title = details[1],
-
           content = details[2]
-
         )
 
-
     receivedMessages = ReceivedMessage.objects.filter(request = arequest)
-
     return render(request, 'adminpage/request.html', {'arequest': arequest, 'sentMessages': sentMessages, 'receivedMessages': receivedMessages})
 
   
   # 수정하기 + 메세지 보내기
-
   elif request.method == 'POST':
-
-
-
     # 수정 부분
-
     arequest= Request.objects.get(id = id)
-
     due_at = request.POST.get('due_at', arequest.due_at)
-
     progress = request.POST.get('progress', arequest.progress)
-
     add_request = request.POST.get('add_request', arequest.add_request)
 
-
     # Client에게 메일 보내기 
-
     message_content = request.POST['msg_content']
-
     receiver = arequest.useremail
-
     send_mail(user, password, receiver, message_content)
-
     newSentMessage = SentMessage.objects.create(
-
       request = arequest,
-
       content = message_content
-
     )
 
     arequest.due_at = due_at
-
     arequest.progress = progress
-
     arequest.add_request = add_request
-
-
-
     arequest.save()
-
     arequest.update_date()
-
-
 
     return redirect('/'+str(id))
 
 def edit(request, id):
-
-
-
   arequest = Request.objects.get(id=id)
-
   return render(request, 'adminpage/edit.html', {
-
       'arequest':arequest,
-
   })
 
 
-
 def download(request, req_id, file_id):
-
-
   arequest= Request.objects.get(id = req_id)
-
   afile = arequest.floor_plan.get(id = file_id)
-
   fs = FileSystemStorage('../On-Demand-Back/media')
-
   response = FileResponse(fs.open(str(afile.photo), 'rb'), content_type='application/force-download')
-
   response['Content-Disposition'] = 'attachment; filename= floorplan.png'
-
-  
-
   return response
 
-
-
 def delete(request, id):
-
   arequest = Request.objects.get(id = id)
-
   arequest.delete()
-
   return redirect('/show')
 
 
