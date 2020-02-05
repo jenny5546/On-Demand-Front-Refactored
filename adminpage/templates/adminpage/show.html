@@ -15,6 +15,7 @@
                 <input style="margin-right: 10px; border-radius: 10px; padding: 5px;" class="searchbox" placeholder="search by..." />
                 <select class="selectbox">
                     <option value="id">ID</option>
+                    <option value="user">User</option>
                     <option value="type">Type</option>
                     <option value="size">Size</option>
                     <option value="due">Due Date</option>
@@ -31,7 +32,7 @@
                             <button class="sorting">ID#<i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th class = "user">
-                            <button>User</button>
+                            <button class="sorting">User  <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
                             <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
@@ -90,6 +91,7 @@
                 <input style="margin-right: 10px; border-radius: 10px; padding: 5px;" class="searchbox" placeholder="search by..." />
                 <select class="selectbox">
                     <option value="id">ID</option>
+                    <option value="user">User</option>
                     <option value="type">Type</option>
                     <option value="size">Size</option>
                     <option value="due">Due date</option>
@@ -107,7 +109,7 @@
                             <button class="sorting">ID# <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th class = "user">
-                            <button>User</button>
+                            <button class="sorting">User  <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th>
                             <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
@@ -301,16 +303,22 @@
                         search_elem_num++;
                     }
                 }
+                else if(search_elem == "user"){
+                    if(new_array[i][1] === input_text){
+                        search_array.push(new_array[i])
+                        search_elem_num++;
+                    }
+                }
                 else if(search_elem=="type"){
                     var input_len = input_text.length
-                    if(new_array[i][2].toLowerCase().slice(0,input_len) === input_text){
+                    if(new_array[i][3].toLowerCase().slice(0,input_len) === input_text){
                         search_array.push(new_array[i])
                         search_elem_num++;
                     }
                 }
                 else if(search_elem=="size"){
                     var input_len = input_text.length
-                    if(new_array[i][3].slice(0,input_len) === input_text){
+                    if(new_array[i][4].slice(0,input_len) === input_text){
                         search_array.push(new_array[i])
                         search_elem_num++;
                     }
@@ -319,13 +327,13 @@
                     var input_len = input_text.length
                     //console.log(input_len)
                     //console.log(typeof(new_array[i][3]))
-                    if(new_array[i][4].slice(0,input_len) === input_text){
+                    if(new_array[i][5].slice(0,input_len) === input_text){
                         search_array.push(new_array[i])
                         search_elem_num++;
                     }
                 }
                 else if(search_elem=="status"){
-                    if(new_array[i][6] === input_text){
+                    if(new_array[i][7] === input_text){
                         search_array.push(new_array[i])
                         search_elem_num++;
                     }
