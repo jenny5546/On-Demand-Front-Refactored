@@ -83,7 +83,7 @@
                     <button class="sorting">ID# <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                 </th>
                 <th class = "user">
-                    <button class="sorting">User <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                    <button class="sorting">Requestor <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                 </th>
                 <th>
                     <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
@@ -117,7 +117,7 @@
                   {% if todays_date <= request.due_at|date:'Y/m/d'%}
                   <td>{{request.due_at|timeuntil}}</td>
                   {% else %}
-                  <td class="overdate">+{{request.due_at|timesince}} </td>
+                  <td class="overdate" style="color: rgb(145, 1, 1); font-weight: 500">{{request.due_at|timesince}} 경과 </td>
                   {% endif %}
                   <td>{{request.progress}}</td>
                   <td><a class= "go_btn" href="/{{request.id}}">Click</a></td>
@@ -191,12 +191,12 @@
             $this_table.find("tbody").empty();
             re_table(table_tr_length, table_th_length, $this_table);
             $(".overdate").parents("tr").css({
-                "background-color" : "#ffedbe",
+                "background-color" : "rgba(214, 70, 65, 0.158)",
             })
         });
     $(document).ready(function() { 
         $(".overdate").parents("tr").css({
-            "background-color": "#ffedbe",
+            "background-color": "rgba(214, 70, 65, 0.158)",
         })
     });
     })
