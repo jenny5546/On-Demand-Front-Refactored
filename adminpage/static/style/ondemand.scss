@@ -231,6 +231,10 @@ html, body{
                     
                 }
             }
+            .overdate{
+                color: rgb(145, 1, 1); 
+                font-weight: 500;
+            }
             
             td{
                 padding: 10px;
@@ -268,6 +272,14 @@ html, body{
                     border-radius: 10px;
                     height: 300px;
                     overflow-y: scroll;
+                    .overdate{
+                        color: rgb(145, 1, 1); 
+                        font-weight: 500;
+                    }
+                    .complete{
+                        color: rgb(214, 145, 18); 
+                        font-weight: 400;
+                    }
                 }
                 .table_scroll::-webkit-scrollbar {
                     display: none;

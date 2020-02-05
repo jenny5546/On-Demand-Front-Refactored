@@ -117,7 +117,7 @@
                   {% if todays_date <= request.due_at|date:'Y/m/d'%}
                   <td>{{request.due_at|timeuntil}}</td>
                   {% else %}
-                  <td class="overdate" style="color: rgb(145, 1, 1); font-weight: 500">{{request.due_at|timesince}} 경과 </td>
+                  <td class="overdate">{{request.due_at|timesince}} 경과 </td>
                   {% endif %}
                   <td>{{request.progress}}</td>
                   <td><a class= "go_btn" href="/{{request.id}}">Click</a></td>
@@ -137,12 +137,12 @@
         for(var i = 0; i<line; i++) {
             table_html += "<tr>";
             for(var j = 0; j<cols; j++) {
-                    if(new_array[i][j][0] == "+"){
-                        table_html += "<td class='overdate'>"+new_array[i][j]+"</td>";
-                    }
-                    else{
-                        table_html += "<td>"+new_array[i][j]+"</td>";
-                    }
+                if(new_array[i][j][new_array[i][j].length - 2] == "과"){
+                    table_html += "<td class='overdate'>"+new_array[i][j]+"</td>";
+                }
+                else{
+                    table_html += "<td>"+new_array[i][j]+"</td>";
+                }
             }
             table_html += "</tr>";
         }
