@@ -31,7 +31,7 @@
                             <button class="sorting">ID#<i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th class = "user">
-                            <button>User</button>
+                            <button>Requestor</button>
                         </th>
                         <th>
                             <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
@@ -67,7 +67,7 @@
                     {% if todays_date <= request.due_at|date:'Y/m/d'%}
                     <td>{{request.due_at|timeuntil}}</td>
                     {% else %}
-                    <td class="overdate">+{{request.due_at|timesince}} </td>
+                    <td class="overdate" style="color: rgb(145, 1, 1); font-weight: 500">{{request.due_at|timesince}} 경과 </td>
                     {% endif %}
                     <td>{{request.progress}}</td>
                     <td><a class= "go_btn" href="/{{request.id}}" >Click</a></td>
@@ -107,7 +107,7 @@
                             <button class="sorting">ID# <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                         </th>
                         <th class = "user">
-                            <button>User</button>
+                            <button>Requestor</button>
                         </th>
                         <th>
                             <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
@@ -143,12 +143,12 @@
                         {% if todays_date <= request.due_at|date:'Y/m/d'%}
                         <td>{{request.due_at|timeuntil}}</td>
                         {% elif request.progress == 5 %}
-                        <td> Done! </td>
+                        <td> - </td>
                         {% else %}
-                        <td class="overdate">+{{request.due_at|timesince}} </td>
+                        <td class="overdate" style="color: rgb(145, 1, 1); font-weight: 500">{{request.due_at|timesince}} 경과 </td>
                         {% endif %}
                         {% if request.progress == 5 %}
-                        <td>completed</td>
+                        <td style="color: rgb(214, 145, 18); font-weight: 400"> completed</td>
                         {% else %}
                         <td>{{request.progress}}</td>
                         {% endif %}                        
@@ -342,7 +342,7 @@
             search_try_num++;
             searching(search_elem_num, table_th_length2, $this_table);
             $(".overdate").parents("tr").css({
-                "background-color" : "#ffedbe",
+                "background-color" : "rgba(214, 70, 65, 0.158)",
             })
         })
 
@@ -358,7 +358,7 @@
     /*overdate color change here!*/
     $(document).ready(function() { 
         $(".overdate").parents("tr").css({
-            "background-color": "#ffedbe",
+            "background-color": "rgba(214, 70, 65, 0.158)",
         })
     });
 </script>   

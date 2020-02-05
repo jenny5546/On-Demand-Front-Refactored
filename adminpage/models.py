@@ -18,7 +18,7 @@ class Plan(models.Model):
 class Request(models.Model):
     
     user  = models.CharField(
-        max_length = 10,
+        max_length = 20,
         default = 'anonymous'
     )
     requested_at = models.DateTimeField(default=timezone.now)
