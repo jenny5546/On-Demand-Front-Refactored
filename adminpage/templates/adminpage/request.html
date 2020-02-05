@@ -75,8 +75,10 @@
         <p1>Request # {{arequest.id}}</p1>
         <div class="eachRequest--status">
             <p2 class="status">Status: {{ arequest.progress }}</p2>
-            {% if todays_date > arequest.due_at|date:'Y/m/d'%}
-            <p2 class="overdate"> OVERDATE! </p2>
+            {% if arequest.progress == 5 %}
+            <p2 class="complete"> COMPLETE </p2>
+            {% elif todays_date > arequest.due_at|date:'Y/m/d'%}
+            <p2 class="overdate"> OVERDATE </p2>
             {% endif %}
         </div>
     </div>
