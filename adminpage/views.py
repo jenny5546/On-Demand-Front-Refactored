@@ -50,7 +50,6 @@ def send_mail(user, password, sendto, msg_body):
 # 메일을 받는 함수(imap4)
 
 def check_mail_imap(user, password, target):
-
   details = []
   # imap server
   imapsrv = "imap.naver.com"
@@ -65,25 +64,24 @@ def check_mail_imap(user, password, target):
     # latest_email_id = id_list[-10:] 
     # 메일리스트를 받아서 내용을 파일로 저장하는 함수
     for each_mail in id_list:
-
       # fetch the email body (RFC822) for the given ID
-      result, data = imapserver.fetch(each_mail, "(RFC822)")
-      msg = email.message_from_bytes(data[0][1])
-      message_subject = decode_mime_words(str(msg['Subject']))
-      from_address = email.utils.parseaddr(msg['From'])[1]
-      raw_email = data[0][1]
-      raw_email_string = raw_email.decode('utf-8')
-      email_message = email.message_from_string(raw_email_string)
+        result, data = imapserver.fetch(each_mail, "(RFC822)")
+        msg = email.message_from_bytes(data[0][1])
+        message_subject = decode_mime_words(str(msg['Subject']))
+        from_address = email.utils.parseaddr(msg['From'])[1]
+        raw_email = data[0][1]
+        raw_email_string = raw_email.decode('utf-8')
+        email_message = email.message_from_string(raw_email_string)
 
-    if target == from_address:
-        for part in email_message.walk():
-            if part.get_content_type() == "text/plain":
-                body = part.get_payload(decode=True)
-                message_content = body.decode('utf-8')
-                # print(message_content)
-                details.append(from_address)
-                details.append(message_subject)
-                details.append(message_content)
+        if target == from_address:
+            for part in email_message.walk():
+                if part.get_content_type() == "text/plain":
+                    body = part.get_payload(decode=True)
+                    message_content = body.decode('utf-8')
+                    # print(message_content)
+                    details.append(from_address)
+                    details.append(message_subject)
+                    details.append(message_content)
 
     imapserver.close()
     imapserver.logout()
@@ -245,7 +243,6 @@ def each(request, id):
     #만약 안읽은게 있다면
 
     if(details):
-
     # 이미 존재하는 이메일이면!
       if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2]):
         print("exists")
