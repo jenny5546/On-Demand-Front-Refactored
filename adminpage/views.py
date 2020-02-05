@@ -3,6 +3,7 @@ from .models import Request, Plan, SelectedTheme, UploadedTheme
 from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import FileResponse
+from random_username.generate import generate_username
 from django.core.files.storage import FileSystemStorage
 import datetime
 import json
@@ -11,6 +12,8 @@ import json
 def request(request):
     if request.method == 'POST':
         #변수 받아오기
+        user = generate_username(1)[0]
+        # print(user)
         floor_type = request.POST.get('floor_type')
         commercial_type = request.POST.get('commercial_type')
         floor_number = request.POST.get('floor_number')
@@ -22,6 +25,7 @@ def request(request):
         add_request = request.POST.get('add_req')
 
         newRequest = Request.objects.create(
+            user = user,
             floor_type = floor_type,
             commercial_type = commercial_type,
             floor_number = floor_number,
