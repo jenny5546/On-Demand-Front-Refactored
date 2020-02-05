@@ -96,19 +96,13 @@ def check_mail_imap(user, password, target):
 
     return details
 
-
-
-
-
-
-
 @csrf_exempt
 
 def request(request):
 
   if request.method == 'POST':
 
-    #연결해야하는 부분
+    #연결해야하는 부분 요청한 사람 정보
     username = generate_username(1)[0]
     useremail = 'kimtest0987678@gmail.com'
     # print(user)
