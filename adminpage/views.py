@@ -7,6 +7,7 @@ from random_username.generate import generate_username
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
 import json, os, time, threading
+from itertools import chain
 import email.header
 
 # email
@@ -36,11 +37,16 @@ with open(secret_file) as f:
   password = secret["Password"]
 
 
+
+# user = '어쩌고@naver.com' # 아키드로우
+# password = '비번'
+
 def send_mail(user, password, sendto, msg_body):
 
   # smtp server
 
   smtpsrv = "smtp.gmail.com" # 발신 메일서버 주소
+
   smtpserver = smtplib.SMTP(smtpsrv, 587) # 발신 메일서버 포트
 
   smtpserver.ehlo()
@@ -58,9 +64,7 @@ def send_mail(user, password, sendto, msg_body):
 
 # 메일을 받는 함수(imap4)
 def check_mail_imap(user, password, target='none'):
-
   print("checking!!!")
-
   details = []
   # imap server
   imapsrv = "imap.gmail.com"
@@ -76,26 +80,30 @@ def check_mail_imap(user, password, target='none'):
     # latest_email_id = id_list[-10:] 
     # 메일리스트를 받아서 내용을 파일로 저장하는 함수
     for each_mail in id_list:
+      # fetch the email body (RFC822) for the given ID
+        result, data = imapserver.fetch(each_mail, "(RFC822)")
+        msg = email.message_from_bytes(data[0][1])
+        message_subject = decode_mime_words(str(msg['Subject']))
+        message_timestamp = datetime.strptime(msg['Date'],"%a, %d %b %Y %H:%M:%S %z")  #message 전송 시각
+        print(message_timestamp)
 
-    #   # fetch the email body (RFC822) for the given ID
-      result, data = imapserver.fetch(each_mail, "(RFC822)")
-      msg = email.message_from_bytes(data[0][1])
-      #From Address
-      message_subject = decode_mime_words(str(msg['Subject']))
-      from_address = email.utils.parseaddr(msg['From'])[1]
-      details.append(from_address)
-      details.append(message_subject)
-      raw_email = data[0][1]
-      raw_email_string = raw_email.decode('utf-8')
-      email_message = email.message_from_string(raw_email_string)
+        from_address = email.utils.parseaddr(msg['From'])[1]
+        
+        details.append(from_address)
+        details.append(message_subject)
+        if target == from_address:
 
-      if target == from_address:
-        for part in email_message.walk():
-          if part.get_content_type() == "text/plain":
-            body = part.get_payload(decode=True)
-            message_content = body.decode('utf-8')
-            # print(message_content)
-            details.append(message_content)
+            raw_email = data[0][1]
+            raw_email_string = raw_email.decode('utf-8')
+            email_message = email.message_from_string(raw_email_string)
+            
+            for part in email_message.walk():
+                if part.get_content_type() == "text/plain":
+                    body = part.get_payload(decode=True)
+                    message_content = body.decode('utf-8')
+                    # print(message_content)
+                    details.append(message_content)
+                    details.append(message_timestamp)
 
     imapserver.close()
     imapserver.logout()
@@ -186,6 +194,7 @@ def dashboard(request):
       for i in range(5):
         if(user.progress == i+1):
           progress[i] += 1
+
     labels = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
     data = progress.copy()
     #print(Request.objects.filter(requested_at__contains=datetime.date(2020, 1, 20)))    
@@ -227,17 +236,16 @@ def dashboard(request):
       "unread_mail_num" : unread_mail_num,
     })
 
-def checking(deatail_or_show="show"):
+def checking():
   global unread_mail_num
   global unread_mail
-  details = check_mail_imap(user, password)
-  
+  details = check_mail_imap(user, password) # pull total unread mails
   # 감소하는 코드는 없음. detail로 들어가서 확인해야 없어지도록 할 것.
-  if(str(type(details)) == "<class 'list'>"):
+  if(str(type(details)) == "<class 'list'>" and details != []):
     unread_mail_num = len(details)/2
     unread_mail = details
 
-  #print('checking: ', unread_mail)
+  print('checking: ', unread_mail)
   
   # checking mailbox every 3 seconds
   threading.Timer(3, checking).start()
@@ -247,7 +255,6 @@ def show(request):
   if request.method == 'GET':
     onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
     totalRequests = Request.objects.all()
-
     if(thread_num < 1):
       checking()
       thread_num += 1
@@ -295,25 +302,29 @@ def each(request, id):
     #만약 안읽은게 있다면
     if(details):
     # 이미 존재하는 이메일이면!
-      if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2]):
+      if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2], timestamp = details[3]):
         print("exists")
 
       else:
         newReceivedMessage = ReceivedMessage.objects.create(
           request = arequest,
+          username = arequest.username,
           sender = details[0],
           title = details[1],
-          content = details[2]
+          content = details[2],
+          timestamp = details[3]
         )
 
     receivedMessages = ReceivedMessage.objects.filter(request = arequest)
-    return render(request, 'adminpage/request.html', {
-      'arequest': arequest, 
-      'sentMessages': sentMessages, 
-      'receivedMessages': receivedMessages, 
-      "unread_mail_num" : unread_mail_num
-    })
 
+    message_list = sorted(
+      chain(sentMessages,receivedMessages),
+      key = lambda message: message.timestamp, reverse=False
+    )
+    
+    print(message_list)
+    # return render(request, 'adminpage/request.html', {'arequest': arequest, 'sentMessages': sentMessages, 'receivedMessages': receivedMessages})
+    return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list,"unread_mail_num" : unread_mail_num})
   
   # 수정하기 + 메세지 보내기
   elif request.method == 'POST':
@@ -324,13 +335,14 @@ def each(request, id):
     add_request = request.POST.get('add_request', arequest.add_request)
 
     # Client에게 메일 보내기 
-    message_content = request.POST['msg_content']
+    message_content = request.POST.get('msg_content', '')
     receiver = arequest.useremail
-    send_mail(user, password, receiver, message_content)
-    newSentMessage = SentMessage.objects.create(
-      request = arequest,
-      content = message_content
-    )
+    if (message_content != ''):
+      send_mail(user, password, receiver, message_content)
+      newSentMessage = SentMessage.objects.create(
+        request = arequest,
+        content = message_content
+      )
 
     arequest.due_at = due_at
     arequest.progress = progress
@@ -342,6 +354,7 @@ def each(request, id):
 
 
 def edit(request, id):
+
   arequest = Request.objects.get(id=id)
   return render(request, 'adminpage/edit.html', {
       'arequest':arequest,

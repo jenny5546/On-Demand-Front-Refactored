@@ -1,12 +1,15 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+
 # Create your models here.
 class SelectedTheme(models.Model):
   option = models.TextField(blank=True, null=True)
 
+
 class UploadedTheme(models.Model):
   photo = models.FileField(upload_to='floor_theme', blank=True, null=True)
+
 
 class Plan(models.Model):
   photo = models.FileField(upload_to='floor_plan', blank=True, null=True)
@@ -104,19 +107,22 @@ class ReceivedMessage(models.Model):
   # client의 이메일 
   request = models.ForeignKey(Request, null=True, on_delete = models.CASCADE)
   sender = models.EmailField( 
-
     max_length = 254,
     default = 'requestor@gmail.com'
-
   )
-
+  username = models.CharField(
+    max_length = 20,
+    default = 'anonymous'
+  )
   title = models.TextField(default='')
   content = models.TextField()
   timestamp = models.DateTimeField(default=timezone.now)
 
-# Clien 에게 보낸 email
 
+# Client 에게 보낸 email
 class SentMessage(models.Model):
+  sender = models.CharField(max_length = 10, default='admin')
   request = models.ForeignKey(Request, null=True, on_delete = models.CASCADE)
   content = models.TextField()
   timestamp = models.DateTimeField(default=timezone.now)
+
