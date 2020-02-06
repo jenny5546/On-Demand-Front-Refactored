@@ -58,7 +58,7 @@ html, body{
     .sidenav {
         display: flex;
         flex-direction: column;
-        width: 15%;
+        width: 18%;
         background-color:  #30343A;
         border-radius: 0px 50px 50px 0px;
 
@@ -75,16 +75,20 @@ html, body{
                 font-size: 15px;
                 color: #CDCDCD;
                 font-weight: $light;
+                height: 80px;
                 text-decoration: none;
-                padding: 20px 0px 20px 40px;
+                padding: 9% 10% 12% 15%;
+                // margin-bottom:1px;
+                // text-align: center;
+                
 
                 &-active{
-
+                    height: 80px;
                     font-size: 15px;
                     color: #CDCDCD;
                     font-weight: $light;
                     text-decoration: none;
-                    padding: 20px 0px 20px 40px;
+                    padding: 9% 10% 12% 15%;
                     background-color: rgba(69, 74, 82, 0.445);
                     position: relative;
     
