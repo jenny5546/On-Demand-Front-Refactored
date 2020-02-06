@@ -564,12 +564,14 @@ html, body{
         width: 35%;
         height: 94%;
         border: 1px solid rgba(128, 128, 128, 0.377);
-        // padding: 30px;
         position: relative;
+        background-color: #F3F7F7;
 
         &_header{
             height: 10%;
-            background-color: whitesmoke;
+            // background-color: white;
+            padding: 10px;
+            font-size: 20px;
         }
         &_send{
             position: absolute;
@@ -578,6 +580,25 @@ html, body{
         }
         &_msg{
             padding: 30px;
+            .msg_me{
+                margin: 10px 5px 10px 5px;
+                border-radius: 10px;
+                background-color: #78D091;
+                padding: 3px 10px 3px 10px;
+                color: white;
+                margin-left: 42%;
+                width: 60%;
+
+            }
+            .msg_client{
+                margin: 10px 5px 10px 5px;
+                border-radius: 10px;
+                background-color: white;
+                padding: 3px 10px 3px 10px;
+                color: black;;
+                width: 60%;
+                
+            }
         }
     }
 }

@@ -243,7 +243,8 @@
     <div class = "eachRequest--chatroom">
 
         <div class = "eachRequest--chatroom_header">
-            <div>{{arequest.username}} 와 소통방</div>
+            <div style="text-align: center; margin-top: 10px; ">{{arequest.username}}</div>
+            <hr/>
         </div>
 
         <div class = "eachRequest--chatroom_msg">
@@ -252,13 +253,11 @@
                 {% for msg in message_list %}
                     {% if msg.sender == 'admin' %}
                     <div class="msg_me">
-                        <div>{{msg.sender}}</div>
                         <div>{{msg.timestamp}}</div>
                         <div>{{msg.content}}</div>
                     </div>
                     {% else %}
                     <div class="msg_client">
-                        <div>{{msg.username}}</div>
                         <div>{{msg.timestamp}}</div>
                         <div>{{msg.content}}</div>
                     </div>
