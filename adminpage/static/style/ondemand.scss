@@ -560,30 +560,74 @@ html, body{
     }
 
     &--chatroom{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
         margin: 10px 40px 0px 40px;
         width: 35%;
         height: 94%;
+        box-shadow: 0 6px 8px rgba(0,0,0,0.30), 0 5px 6px rgba(0,0,0,0.22);
         // border: 1px solid rgba(128, 128, 128, 0.377);
         position: relative;
-        background-color: #F3F7F7;
+        border-radius: 30px;
+        background-color: rgba(247, 247, 243, 0.925);
 
         &_header{
+            
+            flex-shrink: 0;
             height: 10%;
-            // background-color: white;
             padding: 10px;
             font-size: 20px;
         }
         &_send{
-            position: absolute;
-            bottom: 5%;
-            padding: 10px;
+            // position: absolute;
+            // bottom: 0%;
+            border-radius: 0px 0px 30px 30px;
+            height: 15%;
+            background-color: white;
+            width: 100%;
+            flex-shrink: 0;
+            border: none;
+            border-top: 10px solid rgba(236, 231, 205, 0.664);
+            
+            .input{
+                width: 80%;
+                height: 100px;
+                border: 0;
+                margin-left: 10px;
+                // box-shadow: 0 3px 4px rgba(0, 0, 0, 0.096), 0 2px 3px rgba(0, 0, 0, 0.075);
+                // background-color: rgba(245, 245, 245, 0.295);
+                
+            }
+            input[type=submit]{
+                // width: 100px;
+                margin-left: 10px;
+                margin-bottom: 10px;
+                padding:5px 25px; 
+                background:#30343A;
+                color: white; 
+                font-size: 15px;
+                font-weight: $light;
+                box-shadow: 0 3px 4px rgba(0,0,0,0.30), 0 2px 3px rgba(0,0,0,0.22);
+                border:0 none;
+                cursor:pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                &:hover{
+                    background:rgb(71, 77, 87);
+                }
+            }
+
         }
         &_msg{
+            overflow-y: auto;
+            flex-grow: 1;
+            overflow: auto;
             padding: 30px;
             .msg_me{
                 margin: 10px 5px 10px 5px;
                 border-radius: 10px;
-                background-color: #78D091;
+                background-color: #f0cf85;
                 padding: 5px 10px 5px 10px;
                 color: white;
                 margin-left: 42%;

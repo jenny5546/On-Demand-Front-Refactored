@@ -243,8 +243,8 @@
     <div class = "eachRequest--chatroom">
 
         <div class = "eachRequest--chatroom_header">
-            <div style="text-align: center; margin-top: 10px; font-weight: 700;">{{arequest.username}}</div>
-            <hr style="margin-top: 10px; color: rgba(253, 253, 253, 0.452);"/>
+            <div style="text-align: center; margin-top: 10px; font-weight: 100;">{{arequest.username}}</div>
+            <hr style="margin-top: 10px; opacity: 20%;"/>
         </div>
 
         <div class = "eachRequest--chatroom_msg">
@@ -277,9 +277,9 @@
         </div>
 
         <div class = "eachRequest--chatroom_send"> 
-            <form action="/adminpage/{{ arequest.id }}/" method="POST">
+            <form style="display: flex; padding: 20px;" action="/adminpage/{{ arequest.id }}/" method="POST">
                 {% csrf_token %}
-                <input type="text" name="msg_content"></input>
+                <input type="text" class="input" placeholder= "Enter your message" name="msg_content"></input>
                 <input class="submit" type="submit" value="Send"/>
             </form>
         </div>

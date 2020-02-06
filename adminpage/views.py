@@ -23,7 +23,6 @@ def decode_mime_words(s):
     word.decode(encoding or 'utf8') if isinstance(word, bytes) else word
     for word, encoding in email.header.decode_header(s))
 
-# 변경 
 
 
 
