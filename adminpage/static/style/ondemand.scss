@@ -58,13 +58,13 @@ html, body{
     .sidenav {
         display: flex;
         flex-direction: column;
-        width: 280px;
+        width: 15%;
         background-color:  #30343A;
         border-radius: 0px 50px 50px 0px;
 
         &--logo{
             margin-top: 40px;
-            width: 240px; 
+            width: 90%; 
         }
         &--menu{
             margin-top: 120px;
@@ -76,7 +76,7 @@ html, body{
                 color: #CDCDCD;
                 font-weight: $light;
                 text-decoration: none;
-                padding: 20px 0px 20px 50px;
+                padding: 20px 0px 20px 40px;
 
                 &-active{
 
@@ -84,7 +84,7 @@ html, body{
                     color: #CDCDCD;
                     font-weight: $light;
                     text-decoration: none;
-                    padding: 20px 0px 20px 50px;
+                    padding: 20px 0px 20px 40px;
                     background-color: rgba(69, 74, 82, 0.445);
                     position: relative;
     
@@ -595,6 +595,7 @@ html, body{
                 height: 100px;
                 border: 0;
                 margin-left: 10px;
+                font-size: 15px;
                 // box-shadow: 0 3px 4px rgba(0, 0, 0, 0.096), 0 2px 3px rgba(0, 0, 0, 0.075);
                 // background-color: rgba(245, 245, 245, 0.295);
                 
@@ -625,17 +626,18 @@ html, body{
             overflow: auto;
             padding: 30px;
             .msg_me{
-                margin: 10px 5px 10px 5px;
+                margin: 10px 7px 10px 7px;
                 border-radius: 10px;
                 background-color: #f0cf85;
                 padding: 5px 10px 5px 10px;
                 color: white;
                 margin-left: 42%;
                 width: 60%;
+                // font-size: 13px;
 
             }
             .msg_client{
-                margin: 10px 5px 10px 5px;
+                margin: 10px 7px 10px 7px;
                 border-radius: 10px;
                 background-color: white;
                 padding: 5px 10px 5px 10px;

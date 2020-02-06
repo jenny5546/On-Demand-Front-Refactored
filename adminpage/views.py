@@ -24,6 +24,7 @@ def decode_mime_words(s):
     for word, encoding in email.header.decode_header(s))
 
 
+# 변경 
 
 
 # user = '어쩌고@naver.com' # 아키드로우
