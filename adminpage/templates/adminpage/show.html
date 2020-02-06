@@ -9,6 +9,7 @@
         <div class="requests-table-top">
             <div class= "requests-title">
                 On Run Requests
+                <h2>{{unread_mail_num}} </h2>
             </div>
             <div class="search_menu">
                 <p style="margin-right: 10px;">Search: </p>
@@ -60,7 +61,7 @@
                 {% for request in onrunRequests %}
                 <tr>
                     <td>{{request.id}}</td>
-                    <td>{{request.user}}</td>
+                    <td>{{request.username}}</td>
                     <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
                     <td>{{request.floor_type}}</td>
                     <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>
@@ -137,7 +138,7 @@
                     {% for request in totalRequests %}
                     <tr>
                         <td>{{request.id}}</td>
-                        <td>{{request.user}}</td>
+                        <td>{{request.username}}</td>
                         <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
                         <td>{{request.floor_type}}</td>
                         <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>

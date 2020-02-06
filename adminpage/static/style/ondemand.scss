@@ -26,8 +26,14 @@ html, body{
     &--nav{
         display: flex;
         list-style: none;
+        text-align: center;
+        
         &_menu{
             padding: 30px;
+            a{ 
+                color: black;
+                text-decoration: none;
+            }
         }
     }
 }
@@ -58,13 +64,13 @@ html, body{
     .sidenav {
         display: flex;
         flex-direction: column;
-        width: 280px;
+        width: 18%;
         background-color:  #30343A;
         border-radius: 0px 50px 50px 0px;
 
         &--logo{
             margin-top: 40px;
-            width: 240px; 
+            width: 90%; 
         }
         &--menu{
             margin-top: 120px;
@@ -75,16 +81,20 @@ html, body{
                 font-size: 15px;
                 color: #CDCDCD;
                 font-weight: $light;
+                height: 80px;
                 text-decoration: none;
-                padding: 20px 0px 20px 50px;
+                padding: 9% 10% 12% 15%;
+                // margin-bottom:1px;
+                // text-align: center;
+                
 
                 &-active{
-
+                    height: 80px;
                     font-size: 15px;
                     color: #CDCDCD;
                     font-weight: $light;
                     text-decoration: none;
-                    padding: 20px 0px 20px 50px;
+                    padding: 9% 10% 12% 15%;
                     background-color: rgba(69, 74, 82, 0.445);
                     position: relative;
     
@@ -383,30 +393,38 @@ html, body{
     margin-top: 80px;
     display: flex;
     flex: 1;
-    flex-direction: column;
+    flex-direction: row;
     padding: 20px;
     position: relative;
 
+    &--request{
+
+        width: 60%;
+        position: relative;
+        &--btnwrapper{
+            margin-top: 10px;
+            position: absolute;
+            right: 0%;
+        }
+    }
+    
     &--editbtn{
-        position: absolute;
-        right: 15%;
+        margin-right: 10px;
         text-decoration: none;
         border-radius: 30px;
         background-color: $btn_darkColor;
         color: white;
-        padding: 10px;
+        padding: 3px 10px 3px 10px;
     }
     &--editbtn:hover{
         background-color: $btn_darkColor_hover;
     }
     &--deletebtn{
-        position: absolute;
-        right: 5%;
         text-decoration: none;
         border-radius: 30px;
         background-color: rgb(112, 10, 10);
         color: white;
-        padding: 10px;
+        padding: 3px 10px 3px 10px;
     }
     &--deletebtn:hover{
         background-color: rgb(128, 14, 14);
@@ -431,10 +449,11 @@ html, body{
         // background-color: black;
         // color:white;
         p2 {
-            margin-left: 20px;
+            margin-left: 10px;
+            margin-top: 10px;
             background-color: black;
             color:white;
-            padding: 10px;
+            padding: 5px 10px 5px 10px;
             border-radius: 10px;
 
         }
@@ -452,7 +471,7 @@ html, body{
         padding: 20px;
 
         .flexslider{
-            width: 500px;
+            width: 330px;
             position: relative;
         }
         
@@ -477,8 +496,7 @@ html, body{
         margin-top: 20px;
         margin-left: 30px;
         padding: 20px;
-        width: 500px;
-        height: 400px;
+        width: 100%;
         background-color: rgba(245, 245, 245, 0.37);
         .line{
             width: 100%;
@@ -502,10 +520,12 @@ html, body{
         margin: 10px;
         margin-bottom: 20px;
         padding: 20px;
+        width: 100%;
+        
         &_img{
             margin: 5px;
-            width: 300px;
-            height: 300px;
+            width: 30%;
+            height: 250px;
         }
 
         &_wrapper{
@@ -548,11 +568,100 @@ html, body{
         font-weight: $bold;
        
     }
+
+    &--chatroom{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        margin: 10px 40px 0px 40px;
+        width: 35%;
+        height: 94%;
+        box-shadow: 0 6px 8px rgba(0,0,0,0.30), 0 5px 6px rgba(0,0,0,0.22);
+        // border: 1px solid rgba(128, 128, 128, 0.377);
+        position: relative;
+        border-radius: 30px;
+        background-color: rgba(247, 247, 243, 0.925);
+
+        &_header{
+            
+            flex-shrink: 0;
+            height: 10%;
+            padding: 10px;
+            font-size: 20px;
+        }
+        &_send{
+            // position: absolute;
+            // bottom: 0%;
+            border-radius: 0px 0px 30px 30px;
+            height: 15%;
+            background-color: white;
+            width: 100%;
+            flex-shrink: 0;
+            border: none;
+            border-top: 10px solid rgba(236, 231, 205, 0.664);
+            
+            .input{
+                width: 80%;
+                height: 100px;
+                border: 0;
+                margin-left: 10px;
+                font-size: 15px;
+                // box-shadow: 0 3px 4px rgba(0, 0, 0, 0.096), 0 2px 3px rgba(0, 0, 0, 0.075);
+                // background-color: rgba(245, 245, 245, 0.295);
+                
+            }
+            input[type=submit]{
+                // width: 100px;
+                margin-left: 10px;
+                margin-bottom: 10px;
+                padding:5px 25px; 
+                background:#30343A;
+                color: white; 
+                font-size: 15px;
+                font-weight: $light;
+                box-shadow: 0 3px 4px rgba(0,0,0,0.30), 0 2px 3px rgba(0,0,0,0.22);
+                border:0 none;
+                cursor:pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                &:hover{
+                    background:rgb(71, 77, 87);
+                }
+            }
+
+        }
+        &_msg{
+            overflow-y: auto;
+            flex-grow: 1;
+            overflow: auto;
+            padding: 30px;
+            .msg_me{
+                margin: 10px 7px 10px 7px;
+                border-radius: 10px;
+                background-color: #f0cf85;
+                padding: 5px 10px 5px 10px;
+                color: white;
+                margin-left: 42%;
+                width: 60%;
+                // font-size: 13px;
+
+            }
+            .msg_client{
+                margin: 10px 7px 10px 7px;
+                border-radius: 10px;
+                background-color: white;
+                padding: 5px 10px 5px 10px;
+                color: black;;
+                width: 60%;
+                
+            }
+        }
+    }
 }
 
 // PROGRESS BAR //
 .progress {
-    width: 1000px;
+    width: 700px;
     margin: 20px auto;
     text-align: center;
 }
