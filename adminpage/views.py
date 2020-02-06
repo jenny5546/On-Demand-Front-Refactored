@@ -27,8 +27,8 @@ def decode_mime_words(s):
 
 
 
-user = '어쩌고@naver.com' # 아키드로우
-password = '비번'
+# user = '어쩌고@naver.com' # 아키드로우
+# password = '비번'
 
 def send_mail(user, password, sendto, msg_body):
 
@@ -288,11 +288,12 @@ def each(request, id):
     # Client에게 메일 보내기 
     message_content = request.POST.get('msg_content', '')
     receiver = arequest.useremail
-    send_mail(user, password, receiver, message_content)
-    newSentMessage = SentMessage.objects.create(
-      request = arequest,
-      content = message_content
-    )
+    if (message_content != ''):
+      send_mail(user, password, receiver, message_content)
+      newSentMessage = SentMessage.objects.create(
+        request = arequest,
+        content = message_content
+      )
 
     arequest.due_at = due_at
     arequest.progress = progress
