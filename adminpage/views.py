@@ -105,6 +105,8 @@ def check_mail_imap(user, password, target='none'):
                     details.append(message_content)
                     details.append(message_timestamp)
 
+        # [TODO] no else?
+
     imapserver.close()
     imapserver.logout()
     print("hahah", type(details))
