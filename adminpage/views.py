@@ -23,6 +23,7 @@ def decode_mime_words(s):
     word.decode(encoding or 'utf8') if isinstance(word, bytes) else word
     for word, encoding in email.header.decode_header(s))
 
+# 변경 
 
 
 
@@ -72,8 +73,8 @@ def check_mail_imap(user, password, target):
         message_timestamp = datetime.strptime(msg['Date'],"%a, %d %b %Y %H:%M:%S %z")  #message 전송 시각
         print(message_timestamp)
         from_address = email.utils.parseaddr(msg['From'])[1]
-        
-
+        details.append(from_address)
+        details.append(message_subject)
         if target == from_address:
 
             raw_email = data[0][1]
@@ -85,8 +86,7 @@ def check_mail_imap(user, password, target):
                     body = part.get_payload(decode=True)
                     message_content = body.decode('utf-8')
                     # print(message_content)
-                    details.append(from_address)
-                    details.append(message_subject)
+                    
                     details.append(message_content)
                     details.append(message_timestamp)
 
@@ -325,5 +325,42 @@ def delete(request, id):
   arequest = Request.objects.get(id = id)
   arequest.delete()
   return redirect('/show')
+
+
+def messages(request):
+
+   if request.method == 'GET':
+     requests = Request.objects.all()
+     return render(request, 'adminpage/messages.html', {'requests': requests})
+
+
+# messages.html에서 각 inbox누르면 chatroom 띄우기
+# def open_room(request, id):
+#   arequest = Request.objects.get(id = id)
+
+#   if request.method == 'GET':
+
+#     sentMessages = SentMessage.objects.filter(request = arequest)
+#     details = check_mail_imap(user, password, arequest.useremail)
+    
+#     if(details):
+#     # 이미 존재하는 이메일이면!
+#       if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2], timestamp = details[3]):
+#         print("exists")
+
+#       else:
+#         newReceivedMessage = ReceivedMessage.objects.create(
+#           request = arequest,
+#           username = arequest.username,
+#           sender = details[0],
+#           title = details[1],
+#           content = details[2],
+#           timestamp = details[3]
+#         )
+
+#     receivedMessages = ReceivedMessage.objects.filter(request = arequest)
+    
+#     return render(request, 'adminpage/messages.html', {'receivedMessages': receivedMessages})
+
 
 

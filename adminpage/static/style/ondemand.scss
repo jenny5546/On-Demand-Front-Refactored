@@ -52,6 +52,8 @@ html, body{
             background-color: rgb(77, 77, 77);
         }
     }
+
+
     
 
     //side navbar
@@ -466,6 +468,7 @@ html, body{
 
         .flexslider{
             width: 330px;
+            height: 300px;
             position: relative;
         }
         
@@ -864,6 +867,54 @@ html, body{
             
         }
 
+    }
+
+    
+
+}
+
+
+.inbox{
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 5% 50px;
+    // padding: 0 50px;
+    width: 100%;
+    height: 80%;
+    background-color: rgba(245, 245, 245, 0.473);
+    // opacity: 30%;
+
+    &--header{
+        font-size: 40px;
+        font-weight: $bold;
+        
+        background-color: white;
+        margin-bottom: 30px;
+    }
+    &--body{
+        display: flex;
+        
+        &_table{
+            width: 50%;
+            height: 80px;
+            border: 1px solid grey;
+            margin-bottom: 2px;
+            a{
+                display: flex;
+            }
+            
+            .profilepic{
+                padding: 10px;
+            }
+                
+            .contents{
+                .username{
+                    font-weight: $bold;
+                }
+            }
+        }
     }
 
 }

@@ -1,0 +1,68 @@
+{% extends '../base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="inbox">
+    <div class="inbox--header">
+        Inbox
+    </div>
+
+    {% for req in requests %}
+        <script>
+            $(document).ready(function() { 
+                const ids = {{req.id}};
+                $("#" + ids).click(function() {
+                    if ($("."+ ids).css("display") == "block"){
+                        $("."+ ids).css("display","none");
+                    }
+                    else {
+                        $("."+ ids).css("display","block");
+                    }
+                    console.log("hi") 
+                })
+            });
+        </script>
+
+        <div class= "inbox--body">
+
+            {% if req.receivedmessage_set.all %}
+                <div class="inbox--body_table">
+
+                    <a id = "{{ req.id }}">
+
+                        <div class="profilepic">
+                            <img style="width:60px; height:60px" src="{% static 'profile_pic.png' %}"/>
+                        </div>
+
+                        <div class ="contents">
+                            <div class="username">
+                                {{req.username}}
+                            </div>
+                            <div>
+                                {% with req.receivedmessage_set.all.last as msg %}
+                                    <p1>{{msg.title}}</p1>
+                                    <p2>{{msg.content}}</p2>
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div style= "display: none" class= "{{ req.id }}" >
+                        {% for msg in req.receivedmessage_set.all %}
+                            <div>{{msg.title}}</div>
+                            <div>{{msg.content}}</div>
+                        {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+    {% endfor %}
+
+    
+
+</div>
+
+
+
+{% endblock content %}
