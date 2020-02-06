@@ -288,7 +288,7 @@ def each(request, id):
     unread_mail_num = len(unread_mail)/2
 
     if(thread_num < 1):
-      chacking()
+      checking()
       thread_num += 1
 
     # details 는 [발신자 이메일, 제목, 내용] 으로 구성된 배열 
