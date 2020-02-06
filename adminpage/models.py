@@ -121,14 +121,19 @@ class ReceivedMessage(models.Model):
     max_length = 254,
     default = 'requestor@gmail.com'
   )
+  username = models.CharField(
+    max_length = 20,
+    default = 'anonymous'
+  )
   title = models.TextField(default='')
   content = models.TextField()
   timestamp = models.DateTimeField(default=timezone.now)
 
 
-# Clien 에게 보낸 email
+# Client 에게 보낸 email
 
 class SentMessage(models.Model):
+  sender = models.CharField(max_length = 10, default='admin')
   request = models.ForeignKey(Request, null=True, on_delete = models.CASCADE)
   content = models.TextField()
   timestamp = models.DateTimeField(default=timezone.now)

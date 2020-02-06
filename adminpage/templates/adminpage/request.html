@@ -58,198 +58,216 @@
 
 <div class="eachRequest">
 
-    <div>
-        <a class="eachRequest--editbtn" href='/adminpage/{{arequest.id}}/edit'>
-          Edit Request
-        </a>
-        <a 
-            class="eachRequest--deletebtn" 
-            onclick=confirmDelete()
-        >
-            Delete Request
-        </a>
-    </div>
-
-    
-    <div class="eachRequest--header">
-        <p1>Request # {{arequest.id}}</p1>
-        <div class="eachRequest--status">
-            <p2 class="status">Status: {{ arequest.progress }}</p2>
-            {% if arequest.progress == 5 %}
-            <p2 class="complete"> COMPLETE </p2>
-            {% elif todays_date > arequest.due_at|date:'Y/m/d'%}
-            <p2 class="overdate"> OVERDATE </p2>
-            {% endif %}
-        </div>
-    </div>
-
-
-    <div class="progress">
-
-            <div class="circle">
-                <span class="label">1</span>
-                <span class="title">0%</span>
-            </div>
-
-            <span class="bar"></span>
-            <div class="circle">
-                <span class="label">2</span>
-                <span class="title">25%</span>
-            </div>
-
-            <span class="bar"></span>
-            <div class="circle">
-                <span class="label">3</span>
-                <span class="title">50%</span>
-            </div>
-
-            <span class="bar"></span>
-            <div class="circle">
-                <span class="label">4</span>
-                <span class="title">75%</span>
-            </div>
-
-            <span class="bar"></span>
-            <div class="circle">
-                <span class="label">5</span>
-                <span class="title">100%</span>
-            </div>
-    </div>
-    <div style="margin:auto">
-            <div style="display: flex;">
-                    <div class="eachRequest--plan">
-                            <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Uploaded Plan Image</label>
-                            <div class="flexslider">
-                                <ul class="slides">
-                                    {% for plan in arequest.floor_plan.all %}
-                                    <li>
-                                        <img class="eachRequest--plan_img" src="{{ plan.photo.url }}">
-                                        <a class="eachRequest--plan_btn" style = "text-decoration: none;" href= "/{{arequest.id}}/{{plan.id}}/download" >
-                                            <i class="fas fa-file-download"></i> Press to Download
-                                        </a>
-                                    </li>
-                                    {% endfor %}
-                                </ul>
-                    
-                            </div>  
+    <div class = "eachRequest--request" >
+            <div stlye = "display: flex;"> 
+                    <div class= "eachRequest--request--btnwrapper">
+                            <a class="eachRequest--editbtn" href='/adminpage/{{arequest.id}}/edit'>
+                                Edit
+                            </a>
+                            <a 
+                                class="eachRequest--deletebtn" 
+                                onclick=confirmDelete()
+                            >
+                                Delete
+                            </a>
+                    </div>
+                        
+                            
+                    <div class="eachRequest--header">
+                        <p1>Request # {{arequest.id}}</p1>
+                        <div class="eachRequest--status">
+                            <p2 class="status">Status: {{ arequest.progress }}</p2>
+                            {% if arequest.progress == 5 %}
+                            <p2 class="complete"> COMPLETE </p2>
+                            {% elif todays_date > arequest.due_at|date:'Y/m/d'%}
+                            <p2 class="overdate"> OVERDATE </p2>
+                            {% endif %}
                         </div>
-                        <div class="eachRequest--info">
-                    
-                                <div class="eachRequest--info_num">
-                                    <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Type :</label>
-                                    <hr class="line"/>
-                                    <div class="floor_info">
-                                        {% if arequest.floor_type == "Residential" %}
-                                            {{arequest.floor_type}}
-                                        {% else %}
-                                            {{arequest.floor_type}} ( {{arequest.commercial_type}} )
-                                        {% endif %}
-        
-                                    </div>
-                                    
-                                    
-                                </div>
-                        
-                                <div class="eachRequest--info_num">
-                                    <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Size:</label>
-                                    <hr class="line"/>
-                                    <div class="floor_info">
-                                        {{arequest.floor_size}} {{arequest.floor_size_unit}} <sup>2</sup>
-                                    </div>
-                                    
-                                </div>
-                        
-                                <div class="eachRequest--info_num">
-                                    <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Number:</label>
-                                    <hr class="line"/>
-                                    <div class="floor_info">
-                                        {{arequest.floor_number}} 
-                                    </div>
-                                    
-                                </div>
-                        
-                                <!-- Optional Tags -->
-                        
-                                {% if arequest.floor_address != "" %}
-                                    <div class="eachRequest--info_num">
-                                        <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Address:</label>
-                                        <hr class="line"/>
-                                        <div class="floor_info">{{arequest.floor_address}} </div>
-                                    </div>
-                                {% endif %}
-                        
-                                <!-- Optional Tags -->
-                        
-                                {% if arequest.floor_height != "" %}
-                                    <div class="eachRequest--info_num">
-                                        <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Height:</label>
-                                        <hr class="line"/>
-                                        <div class="floor_info">
-                                            {{arequest.floor_height}} {{arequest.floor_height_unit}} 
-                                        </div>
-                                    </div>
-                                {% endif %}
-                        
-                                {% if arequest.add_request != "" %}
-                                    <div class="eachRequest--info_num">
-                                        <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Additional Requests:</label>
-                                        <hr class="line"/>
-                                        <div class="floor_info">{{arequest.add_request}}</div>
-                                    </div>
-                                {% endif %}
-                        </div>
-                    
+                    </div>
+
             </div>
             
-        
-        
-            <!-- selected theme -->
-            {% if arequest.selected_theme.all  %}
-            <div class="eachRequest--stheme">
-                <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Selected Theme Preferences</label>
-                <div class="eachRequest--stheme_wrapper" >
-                    {% for theme in arequest.selected_theme.all %}
-                        <img class="eachRequest--stheme_img" src="{{ theme.option }}">
-                    {% endfor %}
+            
+            
+                <div class="progress">
+            
+                        <div class="circle">
+                            <span class="label">1</span>
+                            <span class="title">0%</span>
+                        </div>
+            
+                        <span class="bar"></span>
+                        <div class="circle">
+                            <span class="label">2</span>
+                            <span class="title">25%</span>
+                        </div>
+            
+                        <span class="bar"></span>
+                        <div class="circle">
+                            <span class="label">3</span>
+                            <span class="title">50%</span>
+                        </div>
+            
+                        <span class="bar"></span>
+                        <div class="circle">
+                            <span class="label">4</span>
+                            <span class="title">75%</span>
+                        </div>
+            
+                        <span class="bar"></span>
+                        <div class="circle">
+                            <span class="label">5</span>
+                            <span class="title">100%</span>
+                        </div>
                 </div>
-            </div>
-            {% endif %}
-        
-            <!-- uploaded theme -->
-            {% if arequest.uploaded_theme.all  %}
-            <div class="eachRequest--utheme">
-                <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Uploaded Theme Preferences</label>
-                <div class="eachRequest--utheme_wrapper" >
-                    {% for theme in arequest.uploaded_theme.all %}
+                <div>
+                        <div style="display: flex;">
+                                <div class="eachRequest--plan">
+                                        <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Uploaded Plan Image</label>
+                                        <div class="flexslider">
+                                            <ul class="slides">
+                                                {% for plan in arequest.floor_plan.all %}
+                                                <li>
+                                                    <img class="eachRequest--plan_img" src="{{ plan.photo.url }}">
+                                                    <a class="eachRequest--plan_btn" style = "text-decoration: none;" href= "/{{arequest.id}}/{{plan.id}}/download" >
+                                                        <i class="fas fa-file-download"></i> Press to Download
+                                                    </a>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                
+                                        </div>  
+                                    </div>
+                                    <div class="eachRequest--info">
+                                
+                                            <div class="eachRequest--info_num">
+                                                <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Type :</label>
+                                                <hr class="line"/>
+                                                <div class="floor_info">
+                                                    {% if arequest.floor_type == "Residential" %}
+                                                        {{arequest.floor_type}}
+                                                    {% else %}
+                                                        {{arequest.floor_type}} ( {{arequest.commercial_type}} )
+                                                    {% endif %}
+                    
+                                                </div>
+                                                
+                                                
+                                            </div>
+                                    
+                                            <div class="eachRequest--info_num">
+                                                <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Size:</label>
+                                                <hr class="line"/>
+                                                <div class="floor_info">
+                                                    {{arequest.floor_size}} {{arequest.floor_size_unit}} <sup>2</sup>
+                                                </div>
+                                                
+                                            </div>
+                                    
+                                            <div class="eachRequest--info_num">
+                                                <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Number:</label>
+                                                <hr class="line"/>
+                                                <div class="floor_info">
+                                                    {{arequest.floor_number}} 
+                                                </div>
+                                                
+                                            </div>
+                                    
+                                            <!-- Optional Tags -->
+                                    
+                                            {% if arequest.floor_address != "" %}
+                                                <div class="eachRequest--info_num">
+                                                    <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Address:</label>
+                                                    <hr class="line"/>
+                                                    <div class="floor_info">{{arequest.floor_address}} </div>
+                                                </div>
+                                            {% endif %}
+                                    
+                                            <!-- Optional Tags -->
+                                    
+                                            {% if arequest.floor_height != "" %}
+                                                <div class="eachRequest--info_num">
+                                                    <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Height:</label>
+                                                    <hr class="line"/>
+                                                    <div class="floor_info">
+                                                        {{arequest.floor_height}} {{arequest.floor_height_unit}} 
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                    
+                                            {% if arequest.add_request != "" %}
+                                                <div class="eachRequest--info_num">
+                                                    <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Additional Requests:</label>
+                                                    <hr class="line"/>
+                                                    <div class="floor_info">{{arequest.add_request}}</div>
+                                                </div>
+                                            {% endif %}
+                                    </div>
+                                
+                        </div>
                         
-                        <img class="eachRequest--utheme_img"src="{{ theme.photo.url }}">
-                        
-                    {% endfor %}
+                    
+                    
+                        <!-- selected theme -->
+                        {% if arequest.selected_theme.all  %}
+                        <div class="eachRequest--stheme">
+                            <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Selected Theme Preferences</label>
+                            <div class="eachRequest--stheme_wrapper" >
+                                {% for theme in arequest.selected_theme.all %}
+                                    <img class="eachRequest--stheme_img" src="{{ theme.option }}">
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    
+                        <!-- uploaded theme -->
+                        {% if arequest.uploaded_theme.all  %}
+                        <div class="eachRequest--utheme">
+                            <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Uploaded Theme Preferences</label>
+                            <div class="eachRequest--utheme_wrapper" >
+                                {% for theme in arequest.uploaded_theme.all %}
+                                    
+                                    <img class="eachRequest--utheme_img"src="{{ theme.photo.url }}">
+                                    
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+            
                 </div>
-            </div>
-            {% endif %}
 
     </div>
+    
 
     
     <div class = "eachRequest--chatroom">
 
+        <div class = "eachRequest--chatroom_header">
+            <div>{{arequest.username}} 와 소통방</div>
+        </div>
+
         <div class = "eachRequest--chatroom_msg">
-            <div>Received</div>
+            
             <div>
-                {% for msg in receivedMessages %}
-                    <div>{{msg.title}}</div>
-                    <div>{{msg.content}}</div>
-                {% endfor %}
-            </div>
-            <div>Sent</div>
-            <div>
-                {% for msg in sentMessages %}
-                    {{msg.content}}
+                {% for msg in message_list %}
+                    {% if msg.sender == 'admin' %}
+                    <div class="msg_me">
+                        <div>{{msg.sender}}</div>
+                        <div>{{msg.timestamp}}</div>
+                        <div>{{msg.content}}</div>
+                    </div>
+                    {% else %}
+                    <div class="msg_client">
+                        <div>{{msg.username}}</div>
+                        <div>{{msg.timestamp}}</div>
+                        <div>{{msg.content}}</div>
+                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
 
         </div>
+
         <div class = "eachRequest--chatroom_send"> 
             <form action="/adminpage/{{ arequest.id }}/" method="POST">
                 {% csrf_token %}

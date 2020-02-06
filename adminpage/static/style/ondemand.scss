@@ -383,30 +383,38 @@ html, body{
     margin-top: 80px;
     display: flex;
     flex: 1;
-    flex-direction: column;
+    flex-direction: row;
     padding: 20px;
     position: relative;
 
+    &--request{
+
+        width: 60%;
+        position: relative;
+        &--btnwrapper{
+            margin-top: 10px;
+            position: absolute;
+            right: 0%;
+        }
+    }
+    
     &--editbtn{
-        position: absolute;
-        right: 15%;
+        margin-right: 10px;
         text-decoration: none;
         border-radius: 30px;
         background-color: $btn_darkColor;
         color: white;
-        padding: 10px;
+        padding: 3px 10px 3px 10px;
     }
     &--editbtn:hover{
         background-color: $btn_darkColor_hover;
     }
     &--deletebtn{
-        position: absolute;
-        right: 5%;
         text-decoration: none;
         border-radius: 30px;
         background-color: rgb(112, 10, 10);
         color: white;
-        padding: 10px;
+        padding: 3px 10px 3px 10px;
     }
     &--deletebtn:hover{
         background-color: rgb(128, 14, 14);
@@ -431,10 +439,11 @@ html, body{
         // background-color: black;
         // color:white;
         p2 {
-            margin-left: 20px;
+            margin-left: 10px;
+            margin-top: 10px;
             background-color: black;
             color:white;
-            padding: 10px;
+            padding: 5px 10px 5px 10px;
             border-radius: 10px;
 
         }
@@ -452,7 +461,7 @@ html, body{
         padding: 20px;
 
         .flexslider{
-            width: 500px;
+            width: 330px;
             position: relative;
         }
         
@@ -477,8 +486,7 @@ html, body{
         margin-top: 20px;
         margin-left: 30px;
         padding: 20px;
-        width: 500px;
-        height: 400px;
+        width: 100%;
         background-color: rgba(245, 245, 245, 0.37);
         .line{
             width: 100%;
@@ -502,10 +510,12 @@ html, body{
         margin: 10px;
         margin-bottom: 20px;
         padding: 20px;
+        width: 100%;
+        
         &_img{
             margin: 5px;
-            width: 300px;
-            height: 300px;
+            width: 30%;
+            height: 250px;
         }
 
         &_wrapper{
@@ -548,11 +558,33 @@ html, body{
         font-weight: $bold;
        
     }
+
+    &--chatroom{
+        margin: 10px 40px 0px 30px;
+        width: 35%;
+        height: 94%;
+        border: 1px solid rgba(128, 128, 128, 0.377);
+        // padding: 30px;
+        position: relative;
+
+        &_header{
+            height: 10%;
+            background-color: whitesmoke;
+        }
+        &_send{
+            position: absolute;
+            bottom: 5%;
+            padding: 10px;
+        }
+        &_msg{
+            padding: 30px;
+        }
+    }
 }
 
 // PROGRESS BAR //
 .progress {
-    width: 1000px;
+    width: 700px;
     margin: 20px auto;
     text-align: center;
 }

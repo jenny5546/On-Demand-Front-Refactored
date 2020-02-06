@@ -6,6 +6,7 @@ from django.http import FileResponse
 from random_username.generate import generate_username
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
+from itertools import chain
 import json
 import email.header
 
@@ -24,15 +25,15 @@ def decode_mime_words(s):
 
 # 변경 
 
+user = 'jenny5546@naver.com' # 아키드로우
+password = '851700Pmj!'
 
-
-user = '어쩌고@naver.com' # 아키드로우
-password = '비번'
+# user = '어쩌고@naver.com' # 아키드로우
+# password = '비번'
 
 def send_mail(user, password, sendto, msg_body):
 
   # smtp server
-
   smtpsrv = "smtp.naver.com" # 발신 메일서버 주소
   smtpserver = smtplib.SMTP(smtpsrv, 587) # 발신 메일서버 포트
 
@@ -70,12 +71,17 @@ def check_mail_imap(user, password, target):
         result, data = imapserver.fetch(each_mail, "(RFC822)")
         msg = email.message_from_bytes(data[0][1])
         message_subject = decode_mime_words(str(msg['Subject']))
+        message_timestamp = datetime.strptime(msg['Date'],"%a, %d %b %Y %H:%M:%S %z")  #message 전송 시각
+        print(message_timestamp)
         from_address = email.utils.parseaddr(msg['From'])[1]
-        raw_email = data[0][1]
-        raw_email_string = raw_email.decode('utf-8')
-        email_message = email.message_from_string(raw_email_string)
+        
 
         if target == from_address:
+
+            raw_email = data[0][1]
+            raw_email_string = raw_email.decode('utf-8')
+            email_message = email.message_from_string(raw_email_string)
+            
             for part in email_message.walk():
                 if part.get_content_type() == "text/plain":
                     body = part.get_payload(decode=True)
@@ -84,6 +90,7 @@ def check_mail_imap(user, password, target):
                     details.append(from_address)
                     details.append(message_subject)
                     details.append(message_content)
+                    details.append(message_timestamp)
 
     imapserver.close()
     imapserver.logout()
@@ -246,20 +253,30 @@ def each(request, id):
 
     if(details):
     # 이미 존재하는 이메일이면!
-      if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2]):
+      if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2], timestamp = details[3]):
         print("exists")
 
       else:
         newReceivedMessage = ReceivedMessage.objects.create(
           request = arequest,
+          username = arequest.username,
           sender = details[0],
           title = details[1],
-          content = details[2]
+          content = details[2],
+          timestamp = details[3]
         )
 
     receivedMessages = ReceivedMessage.objects.filter(request = arequest)
-    return render(request, 'adminpage/request.html', {'arequest': arequest, 'sentMessages': sentMessages, 'receivedMessages': receivedMessages})
 
+    message_list = sorted(
+      chain(sentMessages,receivedMessages),
+      key = lambda message: message.timestamp, reverse=False
+    )
+    
+    print(message_list)
+    # return render(request, 'adminpage/request.html', {'arequest': arequest, 'sentMessages': sentMessages, 'receivedMessages': receivedMessages})
+    return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list})
+  
   # 수정하기 + 메세지 보내기
   elif request.method == 'POST':
     # 수정 부분
@@ -270,7 +287,7 @@ def each(request, id):
     add_request = request.POST.get('add_request', arequest.add_request)
 
     # Client에게 메일 보내기 
-    message_content = request.POST['msg_content']
+    message_content = request.POST.get('msg_content', '')
     receiver = arequest.useremail
     send_mail(user, password, receiver, message_content)
     newSentMessage = SentMessage.objects.create(
