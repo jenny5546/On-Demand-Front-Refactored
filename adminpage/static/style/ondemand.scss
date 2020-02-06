@@ -26,8 +26,14 @@ html, body{
     &--nav{
         display: flex;
         list-style: none;
+        text-align: center;
+        
         &_menu{
             padding: 30px;
+            a{ 
+                color: black;
+                text-decoration: none;
+            }
         }
     }
 }
