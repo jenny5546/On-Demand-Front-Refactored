@@ -6,7 +6,7 @@ from django.http import FileResponse
 from random_username.generate import generate_username
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
-import json, os
+import json, os, time, threading
 import email.header
 
 # email
@@ -22,8 +22,12 @@ def decode_mime_words(s):
 
 # 변경 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # email info locate outside of app folder
-user = "haha"
-password = "haha"
+user = "none"
+password = "none"
+target_mail = "none"
+thread_num = 0
+unread_mail_num = 0
+unread_mail = []
 
 secret_file = os.path.join(BASE_DIR, 'secret.json') # email address & password
 with open(secret_file) as f:
@@ -53,8 +57,9 @@ def send_mail(user, password, sendto, msg_body):
   smtpserver.close()
 
 # 메일을 받는 함수(imap4)
+def check_mail_imap(user, password, target='none'):
 
-def check_mail_imap(user, password, target):
+  print("checking!!!")
 
   details = []
   # imap server
@@ -63,6 +68,7 @@ def check_mail_imap(user, password, target):
   imapserver.login(user, password)
   imapserver.select('INBOX')
   res, unseen_data = imapserver.search(None, '(UNSEEN)')
+
   if (unseen_data[0]):
     ids = unseen_data[0] 
     lists = ids.split()
@@ -93,7 +99,8 @@ def check_mail_imap(user, password, target):
 
     imapserver.close()
     imapserver.logout()
-
+    print("hahah", type(details))
+    #threading.Timer(3, check_mail_test).start()
     return details
 
 @csrf_exempt
@@ -161,12 +168,14 @@ def request(request):
 
 
 def dashboard(request):
+  global unread_mail_num
+  global unread_mail
   if request.method == 'GET':
 
     requests = Request.objects.all()
     queryset = Request.objects.order_by('-progress')[:]
     onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
-
+    unread_mail_num = len(unread_mail)/2
     progress = [0,0,0,0,0]
 
     # temp data edit it!
@@ -215,22 +224,72 @@ def dashboard(request):
       'labels': labels,
       'data': data,
       'line_data' : line_data,
+      "unread_mail_num" : unread_mail_num,
     })
 
+def checking(deatail_or_show="show"):
+  global unread_mail_num
+  global unread_mail
+  details = check_mail_imap(user, password)
+  
+  # 감소하는 코드는 없음. detail로 들어가서 확인해야 없어지도록 할 것.
+  if(str(type(details)) == "<class 'list'>"):
+    unread_mail_num = len(details)/2
+    unread_mail = details
+
+  #print('checking: ', unread_mail)
+  
+  # checking mailbox every 3 seconds
+  threading.Timer(3, checking).start()
 
 def show(request):
+  global thread_num
   if request.method == 'GET':
     onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
     totalRequests = Request.objects.all()
 
-    return render(request, 'adminpage/show.html', {'totalRequests': totalRequests, 'onrunRequests': onrunRequests})
+    if(thread_num < 1):
+      checking()
+      thread_num += 1
+    return render(request, 'adminpage/show.html', {
+      'totalRequests': totalRequests, 
+      'onrunRequests': onrunRequests, 
+      "unread_mail_num" : unread_mail_num
+    })
+
 
 def each(request, id):
-  # 보여주기
+  global thread_num
+  global unread_mail_num
+  global unread_mail
+  i = 0
+  delete_index = []
   if request.method == 'GET':
     arequest= Request.objects.get(id = id)
     sentMessages = SentMessage.objects.filter(request = arequest)
+    # email check!
+    target_mail = arequest.useremail
     details = check_mail_imap(user, password, arequest.useremail)
+
+    # Delete read mail
+    for elem in unread_mail:
+      if(elem == arequest.useremail):
+        delete_index.append(i)
+      i += 1
+
+    delete_index.reverse()
+
+    for j in delete_index:
+      unread_mail.pop(j)
+      unread_mail.pop(j)
+    
+
+    # the number of unread mail
+    unread_mail_num = len(unread_mail)/2
+
+    if(thread_num < 1):
+      chacking()
+      thread_num += 1
 
     # details 는 [발신자 이메일, 제목, 내용] 으로 구성된 배열 
     #만약 안읽은게 있다면
@@ -248,7 +307,12 @@ def each(request, id):
         )
 
     receivedMessages = ReceivedMessage.objects.filter(request = arequest)
-    return render(request, 'adminpage/request.html', {'arequest': arequest, 'sentMessages': sentMessages, 'receivedMessages': receivedMessages})
+    return render(request, 'adminpage/request.html', {
+      'arequest': arequest, 
+      'sentMessages': sentMessages, 
+      'receivedMessages': receivedMessages, 
+      "unread_mail_num" : unread_mail_num
+    })
 
   
   # 수정하기 + 메세지 보내기
@@ -275,6 +339,7 @@ def each(request, id):
     arequest.update_date()
 
     return redirect('/'+str(id))
+
 
 def edit(request, id):
   arequest = Request.objects.get(id=id)
