@@ -390,6 +390,11 @@ def messages(request):
      requests = Request.objects.all()
      return render(request, 'adminpage/messages.html', {'requests': requests})
 
+def setting(request):
+  # something
+  return render(request, 'adminpage/setting.html')
+  
+
 
 # messages.html에서 각 inbox누르면 chatroom 띄우기
 # def open_room(request, id):
