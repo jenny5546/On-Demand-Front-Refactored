@@ -58,8 +58,6 @@ def send_mail(user, password, sendto, msg_body):
 
 # 메일을 받는 함수(imap4)
 def check_mail_imap(user, password, target='none'):
-  print("checking!!!")
-
   details = []
   # imap server
   imapsrv = "imap.gmail.com"
@@ -188,6 +186,10 @@ def request(request):
 def dashboard(request):
   global unread_mail_num
   global unread_mail
+  global thread_num
+  if(thread_num < 1):
+    checking()
+    thread_num += 1
   if request.method == 'GET':
 
     requests = Request.objects.all()
