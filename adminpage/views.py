@@ -26,14 +26,13 @@ def decode_mime_words(s):
 # 변경 
 
 
-
 # user = '어쩌고@naver.com' # 아키드로우
 # password = '비번'
 
 def send_mail(user, password, sendto, msg_body):
 
   # smtp server
-  smtpsrv = "smtp.gmail.com"  # 발신 메일서버 주소
+  smtpsrv = "smtp.naver.com" # 발신 메일서버 주소
   smtpserver = smtplib.SMTP(smtpsrv, 587) # 발신 메일서버 포트
 
   smtpserver.ehlo()
@@ -53,10 +52,9 @@ def send_mail(user, password, sendto, msg_body):
 
 
 def check_mail_imap(user, password, target):
-
   details = []
   # imap server
-  imapsrv = "imap.gmail.com"
+  imapsrv = "imap.naver.com"
   imapserver = imaplib.IMAP4_SSL(imapsrv, "993")
   imapserver.login(user, password)
   imapserver.select('INBOX')
@@ -79,12 +77,13 @@ def check_mail_imap(user, password, target):
         
         # print(msg['Date'])
         details.append(from_address)
-        details.append(messvage_subject)
+        details.append(message_subject)
+        
 
         if target == from_address:
 
-            # message_timestamp = datetime.strptime(msg['Date'],'%a, %d %B %Y %H:%M:%S GMT') 
-            # print(message_timestamp)
+            message_timestamp = datetime.strptime(msg['Date'][:-6],'%a, %d %b %Y %H:%M:%S')
+            print(message_timestamp)
             raw_email = data[0][1]
             raw_email_string = raw_email.decode('utf-8')
             email_message = email.message_from_string(raw_email_string)
@@ -99,9 +98,8 @@ def check_mail_imap(user, password, target):
                     details.append(message_timestamp)
         
         else:
-          details.append('')
-          details.append(datetime.strptime('Mon, 23 May 2016 08:30:15 GMT', '%a, %d %B %Y %H:%M:%S GMT'))
-
+          details.append(' ')
+          details.append(' ')
 
     imapserver.close()
     imapserver.logout()
@@ -257,7 +255,7 @@ def each(request, id):
 
     arequest= Request.objects.get(id = id)
     sentMessages = SentMessage.objects.filter(request = arequest)
-    details = check_mail_imap(user, password, arequest.useremail)
+    details = check_mail_imap(user, password, 'piaomj55@naver.com')
 
     # details 는 [발신자 이메일, 제목, 내용] 으로 구성된 배열 
     #만약 안읽은게 있다면
