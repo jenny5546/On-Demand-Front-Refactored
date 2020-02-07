@@ -300,9 +300,6 @@ def each(request, id):
           delete_index.append(i)
       i += 1
 
-    delete_index.reverse()
-
-
     '''
     details 는 [[발신자 이메일, 제목, 내용]] 으로 구성된 배열 
     unread_mail 은 [[mail_struct][mail_struct]....]
