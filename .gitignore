@@ -9,6 +9,7 @@ local_settings.py
 db.sqlite3
 media
 db.sqlite3
+secret.json
 
 ##React##
 /node_modules

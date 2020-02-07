@@ -2,21 +2,16 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-
 # Create your models here.
-
 class SelectedTheme(models.Model):
-
   option = models.TextField(blank=True, null=True)
 
 
 class UploadedTheme(models.Model):
-
   photo = models.FileField(upload_to='floor_theme', blank=True, null=True)
 
 
 class Plan(models.Model):
-
   photo = models.FileField(upload_to='floor_plan', blank=True, null=True)
 
   def int(self):
@@ -32,15 +27,14 @@ class Request(models.Model):
   # 사용자 이메일 받아오기
   useremail = models.CharField(
     max_length = 256,
-    default = 'piaomj55@naver.com'
+    default = 'kimtest0987678@gmail.com'
   )
+
   requested_at = models.DateTimeField(default=timezone.now)
   updated_at = models.DateTimeField(blank=True, null=True)
 
   def two_day_hence():
     return timezone.now() + timezone.timedelta(days=2)
-
-
 
   def update_date(self):
     self.updated_at = timezone.now()
@@ -61,7 +55,6 @@ class Request(models.Model):
     Plan, 
     blank=False, 
     related_name='plan_image'
-
   )
 
   floor_number = models.IntegerField(
@@ -108,10 +101,6 @@ class Request(models.Model):
     blank = True
   )
 
-
-
-
-
 # Client 에게 받은 email
 
 class ReceivedMessage(models.Model):
@@ -131,11 +120,9 @@ class ReceivedMessage(models.Model):
 
 
 # Client 에게 보낸 email
-
 class SentMessage(models.Model):
   sender = models.CharField(max_length = 10, default='admin')
   request = models.ForeignKey(Request, null=True, on_delete = models.CASCADE)
   content = models.TextField()
   timestamp = models.DateTimeField(default=timezone.now)
-
 
