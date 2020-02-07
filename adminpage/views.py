@@ -105,11 +105,6 @@ def check_mail_imap(user, password, target='none'):
                     # print(message_content)
                     details.append(message_content)
                     details.append(message_timestamp)
-        
-        else:
-          details.append('')
-          details.append(datetime.strptime('Mon, 23 May 2016 08:30:15 GMT', '%a, %d %B %Y %H:%M:%S GMT'))
-
 
         # [TODO] no else?
         else:
