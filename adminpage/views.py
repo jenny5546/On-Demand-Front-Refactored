@@ -37,10 +37,6 @@ with open(secret_file) as f:
   password = secret["Password"]
 
 
-
-# user = '어쩌고@naver.com' # 아키드로우
-# password = '비번'
-
 def send_mail(user, password, sendto, msg_body):
 
   # smtp server
@@ -72,7 +68,7 @@ def check_mail_imap(user, password, target='none'):
   imapserver.login(user, password)
   imapserver.select('INBOX')
   res, unseen_data = imapserver.search(None, '(UNSEEN)')
-
+  print("unseen_data", unseen_data)
   if (unseen_data[0]):
     ids = unseen_data[0] 
     lists = ids.split()
@@ -80,19 +76,22 @@ def check_mail_imap(user, password, target='none'):
     # latest_email_id = id_list[-10:] 
     # 메일리스트를 받아서 내용을 파일로 저장하는 함수
     for each_mail in id_list:
+        
       # fetch the email body (RFC822) for the given ID
         result, data = imapserver.fetch(each_mail, "(RFC822)")
         msg = email.message_from_bytes(data[0][1])
         message_subject = decode_mime_words(str(msg['Subject']))
-        message_timestamp = datetime.strptime(msg['Date'],"%a, %d %b %Y %H:%M:%S %z")  #message 전송 시각
-        print(message_timestamp)
+        
+        #print(message_timestamp)
 
         from_address = email.utils.parseaddr(msg['From'])[1]
         
         details.append(from_address)
         details.append(message_subject)
-        if target == from_address:
+        
 
+        if target == from_address:
+            message_timestamp = datetime.strptime(msg['Date'],'%a, %d %B %Y %H:%M:%S GMT')  #message 전송 시각
             raw_email = data[0][1]
             raw_email_string = raw_email.decode('utf-8')
             email_message = email.message_from_string(raw_email_string)
@@ -106,7 +105,10 @@ def check_mail_imap(user, password, target='none'):
                     details.append(message_timestamp)
 
         # [TODO] no else?
-
+        else:
+          details.append(' ')
+          details.append(' ')
+          
     imapserver.close()
     imapserver.logout()
     print("hahah", type(details))
@@ -185,7 +187,7 @@ def dashboard(request):
     requests = Request.objects.all()
     queryset = Request.objects.order_by('-progress')[:]
     onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
-    unread_mail_num = len(unread_mail)/2
+    unread_mail_num = len(unread_mail) # 1개 메일당 contents가 4개니까
     progress = [0,0,0,0,0]
 
     # temp data edit it!
@@ -244,8 +246,8 @@ def checking():
   details = check_mail_imap(user, password) # pull total unread mails
   # 감소하는 코드는 없음. detail로 들어가서 확인해야 없어지도록 할 것.
   if(str(type(details)) == "<class 'list'>" and details != []):
-    unread_mail_num = len(details)/2
-    unread_mail = details
+    unread_mail_num = len(details)
+    unread_mail.append(details.value())
 
   print('checking: ', unread_mail)
   
@@ -282,19 +284,22 @@ def each(request, id):
 
     # Delete read mail
     for elem in unread_mail:
-      if(elem == arequest.useremail):
-        delete_index.append(i)
+      for sub_elem in elem:
+        if(sub_elem == arequest.useremail):
+          delete_index.append(i)
       i += 1
 
     delete_index.reverse()
 
     for j in delete_index:
-      unread_mail.pop(j)
-      unread_mail.pop(j)
+      unread_mail.pop(j) # mail
+      #unread_mail.pop(j) # title
+      #unread_mail.pop(j) # content
+      #unread_mail.pop(j) # time
     
 
     # the number of unread mail
-    unread_mail_num = len(unread_mail)/2
+    unread_mail_num = len(unread_mail)
 
     if(thread_num < 1):
       checking()
