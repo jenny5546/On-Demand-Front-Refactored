@@ -41,6 +41,8 @@ html, body{
     display: flex;
     flex-direction: row;
     flex: 1;
+    // max-width: 100%;
+    // overflow-x: hidden;
     // height: 100%;
 
     // in dashboard table, "click" button
@@ -65,6 +67,7 @@ html, body{
         display: flex;
         flex-direction: column;
         width: 18%;
+        min-width: 18%;
         background-color:  #30343A;
         border-radius: 0px 50px 50px 0px;
 
@@ -390,6 +393,8 @@ html, body{
 
 //SHOW.HTML
 .eachRequest{
+
+    width:100vh;
     font-family: $_base-font-family;
     margin-top: 80px;
     display: flex;
@@ -399,7 +404,7 @@ html, body{
     position: relative;
 
     &--request{
-
+        // margin-right: 100px;
         width: 60%;
         position: relative;
         &--btnwrapper{
@@ -468,12 +473,11 @@ html, body{
         }
     }
     &--plan{
-        margin: 10px;
-        padding: 20px;
+        width: 50%;
 
         .flexslider{
-            width: 330px;
-            height: 300px;
+            width: 100%;
+            // height: 400px;
             position: relative;
         }
         
@@ -494,18 +498,19 @@ html, body{
 
     }
     &--info{
-
+        width: 50%;
         margin-top: 20px;
-        margin-left: 30px;
+        // margin-left: 30px;
         padding: 20px;
-        width: 100%;
+        // width: 80%;
+        // max-width: 400px;
         background-color: rgba(245, 245, 245, 0.37);
+
         .line{
             width: 100%;
             margin-bottom:0;
             margin-top:0;
-            // color: grey;
-            // border: 1px solid grey;
+            
         }
         &_num{
             margin-bottom: 10px;
@@ -549,17 +554,19 @@ html, body{
         margin-bottom: 20px;
         padding: 20px;
         &_img{
-            margin: 10px;
-            width: 300px;
-            height: 300px;
+            margin: 5px;
+            width: 30%;
+            height: 250px;
         }
 
         &_wrapper{
+            align-items: center;
+            justify-content: center;
             margin-top: 20px;
+            text-align: center;
             display: flex;
             flex-wrap: wrap;
             padding: 10px;
-            width:100%;
             border-radius: 10px;
             background-color: rgba(211, 211, 211, 0.137);
         }
@@ -572,15 +579,18 @@ html, body{
     }
 
     &--chatroom{
+
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
         margin: 10px 40px 0px 40px;
         width: 35%;
         height: 94%;
+        max-height: 900px;
         box-shadow: 0 6px 8px rgba(0,0,0,0.30), 0 5px 6px rgba(0,0,0,0.22);
-        // border: 1px solid rgba(128, 128, 128, 0.377);
-        position: relative;
+        position: absolute;
+        right:0%;
+        
         border-radius: 30px;
         background-color: rgba(247, 247, 243, 0.925);
 
@@ -635,7 +645,7 @@ html, body{
         &_msg{
             overflow-y: auto;
             flex-grow: 1;
-            overflow: auto;
+            overflow-x: hidden;
             padding: 30px;
             .msg_me{
                 margin: 10px 7px 10px 7px;
@@ -645,7 +655,7 @@ html, body{
                 color: white;
                 margin-left: 42%;
                 width: 60%;
-                // font-size: 13px;
+                word-wrap: break-word;
 
             }
             .msg_client{
@@ -655,6 +665,7 @@ html, body{
                 padding: 5px 10px 5px 10px;
                 color: black;;
                 width: 60%;
+                word-wrap: break-word;
                 
             }
         }
@@ -971,6 +982,7 @@ html, body{
         font-family: 'Source Sans Pro', sans-serif;
         
         &_table{
+            
 
             // opacity: 60%;
             width: 50%;
@@ -982,6 +994,9 @@ html, body{
             border-top: 1px solid rgba(206, 206, 206, 0.548);
             border-bottom: 1px solid rgba(206, 206, 206, 0.363);
             // margin-bottom: 2px;
+            .x{
+                display: none;
+            }
             &:hover{
                 background-color: rgba(129, 129, 129, 0.11);
                 cursor: pointer;
@@ -1022,6 +1037,7 @@ html, body{
             
         }
         &_table-active{
+            position: relative;
             opacity: 100%;
             width: 50%;
             height: 150px;
@@ -1034,12 +1050,20 @@ html, body{
             background-color: rgba(129, 129, 129, 0.11);
             
             a{
+
                 overflow:hidden;
                 display: flex;
                 
                 .profilepic{
                     padding-left: 10px;
                     padding-right: 10px;
+                }
+                .x{
+                    display:block;
+                    position: absolute;
+                    top: 3%;
+                    right:1%;
+                    color: grey;
                 }
                 
                     

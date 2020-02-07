@@ -24,7 +24,9 @@ def decode_mime_words(s):
     for word, encoding in email.header.decode_header(s))
 
 
-
+# 변경 
+user = 'jenny5546@naver.com' # 아키드로우
+password = '851700Pmj!'
 
 # user = '어쩌고@naver.com' # 아키드로우
 # password = '비번'

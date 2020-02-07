@@ -35,9 +35,9 @@
 
             {% if req.receivedmessage_set.all %}
                 <div class="inbox--body_table" id= "table{{req.id}}">
-
+                    
                     <a id="table-elem" class= "{{ req.id }}">
-
+                        <div class="x"><i class="fas fa-times-circle"></i></div>
                         <div class="profilepic">
                             <img style="width:70px; height:70px" src="{% static 'profile_pic.png' %}"/>
                         </div>
