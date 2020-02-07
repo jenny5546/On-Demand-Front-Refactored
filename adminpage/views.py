@@ -77,7 +77,7 @@ def check_mail_imap(user, password, target='none'):
     # latest_email_id = id_list[-10:] 
     # 메일리스트를 받아서 내용을 파일로 저장하는 함수
     for each_mail in id_list:
-        
+        mail_struct = []
       # fetch the email body (RFC822) for the given ID
         result, data = imapserver.fetch(each_mail, "(RFC822)")
         msg = email.message_from_bytes(data[0][1])
@@ -88,8 +88,10 @@ def check_mail_imap(user, password, target='none'):
 
         from_address = email.utils.parseaddr(msg['From'])[1]
         
-        details.append(from_address)
-        details.append(message_subject)
+        mail_struct.append(from_address)
+        mail_struct.append(message_subject)
+        #details.append(from_address)
+        #details.append(message_subject)
         
 
         if target == from_address:
@@ -103,13 +105,16 @@ def check_mail_imap(user, password, target='none'):
                     body = part.get_payload(decode=True)
                     message_content = body.decode('utf-8')
                     # print(message_content)
-                    details.append(message_content)
-                    details.append(message_timestamp)
+                    mail_struct.append(message_content)
+                    mail_struct.append(message_timestamp)
+                    #details.append(message_content)
+                    #details.append(message_timestamp)
 
         # [TODO] no else?
         else:
-          details.append(' ')
-          details.append(' ')
+          mail_struct.append(' ')
+          mail_struct.append(' ')
+        details.append(mail_struct)
           
     imapserver.close()
     imapserver.logout()
@@ -249,7 +254,7 @@ def checking():
   # 감소하는 코드는 없음. detail로 들어가서 확인해야 없어지도록 할 것.
   if(str(type(details)) == "<class 'list'>" and details != []):
     unread_mail_num = len(details)
-    unread_mail.append(details.value())
+    unread_mail = details
 
   print('checking: ', unread_mail)
   
@@ -287,6 +292,7 @@ def each(request, id):
     # Delete read mail
     for elem in unread_mail:
       for sub_elem in elem:
+        #print("in each!! : ", sub_elem, arequest.useremail)
         if(sub_elem == arequest.useremail):
           delete_index.append(i)
       i += 1
