@@ -37,16 +37,10 @@ with open(secret_file) as f:
   password = secret["Password"]
 
 
-
-# user = '어쩌고@naver.com' # 아키드로우
-# password = '비번'
-
 def send_mail(user, password, sendto, msg_body):
 
   # smtp server
-
-  smtpsrv = "smtp.gmail.com" # 발신 메일서버 주소
-
+  smtpsrv = "smtp.gmail.com"  # 발신 메일서버 주소
   smtpserver = smtplib.SMTP(smtpsrv, 587) # 발신 메일서버 포트
 
   smtpserver.ehlo()
@@ -65,6 +59,7 @@ def send_mail(user, password, sendto, msg_body):
 # 메일을 받는 함수(imap4)
 def check_mail_imap(user, password, target='none'):
   print("checking!!!")
+
   details = []
   # imap server
   imapsrv = "imap.gmail.com"
@@ -72,39 +67,54 @@ def check_mail_imap(user, password, target='none'):
   imapserver.login(user, password)
   imapserver.select('INBOX')
   res, unseen_data = imapserver.search(None, '(UNSEEN)')
-
+  print("unseen_data", unseen_data)
   if (unseen_data[0]):
     ids = unseen_data[0] 
     lists = ids.split()
+    
     id_list = list(reversed(lists))
+    print(id_list.__len__()) # length of unseen mails
+
     # latest_email_id = id_list[-10:] 
     # 메일리스트를 받아서 내용을 파일로 저장하는 함수
     for each_mail in id_list:
+        mail_struct = []
       # fetch the email body (RFC822) for the given ID
         result, data = imapserver.fetch(each_mail, "(RFC822)")
         msg = email.message_from_bytes(data[0][1])
+
         message_subject = decode_mime_words(str(msg['Subject']))
-        message_timestamp = datetime.strptime(msg['Date'],"%a, %d %b %Y %H:%M:%S %z")  #message 전송 시각
-        print(message_timestamp)
-
         from_address = email.utils.parseaddr(msg['From'])[1]
-        
-        details.append(from_address)
-        details.append(message_subject)
-        if target == from_address:
+        mail_struct.append(from_address)
+        mail_struct.append(message_subject)
 
-            raw_email = data[0][1]
-            raw_email_string = raw_email.decode('utf-8')
-            email_message = email.message_from_string(raw_email_string)
-            
-            for part in email_message.walk():
-                if part.get_content_type() == "text/plain":
-                    body = part.get_payload(decode=True)
-                    message_content = body.decode('utf-8')
-                    # print(message_content)
-                    details.append(message_content)
-                    details.append(message_timestamp)
+        '''
+        <TIME DATA INPUT>
+        NAVER, Gmail 은 가능하다.
+        time data format 가장뒤에 (KST)같은 문자열이 없어야 함.
+        DGIST 메일은 (KST) 가 붙어서 오류 뜸.
+        '''
+        print(msg['Date'])
+        message_timestamp = datetime.strptime(msg['Date'],'%a, %d %b %Y %H:%M:%S %z')
+        #message_timestamp = datetime.strptime(msg['Date'],'%a, %d %b %Y %H:%M:%S %z')
 
+        '''
+        <CONTENTS DATA INPUT>
+        '''
+        raw_email = data[0][1]
+        raw_email_string = raw_email.decode('utf-8')
+        email_message = email.message_from_string(raw_email_string)
+        for part in email_message.walk():
+            if part.get_content_type() == "text/plain":
+                body = part.get_payload(decode=True)
+                message_content = body.decode('utf-8')
+                # print(message_content)
+                mail_struct.append(message_content)
+                mail_struct.append(message_timestamp)
+                
+        # update
+        details.append(mail_struct)
+          
     imapserver.close()
     imapserver.logout()
     print("hahah", type(details))
@@ -183,7 +193,7 @@ def dashboard(request):
     requests = Request.objects.all()
     queryset = Request.objects.order_by('-progress')[:]
     onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
-    unread_mail_num = len(unread_mail)/2
+    unread_mail_num = len(unread_mail) # 1개 메일당 contents가 4개니까
     progress = [0,0,0,0,0]
 
     # temp data edit it!
@@ -242,10 +252,10 @@ def checking():
   details = check_mail_imap(user, password) # pull total unread mails
   # 감소하는 코드는 없음. detail로 들어가서 확인해야 없어지도록 할 것.
   if(str(type(details)) == "<class 'list'>" and details != []):
-    unread_mail_num = len(details)/2
     unread_mail = details
-
+  unread_mail_num = len(unread_mail)
   print('checking: ', unread_mail)
+  print("mailnumber : ", unread_mail_num)
   
   # checking mailbox every 3 seconds
   threading.Timer(3, checking).start()
@@ -276,44 +286,44 @@ def each(request, id):
     sentMessages = SentMessage.objects.filter(request = arequest)
     # email check!
     target_mail = arequest.useremail
-    details = check_mail_imap(user, password, arequest.useremail)
+    
+    # erase this code.
+    #details = check_mail_imap(user, password, arequest.useremail)
 
     # Delete read mail
     for elem in unread_mail:
-      if(elem == arequest.useremail):
-        delete_index.append(i)
+      for sub_elem in elem:
+        #print("in each!! : ", sub_elem, arequest.useremail)
+        if(sub_elem == arequest.useremail):
+          delete_index.append(i)
       i += 1
 
     delete_index.reverse()
 
-    for j in delete_index:
-      unread_mail.pop(j)
-      unread_mail.pop(j)
-    
 
-    # the number of unread mail
-    unread_mail_num = len(unread_mail)/2
+    '''
+    details 는 [[발신자 이메일, 제목, 내용]] 으로 구성된 배열 
+    unread_mail 은 [[mail_struct][mail_struct]....]
+    mail_struct 는 [mail, title, content, timestamp]로 구성된 배열
+    '''
 
-    if(thread_num < 1):
-      checking()
-      thread_num += 1
-
-    # details 는 [발신자 이메일, 제목, 내용] 으로 구성된 배열 
     #만약 안읽은게 있다면
-    if(details):
-    # 이미 존재하는 이메일이면!
-      if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2], timestamp = details[3]):
-        print("exists")
-
-      else:
-        newReceivedMessage = ReceivedMessage.objects.create(
-          request = arequest,
-          username = arequest.username,
-          sender = details[0],
-          title = details[1],
-          content = details[2],
-          timestamp = details[3]
-        )
+    if(unread_mail_num):
+    # 이미 존재하는 이메일 / each의 target과 다른 이메일 필터링
+      for mail in unread_mail:
+        if(target_mail == mail[0]):
+          newReceivedMessage = ReceivedMessage.objects.create(
+            request = arequest,
+            username = arequest.username,
+            sender = mail[0],
+            title = mail[1],
+            content = mail[2],
+            timestamp = mail[3]
+          )
+          
+      delete_index.reverse()
+      for j in delete_index:
+        unread_mail.pop(j) # mail
 
     receivedMessages = ReceivedMessage.objects.filter(request = arequest)
 
@@ -373,5 +383,42 @@ def delete(request, id):
   arequest = Request.objects.get(id = id)
   arequest.delete()
   return redirect('/show')
+
+
+def messages(request):
+
+   if request.method == 'GET':
+     requests = Request.objects.all()
+     return render(request, 'adminpage/messages.html', {'requests': requests})
+
+
+# messages.html에서 각 inbox누르면 chatroom 띄우기
+# def open_room(request, id):
+#   arequest = Request.objects.get(id = id)
+
+#   if request.method == 'GET':
+
+#     sentMessages = SentMessage.objects.filter(request = arequest)
+#     details = check_mail_imap(user, password, arequest.useremail)
+    
+#     if(details):
+#     # 이미 존재하는 이메일이면!
+#       if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2], timestamp = details[3]):
+#         print("exists")
+
+#       else:
+#         newReceivedMessage = ReceivedMessage.objects.create(
+#           request = arequest,
+#           username = arequest.username,
+#           sender = details[0],
+#           title = details[1],
+#           content = details[2],
+#           timestamp = details[3]
+#         )
+
+#     receivedMessages = ReceivedMessage.objects.filter(request = arequest)
+    
+#     return render(request, 'adminpage/messages.html', {'receivedMessages': receivedMessages})
+
 
 
