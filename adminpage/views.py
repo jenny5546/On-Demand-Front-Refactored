@@ -33,7 +33,7 @@ def decode_mime_words(s):
 def send_mail(user, password, sendto, msg_body):
 
   # smtp server
-  smtpsrv = "smtp.naver.com" # 발신 메일서버 주소
+  smtpsrv = "smtp.gmail.com"  # 발신 메일서버 주소
   smtpserver = smtplib.SMTP(smtpsrv, 587) # 발신 메일서버 포트
 
   smtpserver.ehlo()
@@ -51,10 +51,12 @@ def send_mail(user, password, sendto, msg_body):
 
 # 메일을 받는 함수(imap4)
 
+
 def check_mail_imap(user, password, target):
+
   details = []
   # imap server
-  imapsrv = "imap.naver.com"
+  imapsrv = "imap.gmail.com"
   imapserver = imaplib.IMAP4_SSL(imapsrv, "993")
   imapserver.login(user, password)
   imapserver.select('INBOX')
@@ -62,21 +64,27 @@ def check_mail_imap(user, password, target):
   if (unseen_data[0]):
     ids = unseen_data[0] 
     lists = ids.split()
+    
     id_list = list(reversed(lists))
+    print(id_list.__len__())
     # latest_email_id = id_list[-10:] 
     # 메일리스트를 받아서 내용을 파일로 저장하는 함수
     for each_mail in id_list:
       # fetch the email body (RFC822) for the given ID
         result, data = imapserver.fetch(each_mail, "(RFC822)")
         msg = email.message_from_bytes(data[0][1])
+
         message_subject = decode_mime_words(str(msg['Subject']))
-        message_timestamp = datetime.strptime(msg['Date'],"%a, %d %b %Y %H:%M:%S %z")  #message 전송 시각
-        print(message_timestamp)
         from_address = email.utils.parseaddr(msg['From'])[1]
+        
+        # print(msg['Date'])
         details.append(from_address)
-        details.append(message_subject)
+        details.append(messvage_subject)
+
         if target == from_address:
 
+            # message_timestamp = datetime.strptime(msg['Date'],'%a, %d %B %Y %H:%M:%S GMT') 
+            # print(message_timestamp)
             raw_email = data[0][1]
             raw_email_string = raw_email.decode('utf-8')
             email_message = email.message_from_string(raw_email_string)
@@ -89,6 +97,11 @@ def check_mail_imap(user, password, target):
                     
                     details.append(message_content)
                     details.append(message_timestamp)
+        
+        else:
+          details.append('')
+          details.append(datetime.strptime('Mon, 23 May 2016 08:30:15 GMT', '%a, %d %B %Y %H:%M:%S GMT'))
+
 
     imapserver.close()
     imapserver.logout()
@@ -249,7 +262,7 @@ def each(request, id):
     # details 는 [발신자 이메일, 제목, 내용] 으로 구성된 배열 
     #만약 안읽은게 있다면
 
-    if(details):
+    if(details[3]):
     # 이미 존재하는 이메일이면!
       if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2], timestamp = details[3]):
         print("exists")

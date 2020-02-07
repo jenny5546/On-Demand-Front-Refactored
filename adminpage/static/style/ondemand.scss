@@ -2,11 +2,12 @@
 @import './config__color';
 @import "https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/flexslider.min.css";
 
+
 * {
     margin: 0;
     padding: 0;
  
-    font-family: $_base-font-family;
+    // font-family: $_base-font-family;
     box-sizing: border-box;
 }
 html, body{
@@ -20,6 +21,7 @@ html, body{
 }
 
 .header {
+    font-family: $_base-font-family;
     height: 75px;
     position: absolute;
     right: 3%;
@@ -58,6 +60,7 @@ html, body{
 
     //side navbar
     .sidenav {
+        font-family: $_base-font-family;
         display: flex;
         flex-direction: column;
         width: 18%;
@@ -158,6 +161,7 @@ html, body{
     }
 
     .dashboard{
+        font-family: $_base-font-family;
         margin-top: 80px;
         display: flex;
         flex: 1;
@@ -256,7 +260,7 @@ html, body{
         }
     }
     .requests{
-
+        font-family: $_base-font-family;
         margin-top: 100px;
         display: flex;
         flex: 1;
@@ -385,7 +389,7 @@ html, body{
 
 //SHOW.HTML
 .eachRequest{
-
+    font-family: $_base-font-family;
     margin-top: 80px;
     display: flex;
     flex: 1;
@@ -599,7 +603,7 @@ html, body{
             
             .input{
                 width: 80%;
-                height: 100px;
+                height: 80px;
                 border: 0;
                 margin-left: 10px;
                 font-size: 15px;
@@ -726,7 +730,7 @@ html, body{
 //Edit Page
 
 .edit{
-
+    font-family: $_base-font-family;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -895,6 +899,7 @@ html, body{
     }
     &--body{
         display: flex;
+        // font-family: 'Source Sans Pro', sans-serif;
         
         &_table{
             width: 50%;
@@ -903,17 +908,20 @@ html, body{
             margin-bottom: 2px;
             a{
                 display: flex;
-            }
-            
-            .profilepic{
-                padding: 10px;
-            }
-                
-            .contents{
-                .username{
-                    font-weight: $bold;
+                .profilepic{
+                    padding: 10px;
+                }
+                    
+                .contents{
+                    font-family: 'Nanum Gothic Coding', monospace !important;
+                    // font-size: 30px;
+                    .username{
+                        // font-weight: $bold;
+                    }
                 }
             }
+            
+            
         }
     }
 
