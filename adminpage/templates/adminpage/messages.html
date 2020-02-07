@@ -40,8 +40,8 @@
                             </div>
                             <div>
                                 {% with req.receivedmessage_set.all.last as msg %}
-                                    <p1>{{msg.title}}</p1>
-                                    <p2>{{msg.content}}</p2>
+                                    <p>Title: {{msg.title}}</p>
+                                    <p>{{msg.content|truncatechars:30}}</p>
                                 {% endwith %}
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                 
                 <div style= "display: none" class= "{{ req.id }}" >
                         {% for msg in req.receivedmessage_set.all %}
-                            <div>{{msg.title}}</div>
+                            <div> {{msg.title}}</div>
                             <div>{{msg.content}}</div>
                         {% endfor %}
                 </div>
