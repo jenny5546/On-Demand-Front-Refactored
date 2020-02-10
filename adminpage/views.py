@@ -299,9 +299,6 @@ def each(request, id):
           delete_index.append(i)
       i += 1
 
-    delete_index.reverse()
-
-
     '''
     details 는 [[발신자 이메일, 제목, 내용]] 으로 구성된 배열 
     unread_mail 은 [[mail_struct][mail_struct]....]
@@ -391,6 +388,11 @@ def messages(request):
    if request.method == 'GET':
      requests = Request.objects.all()
      return render(request, 'adminpage/messages.html', {'requests': requests, "unread_mail_num" : unread_mail_num})
+
+def setting(request):
+  # something
+  return render(request, 'adminpage/setting.html')
+  
 
 
 # messages.html에서 각 inbox누르면 chatroom 띄우기
