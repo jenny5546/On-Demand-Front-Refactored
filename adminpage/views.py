@@ -25,8 +25,7 @@ def decode_mime_words(s):
 
 
 # 변경 
-user = 'jenny5546@naver.com' # 아키드로우
-password = '851700Pmj!'
+
 
 # user = '어쩌고@naver.com' # 아키드로우
 # password = '비번'
@@ -262,20 +261,22 @@ def each(request, id):
     # details 는 [발신자 이메일, 제목, 내용] 으로 구성된 배열 
     #만약 안읽은게 있다면
 
-    if(details[3]):
-    # 이미 존재하는 이메일이면!
-      if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2], timestamp = details[3]):
-        print("exists")
+    #None type error 방지를 위한 code, details가 있고, contents가 있을 때, 
+    if (details): 
+      if(details[2]):
+      # 이미 존재하는 이메일이면!
+        if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2], timestamp = details[3]):
+          print("exists")
 
-      else:
-        newReceivedMessage = ReceivedMessage.objects.create(
-          request = arequest,
-          username = arequest.username,
-          sender = details[0],
-          title = details[1],
-          content = details[2],
-          timestamp = details[3]
-        )
+        else:
+          newReceivedMessage = ReceivedMessage.objects.create(
+            request = arequest,
+            username = arequest.username,
+            sender = details[0],
+            title = details[1],
+            content = details[2],
+            timestamp = details[3]
+          )
 
     receivedMessages = ReceivedMessage.objects.filter(request = arequest)
 
