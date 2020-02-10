@@ -234,14 +234,12 @@ html, body{
                     color: rgb(175, 150, 85);
                 }
                 &-num{
+                    border-top: 1px solid rgb(196, 187, 165);
                     color: rgba(70, 59, 33, 0.521);
-                    font-size: 50px;
-                    margin-top: 60px;
-                    margin-left: 180px;
-                    position: absolute;
-                    bottom: 0;
-                    right: 0;
-                    padding: 30px;
+                    text-align: left;
+                    font-size: 20px;
+                    //position: absolute;
+                    padding: 20px;
 
                 }
             }

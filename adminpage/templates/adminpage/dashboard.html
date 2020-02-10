@@ -7,12 +7,15 @@
     <div class="dashboard--board">
         <div class ="dashboard--board_undone">
             <div class ="dashboard--board_undone-label">
-                <i class="fas fa-edit"></i>Undone Requests
-            </div>
-            <hr style= "margin-top: 10px; width: 160px; border: 1px solid rgb(196, 187, 165); margin-left: 45px;"/>
+                <i class="fas fa-edit"></i>Notice
+            </div> 
             
             <div class ="dashboard--board_undone-num">
-                {{onrunRequests.count}}
+                Mails : {{unread_mail_num}}
+                <br/>
+                Request : {{onrunRequests.count}}
+                <br/>
+                Overdue: <text class="overdate_num">##</text>
             </div>
             
             
@@ -130,7 +133,7 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
     // 테이블 재 세팅
-    var table_html;
+    var table_html, overdate_num = 0
     var k = 0;
     function re_table(line, cols, table_position) {
         table_html = "";
@@ -198,6 +201,9 @@
         $(".overdate").parents("tr").css({
             "background-color": "rgba(214, 70, 65, 0.158)",
         })
+
+        overdate_num = $(".overdate").length
+        $(".overdate_num").text(overdate_num)
     });
     })
 </script>   
