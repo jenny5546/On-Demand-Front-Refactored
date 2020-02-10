@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
+import json, os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -101,6 +101,19 @@ TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBacke
 TEMPLATED_EMAIL_TEMPLATE_DIR = 'templated_email/' #use '' for top level template dir, ensure there is a trailing slash
 TEMPLATED_EMAIL_FILE_EXTENSION = 'email'
 
+secret_file = os.path.join(BASE_DIR, 'secret.json') # email address & password
+with open(secret_file) as f:
+  secret = json.loads(f.read())
+  user = secret["Email"]
+  password = secret["Password"]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = user
+EMAIL_HOST_PASSWORD =password
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL  = 'jangjangman5546@gmail.com'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 

@@ -55,23 +55,8 @@ def send_mail(user, password, sendto, msg_body):
   msg['To'] = sendto
   msg['Subject'] = "[ARCHIDRAW 아키드로우] On-Demand 서비스 문의에 대한 답변이 도착했습니다."
   smtpserver.sendmail(user, sendto, msg.as_string())
-  # smtpserver.send_templated_mail(
-  #         template_name='welcome',
-  #         from_email='jangjangman5546@gmail.com',
-  #         recipient_list=['jangjangman5546@gmail.com'],
-  #         context={
-  #             'username':arequest.username,
-  #             # 'full_name':arequest.username,
-  #             # 'signup_date':arequest.username
-  #         },
-  #         # Optional:
-  #         # cc=['cc@example.com'],
-  #         # bcc=['bcc@example.com'],
-  #         # headers={'My-Custom-Header':'Custom Value'},
-  #         # template_prefix="my_emails/",
-  #         # template_suffix="email",
-  # )
-  # print('done!')
+  
+  print('done!')
   smtpserver.close()
 
 # 메일을 받는 함수(imap4)
@@ -378,6 +363,26 @@ def each(request, id):
       newSentMessage = SentMessage.objects.create(
         request = arequest,
         content = message_content
+      )
+
+      #send mail 대체 ******** template으로 보내기 
+      send_templated_mail( 
+          template_name='welcome',
+          from_email= 'jangjangman5546@gmail.com',
+          recipient_list=[arequest.useremail],
+          context={
+              'username': arequest.username,
+              'content' : message_content,
+              # 'full_name':arequest.username,
+              # 'signup_date':arequest.username
+          },
+          
+          # Optional:
+          # cc=['cc@example.com'],
+          # bcc=['bcc@example.com'],
+          # headers={'My-Custom-Header':'Custom Value'},
+          # template_prefix="my_emails/",
+          # template_suffix="email",
       )
       
 
