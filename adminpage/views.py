@@ -319,7 +319,9 @@ def each(request, id):
   global unread_mail
   global unread_mail_id
   i = 0
+  j = 0
   delete_index = []
+  delete_id_index = []
   if request.method == 'GET':
     arequest= Request.objects.get(id = id)
     sentMessages = SentMessage.objects.filter(request = arequest)
@@ -339,7 +341,8 @@ def each(request, id):
     
     for mail_id in unread_mail_id:
       if(mail_id == arequest.id):
-        unread_mail_id.remove(mail_id)
+        delete_id_index.append(j)
+      j += 1
 
 
     '''
@@ -351,8 +354,12 @@ def each(request, id):
     if(unread_mail_num):
     # 이미 존재하는 이메일 / each의 target과 다른 이메일 필터링   
       delete_index.reverse()
-      for j in delete_index:
-        unread_mail.pop(j) # mail
+      delete_id_index.reverse()
+      for i in delete_index:
+        unread_mail.pop(i) # mail
+      for j in delete_id_index:
+        unread_mail_id.pop(j)
+
 
     receivedMessages = ReceivedMessage.objects.filter(request = arequest)
 
