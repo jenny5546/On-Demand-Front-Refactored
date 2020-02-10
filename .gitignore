@@ -11,6 +11,8 @@ media
 db.sqlite3
 secret.json
 
+
+
 ##React##
 /node_modules
 /.pnp

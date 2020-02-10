@@ -20,7 +20,9 @@ django-appconf==1.0.3
 django-compressor==2.4
 django-cors-headers==3.2.1
 django-model-utils==4.0.0
+django-render-block==0.6
 django-sass-processor==0.8
+django-templated-email==2.3.0
 djangorestframework==3.11.0
 freeze==1.0.10
 hiredis==1.0.1
