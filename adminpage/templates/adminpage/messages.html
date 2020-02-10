@@ -20,13 +20,23 @@
 
     {% for req in requests %}
         <script>
-            $(document).on('click', '#table-elem', function(e){
+            $(document).on('click', '#table-elem', function toggling(){
                 var show = $(this).parent().parent().find('#detail' + {{req.id}});
                 var table = $(this).parent().parent().find('#table' + {{req.id}});
                 show.toggle();
-                table.toggleClass('inbox--body_table-active');
+                var othert = $('.inbox--body_table').not(table)
                 
+                if (table.attr('class') == 'inbox--body_table'){
+                    table.removeClass('inbox--body_table').addClass('inbox--body_table-active')
+                    othert.css("pointer-events","none")
+                }
+                else if (table.attr('class') == 'inbox--body_table-active'){
+                    table.removeClass('inbox--body_table-active').addClass('inbox--body_table')
+                    othert.css("pointer-events","auto")
+                }
+
             })
+            
            
         </script>
 
