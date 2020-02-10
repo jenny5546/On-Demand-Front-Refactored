@@ -263,12 +263,30 @@ def checking():
 
 def show(request):
   global thread_num
+  global unread_mail_num
+  global unread_mail
   if request.method == 'GET':
     onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
     totalRequests = Request.objects.all()
     if(thread_num < 1):
       checking()
       thread_num += 1
+
+    print(totalRequests)
+    for req in totalRequests:
+      if(unread_mail_num):
+        for mail in unread_mail:
+          if(mail[0]==req.useremail):
+            newReceivedMessage = ReceivedMessage.objects.create(
+              request = req,
+              username = req.username,
+              sender = mail[0],
+              title = mail[1],
+              content = mail[2],
+              timestamp = mail[3]
+            )
+
+      
     return render(request, 'adminpage/show.html', {
       'totalRequests': totalRequests, 
       'onrunRequests': onrunRequests, 
@@ -307,18 +325,7 @@ def each(request, id):
 
     #만약 안읽은게 있다면
     if(unread_mail_num):
-    # 이미 존재하는 이메일 / each의 target과 다른 이메일 필터링
-      for mail in unread_mail:
-        if(mail[0]==target_mail):
-          newReceivedMessage = ReceivedMessage.objects.create(
-            request = arequest,
-            username = arequest.username,
-            sender = mail[0],
-            title = mail[1],
-            content = mail[2],
-            timestamp = mail[3]
-          )
-          
+    # 이미 존재하는 이메일 / each의 target과 다른 이메일 필터링   
       delete_index.reverse()
       for j in delete_index:
         unread_mail.pop(j) # mail
