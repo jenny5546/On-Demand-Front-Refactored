@@ -38,6 +38,36 @@ html, body{
             }
         }
     }
+    .count-num1{
+        position:absolute;
+        top: 20%;
+        right: 23%;
+        // margin-left: 5px;
+        font-weight: $black;
+        font-size: 12px;
+        background-color: rgb(148, 20, 20);
+        // padding-bottom: 3px;
+        color: white;
+        border-radius: 100%;
+        width: 20px;
+        height: 20px;
+
+    }
+    .count-num2{
+        position:absolute;
+        top: 20%;
+        right: 3%;
+        // margin-left: 5px;
+        font-weight: $black;
+        font-size: 12px;
+        background-color: rgb(148, 20, 20);
+        // padding-bottom: 3px;
+        color: white;
+        border-radius: 100%;
+        width: 20px;
+        height: 20px;
+
+    }
 }
 
 
