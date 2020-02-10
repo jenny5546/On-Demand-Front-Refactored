@@ -390,7 +390,7 @@ def messages(request):
 
    if request.method == 'GET':
      requests = Request.objects.all()
-     return render(request, 'adminpage/messages.html', {'requests': requests})
+     return render(request, 'adminpage/messages.html', {'requests': requests, "unread_mail_num" : unread_mail_num})
 
 
 # messages.html에서 각 inbox누르면 chatroom 띄우기
