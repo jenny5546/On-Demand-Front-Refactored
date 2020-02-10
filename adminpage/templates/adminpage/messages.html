@@ -6,6 +6,8 @@
 <script>
 
     $(document).ready(function() { 
+        const mid = $(".mid")
+        mid.css("overflow","hidden")
         const active_menu = $('#messages')
         active_menu.removeClass('sidenav--menu_sub').addClass('sidenav--menu_sub-active'); 
     });
@@ -13,62 +15,74 @@
 </script>
 <div class="inbox">
     <div class="inbox--header">
-        Inbox
+            <i class="fas fa-inbox"></i> On-Run Inbox
     </div>
 
     {% for req in requests %}
         <script>
-            $(document).ready(function() { 
-                const ids = {{req.id}};
-                $("#" + ids).click(function() {
-                    if ($("."+ ids).css("display") == "block"){
-                        $("."+ ids).css("display","none");
-                    }
-                    else {
-                        $("."+ ids).css("display","block");
-                    }
-                    console.log("hi") 
-                })
-            });
+            $(document).on('click', '#table-elem', function(e){
+                var show = $(this).parent().parent().find('#detail' + {{req.id}});
+                var table = $(this).parent().parent().find('#table' + {{req.id}});
+                show.toggle();
+                table.toggleClass('inbox--body_table-active');
+                
+            })
+           
         </script>
 
+        {% if req.progress != 5 %}
         <div class= "inbox--body">
 
             {% if req.receivedmessage_set.all %}
-                <div class="inbox--body_table">
-
-                    <a id = "{{ req.id }}">
-
+                <div class="inbox--body_table" id= "table{{req.id}}">
+                    
+                    <a id="table-elem" class= "{{ req.id }}">
+                        <div class="x"><i class="fas fa-times-circle"></i></div>
                         <div class="profilepic">
-                            <img style="width:60px; height:60px" src="{% static 'profile_pic.png' %}"/>
+                            <img style="width:70px; height:70px" src="{% static 'profile_pic.png' %}"/>
                         </div>
 
                         <div class ="contents">
                             <div class="username">
                                 {{req.username}}
                             </div>
-                            <div>
+                            <div class="msg">
                                 {% with req.receivedmessage_set.all.last as msg %}
-                                    <p>{{msg.title}}</p>
-                                    <p>{{msg.content|truncatechars:30}}</p>
+                                    <div class="title">{{msg.title}}</div>
+                                    <div class="content">{{msg.content|truncatechars:110}}</div>
                                 {% endwith %}
                             </div>
                         </div>
                     </a>
                 </div>
                 
-                <div style= "display: none" class= "{{ req.id }}" >
+                <div name = "detail" class= "inbox--body_detail" id= "detail{{req.id}}" >
+                    
+                    <div class="head">
+                        <p>All Previous Messages from <p1>{{req.username}}</p1></p>
+                        <div class="navigate">
+                            <a href="http://localhost:8000/{{req.id}}/">Go <i class="fas fa-chevron-circle-right"></i></a>
+                        </div>
+                    </div>
+                    
                     {% for msg in req.receivedmessage_set.all %}
-
+                    <div class = "each-msg">
+                        <div style="margin-right: 10px;">{{forloop.counter}}.</div>
                         <div>
-                            <div> {{msg.title}}</div>
-                            <div>{{msg.content}}</div>
+                            <div class = "title"> {{msg.title}}</div>
+                            <div class = "content">{{msg.content}}</div>
+                            <div class = "date">{{msg.timestamp}}</div>
                         </div>
                         
+                        
+                    </div>
+                    
                     {% endfor %}
+                    
                 </div>
             {% endif %}
         </div>
+        {% endif %}
 
     {% endfor %}
 

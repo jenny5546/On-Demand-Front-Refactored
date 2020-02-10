@@ -40,7 +40,7 @@ with open(secret_file) as f:
 def send_mail(user, password, sendto, msg_body):
 
   # smtp server
-  smtpsrv = "smtp.gmail.com"  # 발신 메일서버 주소
+  smtpsrv = "smtp.gmail.com" # 발신 메일서버 주소
   smtpserver = smtplib.SMTP(smtpsrv, 587) # 발신 메일서버 포트
 
   smtpserver.ehlo()
@@ -53,7 +53,7 @@ def send_mail(user, password, sendto, msg_body):
   msg['To'] = sendto
   msg['Subject'] = "[ARCHIDRAW 아키드로우] On-Demand 서비스 문의에 대한 답변이 도착했습니다."
   smtpserver.sendmail(user, sendto, msg.as_string())
-  print('done!')
+  # print('done!')
   smtpserver.close()
 
 # 메일을 받는 함수(imap4)
@@ -65,13 +65,13 @@ def check_mail_imap(user, password, target='none'):
   imapserver.login(user, password)
   imapserver.select('INBOX')
   res, unseen_data = imapserver.search(None, '(UNSEEN)')
-  print("unseen_data", unseen_data)
+  # print("unseen_data", unseen_data)
   if (unseen_data[0]):
     ids = unseen_data[0] 
     lists = ids.split()
     
     id_list = list(reversed(lists))
-    print(id_list.__len__()) # length of unseen mails
+    # print(id_list.__len__()) # length of unseen mails
 
     # latest_email_id = id_list[-10:] 
     # 메일리스트를 받아서 내용을 파일로 저장하는 함수
@@ -92,9 +92,8 @@ def check_mail_imap(user, password, target='none'):
         time data format 가장뒤에 (KST)같은 문자열이 없어야 함.
         DGIST 메일은 (KST) 가 붙어서 오류 뜸.
         '''
-        print(msg['Date'])
-        message_timestamp = datetime.strptime(msg['Date'],'%a, %d %b %Y %H:%M:%S %z')
-        #message_timestamp = datetime.strptime(msg['Date'],'%a, %d %b %Y %H:%M:%S %z')
+        
+        message_timestamp = datetime.strptime(msg['Date'][:31],'%a, %d %b %Y %H:%M:%S %z')
 
         '''
         <CONTENTS DATA INPUT>
@@ -115,7 +114,7 @@ def check_mail_imap(user, password, target='none'):
           
     imapserver.close()
     imapserver.logout()
-    print("hahah", type(details))
+    # print("hahah", type(details))
     #threading.Timer(3, check_mail_test).start()
     return details
 
@@ -128,7 +127,7 @@ def request(request):
     #연결해야하는 부분 
     #요청한 사람 정보(user)
     username = generate_username(1)[0]
-    useremail = 'taiyoung1122@naver.com'
+    useremail = 'jenny5546@likelion.org' #연결할때, front에서 들고오기
     # print(user)
     floor_type = request.POST.get('floor_type')
     commercial_type = request.POST.get('commercial_type')
@@ -310,7 +309,7 @@ def each(request, id):
     if(unread_mail_num):
     # 이미 존재하는 이메일 / each의 target과 다른 이메일 필터링
       for mail in unread_mail:
-        if(target_mail == mail[0]):
+        if(mail[0]==target_mail):
           newReceivedMessage = ReceivedMessage.objects.create(
             request = arequest,
             username = arequest.username,
@@ -388,7 +387,7 @@ def messages(request):
 
    if request.method == 'GET':
      requests = Request.objects.all()
-     return render(request, 'adminpage/messages.html', {'requests': requests})
+     return render(request, 'adminpage/messages.html', {'requests': requests, "unread_mail_num" : unread_mail_num})
 
 def setting(request):
   # something

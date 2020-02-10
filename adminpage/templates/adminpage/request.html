@@ -249,6 +249,7 @@
 
         <div class = "eachRequest--chatroom_msg">
             
+            {% if message_list %}
             <div>
                 {% for msg in message_list %}
                     {% if msg.sender == 'admin' %}
@@ -273,13 +274,14 @@
                     {% endif %}
                 {% endfor %}
             </div>
+            {% endif %}
 
         </div>
 
         <div class = "eachRequest--chatroom_send"> 
             <form style="display: flex; padding: 20px;" action="/adminpage/{{ arequest.id }}/" method="POST">
                 {% csrf_token %}
-                <input type="text" class="input" placeholder= "Enter your message" name="msg_content"></input>
+                <textarea class="input" placeholder= "Enter your message" name="msg_content"></textarea>
                 <input class="submit" type="submit" value="Send"/>
             </form>
         </div>
