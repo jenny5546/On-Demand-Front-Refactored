@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'adminpage.apps.AdminpageConfig',
     'corsheaders',
     'sass_processor',
+    'templated_email',
 ]
 
 MIDDLEWARE = [
@@ -96,6 +97,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ondemand.wsgi.application'
 
+TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
+TEMPLATED_EMAIL_TEMPLATE_DIR = 'templated_email/' #use '' for top level template dir, ensure there is a trailing slash
+TEMPLATED_EMAIL_FILE_EXTENSION = 'email'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

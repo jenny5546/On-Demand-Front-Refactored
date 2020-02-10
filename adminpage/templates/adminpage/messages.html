@@ -59,7 +59,7 @@
                             <div class="msg">
                                 {% with req.receivedmessage_set.all.last as msg %}
                                     <div class="title">{{msg.title}}</div>
-                                    <div class="content">{{msg.content|truncatechars:110}}</div>
+                                    <div class="content">{{msg.content|truncatechars:90}}</div>
                                 {% endwith %}
                             </div>
                         </div>
