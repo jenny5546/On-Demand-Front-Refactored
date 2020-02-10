@@ -309,6 +309,7 @@ def each(request, id):
   global thread_num
   global unread_mail_num
   global unread_mail
+  global unread_mail_id
   i = 0
   delete_index = []
   if request.method == 'GET':
@@ -327,13 +328,17 @@ def each(request, id):
         if(sub_elem == arequest.useremail):
           delete_index.append(i)
       i += 1
+    
+    for mail_id in unread_mail_id:
+      if(mail_id == arequest.id):
+        unread_mail_id.remove(mail_id)
+
 
     '''
     details 는 [[발신자 이메일, 제목, 내용]] 으로 구성된 배열 
     unread_mail 은 [[mail_struct][mail_struct]....]
     mail_struct 는 [mail, title, content, timestamp]로 구성된 배열
     '''
-
     #만약 안읽은게 있다면
     if(unread_mail_num):
     # 이미 존재하는 이메일 / each의 target과 다른 이메일 필터링   

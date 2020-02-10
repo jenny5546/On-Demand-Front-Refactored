@@ -9,7 +9,7 @@
         <div class="requests-table-top">
             <div class= "requests-title">
                 On Run Requests
-                <h2>{{unread_mail_id}} </h2>
+                <!--<h2>{{unread_mail_id}} </h2>-->
             </div>
             <div class="search_menu">
                 <p style="margin-right: 10px;">Search: </p>
@@ -383,6 +383,25 @@
         $(".overdate").parents("tr").css({
             "background-color": "rgba(214, 70, 65, 0.158)",
         })
+    });
+    
+    /* unread mail make red */
+    $(document).ready(function() { 
+        let unread_id = Object.values({{unread_mail_id}})
+        console.log(unread_id.length)
+        console.log(String(unread_id[0]))
+        for(var i = 0; i < unread_id.length; i++){
+            $("td").filter(function() {
+                return $(this).text() === String(unread_id[i]);
+            }).parents("tr").css({
+                "font-weight" : "500"
+            })
+        }
+        /*
+        $('td:contains("7")').css({
+            "background-color" : "black"
+        }); 
+        */
     });
 </script>   
 
