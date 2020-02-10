@@ -29,6 +29,8 @@ target_mail = "none"
 thread_num = 0
 unread_mail_num = 0
 unread_mail = []
+unread_mail_id = []
+unmade_model_num = 0
 
 secret_file = os.path.join(BASE_DIR, 'secret.json') # email address & password
 with open(secret_file) as f:
@@ -250,31 +252,23 @@ def dashboard(request):
 def checking():
   global unread_mail_num
   global unread_mail
+  global unmade_model_num
   details = check_mail_imap(user, password) # pull total unread mails
+  totalRequests = Request.objects.all()
   # 감소하는 코드는 없음. detail로 들어가서 확인해야 없어지도록 할 것.
   if(str(type(details)) == "<class 'list'>" and details != []):
     unread_mail = details
+    unmade_model_num += len(unread_mail)
+    
   unread_mail_num = len(unread_mail)
   print('checking: ', unread_mail)
   print("mailnumber : ", unread_mail_num)
-  
-  # checking mailbox every 3 seconds
-  threading.Timer(3, checking).start()
+  print("unmad model num: ", unmade_model_num)
+  print("unread_mail_id: ", unread_mail_id)
 
-def show(request):
-  global thread_num
-  global unread_mail_num
-  global unread_mail
-  if request.method == 'GET':
-    onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
-    totalRequests = Request.objects.all()
-    if(thread_num < 1):
-      checking()
-      thread_num += 1
-
-    print(totalRequests)
+  if(unread_mail_num):
     for req in totalRequests:
-      if(unread_mail_num):
+      if(unmade_model_num):
         for mail in unread_mail:
           if(mail[0]==req.useremail):
             newReceivedMessage = ReceivedMessage.objects.create(
@@ -285,12 +279,29 @@ def show(request):
               content = mail[2],
               timestamp = mail[3]
             )
+            unread_mail_id.append(req.id)
+    unmade_model_num = 0
+  
+  # checking mailbox every 3 seconds
+  threading.Timer(3, checking).start()
 
-      
+def show(request):
+  global thread_num
+  global unread_mail_num
+  global unread_mail
+  global unmade_model_num
+  if request.method == 'GET':
+    onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
+    totalRequests = Request.objects.all()
+    if(thread_num < 1):
+      checking()
+      thread_num += 1
+   
     return render(request, 'adminpage/show.html', {
       'totalRequests': totalRequests, 
       'onrunRequests': onrunRequests, 
-      "unread_mail_num" : unread_mail_num
+      "unread_mail_num" : unread_mail_num,
+      "unread_mail_id" : unread_mail_id,
     })
 
 
@@ -336,8 +347,6 @@ def each(request, id):
       chain(sentMessages,receivedMessages),
       key = lambda message: message.timestamp, reverse=False
     )
-    
-    print(message_list)
     # return render(request, 'adminpage/request.html', {'arequest': arequest, 'sentMessages': sentMessages, 'receivedMessages': receivedMessages})
     return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list,"unread_mail_num" : unread_mail_num})
   
