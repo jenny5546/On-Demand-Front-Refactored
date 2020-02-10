@@ -9,6 +9,7 @@ from datetime import datetime
 import json, os, time, threading
 from itertools import chain
 import email.header
+from bs4 import BeautifulSoup
 
 # email
 import smtplib, imaplib, poplib, email
@@ -80,7 +81,7 @@ def check_mail_imap(user, password, target='none'):
       # fetch the email body (RFC822) for the given ID
         result, data = imapserver.fetch(each_mail, "(RFC822)")
         msg = email.message_from_bytes(data[0][1])
-
+        print(msg)
         message_subject = decode_mime_words(str(msg['Subject']))
         from_address = email.utils.parseaddr(msg['From'])[1]
         mail_struct.append(from_address)
@@ -94,7 +95,8 @@ def check_mail_imap(user, password, target='none'):
         '''
         
         message_timestamp = datetime.strptime(msg['Date'][:31],'%a, %d %b %Y %H:%M:%S %z')
-
+        print('date:' + msg['Date'])
+        # print(message_timestamp)
         '''
         <CONTENTS DATA INPUT>
         '''
@@ -102,12 +104,18 @@ def check_mail_imap(user, password, target='none'):
         raw_email_string = raw_email.decode('utf-8')
         email_message = email.message_from_string(raw_email_string)
         for part in email_message.walk():
-            if part.get_content_type() == "text/plain":
-                body = part.get_payload(decode=True)
-                message_content = body.decode('utf-8')
-                # print(message_content)
-                mail_struct.append(message_content)
-                mail_struct.append(message_timestamp)
+          # print('type'+ part.get_content_maintype())
+          if part.get_content_type() == "text/plain":
+            body = part.get_payload(decode=True)
+            message_content = body.decode('utf-8')
+            mail_struct.append(message_content)
+            mail_struct.append(message_timestamp)
+
+          elif part.get_content_type() == 'text/html':
+            body = part.get_payload(decode=True)
+            message_content = BeautifulSoup(body.decode('UTF-8'), "html.parser")
+            mail_struct.append(message_content.get_text())
+            mail_struct.append(message_timestamp)
                 
         # update
         details.append(mail_struct)
@@ -127,7 +135,7 @@ def request(request):
     #연결해야하는 부분 
     #요청한 사람 정보(user)
     username = generate_username(1)[0]
-    useremail = 'jenny5546@likelion.org' #연결할때, front에서 들고오기
+    useremail = 'jenny5546@nate.com' #연결할때, front에서 들고오기
     # print(user)
     floor_type = request.POST.get('floor_type')
     commercial_type = request.POST.get('commercial_type')

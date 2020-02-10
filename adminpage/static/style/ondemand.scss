@@ -1136,7 +1136,11 @@ html, body{
             @include mixin-toggle;
             
         }
-        
+        .inbox--body_detail-active{
+            display: block;
+            @include mixin-toggle;
+            
+        }
     }
 
 }
