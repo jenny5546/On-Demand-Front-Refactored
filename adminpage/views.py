@@ -127,7 +127,7 @@ def request(request):
     #연결해야하는 부분 
     #요청한 사람 정보(user)
     username = generate_username(1)[0]
-    useremail = 'jenny5546@naver.com'
+    useremail = 'jenny5546@likelion.org'
     # print(user)
     floor_type = request.POST.get('floor_type')
     commercial_type = request.POST.get('commercial_type')
@@ -312,7 +312,7 @@ def each(request, id):
     if(unread_mail_num):
     # 이미 존재하는 이메일 / each의 target과 다른 이메일 필터링
       for mail in unread_mail:
-        if(target_mail == mail[0]):
+        if(mail[0]==target_mail):
           newReceivedMessage = ReceivedMessage.objects.create(
             request = arequest,
             username = arequest.username,
