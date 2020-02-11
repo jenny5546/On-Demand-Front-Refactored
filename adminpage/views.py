@@ -1,20 +1,22 @@
 from django.shortcuts import render, redirect
 from .models import Request, Plan, SelectedTheme, UploadedTheme, SentMessage, ReceivedMessage
-from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect, FileResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.http import FileResponse
 from random_username.generate import generate_username
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime
 import json, os, time, threading
 from itertools import chain
-import email.header
 from bs4 import BeautifulSoup
-from templated_email import send_templated_mail, InlineImage
 
 # email
-import smtplib, imaplib, poplib, email
-from email.mime.text import MIMEText
+import smtplib, imaplib, email
+import email.header
+from email.mime.multipart import MIMEMultipart 
+from email.mime.image import MIMEImage
+from email.mime.text import MIMEText 
+from email.mime.base import MIMEBase 
+from templated_email import send_templated_mail, InlineImage
 
 # email parsing 함수
 
@@ -35,31 +37,12 @@ unread_mail_id = []
 unmade_model_num = 0
 
 secret_file = os.path.join(BASE_DIR, 'secret.json') # email address & password
+
 with open(secret_file) as f:
   secret = json.loads(f.read())
   user = secret["Email"]
   password = secret["Password"]
 
-
-# def send_mail(user, password, sendto, msg_body):
-
-#   # smtp server
-#   smtpsrv = "smtp.gmail.com" # 발신 메일서버 주소
-#   smtpserver = smtplib.SMTP(smtpsrv, 587) # 발신 메일서버 포트
-
-#   smtpserver.ehlo()
-#   smtpserver.starttls()
-#   smtpserver.ehlo()
-#   smtpserver.login(user, password)
-
-#   msg = MIMEText(msg_body)
-#   msg['From'] = user
-#   msg['To'] = sendto
-#   msg['Subject'] = "[ARCHIDRAW 아키드로우] On-Demand 서비스 문의에 대한 답변이 도착했습니다."
-#   smtpserver.sendmail(user, sendto, msg.as_string())
-  
-#   print('done!')
-#   smtpserver.close()
 
 # 메일을 받는 함수(imap4)
 def check_mail_imap(user, password, target='none'):
@@ -383,19 +366,24 @@ def each(request, id):
     # Client에게 메일 보내기 
     message_content = request.POST.get('msg_content', '')
     receiver = arequest.useremail
-    if (message_content != ''):
-      # send_mail(user, password, receiver, message_content)
+    # 첨부파일 처리 
+    att_list = [] 
+    if request.FILES:
+      att_list = request.FILES.getlist('msg_attachments')
 
+    if (message_content != ''):
+      
+      #logo template 넘기기 위한 경로
       module_dir = os.path.dirname(__file__)
       image_path = os.path.join(module_dir, 'static/Logo.png')
-    
-      
+
       #templated email로 이미지 넘겨주는 함수 
       with open(image_path, 'rb') as logo: 
         archi_image = logo.read()
-        inline_logo = InlineImage(filename="logo.png", content=archi_image)
-
+        inline_logo = InlineImage(filename="Logo.png", content=archi_image)
+        
         send_templated_mail( 
+
             template_name='basic',
             from_email= 'jangjangman5546@gmail.com',
             recipient_list=[receiver],
@@ -404,10 +392,11 @@ def each(request, id):
                 'content' : message_content,
                 'logo' : inline_logo,
             },
+            attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),
             # Optional:
             # cc=['cc@example.com'],
             # bcc=['bcc@example.com'],
-            # headers={'My-Custom-Header':'Custom Value'},
+            # headers={'Content-Disposition' :"attachment; filename= %s" % filename},
             # template_prefix="my_emails/",
             # template_suffix="email",
         )
@@ -436,6 +425,7 @@ def edit(request, id):
 
 
 def download(request, req_id, file_id):
+
   arequest= Request.objects.get(id = req_id)
   afile = arequest.floor_plan.get(id = file_id)
   fs = FileSystemStorage('../On-Demand-Back/media')
@@ -444,6 +434,7 @@ def download(request, req_id, file_id):
   return response
 
 def delete(request, id):
+
   arequest = Request.objects.get(id = id)
   arequest.delete()
   return redirect('/show')

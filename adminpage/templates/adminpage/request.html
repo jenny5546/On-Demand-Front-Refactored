@@ -2,6 +2,7 @@
 
 {% block content %}
 {% load static %}
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/jquery.flexslider-min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() { 
@@ -279,8 +280,9 @@
         </div>
 
         <div class = "eachRequest--chatroom_send"> 
-            <form style="display: flex; padding: 20px; height: 100%;" action="/adminpage/{{ arequest.id }}/" method="POST">
+            <form enctype="multipart/form-data" style="display: flex; padding: 20px; height: 100%;" action="/adminpage/{{ arequest.id }}/" method="POST">
                 {% csrf_token %}
+                <input style="width: 10px;" type="file" name="msg_attachments" multiple="multiple"/>
                 <textarea class="input" placeholder= "Enter your message" name="msg_content"></textarea>
                 <input class="submit" type="submit" value="Send"/>
             </form>
