@@ -23,35 +23,37 @@
             $(document).on('click', '#table-elem', function toggling(){
                 var show = $(this).parent().parent().find('#detail' + {{req.id}});
                 var table = $(this).parent().parent().find('#table' + {{req.id}});
-                show.toggle();
+                //show.toggle();
                 var othert = $('.inbox--body_table').not(table)
                 
+                
                 if (table.attr('class') == 'inbox--body_table'){
-                    table.removeClass('inbox--body_table').addClass('inbox--body_table-active')
-                    othert.css("pointer-events","none")
+                    $(".inbox--body_table-active").removeClass('inbox--body_table-active').addClass('inbox--body_table')
+                    $(".inbox--body_detail-active").removeClass('inbox--body_detail-active').addClass('inbox--body_detail')
+                    $(this).parent().removeClass('inbox--body_table').addClass('inbox--body_table-active')
+                    $(this).parent().next().removeClass('inbox--body_detail').addClass('inbox--body_detail-active')
+                    
+                    //othert.css("pointer-events","none")
                 }
                 else if (table.attr('class') == 'inbox--body_table-active'){
-                    table.removeClass('inbox--body_table-active').addClass('inbox--body_table')
-                    othert.css("pointer-events","auto")
-                }
+                    $(this).parent().removeClass('inbox--body_table-active').addClass('inbox--body_table')
+                    $(this).parent().next().removeClass('inbox--body_detail-active').addClass('inbox--body_detail')
 
-            })
-            
-           
+                    //othert.css("pointer-events","auto")
+                }
+                
+            })  
         </script>
 
         {% if req.progress != 5 %}
         <div class= "inbox--body">
-
             {% if req.receivedmessage_set.all %}
-                <div class="inbox--body_table" id= "table{{req.id}}">
-                    
+                <div class="inbox--body_table" id= "table{{req.id}}"> 
                     <a id="table-elem" class= "{{ req.id }}">
                         <div class="x"><i class="fas fa-times-circle"></i></div>
                         <div class="profilepic">
                             <img style="width:70px; height:70px" src="{% static 'profile_pic.png' %}"/>
                         </div>
-
                         <div class ="contents">
                             <div class="username">
                                 {{req.username}}
@@ -65,16 +67,13 @@
                         </div>
                     </a>
                 </div>
-                
                 <div name = "detail" class= "inbox--body_detail" id= "detail{{req.id}}" >
-                    
                     <div class="head">
                         <p>All Previous Messages from <p1>{{req.username}}</p1></p>
                         <div class="navigate">
                             <a href="http://localhost:8000/{{req.id}}/">Go <i class="fas fa-chevron-circle-right"></i></a>
                         </div>
                     </div>
-                    
                     {% for msg in req.receivedmessage_set.all %}
                     <div class = "each-msg">
                         <div style="margin-right: 10px;">{{forloop.counter}}.</div>
@@ -83,21 +82,13 @@
                             <div class = "content">{{msg.content}}</div>
                             <div class = "date">{{msg.timestamp}}</div>
                         </div>
-                        
-                        
                     </div>
-                    
                     {% endfor %}
-                    
                 </div>
             {% endif %}
         </div>
         {% endif %}
-
     {% endfor %}
-
-    
-
 </div>
 
 

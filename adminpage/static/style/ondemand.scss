@@ -1132,12 +1132,16 @@ html, body{
             
         }
         .inbox--body_detail{
-            display: none;
+            height: 0;
+            transition: opacity 0.2s ease-out;
+            opacity: 0;
             @include mixin-toggle;
             
         }
         .inbox--body_detail-active{
-            display: block;
+            height: 1;
+            transition: opacity 0.2s ease-in;
+            opacity: 1;
             @include mixin-toggle;
             
         }
