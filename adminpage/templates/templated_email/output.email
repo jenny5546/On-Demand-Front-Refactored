@@ -1,0 +1,19 @@
+{% block subject %} [On-Demand] 아키드로우에서 {{ username }}의 요청 결과물 도착했습니다. {% endblock %}
+
+{% block html %}
+    <div>
+        결과물입니다.
+    </div>
+
+    <div>
+        {{ content }}
+
+        {% if image %}
+            <img
+                src="{{ image }}"
+                style = "width: 300px; height: auto;"
+            />
+        {% endif %}
+
+    </div>
+{% endblock %}

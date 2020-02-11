@@ -4,80 +4,106 @@
 
 {% load static %}
 
-  <div 
-    name="wrap"
-    style = "background-color: #faf9f9;"
-  >
+<style>
+  .wrap{
+    background-color: #faf9f9;
+  }
+  .header{
+    background-color: #5ea3a3; 
+    width: 100%; 
+    height: 80px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  .logo{
+    width: 300px;
+    height: auto;
+  }
+  .title{
+    font-size: 15px; 
+    font-weight: 300;
+    color: white;
+    margin-left: 10px;
+  }
+  .content-wrap{
+    min-height: 500px;
+    display:flex;
+    margin-top: 30px;
+    justify-content:center;
+    align-items:center;
+  }
+  .mail-contents{
+    width: 50%; 
+    min-height: 250px; 
+    padding: 50px; 
+    font-size: 16px;
+    white-space: pre-line;
+    word-wrap: break-word; 
+    background-color: white;
+    box-shadow: 0 6px 8px rgba(0,0,0,0.30), 0 5px 6px rgba(0,0,0,0.22);
+  }
+  .footer{
+    width 100%; 
+    height: 100px; 
+    display: flex; 
+    justify-content:center; 
+    align-items:center;
+  }
+  .foot_logo{
+    width: 200px; 
+    height: 40px; 
+    filter: brightness(10%);
+    margin-right: 20px;
+  }
+  .foot_menu{
+    padding:5px;
+  }
+  .atag{
+    padding: 10px; 
+    text-decoration: none; 
+    color: black; 
+    font-size: 14px; 
+    font-weight: 500;
+  }
+  .copyright{
+    padding: 10px; 
+    margin-left: 10px; 
+    color: #949494; 
+    font-size: 11px;
+  }
 
-      <div
-        name="header"
-        style= "background-color: #5ea3a3; 
-                width: 100%; 
-                height: 80px; 
-                display:flex;
-                justify-content:center;
-                align-items:center;" 
-      >
+</style>
 
-          <img
-            name= "logo"
-            src="{{ logo }}"
-            style = "width: 300px; height: auto;"
-          />
-          <div
-            name= "title"
-            style = "font-size: 15px; 
-                    font-weight: 300;
-                    color: white;
-                    margin-left: 10px;"
-          >
+  <div class="wrap">
+
+      <div class="header">
+          <img class="logo" src="{{ logo }}"/>
+
+          <div class= "title">
             {{ username }} 님의 On Demand Service
           </div>
-        
+          
       </div>
 
-      <div 
-        name="content-wrap"
-        style = "min-height: 500px; display:flex;
-                justify-content:center;
-                align-items:center;" 
-      >
+      <div class="content-wrap">
 
-          <div
-            name = "mail-contents"
-            style = " width: 50%; 
-                      min-height: 250px; 
-                      padding: 50px; 
-                      background-color: white;
-                      box-shadow: 0 6px 8px rgba(0,0,0,0.30), 0 5px 6px rgba(0,0,0,0.22);"
-
-          >
+          <div class = "mail-contents">
             {{ content }}
           </div>
-      </div>
-      <div
-        name = "footer"
-        style = "width 100%; height: 100px; display: flex; 
-                justify-content:center; align-items:center;" 
-      >
-          <img
-            name= "foot_logo"
-            src="{{ logo }}"
-            style = "width: 200px; height: 40px; filter: brightness(10%);margin-right: 20px;"
-          />
 
-          <div
-            name= "foot_menu"
-            style="padding:5px;"
-          >
+      </div>
+
+      <div class = "footer">
+          <img class= "foot_logo" src="{{ logo }}"/>
+
+          <div class= "foot_menu">
               <div>
-                <a style="padding: 10px; text-decoration: none; color: black; font-size: 14px; font-weight: 500;" href="https://www.archisketch.com/contact_us" > Contact Us </a>
-                <a style="padding: 10px; text-decoration: none; color: black; font-size: 14px; font-weight: 500;" href="https://www.archisketch.com/terms"> Terms & Privacy </a>
-                <a style="padding: 10px; text-decoration: none; color: black; font-size: 14px; font-weight: 500;" href="https://developer.archisketch.com"> Developer </a>
+                <a class="atag" href="https://www.archisketch.com/contact_us" > Contact Us </a>
+                <a class="atag" href="https://www.archisketch.com/terms"> Terms & Privacy </a>
+                <a class="atag" href="https://developer.archisketch.com"> Developer </a>
               </div>
-              
-              <p style="padding: 10px; margin-left: 10px; color: #949494; font-size: 11px;" >Copyright© 2019 All rights reserved by Archisketch.Inc</p>
-          
+              <p class="copyright">Copyright© 2019 All rights reserved by Archisketch.Inc</p>
           </div>
 
     </div>
