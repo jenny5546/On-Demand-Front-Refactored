@@ -20,16 +20,19 @@ $secondary_subColor_dark: #96a4ab;
 
 //Status
 $agree: #2966ba;
-$warning: #c53e38;
+$warning: rgb(145, 1, 1);
 $caution: #efaa46;
 
+//chat color
+$chatBox: #f0cf85;
+
 //Button & Background Color
-$btn_whiteColor: #fff;
+$btn_whiteColor: rgb(240,240,240);
 $btn_whiteColor_hover: #f9f9f9;
 $btn_whiteColor_active: #eee;
 
 $btn_darkColor: #383e44;
-$btn_darkColor_hover: #40474e;
+$btn_darkColor_hover: rgb(77, 77, 77);
 $btn_darkColor_active: #2d3236;
 
 $btn_borderColor: #D7B889;

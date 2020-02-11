@@ -31,7 +31,6 @@ a{
         display: flex;
         list-style: none;
         text-align: center;
-        
         &_menu{
             padding: 30px;
         }
@@ -114,17 +113,7 @@ a{
     display: flex;
     flex-direction: row;
     flex: 1;
-}
-    // in dashboard table, "click" button
-.go_btn{
-    padding: 6px;
-    background-color: $btn_darkColor;
-    border-radius: 10px;
-    font-size: 10px;
-    color: white;
-    &:hover{
-        background-color: rgb(77, 77, 77);
-    }
+    font-family: $_base-font-family;
 }
 
 .dashboard{
@@ -142,7 +131,6 @@ a{
     }
     &--board{
         @include dashboardBox;
-
         &_notice{
             margin-top: 10px;
             position: relative;
@@ -169,11 +157,11 @@ a{
             }
         }
     }
-
     &--table{
         @include dataTable;
     }
 }
+
 .requests{
     font-family: $_base-font-family;
     margin-top: 100px;
@@ -187,25 +175,14 @@ a{
     }
 }
 
-
-.swal-overlay{
-    font-family: $_base-font-family;
-}
-//SHOW.HTML
+//detail.HTML
 .eachRequest{
-
-    width:100vh;
-    font-family: $_base-font-family;
+    @extend .mid;
     margin-top: 80px;
-    display: flex;
-    flex: 1;
-    flex-direction: row;
+    width:100vh;
     padding: 20px;
     position: relative;
-
-    
     &--request{
-        // margin-right: 100px;
         width: 60%;
         position: relative;
         &--btnwrapper{
@@ -214,97 +191,71 @@ a{
             right: 0%;
         }
     }
-    
     &--editbtn{
+        @include detailButton($btn_darkColor);
         margin-right: 10px;
-        text-decoration: none;
-        border-radius: 30px;
-        background-color: $btn_darkColor;
-        color: white;
-        padding: 3px 10px 3px 10px;
-    }
-    &--editbtn:hover{
-        background-color: $btn_darkColor_hover;
     }
     &--deletebtn{
-        text-decoration: none;
-        border-radius: 30px;
-        background-color: rgb(112, 10, 10);
-        color: white;
-        padding: 3px 10px 3px 10px;
-    }
-    &--deletebtn:hover{
-        background-color: rgb(128, 14, 14);
+        @include detailButton($warning);
     }
 
     &--header{
-        display: inline-flex;
-        // margin: auto;
-        margin-bottom: 20px;
-        margin-left: 50px;
-        p1 {
-            font-size:30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        p1{
+            font-size: 30px;
             font-weight: $light;
-            margin-top: 8px;
+            margin-right: 15px;
         }
-        
-    }
-
-    &--status{
-        display: inline-flex;
-        align-items: center;
-        // background-color: black;
-        // color:white;
-        p2 {
-            margin-left: 10px;
-            margin-top: 10px;
+        .status {
+            font-size: 15px;
+            font-weight: $regular;
             background-color: black;
             color:white;
-            padding: 5px 10px 5px 10px;
+            margin: 5px;
+            padding: 5px 10px;
             border-radius: 10px;
-
         }
-
         .overdate{
-            background-color:  rgb(145, 1, 1);
+            @extend .status;
+            background-color:  $warning;
         }
-
         .complete{
-            background-color: rgb(214, 145, 18);
+            @extend .status;
+            background-color: $caution;
         }
+    }
+    &--contents{
+        display: flex;
+        flex-direction: column;
+    }
+    .info{
+        display: flex;
+        flex-direction: row;
     }
     &--plan{
         width: 50%;
-
         .flexslider{
             width: 100%;
-            // height: 400px;
             position: relative;
         }
-        
         &_btn{
             font-size: 13px;
-            // padding: 10px;
             color: $btn_darkColor;
             text-align: center;
             margin-left: 40%;
-
         }
         &_btn:hover{
             background-color: rgba(128, 128, 128, 0.11);
             border-radius: 50px;
             color: $btn_darkColor;
         }
-        
-
     }
     &--info{
         width: 50%;
         margin-top: 20px;
-        // margin-left: 30px;
         padding: 20px;
-        // width: 80%;
-        // max-width: 400px;
         background-color: rgba(245, 245, 245, 0.37);
 
         .line{
@@ -378,9 +329,9 @@ a{
         font-weight: $bold;
        
     }
-
     &--chatroom{
-
+        position: absolute;
+        right: 0%;
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
@@ -389,22 +340,19 @@ a{
         height: 94%;
         max-height: 900px;
         box-shadow: 0 6px 8px rgba(0,0,0,0.30), 0 5px 6px rgba(0,0,0,0.22);
-        position: absolute;
-        right:0%;
-        
         border-radius: 30px;
         background-color: rgba(247, 247, 243, 0.925);
 
         &_header{
-            
             flex-shrink: 0;
             height: 10%;
             padding: 10px;
             font-size: 20px;
+            text-align: center; 
+            margin-top: 10px; 
+            font-weight: 100;  
         }
         &_send{
-            // position: absolute;
-            // bottom: 0%;
             border-radius: 0px 0px 30px 30px;
             height: 15%;
             background-color: white;
@@ -415,20 +363,16 @@ a{
             
             .input{
                 width: 80%;
-                // height: 50%;
                 border: 0;
                 margin-left: 10px;
-                font-size: 15px;
-                // box-shadow: 0 3px 4px rgba(0, 0, 0, 0.096), 0 2px 3px rgba(0, 0, 0, 0.075);
-                // background-color: rgba(245, 245, 245, 0.295);
-                
+                font-size: 15px; 
             }
             input[type=submit]{
                 // width: 100px;
                 margin-left: 10px;
                 margin-bottom: 10px;
                 padding:5px 25px; 
-                background:#30343A;
+                background:$btn_darkColor;
                 color: white; 
                 font-size: 15px;
                 font-weight: $light;
@@ -448,26 +392,13 @@ a{
             flex-grow: 1;
             overflow-x: hidden;
             padding: 30px;
+            
             .msg_me{
-                margin: 10px 7px 10px 7px;
-                border-radius: 10px;
-                background-color: #f0cf85;
-                padding: 5px 10px 5px 10px;
-                color: white;
+                @include msg_contents;
                 margin-left: 42%;
-                width: 60%;
-                word-wrap: break-word;
-
             }
             .msg_client{
-                margin: 10px 7px 10px 7px;
-                border-radius: 10px;
-                background-color: white;
-                padding: 5px 10px 5px 10px;
-                color: black;;
-                width: 60%;
-                word-wrap: break-word;
-                
+                @include msg_contents(black, white, rgb(185, 185, 185));
             }
         }
     }
@@ -476,7 +407,7 @@ a{
 // PROGRESS BAR //
 .progress {
     width: 700px;
-    margin: 20px auto;
+    margin: 30px auto;
     text-align: center;
 }
 .progress .circle,

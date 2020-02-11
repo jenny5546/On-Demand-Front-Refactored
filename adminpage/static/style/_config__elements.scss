@@ -10,17 +10,42 @@
     position: absolute;
 }
 
+//button
+.go_btn {
+    padding: 6px;
+    background-color: $btn_darkColor;
+    border-radius: 10px;
+    font-size: 10px;
+    color: white;
+    &:hover{
+        background-color: $btn_darkColor_hover;
+    }
+}
+
+@mixin detailButton($bgColor: $btn_darkColor) {
+    text-decoration: none;
+    border-radius: 30px;
+    background-color: $bgColor;
+    color: white;
+    padding: 3px 10px 3px 10px;
+    cursor: pointer;
+    &:hover{
+        background-color: darken($color: $bgColor, $amount: 10);
+    }
+}
+
+//layout box
 @mixin contentBox{
     width: 90%;
     border-radius: 10px;
     margin-left: 20px;
+    height: 300px;
     overflow: hidden;
 }
 
 @mixin dashboardBox{
     @include contentBox;
     display: flex;
-    height: 300px;
     padding: 50px;
     margin-bottom: 50px;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
@@ -30,14 +55,10 @@
     .top{
         position: relative;
         &-title{
-            font-size: 20px;
             margin-bottom: 20px;
-            font-family: 'Lato', sans-serif;
-            color: rgb(54, 54, 54);
             margin-left: 10px;
-            letter-spacing: 0.5px;
         }
-        .search_menu{
+        &-search_menu{
             display: flex;
             position: absolute;
             right: 8%;
@@ -57,8 +78,8 @@
                 padding-bottom: 20px;
                 font-size: 15px;
                 font-weight: $regular;
-                background-color: rgb(240, 240, 240);
-                color: rgb(68, 68, 68);
+                background-color: $btn_whiteColor;
+                color: $btn_darkColor;
                 width: 100%;
                 border: none;
                 outline: none;
@@ -69,34 +90,43 @@
             padding: 10px;
             text-align: center;
         }
-
         tr {
             font-weight: $thin;
             padding: 10px;
             border-bottom: 0.5px solid rgb(219, 219, 219);
         }
         .table_scroll{
-            width: 90%;
+            @include contentBox;
             box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
-            margin-left: 20px;
-            border-radius: 10px;
-            height: 300px;
             overflow-y: scroll;
-            .overdate{
-                color: rgb(145, 1, 1); 
-                font-weight: 500;
-            }
-            .complete{
-                color: rgb(214, 145, 18); 
-                font-weight: 400;
-            }
         }
         .table_scroll::-webkit-scrollbar {
             display: none;
         }
         .overdate{
-            color: rgb(145, 1, 1); 
-            font-weight: 500;
+            color: $warning; 
+            font-weight: $medium;
+        }
+        .complete{
+            color: $caution; 
+            font-weight: $regular;
         }
     }
+}
+
+//chat box
+@mixin msg_contents($color: white, $bgColor: $chatBox, $timeColor: rgba(255, 255, 255, 0.685)) {
+    margin: 10px 7px 10px 7px;
+    border-radius: 10px;
+    background-color: $bgColor;
+    padding: 5px 10px 5px 10px;
+    color: $color;
+    width: 60%;
+    word-wrap: break-word;
+    .chat_time{
+        float:right;
+        font-size: 11px; 
+        color: $timeColor;
+    }
+    
 }
