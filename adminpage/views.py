@@ -423,6 +423,7 @@ def edit(request, id):
   arequest = Request.objects.get(id=id)
   return render(request, 'adminpage/edit.html', {
       'arequest':arequest,
+      "unread_mail_num" : unread_mail_num,
   })
 
 
