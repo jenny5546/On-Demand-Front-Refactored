@@ -446,6 +446,41 @@ def messages(request):
      requests = Request.objects.all()
      return render(request, 'adminpage/messages.html', {'requests': requests, "unread_mail_num" : unread_mail_num})
 
+def output(request, id):
+  
+  arequest = Request.objects.get(id = id)
+  
+  if request.method == 'GET':
+    return render(request, 'adminpage/output.html', {'arequest': arequest})
+
+  elif request.method == 'POST':
+
+    receiver = arequest.useremail
+    
+    content = request.POST.get('content', '') #텍스트 내용 
+    attachments = [] 
+    inline= None
+
+    if request.FILES:
+      attachments = request.FILES.getlist('attach')  # 첨부해서 가는 파일 
+      image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
+      inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
+
+    send_templated_mail( 
+        template_name='output',
+        from_email= 'jangjangman5546@gmail.com',
+        recipient_list=[receiver],
+        context={
+            'username': arequest.username,
+            'content' : content,
+            'image' : inline,
+        },
+        attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), attachments),
+    )
+
+    return redirect('/'+str(id))
+
+
 def setting(request):
   # something
   return render(request, 'adminpage/setting.html')

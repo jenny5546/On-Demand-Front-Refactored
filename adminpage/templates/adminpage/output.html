@@ -1,0 +1,21 @@
+{% extends '../base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div>결과 보내기</div>
+<form enctype="multipart/form-data" action='/adminpage/{{ arequest.id }}/output/' method="POST">
+    {% csrf_token %}
+    <label>첨부파일</label>
+    <input type="file" name="attach" multiple="multiple"/>
+
+    <label>내용</label>
+    <textarea placeholder= "Enter your message" name="content"></textarea>
+
+    <label>이메일 이미지 파일고르기</label>
+    <input type="file" name="image"/>
+
+    <input class="submit" type="submit" value="Send"/>
+</form>
+
+{% endblock content %}
