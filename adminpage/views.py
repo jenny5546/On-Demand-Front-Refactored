@@ -193,8 +193,7 @@ def dashboard(request):
     progress = [0,0,0,0,0]
 
     # temp data edit it!
-    line_data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
+    line_data = [0] * 12
     #progress 별 counting
     for user in queryset:
       for i in range(5):
@@ -206,32 +205,34 @@ def dashboard(request):
     #print(Request.objects.filter(requested_at__contains=datetime.date(2020, 1, 20)))    
 
     for req in requests:
-      k = str(req.requested_at)
-      a = k[5]+k[6]
-      if(a == "01"):
-        line_data[0] += 1
-      elif(a == "02"):
-        line_data[1]+=1
-      elif(a == "03"):
-        line_data[2]+=1
-      elif(a == "04"):
-        line_data[3]+=1
-      elif(a == "05"):
-        line_data[4]+=1
-      elif(a == "06"):
-        line_data[5]+=1
-      elif(a == "07"):
-        line_data[6]+=1
-      elif(a == "08"):
-        line_data[7]+=1
-      elif(a == "09"):
-        line_data[8]+=1
-      elif(a == "10"):
-        line_data[9]+=1
-      elif(a == "11"):
-        line_data[10]+=1
-      elif(a == "12"):
-        line_data[11]+=1
+      line_data[req.requested_at.month-1]+=1
+      # k = str(req.requested_at)
+      # a = k[5]+k[6]
+      # print(req.requested_at.month)
+      # if(a == "01"):
+      #   line_data[0] += 1
+      # elif(a == "02"):
+      #   line_data[1]+=1
+      # elif(a == "03"):
+      #   line_data[2]+=1
+      # elif(a == "04"):
+      #   line_data[3]+=1
+      # elif(a == "05"):
+      #   line_data[4]+=1
+      # elif(a == "06"):
+      #   line_data[5]+=1
+      # elif(a == "07"):
+      #   line_data[6]+=1
+      # elif(a == "08"):
+      #   line_data[7]+=1
+      # elif(a == "09"):
+      #   line_data[8]+=1
+      # elif(a == "10"):
+      #   line_data[9]+=1
+      # elif(a == "11"):
+      #   line_data[10]+=1
+      # elif(a == "12"):
+      #   line_data[11]+=1
 
     return render(request, 'adminpage/dashboard.html', {
       'onrunRequests': onrunRequests,
@@ -313,13 +314,9 @@ def each(request, id):
     # email check!
     target_mail = arequest.useremail
     
-    # erase this code.
-    #details = check_mail_imap(user, password, arequest.useremail)
-
     # Delete read mail
     for elem in unread_mail:
       for sub_elem in elem:
-        #print("in each!! : ", sub_elem, arequest.useremail)
         if(sub_elem == arequest.useremail):
           delete_index.append(i)
       i += 1
@@ -352,7 +349,7 @@ def each(request, id):
       chain(sentMessages,receivedMessages),
       key = lambda message: message.timestamp, reverse=False
     )
-    # return render(request, 'adminpage/request.html', {'arequest': arequest, 'sentMessages': sentMessages, 'receivedMessages': receivedMessages})
+    
     return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list,"unread_mail_num" : unread_mail_num})
   
   # 수정하기 + 메세지 보내기
@@ -451,37 +448,36 @@ def output(request, id):
   arequest = Request.objects.get(id = id)
   
   if request.method == 'GET':
-    return render(request, 'adminpage/output.html', {'arequest': arequest})
+      return render(request, 'adminpage/output.html', {'arequest': arequest, "unread_mail_num" : unread_mail_num})
 
   elif request.method == 'POST':
 
-    receiver = arequest.useremail
-    
-    content = request.POST.get('content', '') #텍스트 내용 
-    attachments = [] 
-    inline= None
+      receiver = arequest.useremail
+      content = request.POST.get('content', '') #텍스트 내용 
+      attachments = [] 
+      inline= None
 
-    if request.FILES:
-      attachments = request.FILES.getlist('attach')  # 첨부해서 가는 파일 
-      image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
-      inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
+      if request.FILES:
+        attachments = request.FILES.getlist('attach')  # 첨부해서 가는 파일 
+        image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
+        inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
 
-    send_templated_mail( 
-        template_name='output',
-        from_email= 'jangjangman5546@gmail.com',
-        recipient_list=[receiver],
-        context={
-            'username': arequest.username,
-            'content' : content,
-            'image' : inline,
-        },
-        attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), attachments),
-    )
+      send_templated_mail( 
+          template_name='output',
+          from_email= 'jangjangman5546@gmail.com',
+          recipient_list=[receiver],
+          context={
+              'username': arequest.username,
+              'content' : content,
+              'image' : inline,
+          },
+          attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), attachments),
+      )
 
-    return redirect('/'+str(id))
+      return redirect('/'+str(id))
 
 
-def setting(request):
+def settings(request):
   # something
   return render(request, 'adminpage/setting.html')
   
