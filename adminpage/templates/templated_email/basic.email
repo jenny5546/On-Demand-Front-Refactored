@@ -1,15 +1,94 @@
 {% block subject %} [On-Demand] 아키드로우에서 {{username}}께 드리는 답변입니다. {% endblock %}
 
-{% block plain %}
+{% block html %}
 
-  안녕하세요~~~~~~~~~~~~~~~~~~~~~~~~~
-  아키드로우입니다. 어쩌고저쩌고~~~~
+{% load static %}
 
-  You just signed up for my website, using:
-      username: {{username}}
+  <div 
+    name="wrap"
+    style = "background-color: #faf9f9;"
+  >
+
+      <div
+        name="header"
+        style= "background-color: #5ea3a3; 
+                width: 100%; 
+                height: 80px; 
+                display:flex;
+                justify-content:center;
+                align-items:center;" 
+      >
+
+          <img
+            name= "logo"
+            src="{{ logo }}"
+            style = "width: 300px; height: auto;"
+          />
+          <div
+            name= "title"
+            style = "font-size: 15px; 
+                    font-weight: 300;
+                    color: white;
+                    margin-left: 10px;"
+          >
+            {{ username }} 님의 On Demand Service
+          </div>
+        
+      </div>
+
+      <div 
+        name="content-wrap"
+        style = "min-height: 500px; display:flex;
+                justify-content:center;
+                align-items:center;" 
+      >
+
+          <div
+            name = "mail-contents"
+            style = " width: 50%; 
+                      min-height: 250px; 
+                      padding: 50px; 
+                      background-color: white;
+                      box-shadow: 0 6px 8px rgba(0,0,0,0.30), 0 5px 6px rgba(0,0,0,0.22);"
+
+          >
+            {{ content }}
+          </div>
+      </div>
+      <div
+        name = "footer"
+        style = "width 100%; height: 100px; display: flex; 
+                justify-content:center; align-items:center;" 
+      >
+          <img
+            name= "foot_logo"
+            src="{{ logo }}"
+            style = "width: 200px; height: 40px; filter: brightness(10%);margin-right: 20px;"
+          />
+
+          <div
+            name= "foot_menu"
+            style="padding:5px;"
+          >
+              <div>
+                <a style="padding: 10px; text-decoration: none; color: black; font-size: 14px; font-weight: 500;" href="https://www.archisketch.com/contact_us" > Contact Us </a>
+                <a style="padding: 10px; text-decoration: none; color: black; font-size: 14px; font-weight: 500;" href="https://www.archisketch.com/terms"> Terms & Privacy </a>
+                <a style="padding: 10px; text-decoration: none; color: black; font-size: 14px; font-weight: 500;" href="https://developer.archisketch.com"> Developer </a>
+              </div>
+              
+              <p style="padding: 10px; margin-left: 10px; color: #949494; font-size: 11px;" >Copyright© 2019 All rights reserved by Archisketch.Inc</p>
+          
+          </div>
+
+    </div>
+
+  </div>
+
   
-  내용 들어가는 부분 :
-    {{content}}
 
-  감사감사감사
+
+
+  
+
+
 {% endblock %}

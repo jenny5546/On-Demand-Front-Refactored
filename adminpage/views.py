@@ -10,7 +10,7 @@ import json, os, time, threading
 from itertools import chain
 import email.header
 from bs4 import BeautifulSoup
-from templated_email import send_templated_mail
+from templated_email import send_templated_mail, InlineImage
 
 # email
 import smtplib, imaplib, poplib, email
@@ -139,7 +139,7 @@ def request(request):
     #연결해야하는 부분 
     #요청한 사람 정보(user)
     username = generate_username(1)[0]
-    useremail = 'jenny5546@nate.com' #연결할때, front에서 들고오기
+    useremail = 'jenny5546@naver.com' #연결할때, front에서 들고오기
     # print(user)
     floor_type = request.POST.get('floor_type')
     commercial_type = request.POST.get('commercial_type')
@@ -385,29 +385,37 @@ def each(request, id):
     receiver = arequest.useremail
     if (message_content != ''):
       # send_mail(user, password, receiver, message_content)
-      send_templated_mail( 
-          template_name='basic',
-          from_email= 'jangjangman5546@gmail.com',
-          recipient_list=['jenny5546@naver.com'],
-          context={
-              'username': arequest.username,
-              'content' : message_content,
-              # 'full_name':arequest.username,
-              # 'signup_date':arequest.username
-          },
-          
-          # Optional:
-          # cc=['cc@example.com'],
-          # bcc=['bcc@example.com'],
-          # headers={'My-Custom-Header':'Custom Value'},
-          # template_prefix="my_emails/",
-          # template_suffix="email",
-      )
 
-      newSentMessage = SentMessage.objects.create(
-        request = arequest,
-        content = message_content
-      )
+      module_dir = os.path.dirname(__file__)
+      image_path = os.path.join(module_dir, 'static/Logo.png')
+    
+      
+      #templated email로 이미지 넘겨주는 함수 
+      with open(image_path, 'rb') as logo: 
+        archi_image = logo.read()
+        inline_logo = InlineImage(filename="logo.png", content=archi_image)
+
+        send_templated_mail( 
+            template_name='basic',
+            from_email= 'jangjangman5546@gmail.com',
+            recipient_list=[receiver],
+            context={
+                'username': arequest.username,
+                'content' : message_content,
+                'logo' : inline_logo,
+            },
+            # Optional:
+            # cc=['cc@example.com'],
+            # bcc=['bcc@example.com'],
+            # headers={'My-Custom-Header':'Custom Value'},
+            # template_prefix="my_emails/",
+            # template_suffix="email",
+        )
+
+        newSentMessage = SentMessage.objects.create(
+          request = arequest,
+          content = message_content
+        )
 
     arequest.due_at = due_at
     arequest.progress = progress
@@ -452,33 +460,6 @@ def setting(request):
   
 
 
-# messages.html에서 각 inbox누르면 chatroom 띄우기
-# def open_room(request, id):
-#   arequest = Request.objects.get(id = id)
-
-#   if request.method == 'GET':
-
-#     sentMessages = SentMessage.objects.filter(request = arequest)
-#     details = check_mail_imap(user, password, arequest.useremail)
-    
-#     if(details):
-#     # 이미 존재하는 이메일이면!
-#       if ReceivedMessage.objects.filter(request = arequest, sender = details[0],title = details[1], content = details[2], timestamp = details[3]):
-#         print("exists")
-
-#       else:
-#         newReceivedMessage = ReceivedMessage.objects.create(
-#           request = arequest,
-#           username = arequest.username,
-#           sender = details[0],
-#           title = details[1],
-#           content = details[2],
-#           timestamp = details[3]
-#         )
-
-#     receivedMessages = ReceivedMessage.objects.filter(request = arequest)
-    
-#     return render(request, 'adminpage/messages.html', {'receivedMessages': receivedMessages})
 
 
 
