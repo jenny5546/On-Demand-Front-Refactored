@@ -1,12 +1,14 @@
-{% block subject %} On-Demand 서비스 요청하신 {{username}}께 드리는 답변입니다. {% endblock %}
+{% block subject %} [On-Demand] 아키드로우에서 {{username}}께 드리는 답변입니다. {% endblock %}
+
 {% block plain %}
+
   안녕하세요~~~~~~~~~~~~~~~~~~~~~~~~~
   아키드로우입니다. 어쩌고저쩌고~~~~
 
   You just signed up for my website, using:
       username: {{username}}
   
-  답변사항:
+  내용 들어가는 부분 :
     {{content}}
 
   감사감사감사
