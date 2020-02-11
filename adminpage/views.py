@@ -39,25 +39,25 @@ with open(secret_file) as f:
   password = secret["Password"]
 
 
-def send_mail(user, password, sendto, msg_body):
+# def send_mail(user, password, sendto, msg_body):
 
-  # smtp server
-  smtpsrv = "smtp.gmail.com" # 발신 메일서버 주소
-  smtpserver = smtplib.SMTP(smtpsrv, 587) # 발신 메일서버 포트
+#   # smtp server
+#   smtpsrv = "smtp.gmail.com" # 발신 메일서버 주소
+#   smtpserver = smtplib.SMTP(smtpsrv, 587) # 발신 메일서버 포트
 
-  smtpserver.ehlo()
-  smtpserver.starttls()
-  smtpserver.ehlo()
-  smtpserver.login(user, password)
+#   smtpserver.ehlo()
+#   smtpserver.starttls()
+#   smtpserver.ehlo()
+#   smtpserver.login(user, password)
 
-  msg = MIMEText(msg_body)
-  msg['From'] = user
-  msg['To'] = sendto
-  msg['Subject'] = "[ARCHIDRAW 아키드로우] On-Demand 서비스 문의에 대한 답변이 도착했습니다."
-  smtpserver.sendmail(user, sendto, msg.as_string())
+#   msg = MIMEText(msg_body)
+#   msg['From'] = user
+#   msg['To'] = sendto
+#   msg['Subject'] = "[ARCHIDRAW 아키드로우] On-Demand 서비스 문의에 대한 답변이 도착했습니다."
+#   smtpserver.sendmail(user, sendto, msg.as_string())
   
-  print('done!')
-  smtpserver.close()
+#   print('done!')
+#   smtpserver.close()
 
 # 메일을 받는 함수(imap4)
 def check_mail_imap(user, password, target='none'):
@@ -359,17 +359,11 @@ def each(request, id):
     message_content = request.POST.get('msg_content', '')
     receiver = arequest.useremail
     if (message_content != ''):
-      send_mail(user, password, receiver, message_content)
-      newSentMessage = SentMessage.objects.create(
-        request = arequest,
-        content = message_content
-      )
-
-      #send mail 대체 ******** template으로 보내기 
+      # send_mail(user, password, receiver, message_content)
       send_templated_mail( 
-          template_name='welcome',
+          template_name='basic',
           from_email= 'jangjangman5546@gmail.com',
-          recipient_list=[arequest.useremail],
+          recipient_list=['jenny5546@naver.com'],
           context={
               'username': arequest.username,
               'content' : message_content,
@@ -384,7 +378,11 @@ def each(request, id):
           # template_prefix="my_emails/",
           # template_suffix="email",
       )
-      
+
+      newSentMessage = SentMessage.objects.create(
+        request = arequest,
+        content = message_content
+      )
 
     arequest.due_at = due_at
     arequest.progress = progress
