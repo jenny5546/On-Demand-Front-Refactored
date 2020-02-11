@@ -114,6 +114,7 @@ EMAIL_HOST_USER = user
 EMAIL_HOST_PASSWORD =password
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL  = 'jangjangman5546@gmail.com'
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
