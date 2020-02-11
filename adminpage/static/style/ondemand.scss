@@ -1,19 +1,21 @@
-@import './config__typography';
-@import './config__color';
+@import './config__elements';
 @import "https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/flexslider.min.css";
 
 
 * {
     margin: 0;
     padding: 0;
- 
-    // font-family: $_base-font-family;
     box-sizing: border-box;
 }
+
 html, body{
    height: 100%;
    display: flex;
    flex-direction: column;
+}
+
+a{
+    text-decoration: none;
 }
 
 *:focus{
@@ -32,398 +34,158 @@ html, body{
         
         &_menu{
             padding: 30px;
-            a{ 
-                color: black;
-                text-decoration: none;
-            }
         }
-    }
-    .count-num1{
-        position:absolute;
-        top: 20%;
-        right: 23%;
-        // margin-left: 5px;
-        font-weight: $black;
-        font-size: 12px;
-        background-color: rgba(243, 187, 34, 0.692);
-        
-        color: white;
-        border-radius: 100%;
-        width: 20px;
-        height: 20px;
-
-    }
-    .count-num2{
-        position:absolute;
-        top: 20%;
-        right: 3%;
-        // margin-left: 5px;
-        font-weight: $black;
-        font-size: 12px;
-        background-color: rgba(243, 187, 34, 0.692);
-        // padding-bottom: 3px;
-        color: white;
-        border-radius: 100%;
-        width: 20px;
-        height: 20px;
-
+        &_count1{
+            position:absolute;
+            top: 20%;
+            right: 23%;
+            font-weight: $black;
+            font-size: 12px;
+            background-color: $mainPointColor2;
+            color: white;
+            border-radius: 100%;
+            width: 20px;
+            height: 20px;
+        }
+        &_count2{
+            @extend .header--nav_count1;
+            right: 3%; 
+        }
     }
 }
 
-
-
-.mid {
-    // z-index: 30;
+//side navbar
+.sidenav {
+    font-family: $_base-font-family;
     display: flex;
-    flex-direction: row;
-    flex: 1;
-    // max-width: 100%;
-    // overflow-x: hidden;
-    // height: 100%;
+    flex-direction: column;
+    width: 18%;
+    min-width: 18%;
+    background-color: $bg_dark;
+    border-radius: 0px 50px 50px 0px;
 
-    // in dashboard table, "click" button
-    .go_btn{
-        padding: 6px;
-        background-color: $btn_darkColor;
-        border-radius: 10px;
-        font-size: 10px;
-        color: white;
-        text-decoration: none;
-        &:hover{
-            background-color: rgb(77, 77, 77);
-        }
+    &--logo{
+        margin-top: 40px;
+        width: 90%; 
     }
-
-
-    
-
-    //side navbar
-    .sidenav {
-        font-family: $_base-font-family;
+    &--menu{
+        margin-top: 150px;
         display: flex;
         flex-direction: column;
-        width: 18%;
-        min-width: 18%;
-        background-color:  #30343A;
-        border-radius: 0px 50px 50px 0px;
 
-        &--logo{
-            margin-top: 40px;
-            width: 90%; 
-        }
-        &--menu{
-            margin-top: 150px;
-            display: flex;
-            flex-direction: column;
-
-            &_sub{
-                font-size: 15px;
-                color: #CDCDCD;
-                font-weight: $light;
-                height: 80px;
-                text-decoration: none;
-                padding: 9% 10% 12% 15%;
-                // margin-bottom:1px;
-                // text-align: center;
-                
-
-                &-active{
-                    height: 80px;
-                    font-size: 15px;
-                    color: #CDCDCD;
-                    font-weight: $light;
-                    text-decoration: none;
-                    padding: 9% 10% 12% 15%;
-                    background-color: rgba(69, 74, 82, 0.445);
-                    position: relative;
-    
-                    &:after{
-                        display: block;
-                        content: "";
-                        width: 12px;
-                        height: 12px;
-                        position: absolute;
-                        top: 0px;
-                        left: 0px;
-                        border-top: 3px solid #D7B889;
-                        border-left: 3px solid #D7B889;
-                        
-                    }
-                    
-            
-                    &:before {
-                        display: block;
-                        content: "";
-                        width: 12px;
-                        height: 12px;
-                        position: absolute;
-                        bottom: 0px;
-                        right: 0px;
-                        border-bottom: 3px solid #D7B889;
-                        border-right: 3px solid #D7B889;
-                      }
-                
-                }
-            }
-            
-            &_sub:hover{
-                background-color: rgba(69, 74, 82, 0.445);
+        &_sub{
+            font-size: 15px;
+            color: $font100;
+            font-weight: $light;
+            height: 80px;
+            padding: 9% 10% 12% 15%;
+            &-active{
+                @extend .sidenav--menu_sub;
                 position: relative;
-
+                height: 80px;
+                background-color: $bg_dark;
+                
                 &:after{
-                    display: block;
-                    content: "";
-                    width: 12px;
-                    height: 12px;
-                    position: absolute;
+                    @include navButton;
                     top: 0px;
                     left: 0px;
                     border-top: 3px solid #D7B889;
                     border-left: 3px solid #D7B889;
                     
                 }
-                
-        
                 &:before {
-                    display: block;
-                    content: "";
-                    width: 12px;
-                    height: 12px;
-                    position: absolute;
+                    @include navButton;
                     bottom: 0px;
                     right: 0px;
                     border-bottom: 3px solid #D7B889;
                     border-right: 3px solid #D7B889;
-                  }
-            }
-        }
-        
-    }
-
-    .dashboard{
-        font-family: $_base-font-family;
-        margin-top: 80px;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        padding: 20px;
-       
-        &--title{
-            font-size: 20px;
-            margin-bottom: 30px;
-            font-family: 'Lato', sans-serif;
-            color: rgb(54, 54, 54);
-            margin-left: 10px;
-            letter-spacing: 0.5px;
-        }
-        &--board{
-            &_undone{
-                margin-top: 20px;
-                position: relative;
-                width: 250px;
-                height: 180px;
-                box-shadow: 0 3px 6px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-                background-color: rgba(253, 242, 214, 0.521);
-                margin-right: 30px;
-                &-label{
-                    padding: 10px;
-                    text-align: center;
-                    font-size: 15px;
-                    // letter-spacing: -1.5px;
-                    font-family: 'Lato', sans-serif;
-                    color: rgb(175, 150, 85);
-                }
-                &-num{
-                    border-top: 1px solid rgba(196, 187, 165, 0.568);
-                    color: rgba(70, 59, 33, 0.521);
-                    text-align: right;
-                    font-size: 16px;
-                    //position: absolute;
-                    padding-top: 30px;
-                    padding-right: 10px;
-                    
-
                 }
             }
-            width: 90%;
-            display: flex;
-            padding: 50px;
-            height: 300px;
-            border-radius: 30px;
-            background-color: rgba(248, 248, 248, 0.664);
-            margin-left: 10px;
-            margin-bottom: 50px;
-            overflow: hidden;
-            box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
         }
-
-
-        &--table{
-
-            border-collapse: collapse;
-            box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
-            width: 90%;
-            margin-left: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-
-            &_head{
-                padding: 10px;
-                button{
-                    font-size: 15px;
-                    font-weight: $regular;
-                    background-color: rgb(240, 240, 240);
-                    color: rgb(68, 68, 68);
-                    width: 100%;
-                    border: none;
-                    outline: none;
-                    height: 40px;
-                    
-                }
-            }
-            .overdate{
-                color: rgb(145, 1, 1); 
-                font-weight: 500;
-            }
-            
-            td{
-                padding: 10px;
-                text-align: center;
-            }
-            tr{
-                font-weight: $thin;
-                padding: 10px;
-                border-bottom: 0.5px solid rgb(219, 219, 219);
-              }
-            
-
+        &_sub:hover{
+            background-color: rgba(69, 74, 82, 0.445);
+            position: relative;
         }
     }
-    .requests{
-        font-family: $_base-font-family;
-        margin-top: 100px;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        padding: 20px;
+    
+}
 
-        &-table{
-            &-top{
-                position: relative;
-
-            }
-            &-bottom{
-                margin-top: 30px;
-                margin-bottom: 50px;
-                .table_scroll{
-                    width: 90%;
-                    box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
-                    margin-left: 20px;
-                    border-radius: 10px;
-                    height: 300px;
-                    overflow-y: scroll;
-                    .overdate{
-                        color: rgb(145, 1, 1); 
-                        font-weight: 500;
-                    }
-                    .complete{
-                        color: rgb(214, 145, 18); 
-                        font-weight: 400;
-                    }
-                }
-                .table_scroll::-webkit-scrollbar {
-                    display: none;
-                  }
-
-            }
-        }
-        .search_menu{
-            
-            display: flex;
-            position: absolute;
-            right: 8%;
-            bottom: 0;
-    
-        }
-        &-on-run{
-            margin-top: 20px;
-            
-            table{
-                width: 100%;
-                border-collapse: collapse;
-            }
-    
-            .head{
-                button{
-                    padding-top: 10px;
-                    padding-bottom: 20px;
-                    font-size: 15px;
-                    font-weight: $regular;
-                    background-color: rgb(240, 240, 240);
-                    color: rgb(68, 68, 68);
-                    width: 100%;
-                    border: none;
-                    outline: none;
-                    height: 40px;
-                }
-            }
-            td{
-                padding: 10px;
-                text-align: center;
-            }
-    
-            tr {
-                font-weight: $thin;
-                padding: 10px;
-                border-bottom: 0.5px solid rgb(219, 219, 219);
-            }
-
-            
-        }
-        &-title{
-            font-size: 20px;
-            margin-bottom: 30px;
-            font-family: 'Lato', sans-serif;
-            color: rgb(54, 54, 54);
-            margin-left: 10px;
-            letter-spacing: 0.5px;
-        }
-        &-total{
-            
-            margin-top: 30px;
-            table{
-                width: 100%;
-                border-collapse: collapse;
-            }
-    
-            .head{
-                button{
-                    padding-top: 10px;
-                    padding-bottom: 20px;
-                    font-size: 15px;
-                    font-weight: $regular;
-                    background-color: rgb(240, 240, 240);
-                    color: rgb(68, 68, 68);
-                    width: 100%;
-                    border: none;
-                    outline: none;
-                    height: 40px;
-                }
-            }
-            td{
-                padding: 10px;
-                text-align: center;
-            }
-    
-            tr {
-                font-weight: $thin;
-                padding: 10px;
-                border-bottom: 0.5px solid rgb(219, 219, 219);
-            }
-        }
+.mid {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+    // in dashboard table, "click" button
+.go_btn{
+    padding: 6px;
+    background-color: $btn_darkColor;
+    border-radius: 10px;
+    font-size: 10px;
+    color: white;
+    &:hover{
+        background-color: rgb(77, 77, 77);
     }
 }
 
+.dashboard{
+    font-family: $_base-font-family;
+    margin-top: 80px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px;
+    &--title{
+        margin-bottom: 20px;
+        font-family: 'Lato', sans-serif;
+        color: $font500;
+        margin-left: 10px;
+    }
+    &--board{
+        @include dashboardBox;
+
+        &_notice{
+            margin-top: 10px;
+            position: relative;
+            width: 250px;
+            height: 180px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+            background-color: rgba(253, 242, 214, 0.521);
+            margin-right: 30px;
+            &-label{
+                padding: 10px;
+                text-align: center;
+                font-family: 'Lato', sans-serif;
+                color: rgb(175, 150, 85);
+            }
+            &-num{
+                border-top: 1px solid rgba(196, 187, 165, 0.568);
+                color: rgba(70, 59, 33, 0.521);
+                text-align: right;
+                padding-top: 25px;
+                padding-right: 10px;
+                strong{
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+
+    &--table{
+        @include dataTable;
+    }
+}
+.requests{
+    font-family: $_base-font-family;
+    margin-top: 100px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px;
+
+    &-table{
+        @include dataTable;
+    }
+}
 
 
 .swal-overlay{

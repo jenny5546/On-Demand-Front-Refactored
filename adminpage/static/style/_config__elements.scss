@@ -1,0 +1,102 @@
+@import './config__typography';
+@import './config__color';
+
+//side nav button
+@mixin navButton {
+    display: block;
+    content: "";
+    width: 12px;
+    height: 12px;
+    position: absolute;
+}
+
+@mixin contentBox{
+    width: 90%;
+    border-radius: 10px;
+    margin-left: 20px;
+    overflow: hidden;
+}
+
+@mixin dashboardBox{
+    @include contentBox;
+    display: flex;
+    height: 300px;
+    padding: 50px;
+    margin-bottom: 50px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+@mixin dataTable{
+    .top{
+        position: relative;
+        &-title{
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-family: 'Lato', sans-serif;
+            color: rgb(54, 54, 54);
+            margin-left: 10px;
+            letter-spacing: 0.5px;
+        }
+        .search_menu{
+            display: flex;
+            position: absolute;
+            right: 8%;
+            bottom: 0;
+        }
+    }
+    .bottom{
+        margin-top: 20px;
+        margin-bottom: 40px;
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .head{
+            button{
+                padding-top: 10px;
+                padding-bottom: 20px;
+                font-size: 15px;
+                font-weight: $regular;
+                background-color: rgb(240, 240, 240);
+                color: rgb(68, 68, 68);
+                width: 100%;
+                border: none;
+                outline: none;
+                height: 40px;
+            }
+        }
+        td{
+            padding: 10px;
+            text-align: center;
+        }
+
+        tr {
+            font-weight: $thin;
+            padding: 10px;
+            border-bottom: 0.5px solid rgb(219, 219, 219);
+        }
+        .table_scroll{
+            width: 90%;
+            box-shadow: 0 9px 19px rgba(0,0,0,0.30), 0 7px 6px rgba(0,0,0,0.22);
+            margin-left: 20px;
+            border-radius: 10px;
+            height: 300px;
+            overflow-y: scroll;
+            .overdate{
+                color: rgb(145, 1, 1); 
+                font-weight: 500;
+            }
+            .complete{
+                color: rgb(214, 145, 18); 
+                font-weight: 400;
+            }
+        }
+        .table_scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .overdate{
+            color: rgb(145, 1, 1); 
+            font-weight: 500;
+        }
+    }
+}
