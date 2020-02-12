@@ -64,6 +64,7 @@ def check_mail_imap(user, password, target='none'):
     # latest_email_id = id_list[-10:] 
     # 메일리스트를 받아서 내용을 파일로 저장하는 함수
     for each_mail in id_list:
+
         mail_struct = []
       # fetch the email body (RFC822) for the given ID
         result, data = imapserver.fetch(each_mail, "(RFC822)")
@@ -372,36 +373,39 @@ def each(request, id):
       
       #logo template 넘기기 위한 경로
       module_dir = os.path.dirname(__file__)
-      image_path = os.path.join(module_dir, 'static/Logo.png')
-
+      logo_path = os.path.join(module_dir, 'static/Logo.png')
+      bg_path = os.path.join(module_dir, 'static/email-header.png')
       #templated email로 이미지 넘겨주는 함수 
-      with open(image_path, 'rb') as logo: 
-        archi_image = logo.read()
-        inline_logo = InlineImage(filename="Logo.png", content=archi_image)
+      with open(logo_path, 'rb') as logo: 
+        inline_logo = InlineImage(filename="Logo.png", content=logo.read())
+
+        with open(bg_path, 'rb') as bg: 
+          inline_bg = InlineImage(filename="email-header.png", content=bg.read())
         
-        send_templated_mail( 
+          send_templated_mail( 
 
-            template_name='basic',
-            from_email= 'jangjangman5546@gmail.com',
-            recipient_list=[receiver],
-            context={
-                'username': arequest.username,
-                'content' : message_content,
-                'logo' : inline_logo,
-            },
-            attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),
-            # Optional:
-            # cc=['cc@example.com'],
-            # bcc=['bcc@example.com'],
-            # headers={'Content-Disposition' :"attachment; filename= %s" % filename},
-            # template_prefix="my_emails/",
-            # template_suffix="email",
-        )
+              template_name='basic',
+              from_email= 'jangjangman5546@gmail.com',
+              recipient_list=[receiver],
+              context={
+                  'username': arequest.username,
+                  'content' : message_content,
+                  'logo' : inline_logo,
+                  'bg': inline_bg,
+              },
+              attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),
+              # Optional:
+              # cc=['cc@example.com'],
+              # bcc=['bcc@example.com'],
+              # headers={'Content-Disposition' :"attachment; filename= %s" % filename},
+              # template_prefix="my_emails/",
+              # template_suffix="email",
+          )
 
-        newSentMessage = SentMessage.objects.create(
-          request = arequest,
-          content = message_content
-        )
+          newSentMessage = SentMessage.objects.create(
+            request = arequest,
+            content = message_content
+          )
 
     arequest.due_at = due_at
     arequest.progress = progress

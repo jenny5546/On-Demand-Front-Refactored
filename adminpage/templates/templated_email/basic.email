@@ -1,120 +1,67 @@
-{% block subject %} [On-Demand] 아키드로우에서 {{username}}께 드리는 답변입니다. {% endblock %}
+{% block subject %} Hi, {{username}}! Thank you for using Archisketch On Demand {% endblock %}
 
 {% block html %}
 
-{% load static %}
-
-<style>
-  .wrap{
-    background-color: #faf9f9;
-  }
-  .header{
-    background-color: #5ea3a3; 
-    width: 100%; 
-    height: 80px; 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-  }
-  .logo{
-    width: 300px;
-    height: auto;
-  }
-  .title{
-    font-size: 15px; 
-    font-weight: 300;
-    color: white;
-    margin-left: 10px;
-  }
-  .content-wrap{
-    min-height: 500px;
-    display:flex;
-    margin-top: 30px;
-    justify-content:center;
-    align-items:center;
-  }
-  .mail-contents{
-    width: 50%; 
-    min-height: 250px; 
-    padding: 50px; 
-    font-size: 16px;
-    white-space: pre-line;
-    word-wrap: break-word; 
-    background-color: white;
-    box-shadow: 0 6px 8px rgba(0,0,0,0.30), 0 5px 6px rgba(0,0,0,0.22);
-  }
-  .footer{
-    width 100%; 
-    height: 100px; 
-    display: flex; 
-    justify-content:center; 
-    align-items:center;
-  }
-  .foot_logo{
-    width: 200px; 
-    height: 40px; 
-    filter: brightness(10%);
-    margin-right: 20px;
-  }
-  .foot_menu{
-    padding:5px;
-  }
-  .atag{
-    padding: 10px; 
-    text-decoration: none; 
-    color: black; 
-    font-size: 14px; 
-    font-weight: 500;
-  }
-  .copyright{
-    padding: 10px; 
-    margin-left: 10px; 
-    color: #949494; 
-    font-size: 11px;
-  }
-
-</style>
-
   <div class="wrap">
 
-      <div class="header">
-          <img class="logo" src="{{ logo }}"/>
+      <div class="head" style=" width:100%; height:300px; overflow:hidden; display:flex; position:relative;">
 
-          <div class= "title">
-            {{ username }} 님의 On Demand Service
-          </div>
-          
+          <img class="bg" style="width: 100%; height: 100%; z-index:1;" src="{{ bg }}"/>
+
+          <a style="position:absolute; top:20%; left:15%; z-index:99; text-decoration:none;">
+            <img style="width: 250px;height: auto; " src= "{{ logo }}">
+          </a>
+
+          <a style="position:absolute; top:40%; left:16%;z-index:99; text-decoration:none;">
+            <p style="font-size:18px; color:#d6d5d5; font-weight: 300;"><p1 style="color:white;">Thank You </p1> for Waiting</p> 
+            <p style="font-size:18px; color:#d6d5d5; font-weight: 200;"> for our <p1 style="font-weight: 600; color:white;">On-Demand Service</p1> </p> 
+          </a>
+
+          <a style="position:absolute; top:70%; left:16%;z-index:99; text-decoration:none;">
+            <p style="width: 150px; height: 35px; background-color: #499fb6; color:white; border-radius: 30px; padding-top: 8px; 
+            font-size: 15px; font-weight: 400; text-align: center; box-shadow: 0 5px 8px rgba(0,0,0,0.30), 0 4px 6px rgba(0,0,0,0.22);">
+              Check it Out
+            </p>
+          </a>
+
       </div>
 
-      <div class="content-wrap">
+      <div style="width:100%; min-height:800px; padding: 50px 0 20px 0; background-color: #F6F6F6; display: flex; flex-direction: column; align-items: center; justify-content: center;" class="content-wrap">
 
-          <div class = "mail-contents">
+          <div style="font-size: 16px; width: 60%;">
+            <p style="color: #499fb6; font-weight: 700; font-size:30px;"> Hello, {{ username }} ! </p>
+            <p style="color:#8b8b8b; margin-top: 10px;"> Thank you for being our customer at Archisketch. </p>
+            <p style="color:#8b8b8b; margin-bottom: 30px;"> A response to your inquiry on our On Demand service has arrived. </p>
+          </div>
+
+          <div class = "mail-contents" style="padding: 50px; font-size:20px; background-color: white; width: 60%; min-height:400px;">
             {{ content }}
           </div>
+
+          <div style="font-size: 14px; margin-top: 50px; text-align: center; font-weight: 200;">
+
+            <p style="color: #8b8b8b;">Please do not hesitate to contact us: <p1 style="font-weight:600; font-size: 15px;color:#499fb6;"> archisketch@archisketch.com </p1> with any questions</p>
+            <p style="color: #8b8b8b;">or further information. We look forward to being able to be of service to you.</p>
+
+            <p style="font-size: 11px; color:#bbbbbb; margin-top: 30px; ">Copyright© 2019 All rights reserved by Archisketch.Inc</p>
+          
+          </div>
+
 
       </div>
 
       <div class = "footer">
-          <img class= "foot_logo" src="{{ logo }}"/>
-
           <div class= "foot_menu">
               <div>
                 <a class="atag" href="https://www.archisketch.com/contact_us" > Contact Us </a>
                 <a class="atag" href="https://www.archisketch.com/terms"> Terms & Privacy </a>
                 <a class="atag" href="https://developer.archisketch.com"> Developer </a>
-              </div>
-              <p class="copyright">Copyright© 2019 All rights reserved by Archisketch.Inc</p>
+              </div> 
           </div>
-
     </div>
 
   </div>
 
-  
-
-
-
-  
 
 
 {% endblock %}
