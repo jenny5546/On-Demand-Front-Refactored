@@ -301,6 +301,7 @@ def show(request):
 
 
 def each(request, id):
+  
   global thread_num
   global unread_mail_num
   global unread_mail
@@ -310,6 +311,7 @@ def each(request, id):
   delete_index = []
   delete_id_index = []
   if request.method == 'GET':
+    
     arequest= Request.objects.get(id = id)
     sentMessages = SentMessage.objects.filter(request = arequest)
     # email check!
@@ -350,12 +352,15 @@ def each(request, id):
       chain(sentMessages,receivedMessages),
       key = lambda message: message.timestamp, reverse=False
     )
-    
-    return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list,"unread_mail_num" : unread_mail_num})
+    # print('Get')
+    # print(loading)
+    return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list,"unread_mail_num" : unread_mail_num })
   
   # 수정하기 + 메세지 보내기
   elif request.method == 'POST':
+    
     # 수정 부분
+    
     arequest= Request.objects.get(id = id)
     due_at = request.POST.get('due_at', arequest.due_at)
     progress = request.POST.get('progress', arequest.progress)
