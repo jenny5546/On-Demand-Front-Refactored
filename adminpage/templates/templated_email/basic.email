@@ -8,21 +8,21 @@
 
           <img class="bg" style="width: 100%; height: 100%; z-index:1;" src="{{ bg }}"/>
 
-          <a style="position:absolute; top:20%; left:15%; z-index:99; text-decoration:none;">
-            <img style="width: 250px;height: auto; " src= "{{ logo }}">
+          <a style="position:absolute; top:25%; left:15%; z-index:99; text-decoration:none;">
+            <img style="width: 300px; height: auto; " src= "{{ logo }}">
           </a>
 
-          <a style="position:absolute; top:40%; left:16%;z-index:99; text-decoration:none;">
+          <a style="position:absolute; top:50%; left:16%;z-index:99; text-decoration:none;">
             <p style="font-size:18px; color:#d6d5d5; font-weight: 300;"><p1 style="color:white;">Thank You </p1> for Waiting</p> 
             <p style="font-size:18px; color:#d6d5d5; font-weight: 200;"> for our <p1 style="font-weight: 600; color:white;">On-Demand Service</p1> </p> 
           </a>
 
-          <a style="position:absolute; top:70%; left:16%;z-index:99; text-decoration:none;">
+          <!-- <a style="position:absolute; top:70%; left:16%;z-index:99; text-decoration:none;">
             <p style="width: 150px; height: 35px; background-color: #499fb6; color:white; border-radius: 30px; padding-top: 8px; 
             font-size: 15px; font-weight: 400; text-align: center; box-shadow: 0 5px 8px rgba(0,0,0,0.30), 0 4px 6px rgba(0,0,0,0.22);">
               Check it Out
             </p>
-          </a>
+          </a> -->
 
       </div>
 
@@ -50,7 +50,7 @@
 
       </div>
 
-      <div class = "footer">
+      <!-- <div class = "footer">
           <div class= "foot_menu">
               <div>
                 <a class="atag" href="https://www.archisketch.com/contact_us" > Contact Us </a>
@@ -58,7 +58,7 @@
                 <a class="atag" href="https://developer.archisketch.com"> Developer </a>
               </div> 
           </div>
-    </div>
+      </div> -->
 
   </div>
 

@@ -5,6 +5,11 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/jquery.flexslider-min.js"></script>
 <script type="text/javascript">
+
+    function loading(){
+        $('.loading').append("<img src='{% static 'loading.gif' %}'/>")
+    }
+
     $(document).ready(function() { 
         var status = {{ arequest.progress }}
         var active_circle= $('.label:contains(' + status + ')').parent()
@@ -202,7 +207,7 @@
                 <div class="eachRequest--utheme_wrapper" >
                     {% for theme in arequest.uploaded_theme.all %}
                         
-                        <img class="eachRequest--utheme_img"src="{{ theme.photo.url }}">
+                        <img class="eachRequest--utheme_img" src="{{ theme.photo.url }}">
                         
                     {% endfor %}
                 </div>
@@ -254,8 +259,10 @@
                 {% csrf_token %}
                 <input style="width: 10px;" type="file" name="msg_attachments" multiple="multiple"/>
                 <textarea class="input" placeholder= "Enter your message" name="msg_content"></textarea>
-                <input class="submit" type="submit" value="Send"/>
+                <input class="submit" type="submit" onclick= "return loading();" value="Send"/>
             </form>
+
+            <div class="loading"></div>
         </div>
     
         <a href= "http://localhost:8000/{{arequest.id}}/output">Send Output</a>
