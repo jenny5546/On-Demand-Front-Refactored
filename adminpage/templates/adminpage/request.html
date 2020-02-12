@@ -55,22 +55,6 @@
     }
 </script>
 
-<script>
-    $(document).ready(function() { 
-        $(".sendPopup").on("click", function(){
-            console.log({{test}})
-            $(".sendMail").css({
-                "display":"flex",
-            })
-        })
-        $(".popupClose").on("click", function(){
-            $(".sendMail").css({
-                "display":"none",
-            }) 
-        })
-    });
-</script>
-
 {% now "Y/m/d" as todays_date %}
 
 <div class="eachRequest">
@@ -228,14 +212,11 @@
     </div>
     
     <div class = "eachRequest--chatroom">
-
         <div class = "eachRequest--chatroom_header">
             {{arequest.username}}
             <hr style="margin-top: 10px; opacity: 20%;"/>
         </div>
-
         <div class = "eachRequest--chatroom_msg">
-            
             {% if message_list %}
             <div>
                 {% for msg in message_list %}
@@ -255,9 +236,7 @@
                                 <p2 class="chat_time">{{msg.timestamp|timesince}} 전</p2>
                             </div>
                         </div>
-
                     </div>
-                    
                     {% endif %}
                 {% endfor %}
             </div>
@@ -265,29 +244,29 @@
 
         </div>
 
-        <div class = "eachRequest--chatroom_send"> 
-            <form enctype="multipart/form-data" style="display: flex; padding: 20px; height: 100%;" action="/adminpage/{{ arequest.id }}/" method="POST">
+        <div class = "eachRequest--chatroom_send">
+            <button class="plus">+</button>
+            <button class="sendPopup">sendPopup</button>
+            <form class="eachRequest--chatroom_send_textbox" enctype="multipart/form-data" action="/adminpage/{{ arequest.id }}/" method="POST">
                 {% csrf_token %}
-                <input style="width: 10px;" type="file" name="msg_attachments" multiple="multiple"/>
-                <textarea class="input" placeholder= "Enter your message" name="msg_content"></textarea>
+                <div class="top">
+                    <input class="fileinput" type="file" name="image" multiple="multiple"/>
+                    <textarea class="textinput" placeholder= "Enter your message" name="msg_content"></textarea>
+                </div>
                 <input class="submit" type="submit" value="Send"/>
             </form>
         </div>
-    
-        <a href= "http://localhost:8000/{{arequest.id}}/output">Send Output</a>
-        <button class="sendPopup">sendPopup</button>
-        
     </div>
 </div>
 <div class="sendMail">
     <div class="sendMail--box">
         <p>Hello, world!</p>
-        <form enctype="multipart/form-data" action='/adminpage/output/{{ arequest.id }}/' method="POST">
+        <form enctype="multipart/form-data" action='/adminpage/{{ arequest.id }}/' method="POST">
             {% csrf_token %}
             <label>첨부파일</label>
-            <input type="file" name="attach" multiple="multiple"/>
+            <input type="file" name="msg_attachments" multiple="multiple"/>
             <label>내용</label>
-            <textarea placeholder= "Enter your message" name="content"></textarea>
+            <textarea placeholder= "Enter your message" name="msg_content"></textarea>
             <label>이메일 이미지 파일고르기</label>
             <input type="file" name="image"/>
             <input class="submit" type="submit" value="Send"/>
@@ -296,5 +275,53 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() { 
+        var click_num = 0;
+        $(".plus").on("click", function(){
+            if(click_num === 0){
+                $(".sendPopup").css({
+                    "display": "flex",
+                })
+                $(".fileinput").css({
+                    "display": "flex",
+                })
+                $(".textinput").css({
+                    "display": "none",
+                })
+                click_num = 1;
+            }
+            else{
+                $(".sendPopup").css({
+                    "display": "none",
+                })
+                $(".fileinput").css({
+                    "display": "none",
+                })
+                $(".textinput").css({
+                    "display": "flex",
+                })
+                click_num = 0;
+            }
+        })
+
+        $(".sendPopup").on("click", function(){
+            $(".sendMail").css({
+                "display":"flex",
+            })
+            $(".eachRequest--contents").css({
+                "display": "none",
+            })
+        })
+        $(".popupClose").on("click", function(){
+            $(".sendMail").css({
+                "display":"none",
+            }) 
+            $(".eachRequest--contents").css({
+                "display": "flex",
+            })
+        })
+    });
+</script>
 
 {% endblock content %}

@@ -9,7 +9,6 @@ urlpatterns = [
     path('<int:id>/', views.each, name='each'), #each requests
     path('<int:id>/edit/', views.edit, name='edit'),
     path('<int:id>/delete/', views.delete, name='delete'),
-    path('<int:id>/output/', views.output, name='output'), #output 보내기
     path('<int:req_id>/<int:file_id>/download/', views.download, name='download'),
     path('messages/', views.messages, name="messages"),
     path('messages/<int:id>', views.messages, name="open_room")
