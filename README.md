@@ -17,3 +17,53 @@
 #### 2. git add .
 #### 3. git commit -m ".gitignore fix"
 
+<!-- <style>
+  
+  .content-wrap{
+    min-height: 500px;
+    display:flex;
+    margin-top: 30px;
+    justify-content:center;
+    align-items:center;
+  }
+  .mail-contents{
+    width: 50%; 
+    min-height: 250px; 
+    padding: 50px; 
+    font-size: 16px;
+    white-space: pre-line;
+    word-wrap: break-word; 
+    background-color: white;
+    box-shadow: 0 6px 8px rgba(0,0,0,0.30), 0 5px 6px rgba(0,0,0,0.22);
+  }
+  .footer{
+    width 100%; 
+    height: 100px; 
+    display: flex; 
+    justify-content:center; 
+    align-items:center;
+  }
+  .foot_logo{
+    width: 200px; 
+    height: 40px; 
+    filter: brightness(10%);
+    margin-right: 20px;
+  }
+  .foot_menu{
+    padding:5px;
+  }
+  .atag{
+    padding: 10px; 
+    text-decoration: none; 
+    color: black; 
+    font-size: 14px; 
+    font-weight: 500;
+  }
+  .copyright{
+    padding: 10px; 
+    margin-left: 10px; 
+    color: #949494; 
+    font-size: 11px;
+  }
+
+</style> -->
