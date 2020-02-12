@@ -75,13 +75,6 @@ def check_mail_imap(user, password, target='none'):
         mail_struct.append(from_address)
         mail_struct.append(message_subject)
 
-        '''
-        <TIME DATA INPUT>
-        NAVER, Gmail 은 가능하다.
-        time data format 가장뒤에 (KST)같은 문자열이 없어야 함.
-        DGIST 메일은 (KST) 가 붙어서 오류 뜸.
-        '''
-        
         message_timestamp = datetime.strptime(msg['Date'][:31],'%a, %d %b %Y %H:%M:%S %z')
         print('date:' + msg['Date'])
         # print(message_timestamp)
@@ -207,33 +200,6 @@ def dashboard(request):
 
     for req in requests:
       line_data[req.requested_at.month-1]+=1
-      # k = str(req.requested_at)
-      # a = k[5]+k[6]
-      # print(req.requested_at.month)
-      # if(a == "01"):
-      #   line_data[0] += 1
-      # elif(a == "02"):
-      #   line_data[1]+=1
-      # elif(a == "03"):
-      #   line_data[2]+=1
-      # elif(a == "04"):
-      #   line_data[3]+=1
-      # elif(a == "05"):
-      #   line_data[4]+=1
-      # elif(a == "06"):
-      #   line_data[5]+=1
-      # elif(a == "07"):
-      #   line_data[6]+=1
-      # elif(a == "08"):
-      #   line_data[7]+=1
-      # elif(a == "09"):
-      #   line_data[8]+=1
-      # elif(a == "10"):
-      #   line_data[9]+=1
-      # elif(a == "11"):
-      #   line_data[10]+=1
-      # elif(a == "12"):
-      #   line_data[11]+=1
 
     return render(request, 'adminpage/dashboard.html', {
       'onrunRequests': onrunRequests,
@@ -398,13 +364,7 @@ def each(request, id):
                   'logo' : inline_logo,
                   'bg': inline_bg,
               },
-              attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),
-              # Optional:
-              # cc=['cc@example.com'],
-              # bcc=['bcc@example.com'],
-              # headers={'Content-Disposition' :"attachment; filename= %s" % filename},
-              # template_prefix="my_emails/",
-              # template_suffix="email",
+              attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),   
           )
 
           newSentMessage = SentMessage.objects.create(
@@ -485,10 +445,6 @@ def output(request, id):
 
       return redirect('/'+str(id))
 
-
-def settings(request):
-  # something
-  return render(request, 'adminpage/setting.html')
   
 
 

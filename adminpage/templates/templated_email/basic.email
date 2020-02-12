@@ -34,7 +34,7 @@
             <p style="color:#8b8b8b; margin-bottom: 30px;"> A response to your inquiry on our On Demand service has arrived. </p>
           </div>
 
-          <div class = "mail-contents" style="padding: 50px; font-size:20px; background-color: white; width: 60%; min-height:400px;">
+          <div class = "mail-contents" style="padding: 50px; font-size:20px; background-color: white; white-space: pre-line; word-wrap: break-word; width: 60%; min-height:400px;">
             {{ content }}
           </div>
 
