@@ -304,6 +304,7 @@ def each(request, id):
   global unread_mail_num
   global unread_mail
   global unread_mail_id
+  test = 0
   i = 0
   j = 0
   delete_index = []
@@ -350,7 +351,12 @@ def each(request, id):
       key = lambda message: message.timestamp, reverse=False
     )
     
-    return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list,"unread_mail_num" : unread_mail_num})
+    return render(request, 'adminpage/request.html', {
+      'arequest': arequest, 
+      'message_list': message_list,
+      "unread_mail_num" : unread_mail_num,
+      "test": test,
+      })
   
   # 수정하기 + 메세지 보내기
   elif request.method == 'POST':
@@ -380,7 +386,6 @@ def each(request, id):
         inline_logo = InlineImage(filename="Logo.png", content=archi_image)
         
         send_templated_mail( 
-
             template_name='basic',
             from_email= 'jangjangman5546@gmail.com',
             recipient_list=[receiver],
@@ -411,7 +416,6 @@ def each(request, id):
 
     return redirect('/'+str(id))
 
-
 def edit(request, id):
 
   arequest = Request.objects.get(id=id)
@@ -422,7 +426,6 @@ def edit(request, id):
 
 
 def download(request, req_id, file_id):
-
   arequest= Request.objects.get(id = req_id)
   afile = arequest.floor_plan.get(id = file_id)
   fs = FileSystemStorage('../On-Demand-Back/media')
