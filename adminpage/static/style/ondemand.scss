@@ -191,6 +191,10 @@ a{
             right: 0%;
         }
     }
+    &--sendbtn{
+        @include detailButton($mainColor_dark);
+        margin-right: 10px;
+    }
     &--editbtn{
         @include detailButton($btn_darkColor);
         margin-right: 10px;
@@ -370,6 +374,7 @@ a{
                 border: 0;
                 margin-left: 10px;
                 font-size: 15px; 
+                font-family: $_base-font-family;
             }
             input[type=submit]{
                 // width: 100px;

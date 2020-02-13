@@ -3,8 +3,8 @@
 {% block content %}
 
 <script>
-
     $(document).ready(function() {
+        var unread = {{ notifications.count }}
         setInterval(function(){
             $.ajax({
                 url: window.location.pathname,
@@ -13,13 +13,17 @@
                 dataType: 'json',
                 success: function(result){
 
-                    // Object.observe
+                    if (unread !== result.unread){
+                        // console.log('changed');
+                        location.reload(true);
+                    }
+                    // else{
+                    //     console.log('unchanged')
+                    // }
                 }     
             })
-        },1000)
-        
+        }, 2000)  
     })
-
 </script>
 
 <div class="requests">

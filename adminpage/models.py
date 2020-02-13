@@ -121,8 +121,14 @@ class ReceivedMessage(models.Model):
 
 # Client 에게 보낸 email
 class SentMessage(models.Model):
+
   sender = models.CharField(max_length = 10, default='admin')
   request = models.ForeignKey(Request, null=True, on_delete = models.CASCADE)
   content = models.TextField()
   timestamp = models.DateTimeField(default=timezone.now)
 
+class Notification(models.Model):
+
+  request = models.ForeignKey(Request, null=True, on_delete = models.CASCADE)
+  received_message = models.ForeignKey(ReceivedMessage, null=True, on_delete = models.CASCADE)
+  seen = models.BooleanField(default = False)

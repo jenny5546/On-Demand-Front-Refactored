@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Request, Plan, SelectedTheme, UploadedTheme, SentMessage, ReceivedMessage
+from .models import Request, Plan, SelectedTheme, UploadedTheme, SentMessage, ReceivedMessage, Notification
 from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect, FileResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from random_username.generate import generate_username
@@ -19,7 +19,6 @@ from email.mime.base import MIMEBase
 from templated_email import send_templated_mail, InlineImage
 
 # email parsing 함수
-
 def decode_mime_words(s):
   return u''.join(
     word.decode(encoding or 'utf-8') if isinstance(word, bytes) else word
@@ -27,17 +26,13 @@ def decode_mime_words(s):
 
 # 변경 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # email info locate outside of app folder
+
 user = "none"
 password = "none"
-target_mail = "none"
+
 thread_num = 0
-unread_mail_num = 0
-unread_mail = []
-unread_mail_id = []
-unmade_model_num = 0
 
 secret_file = os.path.join(BASE_DIR, 'secret.json') # email address & password
-
 with open(secret_file) as f:
   secret = json.loads(f.read())
   user = secret["Email"]
@@ -45,7 +40,8 @@ with open(secret_file) as f:
 
 
 # 메일을 받는 함수(imap4)
-def check_mail_imap(user, password, target='none'):
+def check_mail_imap(user, password):
+
   details = []
   # imap server
   imapsrv = "imap.gmail.com"
@@ -53,20 +49,19 @@ def check_mail_imap(user, password, target='none'):
   imapserver.login(user, password)
   imapserver.select('INBOX')
   res, unseen_data = imapserver.search(None, '(UNSEEN)')
+
   # print("unseen_data", unseen_data)
   if (unseen_data[0]):
+
     ids = unseen_data[0] 
     lists = ids.split()
     
     id_list = list(reversed(lists))
-    # print(id_list.__len__()) # length of unseen mails
 
-    # latest_email_id = id_list[-10:] 
     # 메일리스트를 받아서 내용을 파일로 저장하는 함수
     for each_mail in id_list:
 
         mail_struct = []
-      # fetch the email body (RFC822) for the given ID
         result, data = imapserver.fetch(each_mail, "(RFC822)")
         msg = email.message_from_bytes(data[0][1])
         # print(msg)
@@ -76,36 +71,37 @@ def check_mail_imap(user, password, target='none'):
         mail_struct.append(message_subject)
 
         message_timestamp = datetime.strptime(msg['Date'][:31],'%a, %d %b %Y %H:%M:%S %z')
-        # print('date:' + msg['Date'])
-        # print(message_timestamp)
+  
         '''
         <CONTENTS DATA INPUT>
         '''
         raw_email = data[0][1]
         raw_email_string = raw_email.decode('utf-8')
         email_message = email.message_from_string(raw_email_string)
-        for part in email_message.walk():
-          # print('type'+ part.get_content_maintype())
-          if part.get_content_type() == "text/plain":
-            body = part.get_payload(decode=True)
-            message_content = body.decode('utf-8')
-            mail_struct.append(message_content)
-            mail_struct.append(message_timestamp)
 
-          elif part.get_content_type() == 'text/html':
+        for part in email_message.walk():
+
+          # print('type'+ part.get_content_maintype())
+          # if part.get_content_type() == "text/plain":
+          #   body = part.get_payload(decode=True)
+          #   message_content = body.decode('utf-8')
+          #   mail_struct.append(message_content)
+          #   mail_struct.append(message_timestamp)
+          #   pass
+
+          if part.get_content_type() == 'text/html':
             body = part.get_payload(decode=True)
             message_content = BeautifulSoup(body.decode('UTF-8'), "html.parser")
             mail_struct.append(message_content.get_text())
             mail_struct.append(message_timestamp)
-                
+    
         # update
         details.append(mail_struct)
           
     imapserver.close()
     imapserver.logout()
-    # print("hahah", type(details))
-    #threading.Timer(3, check_mail_test).start()
-    return details
+
+    return details # details = [{mail: (보낸사람 이메일, 메일 제목, 메일 내용, 메일 보낸 시간)},{},{}]
 
 @csrf_exempt
 
@@ -116,7 +112,7 @@ def request(request):
     #연결해야하는 부분 
     #요청한 사람 정보(user)
     username = generate_username(1)[0]
-    useremail = 'jenny5546@naver.com' #연결할때, front에서 들고오기
+    useremail = 'jenny5546@snu.ac.kr' #연결할때, front에서 들고오기
     # print(user)
     floor_type = request.POST.get('floor_type')
     commercial_type = request.POST.get('commercial_type')
@@ -172,175 +168,130 @@ def request(request):
 
 
 def dashboard(request):
-  global unread_mail_num
-  global unread_mail
+
   global thread_num
+
   if(thread_num < 1):
     checking()
     thread_num += 1
+
   if request.method == 'GET':
 
-    requests = Request.objects.all()
-    queryset = Request.objects.order_by('-progress')[:]
-    onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
-    unread_mail_num = len(unread_mail) # 1개 메일당 contents가 4개니까
-    progress = [0,0,0,0,0]
+    if request.is_ajax():
+      unread = Notification.objects.all().count() #당시의 알람 개수
+      return JsonResponse({'unread': unread }) # 보내기
 
-    # temp data edit it!
-    line_data = [0] * 12
-    #progress 별 counting
-    for user in queryset:
-      for i in range(5):
-        if(user.progress == i+1):
-          progress[i] += 1
+    else:
+      requests = Request.objects.all()
+      notifications = Notification.objects.all()
+      queryset = Request.objects.order_by('-progress')[:]
+      onrunRequests = Request.objects.exclude(progress = 5) 
+      
+      progress = [0]*5
 
-    labels = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
-    data = progress.copy()
-    #print(Request.objects.filter(requested_at__contains=datetime.date(2020, 1, 20)))    
+      line_data = [0] * 12
+      #progress 별 counting
+      for user in queryset:
+        for i in range(5):
+          if(user.progress == i+1):
+            progress[i] += 1
 
-    for req in requests:
-      line_data[req.requested_at.month-1]+=1
+      labels = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
+      data = progress.copy()  
 
-    return render(request, 'adminpage/dashboard.html', {
-      'onrunRequests': onrunRequests,
-      'requests': requests,
-      'labels': labels,
-      'data': data,
-      'line_data' : line_data,
-      "unread_mail_num" : unread_mail_num,
-    })
+      for req in requests:
+        line_data[req.requested_at.month-1]+=1
 
+      return render(request, 'adminpage/dashboard.html', {
+        'onrunRequests': onrunRequests,
+        'requests': requests,
+        'labels': labels,
+        'data': data,
+        'line_data' : line_data,
+        'notifications': notifications,
+      })
+
+  
 def checking():
-  global unread_mail_num
-  global unread_mail
-  global unmade_model_num
-  details = check_mail_imap(user, password) # pull total unread mails
-  totalRequests = Request.objects.all()
-  # 감소하는 코드는 없음. detail로 들어가서 확인해야 없어지도록 할 것.
-  if(str(type(details)) == "<class 'list'>" and details != []):
-    unread_mail = details
-    unmade_model_num += len(unread_mail)
-    
-  unread_mail_num = len(unread_mail)
-  print('checking: ', unread_mail)
-  print("mailnumber : ", unread_mail_num)
-  print("unmad model num: ", unmade_model_num)
-  print("unread_mail_id: ", unread_mail_id)
 
-  if(unread_mail_num):
-    # request.session['load'] = 'True'
-    for req in totalRequests:
-      if(unmade_model_num):
-        for mail in unread_mail:
-          if(mail[0]==req.useremail):
-            newReceivedMessage = ReceivedMessage.objects.create(
+  details = check_mail_imap(user, password) 
+  if(str(type(details)) == "<class 'list'>" and details != []): # 안 읽은 메일이 존재한다면.
+    for eachmail in details: # 안 읽은 메일 중에서 
+      if Request.objects.filter(useremail = eachmail[0]).exists(): # 리퀘 보낸 사람이 있다면 
+        req = Request.objects.get(useremail = eachmail[0]) # 리퀘 찾기. 
+
+        newReceivedMessage = ReceivedMessage.objects.create(
               request = req,
               username = req.username,
-              sender = mail[0],
-              title = mail[1],
-              content = mail[2],
-              timestamp = mail[3]
-            )
-            unread_mail_id.append(req.id)
-    unmade_model_num = 0
-  
-  # checking mailbox every 3 seconds
+              sender = eachmail[0],
+              title = eachmail[1],
+              content = eachmail[2],
+              timestamp = eachmail[3]
+        )
+        newNotification = Notification.objects.create(
+          request=req,
+          received_message = newReceivedMessage
+        )
+
   threading.Timer(3, checking).start()
-  
+
 
 def show(request):
 
   global thread_num
-  global unread_mail_num
-  global unread_mail
-  global unmade_model_num
-
+  
   if request.method == 'GET':
 
     onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
     totalRequests = Request.objects.all()
+    notifications= Notification.objects.all()
 
     if(thread_num < 1):
       checking()
       thread_num += 1
-    
+
     if request.is_ajax():
-      # context ={}
-      # context['unread_mail_num'] = unread_mail_num
-      # data = json.dumps(context)
-      # mimetype= 'application/json'
-      return JsonResponse({'unread_mail_num':unread_mail_num})
-      
+      unread = Notification.objects.all().count() #당시의 알람 개수
+      return JsonResponse({'unread': unread }) # 보내기
+
     else:
       return render(request, 'adminpage/show.html', {
       'totalRequests': totalRequests, 
       'onrunRequests': onrunRequests, 
-      "unread_mail_num" : unread_mail_num,
-      "unread_mail_id" : unread_mail_id,
+      'notifications': notifications,
     })
 
 
 def each(request, id):
   
   global thread_num
-  global unread_mail_num
-  global unread_mail
-  global unread_mail_id
-  i = 0
-  j = 0
-  delete_index = []
-  delete_id_index = []
   if request.method == 'GET':
+
+    if(thread_num < 1):
+      checking()
+      thread_num += 1
     
     arequest= Request.objects.get(id = id)
     sentMessages = SentMessage.objects.filter(request = arequest)
-    # email check!
-    target_mail = arequest.useremail
     
-    # Delete read mail
-    for elem in unread_mail:
-      for sub_elem in elem:
-        if(sub_elem == arequest.useremail):
-          delete_index.append(i)
-      i += 1
-    
-    for mail_id in unread_mail_id:
-      if(mail_id == arequest.id):
-        delete_id_index.append(j)
-      j += 1
-
-
-    '''
-    details 는 [[발신자 이메일, 제목, 내용]] 으로 구성된 배열 
-    unread_mail 은 [[mail_struct][mail_struct]....]
-    mail_struct 는 [mail, title, content, timestamp]로 구성된 배열
-    '''
-    #만약 안읽은게 있다면
-    if(unread_mail_num):
-    # 이미 존재하는 이메일 / each의 target과 다른 이메일 필터링   
-      delete_index.reverse()
-      delete_id_index.reverse()
-      for i in delete_index:
-        unread_mail.pop(i) # mail
-      for j in delete_id_index:
-        unread_mail_id.pop(j)
+    # 해당하는 알림 지우기
+    if Notification.objects.filter(request = arequest).exists():
+      Notification.objects.filter(request = arequest).delete()
 
 
     receivedMessages = ReceivedMessage.objects.filter(request = arequest)
+    notifications= Notification.objects.all()
 
     message_list = sorted(
       chain(sentMessages,receivedMessages),
       key = lambda message: message.timestamp, reverse=False
     )
-    # print('Get')
-    # print(loading)
-    return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list,"unread_mail_num" : unread_mail_num })
+    return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list, 'notifications': notifications})
   
   # 수정하기 + 메세지 보내기
   elif request.method == 'POST':
     
     # 수정 부분
-    
     arequest= Request.objects.get(id = id)
     due_at = request.POST.get('due_at', arequest.due_at)
     progress = request.POST.get('progress', arequest.progress)
@@ -413,18 +364,19 @@ def download(request, req_id, file_id):
   response['Content-Disposition'] = 'attachment; filename= floorplan.png'
   return response
 
+
 def delete(request, id):
 
   arequest = Request.objects.get(id = id)
   arequest.delete()
   return redirect('/show')
 
-
 def messages(request):
 
    if request.method == 'GET':
      requests = Request.objects.all()
      return render(request, 'adminpage/messages.html', {'requests': requests, "unread_mail_num" : unread_mail_num})
+
 
 def output(request, id):
   
