@@ -307,8 +307,14 @@ def each(request, id):
     receiver = arequest.useremail
     # 첨부파일 처리 
     att_list = [] 
+    inline= None
+
     if request.FILES:
       att_list = request.FILES.getlist('msg_attachments')
+      #popup
+      #image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
+      #inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
+
 
     if (message_content != ''):
       
@@ -317,30 +323,23 @@ def each(request, id):
       logo_path = os.path.join(module_dir, 'static/Logo.png')
       bg_path = os.path.join(module_dir, 'static/email-header.png')
       #templated email로 이미지 넘겨주는 함수 
-      with open(logo_path, 'rb') as logo: 
-        inline_logo = InlineImage(filename="Logo.png", content=logo.read())
-
-        with open(bg_path, 'rb') as bg: 
-          inline_bg = InlineImage(filename="email-header.png", content=bg.read())
         
-          send_templated_mail( 
-
-              template_name='basic',
-              from_email= 'jangjangman5546@gmail.com',
-              recipient_list=[receiver],
-              context={
-                  'username': arequest.username,
-                  'content' : message_content,
-                  'logo' : inline_logo,
-                  'bg': inline_bg,
-              },
-              attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),   
-          )
-
-          newSentMessage = SentMessage.objects.create(
-            request = arequest,
-            content = message_content
-          )
+      send_templated_mail( 
+          template_name='output',
+          from_email= 'jangjangman5546@gmail.com',
+          recipient_list=[receiver],
+          context={
+              'username': arequest.username,
+              'content' : message_content,
+              #'logo' : inline_logo,
+              #'image' : inline,
+          },
+          attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),
+      )
+      newSentMessage = SentMessage.objects.create(
+        request = arequest,
+        content = message_content
+      )
 
     arequest.due_at = due_at
     arequest.progress = progress
@@ -349,7 +348,6 @@ def each(request, id):
     arequest.update_date()
 
     return redirect('/'+str(id))
-
 
 def edit(request, id):
 
@@ -362,7 +360,6 @@ def edit(request, id):
 
 
 def download(request, req_id, file_id):
-
   arequest= Request.objects.get(id = req_id)
   afile = arequest.floor_plan.get(id = file_id)
   fs = FileSystemStorage('../On-Demand-Back/media')
@@ -383,7 +380,6 @@ def messages(request):
      notifications= Notification.objects.all()
      requests = Request.objects.all()
      return render(request, 'adminpage/messages.html', {'requests': requests, 'notifications': notifications})
-
 
 def output(request, id):
   
@@ -420,8 +416,4 @@ def output(request, id):
       return redirect('/'+str(id))
 
   
-
-
-
-
 

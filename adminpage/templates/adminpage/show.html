@@ -277,18 +277,57 @@
             }
             
             //테이블 클래스 active 지정
-            //$this_table.find("th button")
+
             /* 정렬 */
             new_array.sort(function (a, b) { 
+                if($this_start_number == 0){
+                    // ID는 Number로 형변환
+                    var numOfAid = Number(a[0])
+                    var numOfBid = Number(b[0])
+                    if(k % 2 == 0) {
+                        return numOfAid < numOfBid ? -1 : numOfAid > numOfBid ? 1 : 0;  
+                    } else {
+                        return numOfAid > numOfBid ? -1 : numOfAid < numOfBid ? 1 : 0;  
+                    }
+                }
 
-                if(k % 2 == 0) {
-                    return a[$this_start_number] < b[$this_start_number] ? -1 : a[$this_start_number] > b[$this_start_number]? 1 : 0;  
-                } else {
-                    return a[$this_start_number] > b[$this_start_number] ? -1 : a[$this_start_number] < b[$this_start_number]? 1 : 0;  
+                else if($this_start_number == 4){
+                    // feet^2 을 m^2으로 단위환산 & number로 형변환
+                    var anotNum = a[4].indexOf(" ")
+                    var bnotNum = b[4].indexOf(" ")
+                    var numOfAsize = Number(a[$this_start_number].substring(0, anotNum))
+                    var numOfBsize = Number(b[$this_start_number].substring(0, bnotNum))
+
+                    if(a[4][anotNum+1] === "f"){
+                        numOfAsize *= 0.09290304
+                    }
+                    if(b[4][bnotNum+1] === "f"){
+                        numOfBsize *= 0.09290304
+                    }
+
+                    if(k % 2 == 0) {
+                        return numOfAsize < numOfBsize ? -1 : numOfAsize > numOfBsize? 1 : 0;  
+                    } else {
+                        return numOfAsize > numOfBsize ? -1 : numOfAsize < numOfBsize? 1 : 0;  
+                    }
+                }
+
+                else if($this_start_number == 6){
+                    // ID는 Number로 형변환
+                    console.log(a[6])
+                }
+
+                else{
+                    console.log(a[6])
+                    if(k % 2 == 0) {
+                        return a[$this_start_number] < b[$this_start_number] ? -1 : a[$this_start_number] > b[$this_start_number]? 1 : 0;  
+                    } else {
+                        return a[$this_start_number] > b[$this_start_number] ? -1 : a[$this_start_number] < b[$this_start_number]? 1 : 0;  
+                    }
                 }
                 
             });
-                k+=1;
+            k+=1;
             //값이 들어오는지 확인 소스
             //console.log(new_array);
             $this_table.find("tbody").empty();
@@ -320,7 +359,6 @@
             
             search_array = []
             if(search_try_num == 0){
-                //new_array = new Array();
                 for(var i = 0; i<table_tr_length2; i++) {
                     new_array[i] = [];
                     for(var j = 0 ; j < table_th_length2; j++) {
@@ -328,7 +366,6 @@
                         new_array[i][j] = text_array;
                     }   
                 }
-                //console.log("hihi")
             }
 
             for(var i =0; i<table_tr_length2; i++){
@@ -377,10 +414,6 @@
             if(search_elem_num == 0){
                 search_elem_num = table_tr_length2;
             }
-            //값 들어오는지 확인
-            //console.log(input_text);
-            //console.log(search_array);
-            //console.log(table_tr_length2)
             
             search_try_num++;
             searching(search_elem_num, table_th_length2, $this_table);
