@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Request, Plan, SelectedTheme, UploadedTheme, SentMessage, ReceivedMessage
-from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect, FileResponse
+from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect, FileResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from random_username.generate import generate_username
 from django.core.files.storage import FileSystemStorage
@@ -69,14 +69,14 @@ def check_mail_imap(user, password, target='none'):
       # fetch the email body (RFC822) for the given ID
         result, data = imapserver.fetch(each_mail, "(RFC822)")
         msg = email.message_from_bytes(data[0][1])
-        print(msg)
+        # print(msg)
         message_subject = decode_mime_words(str(msg['Subject']))
         from_address = email.utils.parseaddr(msg['From'])[1]
         mail_struct.append(from_address)
         mail_struct.append(message_subject)
 
         message_timestamp = datetime.strptime(msg['Date'][:31],'%a, %d %b %Y %H:%M:%S %z')
-        print('date:' + msg['Date'])
+        # print('date:' + msg['Date'])
         # print(message_timestamp)
         '''
         <CONTENTS DATA INPUT>
@@ -228,6 +228,7 @@ def checking():
   print("unread_mail_id: ", unread_mail_id)
 
   if(unread_mail_num):
+    # request.session['load'] = 'True'
     for req in totalRequests:
       if(unmade_model_num):
         for mail in unread_mail:
@@ -245,20 +246,33 @@ def checking():
   
   # checking mailbox every 3 seconds
   threading.Timer(3, checking).start()
+  
 
 def show(request):
+
   global thread_num
   global unread_mail_num
   global unread_mail
   global unmade_model_num
+
   if request.method == 'GET':
+
     onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
     totalRequests = Request.objects.all()
+
     if(thread_num < 1):
       checking()
       thread_num += 1
-   
-    return render(request, 'adminpage/show.html', {
+    
+    if request.is_ajax():
+      # context ={}
+      # context['unread_mail_num'] = unread_mail_num
+      # data = json.dumps(context)
+      # mimetype= 'application/json'
+      return JsonResponse({'unread_mail_num':unread_mail_num})
+      
+    else:
+      return render(request, 'adminpage/show.html', {
       'totalRequests': totalRequests, 
       'onrunRequests': onrunRequests, 
       "unread_mail_num" : unread_mail_num,

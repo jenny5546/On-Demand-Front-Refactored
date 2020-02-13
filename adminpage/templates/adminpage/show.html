@@ -2,6 +2,26 @@
 
 {% block content %}
 
+<script>
+
+    $(document).ready(function() {
+        setInterval(function(){
+            $.ajax({
+                url: window.location.pathname,
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(result){
+
+                    // Object.observe
+                }     
+            })
+        },1000)
+        
+    })
+
+</script>
+
 <div class="requests">
     <div class="requests-table">
         <div class="top">
