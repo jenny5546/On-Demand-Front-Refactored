@@ -405,24 +405,24 @@
         })
     });
     
-    /* unread mail make red */
-    $(document).ready(function() { 
-        let unread_id = Object.values({{unread_mail_id}})
-        console.log(unread_id.length)
-        console.log(String(unread_id[0]))
-        for(var i = 0; i < unread_id.length; i++){
-            $("td").filter(function() {
-                return $(this).text() === String(unread_id[i]);
-            }).parents("tr").css({
-                "font-weight" : "500"
-            })
-        }
-        /*
-        $('td:contains("7")').css({
-            "background-color" : "black"
-        }); 
-        */
-    });
+    // /* unread mail make red */
+    // $(document).ready(function() { 
+    //     let unread_id = Object.values({{unread_mail_id}})
+    //     console.log(unread_id.length)
+    //     console.log(String(unread_id[0]))
+    //     for(var i = 0; i < unread_id.length; i++){
+    //         $("td").filter(function() {
+    //             return $(this).text() === String(unread_id[i]);
+    //         }).parents("tr").css({
+    //             "font-weight" : "500"
+    //         })
+    //     }
+    //     /*
+    //     $('td:contains("7")').css({
+    //         "background-color" : "black"
+    //     }); 
+    //     */
+    // });
 </script>   
 
 {% endblock content %}

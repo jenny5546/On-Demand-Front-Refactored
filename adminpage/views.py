@@ -270,23 +270,28 @@ def each(request, id):
     if(thread_num < 1):
       checking()
       thread_num += 1
+
+    if request.is_ajax():
+      unread = Notification.objects.all().count() #당시의 알람 개수
+      return JsonResponse({'unread': unread }) # 보내기
     
-    arequest= Request.objects.get(id = id)
-    sentMessages = SentMessage.objects.filter(request = arequest)
-    
-    # 해당하는 알림 지우기
-    if Notification.objects.filter(request = arequest).exists():
-      Notification.objects.filter(request = arequest).delete()
+    else:
+      arequest= Request.objects.get(id = id)
+      sentMessages = SentMessage.objects.filter(request = arequest)
+      
+      # 해당하는 알림 지우기
+      if Notification.objects.filter(request = arequest).exists():
+        Notification.objects.filter(request = arequest).delete()
 
 
-    receivedMessages = ReceivedMessage.objects.filter(request = arequest)
-    notifications= Notification.objects.all()
+      receivedMessages = ReceivedMessage.objects.filter(request = arequest)
+      notifications= Notification.objects.all()
 
-    message_list = sorted(
-      chain(sentMessages,receivedMessages),
-      key = lambda message: message.timestamp, reverse=False
-    )
-    return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list, 'notifications': notifications})
+      message_list = sorted(
+        chain(sentMessages,receivedMessages),
+        key = lambda message: message.timestamp, reverse=False
+      )
+      return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list, 'notifications': notifications})
   
   # 수정하기 + 메세지 보내기
   elif request.method == 'POST':
