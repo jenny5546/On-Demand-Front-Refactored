@@ -381,12 +381,6 @@ a{
           
             .plus{
                 padding:15px; 
-              
-            .loading{
-                position: absolute;
-                top: 30%;
-                right: 21%;
-            }
                 background:$btn_darkColor;
                 color: white; 
                 font-size: 15px;
@@ -400,6 +394,13 @@ a{
                     background:rgb(71, 77, 87);
                 }
             }
+              
+            .loading{
+                position: absolute;
+                top: 30%;
+                right: 21%;
+            }
+            
             .sendPopup{
                 display: none;
             }
