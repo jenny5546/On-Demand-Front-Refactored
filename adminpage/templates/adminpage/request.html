@@ -5,6 +5,11 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/jquery.flexslider-min.js"></script>
 <script type="text/javascript">
+
+    function loading(){
+        $('.loading').append("<img src='{% static 'loading.gif' %}'/>")
+    }
+
     $(document).ready(function() { 
         var status = {{ arequest.progress }}
         var active_circle= $('.label:contains(' + status + ')').parent()
@@ -228,7 +233,7 @@
                 <div class="eachRequest--utheme_wrapper" >
                     {% for theme in arequest.uploaded_theme.all %}
                         
-                        <img class="eachRequest--utheme_img"src="{{ theme.photo.url }}">
+                        <img class="eachRequest--utheme_img" src="{{ theme.photo.url }}">
                         
                     {% endfor %}
                 </div>
@@ -282,6 +287,8 @@
                 </div>
                 <input class="submit" type="submit" value="Send"/>
             </form>
+
+            <div class="loading"></div>
         </div>
     </div>
 </div>
@@ -302,6 +309,7 @@
         </form>
         <button class="popupClose">Close</button>
     </div>
+
 </div>
 
 <script>

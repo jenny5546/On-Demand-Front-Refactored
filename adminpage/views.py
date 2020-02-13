@@ -64,6 +64,7 @@ def check_mail_imap(user, password, target='none'):
     # latest_email_id = id_list[-10:] 
     # 메일리스트를 받아서 내용을 파일로 저장하는 함수
     for each_mail in id_list:
+
         mail_struct = []
       # fetch the email body (RFC822) for the given ID
         result, data = imapserver.fetch(each_mail, "(RFC822)")
@@ -74,13 +75,6 @@ def check_mail_imap(user, password, target='none'):
         mail_struct.append(from_address)
         mail_struct.append(message_subject)
 
-        '''
-        <TIME DATA INPUT>
-        NAVER, Gmail 은 가능하다.
-        time data format 가장뒤에 (KST)같은 문자열이 없어야 함.
-        DGIST 메일은 (KST) 가 붙어서 오류 뜸.
-        '''
-        
         message_timestamp = datetime.strptime(msg['Date'][:31],'%a, %d %b %Y %H:%M:%S %z')
         print('date:' + msg['Date'])
         # print(message_timestamp)
@@ -206,33 +200,6 @@ def dashboard(request):
 
     for req in requests:
       line_data[req.requested_at.month-1]+=1
-      # k = str(req.requested_at)
-      # a = k[5]+k[6]
-      # print(req.requested_at.month)
-      # if(a == "01"):
-      #   line_data[0] += 1
-      # elif(a == "02"):
-      #   line_data[1]+=1
-      # elif(a == "03"):
-      #   line_data[2]+=1
-      # elif(a == "04"):
-      #   line_data[3]+=1
-      # elif(a == "05"):
-      #   line_data[4]+=1
-      # elif(a == "06"):
-      #   line_data[5]+=1
-      # elif(a == "07"):
-      #   line_data[6]+=1
-      # elif(a == "08"):
-      #   line_data[7]+=1
-      # elif(a == "09"):
-      #   line_data[8]+=1
-      # elif(a == "10"):
-      #   line_data[9]+=1
-      # elif(a == "11"):
-      #   line_data[10]+=1
-      # elif(a == "12"):
-      #   line_data[11]+=1
 
     return render(request, 'adminpage/dashboard.html', {
       'onrunRequests': onrunRequests,
@@ -300,6 +267,7 @@ def show(request):
 
 
 def each(request, id):
+  
   global thread_num
   global unread_mail_num
   global unread_mail
@@ -310,6 +278,7 @@ def each(request, id):
   delete_index = []
   delete_id_index = []
   if request.method == 'GET':
+    
     arequest= Request.objects.get(id = id)
     sentMessages = SentMessage.objects.filter(request = arequest)
     # email check!
@@ -350,7 +319,7 @@ def each(request, id):
       chain(sentMessages,receivedMessages),
       key = lambda message: message.timestamp, reverse=False
     )
-    
+  
     return render(request, 'adminpage/request.html', {
       'arequest': arequest, 
       'message_list': message_list,
@@ -360,7 +329,9 @@ def each(request, id):
   
   # 수정하기 + 메세지 보내기
   elif request.method == 'POST':
+    
     # 수정 부분
+    
     arequest= Request.objects.get(id = id)
     due_at = request.POST.get('due_at', arequest.due_at)
     progress = request.POST.get('progress', arequest.progress)
@@ -384,8 +355,8 @@ def each(request, id):
       
       #logo template 넘기기 위한 경로
       module_dir = os.path.dirname(__file__)
-      image_path = os.path.join(module_dir, 'static/Logo.png')
-
+      logo_path = os.path.join(module_dir, 'static/Logo.png')
+      bg_path = os.path.join(module_dir, 'static/email-header.png')
       #templated email로 이미지 넘겨주는 함수 
       with open(image_path, 'rb') as logo: 
         #archi_image = logo.read()
@@ -446,13 +417,9 @@ def messages(request):
      requests = Request.objects.all()
      return render(request, 'adminpage/messages.html', {'requests': requests, "unread_mail_num" : unread_mail_num})
 
-
 def settings(request):
   # something
   return render(request, 'adminpage/setting.html')
+
   
-
-
-
-
 

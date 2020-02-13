@@ -378,8 +378,15 @@ a{
             width: 100%;
             border: none;
             border-top: 10px solid rgba(236, 231, 205, 0.664);
+          
             .plus{
                 padding:15px; 
+              
+            .loading{
+                position: absolute;
+                top: 30%;
+                right: 21%;
+            }
                 background:$btn_darkColor;
                 color: white; 
                 font-size: 15px;
