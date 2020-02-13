@@ -303,7 +303,7 @@
 
         </div>
         <div class="preview">
-
+            <!-- img preview here! -->
         </div>
         <div class = "eachRequest--chatroom_send">
             <form class="eachRequest--chatroom_send_textbox" enctype="multipart/form-data" action="/adminpage/{{ arequest.id }}/" method="POST">
@@ -380,11 +380,13 @@
             para.textContent = 'No files currently selected for upload';
             preview.appendChild(para);
         } else {
-            const list = document.createElement('ol');
+            const list = document.createElement('div');
+            list.className = "list"
             preview.appendChild(list);
 
             for(const file of curFiles) {
-            const listItem = document.createElement('li');
+            const listItem = document.createElement('div');
+            listItem.className = "list_item"
             const para = document.createElement('p');
             if(validFileType(file)) {
                 para.textContent = `File name ${file.name}`;
