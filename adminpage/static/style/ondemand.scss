@@ -191,6 +191,10 @@ a{
             right: 0%;
         }
     }
+    &--sendbtn{
+        @include detailButton($mainColor_dark);
+        margin-right: 10px;
+    }
     &--editbtn{
         @include detailButton($btn_darkColor);
         margin-right: 10px;

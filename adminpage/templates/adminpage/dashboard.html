@@ -1,7 +1,30 @@
 {% extends '../base.html' %}
 
 {% block content %}
+<script>
+    // 바로 알림 받아오고 refresh
+    $(document).ready(function() {
+        var unread = {{ notifications.count }}
+        setInterval(function(){
+            $.ajax({
+                url: window.location.pathname,
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(result){
 
+                    if (unread !== result.unread){
+                        // console.log('changed');
+                        location.reload(true);
+                    }
+                    // else{
+                    //     console.log('unchanged')
+                    // }
+                }     
+            })
+        }, 2000)  
+    })
+</script>
 <div class="dashboard">
     <div class="dashboard--title">
         <h2>Dashboard</h2>
@@ -14,7 +37,7 @@
             
 
             <div class ="dashboard--board_notice-num">
-                Unread Mails : <strong>{{unread_mail_num}}</strong>
+                Unread Mails : <strong>{{ notifications.count }}</strong>
                 <br/>
                 On-run Requests : <strong>{{onrunRequests.count}}</strong>
                 <br/>
