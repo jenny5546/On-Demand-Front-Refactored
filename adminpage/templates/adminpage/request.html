@@ -286,9 +286,8 @@
                     <input class="fileinput" id="fileinput" type="file" name="msg_attachments" accept=".jpg, .jpeg, .png" multiple>
                     <textarea class="textinput" placeholder= "Enter your message" name="msg_content"></textarea>
                 </div>
-                <input class="submit" type="submit" value="Send"/>
+                <input class="submit" type="submit" onclick= "return loading();" value="Send"/>
             </form>
-
             <div class="loading"></div>
         </div>
     </div>
