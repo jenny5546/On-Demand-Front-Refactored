@@ -353,10 +353,11 @@ def each(request, id):
 
 def edit(request, id):
 
+  notifications= Notification.objects.all()
   arequest = Request.objects.get(id=id)
   return render(request, 'adminpage/edit.html', {
       'arequest':arequest,
-      "unread_mail_num" : unread_mail_num,
+      'notifications': notifications
   })
 
 
@@ -379,16 +380,18 @@ def delete(request, id):
 def messages(request):
 
    if request.method == 'GET':
+     notifications= Notification.objects.all()
      requests = Request.objects.all()
-     return render(request, 'adminpage/messages.html', {'requests': requests, "unread_mail_num" : unread_mail_num})
+     return render(request, 'adminpage/messages.html', {'requests': requests, 'notifications': notifications})
 
 
 def output(request, id):
   
+  notifications= Notification.objects.all()
   arequest = Request.objects.get(id = id)
   
   if request.method == 'GET':
-      return render(request, 'adminpage/output.html', {'arequest': arequest, "unread_mail_num" : unread_mail_num})
+      return render(request, 'adminpage/output.html', {'arequest': arequest, 'notifications': notifications})
 
   elif request.method == 'POST':
 
