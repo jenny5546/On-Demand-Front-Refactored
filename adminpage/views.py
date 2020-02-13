@@ -376,8 +376,9 @@ def each(request, id):
     if request.FILES:
       att_list = request.FILES.getlist('msg_attachments')
       #popup
-      image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
-      inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
+      #image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
+      #inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
+
 
     if (message_content != ''):
       
@@ -387,51 +388,25 @@ def each(request, id):
 
       #templated email로 이미지 넘겨주는 함수 
       with open(image_path, 'rb') as logo: 
-        archi_image = logo.read()
-        inline_logo = InlineImage(filename="Logo.png", content=archi_image)
+        #archi_image = logo.read()
+        #inline_logo = InlineImage(filename="Logo.png", content=archi_image)
         
-        if inline:
-            send_templated_mail( 
-                template_name='output',
-                from_email= 'jangjangman5546@gmail.com',
-                recipient_list=[receiver],
-                context={
-                    'username': arequest.username,
-                    'content' : message_content,
-                    'logo' : inline_logo,
-                    'image' : inline,
-                },
-                attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),
-            )
-            newSentMessage = SentMessage.objects.create(
-              request = arequest,
-              content = message_content
-            )
-
-        else:
-            send_templated_mail( 
-                template_name='basic',
-                from_email= 'jangjangman5546@gmail.com',
-                recipient_list=[receiver],
-                context={
-                    'username': arequest.username,
-                    'content' : message_content,
-                    'logo' : inline_logo,
-                    'image' : inline,
-                },
-                attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),
-                # Optional:
-                # cc=['cc@example.com'],
-                # bcc=['bcc@example.com'],
-                # headers={'Content-Disposition' :"attachment; filename= %s" % filename},
-                # template_prefix="my_emails/",
-                # template_suffix="email",
-            )
-
-            newSentMessage = SentMessage.objects.create(
-              request = arequest,
-              content = message_content
-            )
+        send_templated_mail( 
+            template_name='output',
+            from_email= 'jangjangman5546@gmail.com',
+            recipient_list=[receiver],
+            context={
+                'username': arequest.username,
+                'content' : message_content,
+                #'logo' : inline_logo,
+                #'image' : inline,
+            },
+            attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),
+        )
+        newSentMessage = SentMessage.objects.create(
+          request = arequest,
+          content = message_content
+        )
 
     arequest.due_at = due_at
     arequest.progress = progress

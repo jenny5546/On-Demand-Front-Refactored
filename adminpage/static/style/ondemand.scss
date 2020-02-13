@@ -226,6 +226,12 @@ a{
             background-color: $caution;
         }
     }
+    .wrap{
+        display: none;
+        flex-direction: column;
+        max-height: 600px;
+    }
+
     &--contents{
         display: flex;
         flex-direction: column;
@@ -284,10 +290,11 @@ a{
         &_img{
             margin: 5px;
             width: 30%;
-            height: 250px;
+            height: 170px;
         }
 
         &_wrapper{
+            max-height: 200px;
             align-items: center;
             justify-content: center;
             margin-top: 20px;
@@ -305,13 +312,15 @@ a{
         margin: 10px;
         margin-bottom: 20px;
         padding: 20px;
+
         &_img{
             margin: 5px;
             width: 30%;
-            height: 250px;
+            height: 170px;
         }
 
         &_wrapper{
+            max-height: 200px;
             align-items: center;
             justify-content: center;
             margin-top: 20px;
@@ -337,7 +346,7 @@ a{
         flex-wrap: nowrap;
         margin: 10px 40px 0px 50px;
         width: 35%;
-        height: 94%;
+        height: 90%;
         max-height: 900px;
         box-shadow: 0 6px 8px rgba(0,0,0,0.30), 0 5px 6px rgba(0,0,0,0.22);
         border-radius: 30px;
@@ -352,13 +361,19 @@ a{
             margin-top: 10px; 
             font-weight: 100;  
         }
+
+        .preview img{
+            width: 100px;
+            height: auto;
+        }
+
         &_send{
             display: flex;
             flex-direction: row;
             flex: 1;
             //padding: 10px;
             border-radius: 0px 0px 30px 30px;
-            max-height: 15%;
+            min-height: 10%;
             background-color: white;
             width: 100%;
             border: none;
