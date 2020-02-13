@@ -261,7 +261,7 @@ def show(request):
     return render(request, 'adminpage/show.html', {
       'totalRequests': totalRequests, 
       'onrunRequests': onrunRequests, 
-      "unread_mail_num" : unread_mail_num,
+      "unread_mail_num" : len(unread_mail_id),
       "unread_mail_id" : unread_mail_id,
     })
 
@@ -303,7 +303,7 @@ def each(request, id):
     mail_struct 는 [mail, title, content, timestamp]로 구성된 배열
     '''
     #만약 안읽은게 있다면
-    if(unread_mail_num):
+    if(len(unread_mail_id)):
     # 이미 존재하는 이메일 / each의 target과 다른 이메일 필터링   
       delete_index.reverse()
       delete_id_index.reverse()
@@ -323,7 +323,7 @@ def each(request, id):
     return render(request, 'adminpage/request.html', {
       'arequest': arequest, 
       'message_list': message_list,
-      "unread_mail_num" : unread_mail_num,
+      "unread_mail_num" : len(unread_mail_id),
       "test": test,
       })
   
