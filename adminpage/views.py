@@ -272,6 +272,7 @@ def each(request, id):
   global unread_mail_num
   global unread_mail
   global unread_mail_id
+  test = 0
   i = 0
   j = 0
   delete_index = []
@@ -318,9 +319,13 @@ def each(request, id):
       chain(sentMessages,receivedMessages),
       key = lambda message: message.timestamp, reverse=False
     )
-    # print('Get')
-    # print(loading)
-    return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list,"unread_mail_num" : unread_mail_num })
+  
+    return render(request, 'adminpage/request.html', {
+      'arequest': arequest, 
+      'message_list': message_list,
+      "unread_mail_num" : unread_mail_num,
+      "test": test,
+      })
   
   # 수정하기 + 메세지 보내기
   elif request.method == 'POST':
@@ -337,8 +342,14 @@ def each(request, id):
     receiver = arequest.useremail
     # 첨부파일 처리 
     att_list = [] 
+    inline= None
+
     if request.FILES:
       att_list = request.FILES.getlist('msg_attachments')
+      #popup
+      #image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
+      #inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
+
 
     if (message_content != ''):
       
@@ -347,30 +358,26 @@ def each(request, id):
       logo_path = os.path.join(module_dir, 'static/Logo.png')
       bg_path = os.path.join(module_dir, 'static/email-header.png')
       #templated email로 이미지 넘겨주는 함수 
-      with open(logo_path, 'rb') as logo: 
-        inline_logo = InlineImage(filename="Logo.png", content=logo.read())
-
-        with open(bg_path, 'rb') as bg: 
-          inline_bg = InlineImage(filename="email-header.png", content=bg.read())
+      with open(image_path, 'rb') as logo: 
+        #archi_image = logo.read()
+        #inline_logo = InlineImage(filename="Logo.png", content=archi_image)
         
-          send_templated_mail( 
-
-              template_name='basic',
-              from_email= 'jangjangman5546@gmail.com',
-              recipient_list=[receiver],
-              context={
-                  'username': arequest.username,
-                  'content' : message_content,
-                  'logo' : inline_logo,
-                  'bg': inline_bg,
-              },
-              attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),   
-          )
-
-          newSentMessage = SentMessage.objects.create(
-            request = arequest,
-            content = message_content
-          )
+        send_templated_mail( 
+            template_name='output',
+            from_email= 'jangjangman5546@gmail.com',
+            recipient_list=[receiver],
+            context={
+                'username': arequest.username,
+                'content' : message_content,
+                #'logo' : inline_logo,
+                #'image' : inline,
+            },
+            attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),
+        )
+        newSentMessage = SentMessage.objects.create(
+          request = arequest,
+          content = message_content
+        )
 
     arequest.due_at = due_at
     arequest.progress = progress
@@ -379,7 +386,6 @@ def each(request, id):
     arequest.update_date()
 
     return redirect('/'+str(id))
-
 
 def edit(request, id):
 
@@ -391,7 +397,6 @@ def edit(request, id):
 
 
 def download(request, req_id, file_id):
-
   arequest= Request.objects.get(id = req_id)
   afile = arequest.floor_plan.get(id = file_id)
   fs = FileSystemStorage('../On-Demand-Back/media')
@@ -412,42 +417,9 @@ def messages(request):
      requests = Request.objects.all()
      return render(request, 'adminpage/messages.html', {'requests': requests, "unread_mail_num" : unread_mail_num})
 
-def output(request, id):
-  
-  arequest = Request.objects.get(id = id)
-  
-  if request.method == 'GET':
-      return render(request, 'adminpage/output.html', {'arequest': arequest, "unread_mail_num" : unread_mail_num})
-
-  elif request.method == 'POST':
-
-      receiver = arequest.useremail
-      content = request.POST.get('content', '') #텍스트 내용 
-      attachments = [] 
-      inline= None
-
-      if request.FILES:
-        attachments = request.FILES.getlist('attach')  # 첨부해서 가는 파일 
-        image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
-        inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
-
-      send_templated_mail( 
-          template_name='output',
-          from_email= 'jangjangman5546@gmail.com',
-          recipient_list=[receiver],
-          context={
-              'username': arequest.username,
-              'content' : content,
-              'image' : inline,
-          },
-          attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), attachments),
-      )
-
-      return redirect('/'+str(id))
+def settings(request):
+  # something
+  return render(request, 'adminpage/setting.html')
 
   
-
-
-
-
 

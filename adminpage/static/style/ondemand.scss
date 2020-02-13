@@ -226,6 +226,12 @@ a{
             background-color: $caution;
         }
     }
+    .wrap{
+        display: none;
+        flex-direction: column;
+        max-height: 600px;
+    }
+
     &--contents{
         display: flex;
         flex-direction: column;
@@ -284,10 +290,11 @@ a{
         &_img{
             margin: 5px;
             width: 30%;
-            height: 250px;
+            height: 170px;
         }
 
         &_wrapper{
+            max-height: 200px;
             align-items: center;
             justify-content: center;
             margin-top: 20px;
@@ -305,13 +312,15 @@ a{
         margin: 10px;
         margin-bottom: 20px;
         padding: 20px;
+
         &_img{
             margin: 5px;
             width: 30%;
-            height: 250px;
+            height: 170px;
         }
 
         &_wrapper{
+            max-height: 200px;
             align-items: center;
             justify-content: center;
             margin-top: 20px;
@@ -337,7 +346,7 @@ a{
         flex-wrap: nowrap;
         margin: 10px 40px 0px 50px;
         width: 35%;
-        height: 94%;
+        height: 90%;
         max-height: 900px;
         box-shadow: 0 6px 8px rgba(0,0,0,0.30), 0 5px 6px rgba(0,0,0,0.22);
         border-radius: 30px;
@@ -352,30 +361,32 @@ a{
             margin-top: 10px; 
             font-weight: 100;  
         }
+
+        .preview img{
+            width: 100px;
+            height: auto;
+        }
+
         &_send{
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+            //padding: 10px;
             border-radius: 0px 0px 30px 30px;
-            height: 15%;
+            min-height: 10%;
             background-color: white;
             width: 100%;
-            flex-shrink: 0;
             border: none;
             border-top: 10px solid rgba(236, 231, 205, 0.664);
+          
+            .plus{
+                padding:15px; 
+              
             .loading{
                 position: absolute;
                 top: 30%;
                 right: 21%;
             }
-            .input{
-                width: 80%;
-                border: 0;
-                margin-left: 10px;
-                font-size: 15px; 
-            }
-            input[type=submit]{
-                // width: 100px;
-                margin-left: 10px;
-                margin-bottom: 10px;
-                padding:5px 25px; 
                 background:$btn_darkColor;
                 color: white; 
                 font-size: 15px;
@@ -384,12 +395,49 @@ a{
                 border:0 none;
                 cursor:pointer;
                 -webkit-border-radius: 5px;
-                border-radius: 5px;
+                border-radius: 0 0 0 30px;
                 &:hover{
                     background:rgb(71, 77, 87);
                 }
             }
-
+            .sendPopup{
+                display: none;
+            }
+            &_textbox{
+                display: flex; 
+                flex: 1;
+                height: 100%;
+                .top{
+                    display: flex;
+                    flex: 1;
+                    .fileinput{
+                        display: none;
+                    }
+                    .textinput{
+                        display: block;
+                        flex:1;
+                        border: 0;
+                        margin: 5px;
+                        margin-left: 10px;
+                        font-size: 15px;  
+                    }
+                }
+                .submit{
+                    padding:5px 25px; 
+                    background:$btn_darkColor;
+                    color: white; 
+                    font-size: 15px;
+                    font-weight: $light;
+                    box-shadow: 0 3px 4px rgba(0,0,0,0.30), 0 2px 3px rgba(0,0,0,0.22);
+                    border:0 none;
+                    cursor:pointer;
+                    -webkit-border-radius: 5px;
+                    border-radius: 0 0 30px 0;
+                    &:hover{
+                        background:rgb(71, 77, 87);
+                    }
+                }
+            }
         }
         &_msg{
             overflow-y: auto;
@@ -404,6 +452,28 @@ a{
                 @include msg_contents(black, white, rgb(185, 185, 185));
             }
         }
+    }
+}
+
+.sendMail{
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    &--box{
+        flex: initial;
+        margin: auto;
+        width: 50%;
+        height: 50%;
+        background-color: white;
+        text-align: center;
     }
 }
 
