@@ -358,26 +358,23 @@ def each(request, id):
       logo_path = os.path.join(module_dir, 'static/Logo.png')
       bg_path = os.path.join(module_dir, 'static/email-header.png')
       #templated email로 이미지 넘겨주는 함수 
-      with open(image_path, 'rb') as logo: 
-        #archi_image = logo.read()
-        #inline_logo = InlineImage(filename="Logo.png", content=archi_image)
         
-        send_templated_mail( 
-            template_name='output',
-            from_email= 'jangjangman5546@gmail.com',
-            recipient_list=[receiver],
-            context={
-                'username': arequest.username,
-                'content' : message_content,
-                #'logo' : inline_logo,
-                #'image' : inline,
-            },
-            attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),
-        )
-        newSentMessage = SentMessage.objects.create(
-          request = arequest,
-          content = message_content
-        )
+      send_templated_mail( 
+          template_name='output',
+          from_email= 'jangjangman5546@gmail.com',
+          recipient_list=[receiver],
+          context={
+              'username': arequest.username,
+              'content' : message_content,
+              #'logo' : inline_logo,
+              #'image' : inline,
+          },
+          attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),
+      )
+      newSentMessage = SentMessage.objects.create(
+        request = arequest,
+        content = message_content
+      )
 
     arequest.due_at = due_at
     arequest.progress = progress
