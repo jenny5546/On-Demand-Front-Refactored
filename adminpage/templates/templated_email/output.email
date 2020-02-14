@@ -7,13 +7,5 @@
 
     <div>
         {{ content }}
-
-        {% if image %}
-            <img
-                src="{{ image }}"
-                style = "width: 300px; height: auto;"
-            />
-        {% endif %}
-
     </div>
 {% endblock %}

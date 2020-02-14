@@ -157,29 +157,59 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for request in totalRequests %}
-                    <tr>
-                        <td>{{request.id}}</td>
-                        <td>{{request.username}}</td>
-                        <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
-                        <td>{{request.floor_type}}</td>
-                        <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>
-                        <td>{{request.due_at|date:'Y/m/d'}}</td>
 
-                        {% if request.progress == 5 %}
-                        <td> - </td>
-                        {% elif todays_date <= request.due_at|date:'Y/m/d'%}
-                        <td>{{request.due_at|timeuntil}}</td>
-                        {% else %}
-                        <td class="overdate">{{request.due_at|timesince}} 경과 </td>
-                        {% endif %}
-                        {% if request.progress == 5 %}
-                        <td class="complete"> completed </td>
-                        {% else %}
-                        <td>{{request.progress}}</td>
-                        {% endif %}                        
-                        <td><a class= "go_btn" href="/{{request.id}}">Click</a></td>
-                    </tr>
+                    {% for request in totalRequests %}
+
+                    {% if request.notification_set.all %}
+                        
+                        <tr style="font-weight: 500">
+                            <td>{{request.id}}</td>
+                            <td>{{request.username}}</td>
+                            <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
+                            <td>{{request.floor_type}}</td>
+                            <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>
+                            <td>{{request.due_at|date:'Y/m/d'}}</td>
+
+                            {% if request.progress == 5 %}
+                            <td> - </td>
+                            {% elif todays_date <= request.due_at|date:'Y/m/d'%}
+                            <td>{{request.due_at|timeuntil}}</td>
+                            {% else %}
+                            <td class="overdate">{{request.due_at|timesince}} 경과 </td>
+                            {% endif %}
+                            {% if request.progress == 5 %}
+                            <td class="complete"> completed </td>
+                            {% else %}
+                            <td>{{request.progress}}</td>
+                            {% endif %}                        
+                            <td><a class= "go_btn" href="/{{request.id}}">Click</a></td>
+                        </tr>
+                        
+
+                    {% else %}
+                        <tr>
+                            <td>{{request.id}}</td>
+                            <td>{{request.username}}</td>
+                            <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
+                            <td>{{request.floor_type}}</td>
+                            <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>
+                            <td>{{request.due_at|date:'Y/m/d'}}</td>
+
+                            {% if request.progress == 5 %}
+                            <td> - </td>
+                            {% elif todays_date <= request.due_at|date:'Y/m/d'%}
+                            <td>{{request.due_at|timeuntil}}</td>
+                            {% else %}
+                            <td class="overdate">{{request.due_at|timesince}} 경과 </td>
+                            {% endif %}
+                            {% if request.progress == 5 %}
+                            <td class="complete"> completed </td>
+                            {% else %}
+                            <td>{{request.progress}}</td>
+                            {% endif %}                        
+                            <td><a class= "go_btn" href="/{{request.id}}">Click</a></td>
+                        </tr>
+                    {% endif %}
         
                     {% endfor %}
         
@@ -314,7 +344,7 @@
 
                 else if($this_start_number == 6){
                     // ID는 Number로 형변환
-                    console.log(a[6])
+                    console.log(a)
                 }
 
                 else{
@@ -438,25 +468,7 @@
             "background-color": "rgba(214, 70, 65, 0.158)",
         })
     });
-    
-    // /* unread mail make red */
-    // $(document).ready(function() { 
-    //     let unread_id = Object.values({{unread_mail_id}})
-    //     console.log(unread_id.length)
-    //     console.log(String(unread_id[0]))
-    //     for(var i = 0; i < unread_id.length; i++){
-    //         $("td").filter(function() {
-    //             return $(this).text() === String(unread_id[i]);
-    //         }).parents("tr").css({
-    //             "font-weight" : "500"
-    //         })
-    //     }
-    //     /*
-    //     $('td:contains("7")').css({
-    //         "background-color" : "black"
-    //     }); 
-    //     */
-    // });
+
 </script>   
 
 {% endblock content %}
