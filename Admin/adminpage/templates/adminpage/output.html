@@ -1,0 +1,42 @@
+{% extends '../base.html' %}
+
+{% block content %}
+{% load static %}
+
+<script>
+    var browser = document.querySelector('#divContainer');
+    var request = browser.getScreenshot(100, 100);
+    request.onsuccess = function() {
+        console.log('hi')
+        var blob = request.result;
+        var url = URL.createObjectURL(blob);
+    }
+</script>
+
+<form enctype="multipart/form-data" action='/adminpage/{{ arequest.id }}/output/' method="POST">
+
+    {% csrf_token %}
+    <!-- <label>첨부파일</label>
+    <input type="file" name="attach" multiple="multiple"/> -->
+
+    <label>내용</label>
+    <textarea placeholder= "Enter your message" name="content"></textarea>
+<!-- 
+    <label>이메일 이미지 파일고르기</label>
+    <input type="file" name="image"/> -->
+
+    <!-- <iframe style="width: 500px; height: 500px" src="https://board.archisketch.com/project/3349/share" scrolling="no"></iframe> -->
+
+    <div id="divContainer" style="position: absolute; left: 30%; top: 10%;">
+        <div id="frameContainer" "> 
+             <iframe id="frame" src="https://plan.archisketch.com/?mode=360&port_id=3349" scrolling="no" style="width: 1000px; height:800px;">
+            </iframe> 
+         </div>
+    </div>
+
+    
+    <input class="submit" type="submit" value="Send"/>
+
+</form>
+<div id="this"></div>
+{% endblock content %}

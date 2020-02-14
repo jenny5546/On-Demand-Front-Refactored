@@ -1,0 +1,477 @@
+{% extends '../base.html' %}
+
+{% block content %}
+
+<script>
+     // 바로 알림 받아오고 refresh
+    $(document).ready(function() {
+        var unread = {{ notifications.count }}
+        setInterval(function(){
+            $.ajaxSetup({ cache: false });
+            $.ajax({
+                url: window.location.pathname,
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(result){
+
+                    if (unread !== result.unread){
+                        // console.log('changed');
+                        location.reload(true);
+                    }
+                    // else{
+                    //     console.log('unchanged')
+                    // }
+                }     
+            })
+        }, 2000)  
+    })
+</script>
+
+<div class="requests">
+    <div class="requests-table">
+        <div class="top">
+            <div class= "top-title">
+                <h3>On Run Requests</h3>
+                <!--<h2>{{unread_mail_id}} </h2>-->
+            </div>
+            <div class="top-search_menu">
+                <p style="margin-right: 10px;">Search: </p>
+                <input style="margin-right: 10px; border-radius: 10px; padding: 5px;" class="searchbox" placeholder="search by..." />
+                <select class="selectbox">
+                    <option value="id">ID</option>
+                    <option value="user">User</option>
+                    <option value="type">Type</option>
+                    <option value="size">Size</option>
+                    <option value="due">Due Date</option>
+                    <option value="status">Work Status</option>
+                </select>
+            </div>
+        </div>
+        <div class="bottom">
+        <div class="table_scroll">
+            <table>
+                <thead>
+                    <tr class="head">
+                            <th>
+                                <button class="sorting">ID#<i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                            </th>
+                            <th class = "user">
+                                <button class="sorting">Requestor  <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                            </th>
+                            <th>
+                                <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                            </th>
+                            <th>
+                                <button class="sorting">Type <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                            </th>
+                            <th>
+                                <button class="sorting">Size <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                            </th>
+                            <th>
+                                <button class="sorting">Due Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                            </th>
+                            <th>
+                                <button class="sorting">Time Remaining <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                            </th>
+                            <th>
+                                <button class="sorting">Work Status <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                            </th>
+                            <th><button>Detail</button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% now "Y/m/d" as todays_date %}
+                    {% for request in onrunRequests %}
+                    <tr>
+                        <td>{{request.id}}</td>
+                        <td>{{request.username}}</td>
+                        <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
+                        <td>{{request.floor_type}}</td>
+                        <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>
+                        <td>{{request.due_at|date:'Y/m/d'}}</td>
+                        {% if todays_date <= request.due_at|date:'Y/m/d'%}
+                        <td>{{request.due_at|timeuntil}}</td>
+                        {% else %}
+                        <td class="overdate">{{request.due_at|timesince}} 경과 </td>
+                        {% endif %}
+                        <td>{{request.progress}}</td>
+                        <td><a class= "go_btn" href="/{{request.id}}" >Click</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+    <div class="requests-table">
+        <div class="top">
+            <div class= "top-title">
+                    <h3>Total Requests</h3>
+            </div>
+            <div class="top-search_menu">
+                <p style="margin-right: 10px; "> Search: </p>
+                <input style="margin-right: 10px; border-radius: 10px; padding: 5px;" class="searchbox" placeholder="search by..." />
+                <select class="selectbox">
+                    <option value="id">ID</option>
+                    <option value="user">User</option>
+                    <option value="type">Type</option>
+                    <option value="size">Size</option>
+                    <option value="due">Due date</option>
+                    <option value="status">Work Status</option>
+                </select>
+            </div>
+        </div>
+        <div class="bottom">
+                <div class="table_scroll">
+
+            <table>
+                <thead>
+                    <tr class="head">
+                        <th>
+                            <button class="sorting">ID# <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                        </th>
+                        <th class = "user">
+                            <button class="sorting">Requestor <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                        </th>
+                        <th>
+                            <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                        </th>
+                        <th>
+                            <button class="sorting">Type <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                        </th>
+                        <th>
+                            <button class="sorting">Size <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                        </th>
+                        <th>
+                            <button class="sorting">Due Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                        </th>
+                        <th>
+                            <button class="sorting">Time Remaining <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                        </th>
+                        <th>
+                            <button class="sorting">Work Status <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                        </th>
+                        <th><button>Detail</button></th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for request in totalRequests %}
+
+                    {% if request.notification_set.all %}
+                        
+                        <tr style="font-weight: 500">
+                            <td>{{request.id}}</td>
+                            <td>{{request.username}}</td>
+                            <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
+                            <td>{{request.floor_type}}</td>
+                            <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>
+                            <td>{{request.due_at|date:'Y/m/d'}}</td>
+
+                            {% if request.progress == 5 %}
+                            <td> - </td>
+                            {% elif todays_date <= request.due_at|date:'Y/m/d'%}
+                            <td>{{request.due_at|timeuntil}}</td>
+                            {% else %}
+                            <td class="overdate">{{request.due_at|timesince}} 경과 </td>
+                            {% endif %}
+                            {% if request.progress == 5 %}
+                            <td class="complete"> completed </td>
+                            {% else %}
+                            <td>{{request.progress}}</td>
+                            {% endif %}                        
+                            <td><a class= "go_btn" href="/{{request.id}}">Click</a></td>
+                        </tr>
+                        
+
+                    {% else %}
+                        <tr>
+                            <td>{{request.id}}</td>
+                            <td>{{request.username}}</td>
+                            <td>{{request.requested_at|date:'Y/m/d'}} {{request.requested_at|time:'H:i:s'}}</td>
+                            <td>{{request.floor_type}}</td>
+                            <td>{{request.floor_size}} {{request.floor_size_unit}} <sup>2</sup></td>
+                            <td>{{request.due_at|date:'Y/m/d'}}</td>
+
+                            {% if request.progress == 5 %}
+                            <td> - </td>
+                            {% elif todays_date <= request.due_at|date:'Y/m/d'%}
+                            <td>{{request.due_at|timeuntil}}</td>
+                            {% else %}
+                            <td class="overdate">{{request.due_at|timesince}} 경과 </td>
+                            {% endif %}
+                            {% if request.progress == 5 %}
+                            <td class="complete"> completed </td>
+                            {% else %}
+                            <td>{{request.progress}}</td>
+                            {% endif %}                        
+                            <td><a class= "go_btn" href="/{{request.id}}">Click</a></td>
+                        </tr>
+                    {% endif %}
+        
+                    {% endfor %}
+        
+                </tbody>
+            </table>
+            </div>
+            </div>
+    </div>
+</div>
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    // 테이블 재 세팅
+    var table_html;
+    var k = 0;
+    var search_try_num = 0;
+    new_array = new Array();
+    function re_table(line, cols, table_position) {
+        table_html = "";
+        for(var i = 0; i<line; i++) {
+            table_html += "<tr>";
+            for(var j = 0; j<cols; j++) {
+                if(new_array[i][j][new_array[i][j].length - 2] == "과"){
+                    table_html += "<td class='overdate'>"+new_array[i][j]+"</td>";
+                }
+                else if(new_array[i][j] === " completed "){
+                    table_html += "<td class='complete'>"+new_array[i][j]+"</td>";
+                }
+                else{
+                    table_html += "<td>"+new_array[i][j]+"</td>";
+                }
+            }
+            table_html += "</tr>";
+        }
+        $(table_position.find("tbody")).html(table_html);
+    }
+    function searching(line, cols, table_position) {
+        table_html = "";
+        for(var i = 0; i<line; i++) {
+            table_html += "<tr>";     
+
+            // there is no search data
+            if(search_array.length === 0){
+                for(var j = 0; j<cols; j++) {
+                    if(new_array[i][j][new_array[i][j].length - 2] == "과"){
+                        table_html += "<td class='overdate'>"+new_array[i][j]+"</td>";
+                    }
+                    else if(new_array[i][j] === " completed "){
+                        table_html += "<td class='complete'>"+new_array[i][j]+"</td>";
+                    }
+                    else{
+                        table_html += "<td>"+new_array[i][j]+"</td>";
+                    }
+                }            
+            }
+
+            // print search data
+            else{
+                for(var j = 0; j<cols; j++) {
+                    if(search_array[i][j][search_array[i][j].length - 2] == "과"){
+                        table_html += "<td class='overdate'>"+search_array[i][j]+"</td>";
+                    }
+                    else if(search_array[i][j] === " completed "){
+                        table_html += "<td class='complete'>"+search_array[i][j]+"</td>";
+                    }
+                    else{
+                        table_html += "<td>"+search_array[i][j]+"</td>";
+                    }                
+                }
+            }
+            table_html += "</tr>";
+        }
+        $(table_position.find("tbody")).html(table_html);
+    }
+
+    // 정렬
+    $(document).ready(function() {
+        var text_array;
+        
+        $("button.sorting").on("click", function() {
+            var $this = $(this);
+            var $this_table = $this.parents("table");
+            var $this_start_number = $this.parent().index();
+            
+            var table_th_length = $this.parents("table").find("thead th").length; //테이블 칸의 갯수
+            var table_tr_length = $this.parents("table").find("tbody tr").length; //테이블 내용 줄 갯수
+
+            new_array = new Array();
+            for(var i = 0; i<table_tr_length; i++) {
+                new_array[i] = [];
+                for(var j = 0 ; j < table_th_length; j++) {
+                    text_array = $this_table.find("tbody tr").eq(i).find("td").eq(j).html(); // 값땡겨오는거
+                    new_array[i][j] = text_array;
+                }   
+            }
+            
+            //테이블 클래스 active 지정
+
+            /* 정렬 */
+            new_array.sort(function (a, b) { 
+                if($this_start_number == 0){
+                    // ID는 Number로 형변환
+                    var numOfAid = Number(a[0])
+                    var numOfBid = Number(b[0])
+                    if(k % 2 == 0) {
+                        return numOfAid < numOfBid ? -1 : numOfAid > numOfBid ? 1 : 0;  
+                    } else {
+                        return numOfAid > numOfBid ? -1 : numOfAid < numOfBid ? 1 : 0;  
+                    }
+                }
+
+                else if($this_start_number == 4){
+                    // feet^2 을 m^2으로 단위환산 & number로 형변환
+                    var anotNum = a[4].indexOf(" ")
+                    var bnotNum = b[4].indexOf(" ")
+                    var numOfAsize = Number(a[$this_start_number].substring(0, anotNum))
+                    var numOfBsize = Number(b[$this_start_number].substring(0, bnotNum))
+
+                    if(a[4][anotNum+1] === "f"){
+                        numOfAsize *= 0.09290304
+                    }
+                    if(b[4][bnotNum+1] === "f"){
+                        numOfBsize *= 0.09290304
+                    }
+
+                    if(k % 2 == 0) {
+                        return numOfAsize < numOfBsize ? -1 : numOfAsize > numOfBsize? 1 : 0;  
+                    } else {
+                        return numOfAsize > numOfBsize ? -1 : numOfAsize < numOfBsize? 1 : 0;  
+                    }
+                }
+
+                else if($this_start_number == 6){
+                    if(k % 2 == 0) {
+                        return a[5] < b[5] ? -1 : a[5] > b[5]? 1 : 0;  
+                    } else {
+                        return a[5] > b[5] ? -1 : a[5] < b[5]? 1 : 0;  
+                    }
+                }
+
+                else{
+                    if(k % 2 == 0) {
+                        return a[$this_start_number] < b[$this_start_number] ? -1 : a[$this_start_number] > b[$this_start_number]? 1 : 0;  
+                    } else {
+                        return a[$this_start_number] > b[$this_start_number] ? -1 : a[$this_start_number] < b[$this_start_number]? 1 : 0;  
+                    }
+                }
+                
+            });
+            k+=1;
+            //값이 들어오는지 확인 소스
+            //console.log(new_array);
+            $this_table.find("tbody").empty();
+            re_table(table_tr_length, table_th_length, $this_table);
+            /*overdate color change here!*/
+            $(".overdate").parents("tr").css({
+                "background-color" : "rgba(214, 70, 65, 0.158)",
+            })
+        });
+
+
+        var table_th_length2 = 0
+        var table_tr_length2 = 0
+        $("input.searchbox").on("input", function() {
+            var $this = $(this);
+            var $this_table = $this.parents("div.top").next();
+            var $this_start_number = $this.parents("div.top").next().index();
+            var input_text = $this.val();
+            var search_elem = $this.next().val()
+            //console.log(search_elem)
+            var search_elem_num = 0;
+            if(search_try_num == 0){
+                table_th_length2 = $this.parents("div.top").next().find("thead th").length; //테이블 칸의 갯수
+                table_tr_length2 = $this.parents("div.top").next().find("tbody tr").length; //테이블 내용 줄 갯수
+            //console.log(table_th_length)
+            }
+
+            //값 가져와서 새로운 array에 할당하기
+            
+            search_array = []
+            if(search_try_num == 0){
+                for(var i = 0; i<table_tr_length2; i++) {
+                    new_array[i] = [];
+                    for(var j = 0 ; j < table_th_length2; j++) {
+                        text_array = $this_table.find("tbody tr").eq(i).find("td").eq(j).html(); // 값땡겨오는거
+                        new_array[i][j] = text_array;
+                    }   
+                }
+            }
+
+            for(var i =0; i<table_tr_length2; i++){
+                if(search_elem == "id"){
+                    if(new_array[i][0] === input_text){
+                        search_array.push(new_array[i])
+                        search_elem_num++;
+                    }
+                }
+                else if(search_elem == "user"){
+                    if(new_array[i][1] === input_text){
+                        search_array.push(new_array[i])
+                        search_elem_num++;
+                    }
+                }
+                else if(search_elem=="type"){
+                    var input_len = input_text.length
+                    if(new_array[i][3].toLowerCase().slice(0,input_len) === input_text){
+                        search_array.push(new_array[i])
+                        search_elem_num++;
+                    }
+                }
+                else if(search_elem=="size"){
+                    var input_len = input_text.length
+                    if(new_array[i][4].slice(0,input_len) === input_text){
+                        search_array.push(new_array[i])
+                        search_elem_num++;
+                    }
+                }
+                else if(search_elem=="due"){
+                    var input_len = input_text.length
+                    //console.log(input_len)
+                    //console.log(typeof(new_array[i][3]))
+                    if(new_array[i][5].slice(0,input_len) === input_text){
+                        search_array.push(new_array[i])
+                        search_elem_num++;
+                    }
+                }
+                else if(search_elem=="status"){
+                    if(new_array[i][7] === input_text){
+                        search_array.push(new_array[i])
+                        search_elem_num++;
+                    }
+                }
+            }
+            if(search_elem_num == 0){
+                search_elem_num = table_tr_length2;
+            }
+            
+            search_try_num++;
+            searching(search_elem_num, table_th_length2, $this_table);
+            
+            /*overdate color change here!*/
+            $(".overdate").parents("tr").css({
+                "background-color" : "rgba(214, 70, 65, 0.158)",
+            })
+        })
+
+    })
+    $(document).ready(function() { 
+        
+        const active_menu = $('#requests')
+        active_menu.removeClass('sidenav--menu_sub').addClass('sidenav--menu_sub-active'); 
+
+    });
+
+    /*overdate color change here!*/
+    $(document).ready(function() { 
+        $(".overdate").parents("tr").css({
+            "background-color": "rgba(214, 70, 65, 0.158)",
+        })
+    });
+
+</script>   
+
+{% endblock content %}

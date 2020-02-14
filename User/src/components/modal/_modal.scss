@@ -1,0 +1,54 @@
+@import '../../styles/_colors.scss';
+@import '../../styles/_typography.scss';
+.modal{
+    
+    position: absolute;
+    overflow: hidden;
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    @keyframes fadeIn {
+        0% {
+        opacity: 0;
+        }
+        100% {
+        opacity: 1;
+        }
+    }
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 70%;
+    z-index: 30;
+    background-color: $bg_primary;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    &__closebtn{
+        float: right;
+    }
+}
+.summary_modal{
+
+    position: absolute;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    border: 10px solid $mainColor_dark;
+
+    @keyframes fadeIn {
+        0% {
+        opacity: 0;
+        }
+        100% {
+        opacity: 1;
+        }
+    }
+    top: 5%;
+    left: 25%;
+    width: 50%;
+    height: 80%;
+    z-index: 30;
+    background-color: rgb(250, 245, 245);
+    &__closebtn{
+        float: right;
+    }
+}

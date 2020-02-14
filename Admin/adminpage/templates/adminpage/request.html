@@ -1,0 +1,422 @@
+{% extends '../base.html' %}
+
+{% block content %}
+{% load static %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/jquery.flexslider-min.js"></script>
+<script>
+     // 바로 알림 받아오고 refresh
+    $(document).ready(function() {
+        var unread = {{ notifications.count }}
+        
+        setInterval(function(){
+            $.ajaxSetup({ cache: false });
+            $.ajax({
+                url: window.location.pathname,
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(result){
+
+                    if (unread !== result.unread){
+                        // console.log('changed');
+                        location.reload(true);
+                    }
+                    // else{
+                    //     console.log('unchanged')
+                    // }
+                }     
+            })
+        }, 2000)  
+    })
+</script>
+<script type="text/javascript">
+
+    function loading(){
+        $('.loading').append("<img src='{% static 'loading.gif' %}'/>")
+        console.log("loading...")
+    }
+
+    $(document).ready(function() { 
+        var status = {{ arequest.progress }}
+        var active_circle= $('.label:contains(' + status + ')').parent()
+        active_circle.removeClass('circle').addClass('circle active'); 
+
+        var label = $('.label')
+        var circles = label.parent()
+        console.log(circles)
+
+        circles.each(function(){
+            if ($(this).find(".label").text() < status){
+                //console.log($(this).find("span").text())
+                $(this).removeClass('circle').addClass('circle done'); 
+            }
+        })
+    });
+
+    $(document).ready(function() { 
+        const active_menu = $('#requests')
+        active_menu.removeClass('sidenav--menu_sub').addClass('sidenav--menu_sub-active'); 
+    });
+    $(document).ready(function() {
+        $('.flexslider').flexslider({
+        animation: "slide"
+        
+        });
+    });
+
+    
+
+</script>
+<script>
+    function confirmDelete() {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this request",
+            icon: "warning",
+            buttons:{ text: "Confirm", cancel: "Cancel"},
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("This request has been deleted!", {
+                icon: "success",
+                }).then(()=>{window.location.href = '/adminpage/{{arequest.id}}/delete'});
+            } else {
+                swal("Your request is safe!");
+            }
+        });
+    }
+</script>
+
+{% now "Y/m/d" as todays_date %}
+
+<div class="eachRequest">
+    <div class = "eachRequest--request" >
+        <div class= "eachRequest--request--btnwrapper">
+            <a class="eachRequest--sendbtn" href= "http://localhost:8000/{{arequest.id}}/output">Output <i class="fas fa-paper-plane"></i> </a>
+            <a class="eachRequest--editbtn" href='/adminpage/{{arequest.id}}/edit'>
+                Edit
+            </a>
+            <a class="eachRequest--deletebtn" onclick=confirmDelete()>
+                Delete
+            </a>
+        </div>
+            
+        <div class="eachRequest--header">
+            <p1>Request # {{arequest.id}}</p1>
+            <div class="status"> Status: {{ arequest.progress }} </div>
+            {% if arequest.progress == 5 %}
+            <div class="complete"> COMPLETE </div>
+            {% elif todays_date > arequest.due_at|date:'Y/m/d'%}
+            <div class="overdate"> OVERDATE </div>
+            {% endif %}
+        </div>    
+        <div class="progress">
+            <div class="circle">
+                <span class="label">1</span>
+                <span class="title">0%</span>
+            </div>
+            <span class="bar"></span>
+            <div class="circle">
+                <span class="label">2</span>
+                <span class="title">25%</span>
+            </div>
+            <span class="bar"></span>
+            <div class="circle">
+                <span class="label">3</span>
+                <span class="title">50%</span>
+            </div>
+            <span class="bar"></span>
+            <div class="circle">
+                <span class="label">4</span>
+                <span class="title">75%</span>
+            </div>
+            <span class="bar"></span>
+            <div class="circle">
+                <span class="label">5</span>
+                <span class="title">100%</span>
+            </div>
+        </div>
+
+        <div class="wrap">
+            <div style="width:100%; min-height:800px; padding: 50px 0 20px 0; background-color: #F6F6F6; display: flex; flex-direction: column; align-items: center; justify-content: center;" class="content-wrap">
+
+                <div style="font-size: 16px; width: 60%;">
+                    <p style="color: #499fb6; font-weight: 700; font-size:30px;"> Hello, {{ username }} ! </p>
+                    <p style="color:#8b8b8b; margin-top: 10px;"> Thank you for being our customer at Archisketch. </p>
+                    <p style="color:#8b8b8b; margin-bottom: 30px;"> A response to your inquiry on our On Demand service has arrived. </p>
+                </div>
+
+                <div class = "mail-contents" style="padding: 50px; font-size:20px; background-color: white; width: 60%; min-height:400px;">
+                    {{ content }}
+                </div>
+
+                <div style="font-size: 14px; margin-top: 50px; text-align: center; font-weight: 200;">
+
+                    <p style="color: #8b8b8b;">Please do not hesitate to contact us: <p1 style="font-weight:600; font-size: 15px;color:#499fb6;"> archisketch@archisketch.com </p1> with any questions</p>
+                    <p style="color: #8b8b8b;">or further information. We look forward to being able to be of service to you.</p>
+
+                    <p style="font-size: 11px; color:#bbbbbb; margin-top: 30px; ">Copyright© 2019 All rights reserved by Archisketch.Inc</p>
+                
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="eachRequest--contents">
+        <div class="info">
+            <div class="eachRequest--plan">
+                <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Uploaded Plan Image</label>
+                <div class="flexslider">
+                    <ul class="slides">
+                        {% for plan in arequest.floor_plan.all %}
+                        <li>
+                            <img class="eachRequest--plan_img" src="{{ plan.photo.url }}">
+                            <a class="eachRequest--plan_btn" style = "text-decoration: none;" href= "/{{arequest.id}}/{{plan.id}}/download" >
+                                <i class="fas fa-file-download"></i> Press to Download
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+        
+                </div>  
+            </div>
+                <div class="eachRequest--info">
+            
+                    <div class="eachRequest--info_num">
+                        <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Type :</label>
+                        <hr class="line"/>
+                        <div class="floor_info">
+                            {% if arequest.floor_type == "Residential" %}
+                                {{arequest.floor_type}}
+                            {% else %}
+                                {{arequest.floor_type}} ( {{arequest.commercial_type}} )
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    <div class="eachRequest--info_num">
+                        <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Size:</label>
+                        <hr class="line"/>
+                        <div class="floor_info">
+                            {{arequest.floor_size}} {{arequest.floor_size_unit}} <sup>2</sup>
+                        </div>
+                    </div>
+                    <div class="eachRequest--info_num">
+                        <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Number:</label>
+                        <hr class="line"/>
+                        <div class="floor_info">
+                            {{arequest.floor_number}} 
+                        </div>
+                    </div>
+                
+                        <!-- Optional Tags -->
+                
+                    {% if arequest.floor_address != "" %}
+                        <div class="eachRequest--info_num">
+                            <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Address:</label>
+                            <hr class="line"/>
+                            <div class="floor_info">{{arequest.floor_address}} </div>
+                        </div>
+                    {% endif %}
+            
+                    <!-- Optional Tags -->
+            
+                    {% if arequest.floor_height != "" %}
+                        <div class="eachRequest--info_num">
+                            <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Floor Height:</label>
+                            <hr class="line"/>
+                            <div class="floor_info">
+                                {{arequest.floor_height}} {{arequest.floor_height_unit}} 
+                            </div>
+                        </div>
+                    {% endif %}
+            
+                    {% if arequest.add_request != "" %}
+                        <div class="eachRequest--info_num">
+                            <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Additional Requests:</label>
+                            <hr class="line"/>
+                            <div class="floor_info">{{arequest.add_request}}</div>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+            <!-- selected theme -->
+            {% if arequest.selected_theme.all  %}
+            <div class="eachRequest--stheme">
+                <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Selected Theme Preferences</label>
+                <div class="eachRequest--stheme_wrapper" >
+                    {% for theme in arequest.selected_theme.all %}
+                        <img class="eachRequest--stheme_img" src="{{ theme.option }}">
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        
+            <!-- uploaded theme -->
+            {% if arequest.uploaded_theme.all  %}
+            <div class="eachRequest--utheme">
+                <label><i class="far fa-check-circle" style="margin-right: 5px"></i>Uploaded Theme Preferences</label>
+                <div class="eachRequest--utheme_wrapper" >
+                    {% for theme in arequest.uploaded_theme.all %}
+                        
+                        <img class="eachRequest--utheme_img" src="{{ theme.photo.url }}">
+                        
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class = "eachRequest--chatroom">
+        <div class = "eachRequest--chatroom_header">
+            {{arequest.username}}
+            <hr style="margin-top: 10px; opacity: 20%;"/>
+        </div>
+        <div class = "eachRequest--chatroom_msg">
+            {% if message_list %}
+            <div>
+                {% for msg in message_list %}
+                    {% if msg.sender == 'admin' %}
+                    <div class="msg_me">
+                        <div>
+                            <p1>{{msg.content}}</p1>
+                            <p2 class="chat_time">{{msg.timestamp|timesince}} 전</p2>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div style="display:flex;">
+                        <div><img style="width:40px; height:40px" src="{% static 'profile_pic.png' %}"/></div>
+                        <div class="msg_client">
+                            <div>
+                                <p1>{{msg.content}}</p1>
+                                <p2 class="chat_time">{{msg.timestamp|timesince}} 전</p2>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+        </div>
+        <div class="preview">
+            <!-- img preview here! -->
+        </div>
+        <div class = "eachRequest--chatroom_send">
+            <form class="eachRequest--chatroom_send_textbox" enctype="multipart/form-data" action="/adminpage/{{ arequest.id }}/" method="POST">
+                {% csrf_token %}
+                <div class="top">
+                    <label class="plus" for="fileinput">+</label>
+                    <input class="fileinput" id="fileinput" type="file" name="msg_attachments" accept=".jpg, .jpeg, .png" multiple>
+                    <textarea class="textinput" placeholder= "Enter your message" name="msg_content"></textarea>
+                </div>
+                <input class="submit" type="submit" onclick= "return loading();" value="Send"/>
+            </form>
+            <div class="loading"></div>
+        </div>
+
+    </div>
+</div>
+
+<!-- 원래 형식 -->
+<div class="sendMail">
+    <div class="sendMail--box">
+        <p>Hello, world!</p>
+        <form enctype="multipart/form-data" action='/adminpage/{{ arequest.id }}/' method="POST">
+            {% csrf_token %}
+            <label>첨부파일</label>
+            <input type="file" name="msg_attachments" accept=".jpg, .jpeg, .png" multiple="multiple">
+            <label>내용</label>
+            <textarea placeholder= "Enter your message" name="msg_content"></textarea>
+            <label>이메일 이미지 파일고르기</label>
+            <input type="file" name="image"/>
+            <input class="submit" type="submit" value="Send"/>
+        </form>
+        <button class="popupClose">Close</button>
+    </div>
+
+</div>
+
+<script>
+
+    $(document).ready(function() { 
+        input.addEventListener('change', updateImageDisplay);
+
+        $(".sendPopup").on("click", function(){
+            if(click_num_popup === 0){
+                $(".wrap").css({
+                    "display":"flex",
+                })
+                $(".eachRequest--contents").css({
+                    "display": "none",
+                })
+                click_num_popup = 1;
+            }
+            else{
+                $(".wrap").css({
+                    "display":"none",
+                }) 
+                $(".eachRequest--contents").css({
+                    "display": "flex",
+                })
+                click_num_popup = 0;
+            }
+        })
+    });
+    var input = document.querySelector('.fileinput');
+    var preview = document.querySelector('.preview');
+    input.style.opacity = 0;
+    function updateImageDisplay() {
+        while(preview.firstChild) {
+            preview.removeChild(preview.firstChild);
+        }
+
+        const curFiles = input.files;
+        if(curFiles.length === 0) {
+            const para = document.createElement('p');
+            para.textContent = 'No files currently selected for upload';
+            preview.appendChild(para);
+        } else {
+            const list = document.createElement('div');
+            list.className = "list"
+            preview.appendChild(list);
+
+            for(const file of curFiles) {
+            const listItem = document.createElement('div');
+            listItem.className = "list_item"
+            const para = document.createElement('p');
+            if(validFileType(file)) {
+                para.textContent = `File name ${file.name}`;
+                const image = document.createElement('img');
+                image.src = URL.createObjectURL(file);
+
+                listItem.appendChild(image);
+                listItem.appendChild(para);
+            } else {
+                para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
+                listItem.appendChild(para);
+            }
+
+            list.appendChild(listItem);
+            }
+        }
+    }
+
+    const fileTypes = [
+        'image/jpeg',
+        'image/pjpeg',
+        'image/png'
+    ];
+
+    function validFileType(file) {
+        return fileTypes.includes(file.type);
+    }
+
+</script>
+
+{% endblock content %}
