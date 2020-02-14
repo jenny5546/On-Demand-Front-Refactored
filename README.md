@@ -6,11 +6,11 @@
 
 ##### User page
 
-![user_page](adminpage/static/ondemand-user.png)
+![user_page](User/adminpage/static/ondemand-user.png)
 
 ##### Admin page
 
-![](adminpage/static/ondemand-admin.png)
+![admin_page](Admin/adminpage/static/ondemand-admin.png)
 
 
 
@@ -30,6 +30,8 @@
 - Admin page (Django, python 3.6)
 
   <code>$ pip install -r requirements.txt </code>
+
+  <code>$ python manage.py migrate </code>
 
 - Run server
 
