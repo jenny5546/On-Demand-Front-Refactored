@@ -1,19 +1,85 @@
 # Archisketch On-Demand Service
 
 > Archisketch On-Demand Service 구축
-> - 각자 제품 프로젝트 시작해보기
-> - 요건 : 프로젝트를 하나의 템플릿으로 최대한 구축해보기
-> 1. React / Django를 베이스로, 최대한 깔끔한 템플릿 File Structure로 구성하여 구축해보기
-> 2. Sass/Scss를 가지고 SMACSS, BEM, OOCSS, Atomic 4가지 방법론을 혼용하여, 최대한 매끄러운 CSS Structure 구성해보기
-> 3. 관리는 Github으로 소통 및 진행하기
 
-## 가상환경 안 될 때,
-#### 1. eval "$(pyenv init -)"
-#### 2. eval "$(pyenv virtualenv-init -)"
-#### 3. pyenv activate ondemand
+**User는 쉽고 간편한, Admin은 관리하기 편리한 On-Demand Service**
 
-## gitignore 지울 때,
-#### 1. git rm -r --cached .
-#### 2. git add .
-#### 3. git commit -m ".gitignore fix"
+##### User page
+
+![user_page](adminpage/static/ondemand-user.png)
+
+##### Admin page
+
+![](adminpage/static/ondemand-admin.png)
+
+
+
+## Install (OS X, Linux)
+
+---------
+
+- User page (React)
+
+  <code>$ npm install </code>
+
+  > If "node_modules"  is already installed, you should run these commands first.
+  >
+  > <code>$ npm cache clean --force</code>
+  >
+  > <code>$ rm -rf node_modules</code> 
+
+- Admin page (Django, python 3.6)
+
+  <code>$ pip install -r requirements.txt </code>
+
+- Run server
+
+  <code>$ npm start</code>
+
+  <code>$ python manage.py runserver</code>
+
+
+
+## About
+
+------
+
+####  User
+
+1. Click to Get Stared! button 을 클릭한다.
+2. Tutorial을 통해 ondemand 서비스의 작동과정을 파악한다.
+3. 각 progress 마다 user의 정보를 입력 / 선택한다.
+4. 결제를 한다.
+5. Email을 통해 결과물을 받고, 피드백한다.
+
+#### Admin
+
+1. Dashboard
+
+- 전체 request에 대한 정보를 파악할 수 있으며, 완료되지 않은 request list를 볼 수 있다.
+
+2. Request
+
+- 완료되지 않은 request list와 total request list를 확인할 수 있다.
+- 각 request의 user가 이메일로 피드백을 보낼경우, request의 글자가 굵어지며 Detail button을 눌러 확인할 수 있다.
+- Due date가 지난 request의 경우 붉은색으로 표시된다.
+
+3. Detail / Edit
+
+- Request의 상세정보를 파악할 수 있는 페이지로, detail button을 눌러 볼 수 있다.
+- 각 Request의 user가 보낸 피드백을 한눈에 파악할 수 있으며, messenger 창을 통해 메일을 보낼 수 있다.
+- Edit 페이지를 통해 request에 대한 정보를 수정할 수 있다.
+
+4. Messages
+
+- User가 보낸 피드백 및 메일을 한눈에 파악할 수 있다.
+
+
+
+## Contributors
+
+---------
+
+- Lee Jaeeun (Seoul National University)
+- Kim Taeyeong (DGIST)
 
