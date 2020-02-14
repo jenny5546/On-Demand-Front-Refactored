@@ -377,9 +377,15 @@ def delete(request, id):
 def messages(request):
 
    if request.method == 'GET':
-     notifications= Notification.objects.all()
-     requests = Request.objects.all()
-     return render(request, 'adminpage/messages.html', {'requests': requests, 'notifications': notifications})
+
+    if request.is_ajax():
+      unread = Notification.objects.all().count() #당시의 알람 개수
+      return JsonResponse({'unread': unread }) # 보내기
+      
+    else:
+      notifications= Notification.objects.all()
+      requests = Request.objects.all()
+      return render(request, 'adminpage/messages.html', {'requests': requests, 'notifications': notifications})
 
 def output(request, id):
   

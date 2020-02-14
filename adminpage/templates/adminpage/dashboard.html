@@ -6,6 +6,7 @@
     $(document).ready(function() {
         var unread = {{ notifications.count }}
         setInterval(function(){
+            $.ajaxSetup({ cache: false });
             $.ajax({
                 url: window.location.pathname,
                 type: 'GET',

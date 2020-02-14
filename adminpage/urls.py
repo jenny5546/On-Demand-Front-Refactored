@@ -7,6 +7,7 @@ urlpatterns = [
     path('show/', views.show, name='show'), #all requests
     path('<int:id>/', views.each, name='each'), #each requests
     path('<int:id>/edit/', views.edit, name='edit'),
+    path('<int:id>/output/', views.output, name='output'),
     path('<int:id>/delete/', views.delete, name='delete'),
     path('<int:req_id>/<int:file_id>/download/', views.download, name='download'),
     path('messages/', views.messages, name="messages"),
