@@ -14,7 +14,7 @@
 
 
 
-## Install (OS X, Linux)
+## Installation (OS X, Linux)
 
 
 - User page (React)
