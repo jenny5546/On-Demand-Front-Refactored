@@ -38,6 +38,9 @@
   <code>$ npm start</code>
 
   <code>$ python manage.py runserver</code>
+  
+- 메일 계정
+  json file이 있어야 하므로 contributors 에게 요청하기.
 
 
 
