@@ -125,7 +125,7 @@
                                 <button class="sorting">Application Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
                             </th>
                             <th>
-                                <button class="sorting">Type, Size <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
+                                <button class="sorting">Type, Size</button>
                             </td>
                             <th>
                                 <button class="sorting">Due Date <i class="fas fa-sort" style= "margin-left: 10px;"></i></button>
@@ -210,25 +210,47 @@
             }
             
             //테이블 클래스 active 지정
-            $this_table.find("th button")
+
             /* 정렬 */
             new_array.sort(function (a, b) { 
+                if($this_start_number == 0){
+                    // ID는 Number로 형변환
+                    var numOfAid = Number(a[0])
+                    var numOfBid = Number(b[0])
+                    if(k % 2 == 0) {
+                        return numOfAid < numOfBid ? -1 : numOfAid > numOfBid ? 1 : 0;  
+                    } else {
+                        return numOfAid > numOfBid ? -1 : numOfAid < numOfBid ? 1 : 0;  
+                    }
+                }
 
-                if(k % 2 == 0) {
-                    console.log(k)
-                    return a[$this_start_number] < b[$this_start_number] ? -1 : a[$this_start_number] > b[$this_start_number]? 1 : 0;  
-                } else {
-                  console.log("hahd")
-                    return a[$this_start_number] > b[$this_start_number] ? -1 : a[$this_start_number] < b[$this_start_number]? 1 : 0;  
+                else if($this_start_number == 3){
+                    return ;
+                }
+
+                else if($this_start_number == 5){
+                    if(k % 2 == 0) {
+                        return a[4] < b[4] ? -1 : a[4] > b[4]? 1 : 0;  
+                    } else {
+                        return a[4] > b[4] ? -1 : a[4] < b[4]? 1 : 0;  
+                    }
+                }
+
+                else{
+                    if(k % 2 == 0) {
+                        return a[$this_start_number] < b[$this_start_number] ? -1 : a[$this_start_number] > b[$this_start_number]? 1 : 0;  
+                    } else {
+                        return a[$this_start_number] > b[$this_start_number] ? -1 : a[$this_start_number] < b[$this_start_number]? 1 : 0;  
+                    }
                 }
                 
             });
-                k+=1;
+            k+=1;
             //값이 들어오는지 확인 소스
             //console.log(new_array);
-
             $this_table.find("tbody").empty();
             re_table(table_tr_length, table_th_length, $this_table);
+            /*overdate color change here!*/
             $(".overdate").parents("tr").css({
                 "background-color" : "rgba(214, 70, 65, 0.158)",
             })
