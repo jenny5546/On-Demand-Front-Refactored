@@ -16,7 +16,6 @@
 
 ## Install (OS X, Linux)
 
----------
 
 - User page (React)
 
@@ -42,7 +41,6 @@
 
 ## About
 
-------
 
 ####  User
 
@@ -78,7 +76,6 @@
 
 ## Contributors
 
----------
 
 - Lee Jaeeun (Seoul National University)
 - Kim Taeyeong (DGIST)
