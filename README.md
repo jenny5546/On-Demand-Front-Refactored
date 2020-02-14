@@ -6,7 +6,7 @@
 
 ##### User page
 
-![user_page](User/adminpage/static/ondemand-user.png)
+![user_page](Admin/adminpage/static/ondemand-user.png)
 
 ##### Admin page
 
@@ -41,7 +41,7 @@
 
 
 
-## About
+## Manual
 
 
 ####  User
