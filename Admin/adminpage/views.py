@@ -81,14 +81,6 @@ def check_mail_imap(user, password):
 
         for part in email_message.walk():
 
-          # print('type'+ part.get_content_maintype())
-          # if part.get_content_type() == "text/plain":
-          #   body = part.get_payload(decode=True)
-          #   message_content = body.decode('utf-8')
-          #   mail_struct.append(message_content)
-          #   mail_struct.append(message_timestamp)
-          #   pass
-
           if part.get_content_type() == 'text/html':
             body = part.get_payload(decode=True)
             message_content = BeautifulSoup(body.decode('UTF-8'), "html.parser")

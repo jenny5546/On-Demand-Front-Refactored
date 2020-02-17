@@ -175,6 +175,9 @@ a{
     }
 }
 
+.swal-modal{
+    font-family: $_base-font-family;
+}
 //detail.HTML
 .eachRequest{
     @extend .mid;
@@ -182,6 +185,7 @@ a{
     width:100vh;
     padding: 20px;
     position: relative;
+    
     &--request{
         width: 60%;
         position: relative;
