@@ -34,7 +34,7 @@
                         {% else %}
                         {% for msg in notifications %}
                             <ul>
-                                <li> <i class="far fa-envelope" style= "color: black"></i> {{ msg.received_message.username }}, {{ msg.received_message.title }}</li>
+                                <li><a href="/{{msg.received_message.request.id}}"> <i class="far fa-envelope" style= "color: black"></i> {{ msg.received_message.username }}, {{ msg.received_message.title }}</a></li>
                                 <hr/>
                             </ul>
                         {% endfor %}
