@@ -24,16 +24,21 @@
                 <ul class="header--nav">
                     <li class="header--nav_menu"><i class="fas fa-user-circle" style= "color: rgb(103, 105, 109); font-size: 25px;"> <p1 style="font-family: 'Roboto Slab', serif; font-size: 16px;">Welcome, Administrator</p1></i></li>
                     <li class="header--nav_menu">
-                        <a class="header--nav_alert" href="">
+                        <button class="header--nav_alert">
                             <i class="fas fa-bell" style= "color: rgb(103, 105, 109); font-size: 25px;"></i> 
                             <div class="header--nav_count1"><p>{{ notifications.count }}</p></div>
-                        </a>
+                        </button>
                         <div class="header--nav_notice">
+                        {% if notifications.count == 0 %}
+                        <p> no alert </p>
+                        {% else %}
                         {% for msg in notifications %}
                             <ul>
-                                <li> {{ msg.received_message.title }}, {{ msg.received_message.content }}</li>
+                                <li> <i class="far fa-envelope" style= "color: black"></i> {{ msg.received_message.username }}, {{ msg.received_message.title }}</li>
+                                <hr/>
                             </ul>
                         {% endfor %}
+                        {% endif %}
                         </div>
                     </li>
                     <li class="header--nav_menu">
@@ -62,3 +67,23 @@
         </div>
     </body>
 </html>
+
+<script>
+    $(document).ready(function() {
+        var click_count = 0;
+        $(".header--nav_alert").on("click", function(){
+            if(click_count % 2 == 0){
+                $(".header--nav_notice").css({
+                    "display" : "flex",
+                })
+                click_count += 1
+            }
+            else{
+                $(".header--nav_notice").css({
+                    "display" : "none",
+                })
+                click_count += 1
+            }
+        })
+    })
+</script>

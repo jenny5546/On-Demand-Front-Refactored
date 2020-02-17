@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'adminpage.apps.AdminpageConfig',
     'corsheaders',
     'sass_processor',
-    'templated_email',
+    # 'templated_email',
+    'mail_templated',
+    # 'django_premailer',
 ]
 
 MIDDLEWARE = [
