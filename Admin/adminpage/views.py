@@ -9,6 +9,7 @@ import json, os, time, threading
 from itertools import chain
 from bs4 import BeautifulSoup
 
+
 # email
 import smtplib, imaplib, email
 import email.header
@@ -18,7 +19,93 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase 
 from templated_email import send_templated_mail, InlineImage
 
-# from mail_templated import send_mail
+'''
+<html-email>
+
+from django.core.mail import send_mail, EmailMessage
+from django.template.loader import render_to_string
+from django.conf import settings
+def send_html_email(to_list, subject, template_name, context, sender=settings.DEFAULT_FROM_EMAIL):
+    msg_html = render_to_string(template_name, context)
+    msg = EmailMessage(subject=subject, body=msg_html, from_email=sender, bcc=to_list)
+    msg.content_subtype = "html"  # Main content is now text/html
+    return msg.send()
+'''
+#imageattach email
+from django.core.mail import EmailMessage as _EmailMessage
+from django.template import loader, Context
+from uuid import uuid1
+
+class EmailMessage(_EmailMessage):
+  """
+  Wraps django.core.mail.EmailMessge, 
+  providing tempalte-context body builder that can embed images.
+  Usage:
+    msg = WFEmailMessage(template='TEMPLATE.html')
+    msg.embed('imgsrc', 'PATH_TO_IMG')
+    msg.send()
+  TEMPLATE.html:
+    <img src="{{ imgsrc }}">
+  @NOTE: passing `template` causes `body` to be ignored
+  @NOTE: recipients still see images as mail attachments if they're 
+         not attributed (in <img> tags)
+  @see django.core.mail.EmailMessage
+  """
+
+  def __init__(
+    self, subject=u'', body=u'', from_email=None, to=None, bcc=None, connection=None, 
+    attachments=None, headers=None, cc=None, template=u'', context=None):
+    """
+    @see django.core.mail.EmailMessage.__init__
+    """
+    if not type(to) in (list, tuple):
+      to = (to,)
+
+    super(EmailMessage, self).__init__(
+            subject='htmlworking', body=body, from_email='jangjangman5546@gmail.com', 
+            to=['jenny5546@naver.com'], bcc=bcc, connection=connection, 
+            attachments=attachments, headers=headers, cc=cc)
+
+    self.template = template
+    self.context = context if context is not None else {}
+
+    self._tpl = None
+
+  def embed(self, token, filename, cid=False):
+    
+    # cid = cid if cid else uuid1().hex()
+    # print (type(cid))
+    cid = str(1)
+    with open(filename, 'rb') as bg: 
+      mi = MIMEImage(bg.read())
+      mi.add_header('Content-ID', '<%s>' % cid)
+      mi.add_header('Content-Disposition', 'inline')
+    
+    self.context.update({token: "cid:%s" % cid})
+    self.attach(mi)
+
+  def _t(self):
+    """
+    Get Template singleton
+    """
+    if not self._tpl:
+      self._tpl = loader.get_template(self.template)
+
+    return self._tpl
+
+  def send(self, fail_silently=False):
+    """
+    @see django.core.email.EmailMessage.send
+    """
+    self.content_subtype = "html"
+
+    if self.template:
+      try:
+        self.body = self._t().render(Context(self.context))
+      except: pass
+
+    super(EmailMessage, self).send(fail_silently)
+
 
 
 # email parsing 함수
@@ -320,7 +407,6 @@ def each(request, id):
       
       #logo template 넘기기 위한 경로
       module_dir = os.path.dirname(__file__)
-      logo_path = os.path.join(module_dir, 'static/Logo.png')
       bg_path = os.path.join(module_dir, 'static/email-header.png')
       #templated email로 이미지 넘겨주는 함수 
       # with open(logo_path, 'rb') as logo: 
@@ -404,14 +490,15 @@ def output(request, id):
   elif request.method == 'POST':
 
       receiver = arequest.useremail
-      # content = request.POST.get('content', '') #텍스트 내용 
-      # attachments = [] 
-      # inline= None
+      '''
+      content = request.POST.get('content', '') #텍스트 내용 
+      attachments = [] 
+      inline= None
 
-      # if request.FILES:
-      #   attachments = request.FILES.getlist('attach')  # 첨부해서 가는 파일 
-      #   image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
-      #   inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
+      if request.FILES:
+        attachments = request.FILES.getlist('attach')  # 첨부해서 가는 파일 
+        image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
+        inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
 
       send_templated_mail( 
           template_name='output',
@@ -424,7 +511,35 @@ def output(request, id):
           },
           # attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), attachments),
       )
+      '''
 
+
+      '''
+      module_dir = os.path.dirname(__file__)
+      bg_path = os.path.join(module_dir, 'static/email-header.png')
+
+      send_html_email(
+        [receiver], # receiver list 
+        'html-email',  # subject
+        'email.html',  # email template 
+        { # context
+          'username': arequest.username,
+          'encoded': encoded,
+        },
+        'jangjangman5546@gmail.com' # sender
+      )
+      '''
+
+      module_dir = os.path.dirname(__file__)
+      bg_path = os.path.join(module_dir, 'static/email-header.png')
+
+      msg = EmailMessage(template = 'email.html')
+      msg.embed('headersrc', bg_path)
+      msg.send()
+
+
+
+      
       return redirect('/'+str(id))
 
   
