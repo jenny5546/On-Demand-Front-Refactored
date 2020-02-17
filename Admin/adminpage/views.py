@@ -110,7 +110,8 @@ def request(request):
     #연결해야하는 부분 
     #요청한 사람 정보(user)
     username = generate_username(1)[0]
-    useremail = 'piaomj55@naver.com' #연결할때, front에서 들고오기
+    useremail = 'taiyoung1122@naver.com' #연결할때, front에서 들고오기
+
     # print(user)
     floor_type = request.POST.get('floor_type')
     commercial_type = request.POST.get('commercial_type')
@@ -230,7 +231,7 @@ def checking():
           )
           newNotification = Notification.objects.create(
             request=req,
-            received_message = newReceivedMessage
+            received_message = newReceivedMessage,
           )
 
   threading.Timer(3, checking).start()

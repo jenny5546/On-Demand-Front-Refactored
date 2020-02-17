@@ -132,3 +132,4 @@ class Notification(models.Model):
   request = models.ForeignKey(Request, null=True, on_delete = models.CASCADE)
   received_message = models.ForeignKey(ReceivedMessage, null=True, on_delete = models.CASCADE)
   seen = models.BooleanField(default = False)
+
