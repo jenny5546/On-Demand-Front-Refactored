@@ -107,10 +107,15 @@
     </div>      
 </div>
 
+<div class="confirm-wrap">
+    <form enctype="multipart/form-data" action='/adminpage/{{ arequest.id }}/output/' method="POST">
+        <!-- <label>내용</label>
+        <textarea placeholder= "Enter your message" name="content"></textarea> -->
+        {% csrf_token %}
+        <input class="submit" type="submit" value="Confirm and Send"/>
+    </form>
 
-<!-- <form enctype="multipart/form-data" action='/adminpage/{{ arequest.id }}/output/' method="POST">
-    <label>내용</label>
-    <textarea placeholder= "Enter your message" name="content"></textarea>
-    <input class="submit" type="submit" value="Send"/>
-</form> -->
+</div>
+
+
 {% endblock content %}

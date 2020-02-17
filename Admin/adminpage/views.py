@@ -112,7 +112,7 @@ def request(request):
     #연결해야하는 부분 
     #요청한 사람 정보(user)
     username = generate_username(1)[0]
-    useremail = 'jenny5546@snu.ac.kr' #연결할때, front에서 들고오기
+    useremail = 'jenny5546@naver.com' #연결할때, front에서 들고오기
     # print(user)
     floor_type = request.POST.get('floor_type')
     commercial_type = request.POST.get('commercial_type')
@@ -123,6 +123,7 @@ def request(request):
     floor_height_unit = request.POST.get('floor_height_unit')
     floor_address = request.POST.get('floor_address')
     add_request = request.POST.get('add_req')
+
     newRequest = Request.objects.create(
       username = username,
       useremail = useremail,
@@ -218,6 +219,7 @@ def checking():
   if(str(type(details)) == "<class 'list'>" and details != []): # 안 읽은 메일이 존재한다면.
     for eachmail in details: # 안 읽은 메일 중에서 
       if Request.objects.filter(useremail = eachmail[0]).exists(): # 리퀘 보낸 사람이 있다면 
+
         for req in Request.objects.filter(useremail = eachmail[0]):
           # req = Request.objects.get(useremail = eachmail[0]) # 리퀘 찾기. 
           newReceivedMessage = ReceivedMessage.objects.create(
@@ -323,23 +325,30 @@ def each(request, id):
       logo_path = os.path.join(module_dir, 'static/Logo.png')
       bg_path = os.path.join(module_dir, 'static/email-header.png')
       #templated email로 이미지 넘겨주는 함수 
+      with open(logo_path, 'rb') as logo: 
+        inline_logo = InlineImage(filename="Logo.png", content=logo.read())
+
+        with open(bg_path, 'rb') as bg: 
+          inline_bg = InlineImage(filename="email-header.png", content=bg.read())
         
-      send_templated_mail( 
-          template_name='basic',
-          from_email= 'jangjangman5546@gmail.com',
-          recipient_list=[receiver],
-          context={
-              'username': arequest.username,
-              'content' : message_content,
-              #'logo' : inline_logo,
-              #'image' : inline,
-          },
-          attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),
-      )
-      newSentMessage = SentMessage.objects.create(
-        request = arequest,
-        content = message_content
-      )
+          send_templated_mail( 
+
+              template_name='basic',
+              from_email= 'jangjangman5546@gmail.com',
+              recipient_list=[receiver],
+              context={
+                  'username': arequest.username,
+                  'content' : message_content,
+                  'logo' : inline_logo,
+                  'bg': inline_bg,
+              },
+              attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),   
+          )
+
+          newSentMessage = SentMessage.objects.create(
+            request = arequest,
+            content = message_content
+          )
 
     arequest.due_at = due_at
     arequest.progress = progress
@@ -398,14 +407,14 @@ def output(request, id):
   elif request.method == 'POST':
 
       receiver = arequest.useremail
-      content = request.POST.get('content', '') #텍스트 내용 
-      attachments = [] 
-      inline= None
+      # content = request.POST.get('content', '') #텍스트 내용 
+      # attachments = [] 
+      # inline= None
 
-      if request.FILES:
-        attachments = request.FILES.getlist('attach')  # 첨부해서 가는 파일 
-        image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
-        inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
+      # if request.FILES:
+      #   attachments = request.FILES.getlist('attach')  # 첨부해서 가는 파일 
+      #   image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
+      #   inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
 
       send_templated_mail( 
           template_name='output',
@@ -413,10 +422,10 @@ def output(request, id):
           recipient_list=[receiver],
           context={
               'username': arequest.username,
-              'content' : content,
-              'image' : inline,
+              # 'content' : content,
+              # 'image' : inline,
           },
-          attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), attachments),
+          # attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), attachments),
       )
 
       return redirect('/'+str(id))
