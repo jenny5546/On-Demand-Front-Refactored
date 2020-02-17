@@ -3,40 +3,114 @@
 {% block content %}
 {% load static %}
 
-<script>
-    var browser = document.querySelector('#divContainer');
-    var request = browser.getScreenshot(100, 100);
-    request.onsuccess = function() {
-        console.log('hi')
-        var blob = request.result;
-        var url = URL.createObjectURL(blob);
-    }
-</script>
+<div class= "output">
 
-<form enctype="multipart/form-data" action='/adminpage/{{ arequest.id }}/output/' method="POST">
+    <div class= "output_header">
 
-    {% csrf_token %}
-    <!-- <label>첨부파일</label>
-    <input type="file" name="attach" multiple="multiple"/> -->
-
-    <label>내용</label>
-    <textarea placeholder= "Enter your message" name="content"></textarea>
-<!-- 
-    <label>이메일 이미지 파일고르기</label>
-    <input type="file" name="image"/> -->
-
-    <!-- <iframe style="width: 500px; height: 500px" src="https://board.archisketch.com/project/3349/share" scrolling="no"></iframe> -->
-
-    <div id="divContainer" style="position: absolute; left: 30%; top: 10%;">
-        <div id="frameContainer" "> 
-             <iframe id="frame" src="https://plan.archisketch.com/?mode=360&port_id=3349" scrolling="no" style="width: 1000px; height:800px;">
-            </iframe> 
-         </div>
+        <div class = "output_header--greeting">
+            <div class= "output_header--greeting-main">
+                <p>Thank you, for using</p>
+                <p style="font-size: 30px; font-weight: 700;">
+                    Archisketch's <br>
+                    On-Demand service
+                </p>
+            </div>
+            <div class= "output_header--greeting-sub">
+                <p>We are happy to inform you that </p>
+                <strong>Your project has been completed</strong>
+                <p>
+                    Click 
+                    <a class= "output_header--greeting-btn" href="https://board.archisketch.com/project/3349/share"> 
+                    this link
+                    </a>
+                    to checkout the results 
+                </p>
+            </div>
+            
+        </div>
+        <img class= "output_header--img" src="{% static 'heading.jpg' %}"/>
+        
     </div>
 
-    
-    <input class="submit" type="submit" value="Send"/>
+    <div class="output_contents">
+        <div class="output_contents--title">
+            
+            <p1> <i class="fab fa-sistrix"></i>  Quick View</p1>  of your Results
+        </div>
+        <div class="output_contents--tour">
+            <!-- <div class="output_contents--body-720"></div> -->
+            <img class="output_contents--tour-img" src="{% static 'viewer720.png' %}"/>
+            <div class="output_contents--tour-inf">
+                <p class="output_contents--label">720 Tour</p>
+                <p1> Check out this 720 panorama provided to assist secure clients and foster interaction. </p1>
+                <br>
+                <p1> Walk through this virtual 720-tour of your space!</p1>
+                <br><br>
+                <a href="https://plan.archisketch.com/?mode=360&port_id=3349">Click to Tour </a>
+            </div>
+        </div>
 
-</form>
-<div id="this"></div>
+        <div class="output_contents--rend">
+
+            <div class="output_contents--rend-inf">
+                <div class="output_contents--label">
+                    Rendered Images 
+                </div>
+                <p1>
+                    Archisketch is able to offer one of the fastest rendering engines that creates photo-realistic renderings. 
+                    Leverage our technology to generate images for all kinds of uses 
+                    – brochures, online ads, catalogues, etc.
+                </p1>
+
+            </div>
+            
+            <div class="output_contents--rend-wrap">
+                <img class="output_contents--rend-img" src="{% static 'render1.png' %}"/>
+                <img class="output_contents--rend-img" src="{% static 'render2.png' %}"/>
+                <img class="output_contents--rend-img" src="{% static 'render3.png' %}"/>
+                <img class="output_contents--rend-img" src="{% static 'render4.png' %}"/>
+                <img class="output_contents--rend-img" src="{% static 'render5.png' %}"/>
+                <img class="output_contents--rend-img" src="{% static 'render6.png' %}"/>
+            </div>
+            
+        </div>
+
+        <div class="output_contents--plan">
+            <div class="output_contents--label">
+                Your Floorplan
+            </div>
+            <div class="output_contents--plan-container">
+
+                <div class="output_contents--plan-wrap">
+                    <img class="output_contents--plan-img" src="{% static 'model3D.png' %}"/>
+                    <div class="output_contents--plan-sub">
+                            3D Floorplan
+                            <div class="output_contents--plan-info">
+                                3D Floor Plans are high-resolution and optimized for print and web. Create beautiful 3D Floor Plans that show furnishings, textures and materials to give a true feel for the space looks.
+                            </div>
+                    </div>
+                </div>
+    
+                <div class="output_contents--plan-wrap">
+                    <img class="output_contents--plan-img" src="{% static 'floorplan2D.png' %}"/>
+                    <div class="output_contents--plan-sub">
+                            2D Floorplan
+                            <div class="output_contents--plan-info">
+                                2D Floor Plans provide a clean and simple visual overview of the property. Allow potential homebuyers to clearly see the layout and potential of the property. For interior design users, a 2D Floor Plan is a great starting point for your project.
+                            </div>
+                    </div>
+                </div>
+                
+            </div>       
+            
+        </div>        
+    </div>      
+</div>
+
+
+<!-- <form enctype="multipart/form-data" action='/adminpage/{{ arequest.id }}/output/' method="POST">
+    <label>내용</label>
+    <textarea placeholder= "Enter your message" name="content"></textarea>
+    <input class="submit" type="submit" value="Send"/>
+</form> -->
 {% endblock content %}
