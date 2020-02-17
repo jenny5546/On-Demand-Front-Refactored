@@ -832,3 +832,186 @@ a{
 
 }
 
+.output{
+    
+    // box-shadow: 1px 6px 8px rgba(0, 0, 0, 0.096), 0 5px 6px rgba(0, 0, 0, 0.096);
+    // background-color: rgba(255, 192, 203, 0.158);
+    width: 50%;
+    min-height: 90%;
+    margin: auto 0 auto 10px;
+    background-color: rgba(243, 216, 161, 0.11);
+    // border: 1px solid black;
+    
+
+    &_header{
+        width: 100%;
+        display: flex;
+        &--greeting{
+            z-index: 5;
+            font-family: 'Volkhov', serif;
+            width: 55%;
+            margin-top: 60px;
+            padding-left: 12%;
+            &-main{
+                font-size: 23px;
+                
+            }
+            &-sub{
+                background-color: rgba(243, 208, 207, 0.418);
+                padding: 10px;
+                opacity:60%;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                font-size: 14px;
+                opacity:70%;
+                width: 330px;
+            }
+            &-btn{
+                font-weight: $black;
+                color: rgb(8, 90, 65);
+                font-size: 15px;
+                font-family: $_base-font-family;
+            }
+        }
+        &--img{
+            width:45%;
+            z-index: 3;
+            height: 280px;
+            opacity: 80%;
+        }
+    }
+    &_contents{
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        padding: 10px;
+        flex-direction: column;
+        margin-left: 1%;
+        // margin-right: 5%;
+
+        &--label{
+            font-weight: $bold;
+            font-size: 25px;
+            letter-spacing: -1.3px;
+            padding-bottom: 10px;
+        }
+
+        &--title{
+            font-size: 20px;
+            margin: auto;
+            padding-bottom: 20px;
+            // font-weight: $bold;
+            letter-spacing: -0.8px;
+            color: rgba(0, 0, 0, 0.288);
+            p1{
+                color: rgb(250, 100, 125);
+                font-weight: $black;
+                margin-right: 5px;
+            }
+        }
+        
+       &--tour{
+
+           padding: 10px;
+           width: 100%;
+           display: flex;
+           position: relative;
+           &-img{
+               width: 60%;
+               filter: brightness(80%);
+           }
+           &-inf{
+                background-color: rgba(44, 77, 2, 0.39);
+                // height: 200px;
+                position: absolute;
+                top: 25%;
+                left: 35%;
+                width: 55%;
+                padding: 15px;
+                // opacity: 80%;
+
+                p1{
+                    font-size: 13px;
+                    color: rgba(255, 255, 255, 0.767);
+                    font-weight: $light;
+                }
+                a{
+                    text-align: center;
+                    font-size: 13px;
+                    padding: 5px;
+                    color:white;
+                    border-radius: 10px;
+                    border: 1px solid rgba(255, 255, 255, 0.589);
+                    background-color: rgb(33, 56, 12);
+                }
+           }
+
+        }
+        &--rend{
+            padding: 10px;
+            width: 100%;
+
+            &-inf{
+                width: 90%;
+                padding: 10px;
+                background-color: rgba(255, 217, 0, 0.11);
+                // margin: auto;
+                p1{
+                    font-size: 14px;
+                    color: rgba(0, 0, 0, 0.459);
+                }
+            }
+            
+            &-wrap{
+                display: flex;
+                flex-wrap: wrap;
+                margin: auto;
+                margin-top: 10px;
+            }
+            &-img{
+                width: 30%;
+                margin: 1px;
+         
+            }
+
+        }
+
+        &--plan{
+            padding: 10px;
+            width: 100%;
+
+            &-container{
+                display: flex;
+            }
+            &-wrap{
+                background-color: white;
+                width: 48%;
+                margin: 5px;
+                padding: 5px;
+                text-align: center;
+                box-shadow: 1px 6px 8px rgba(0, 0, 0, 0.096), 0 5px 6px rgba(0, 0, 0, 0.096);
+            }
+            &-img{
+                width: 95%;
+                margin-top: 10px;
+            }
+            
+           &-sub{
+                // height: 40px;
+                font-weight: $bold;
+                letter-spacing: -1px;
+                color: rgb(5, 5, 73);
+           }
+           &-info{
+                font-weight: $light;
+                letter-spacing: -1px;
+                color: rgba(95, 95, 95, 0.733);
+                font-size: 13px;
+                padding: 5px;
+           }
+        }
+
+    }
+
+}
+

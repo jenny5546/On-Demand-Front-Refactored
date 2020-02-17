@@ -218,20 +218,20 @@ def checking():
   if(str(type(details)) == "<class 'list'>" and details != []): # 안 읽은 메일이 존재한다면.
     for eachmail in details: # 안 읽은 메일 중에서 
       if Request.objects.filter(useremail = eachmail[0]).exists(): # 리퀘 보낸 사람이 있다면 
-        req = Request.objects.get(useremail = eachmail[0]) # 리퀘 찾기. 
-
-        newReceivedMessage = ReceivedMessage.objects.create(
-              request = req,
-              username = req.username,
-              sender = eachmail[0],
-              title = eachmail[1],
-              content = eachmail[2],
-              timestamp = eachmail[3]
-        )
-        newNotification = Notification.objects.create(
-          request=req,
-          received_message = newReceivedMessage
-        )
+        for req in Request.objects.filter(useremail = eachmail[0]):
+          # req = Request.objects.get(useremail = eachmail[0]) # 리퀘 찾기. 
+          newReceivedMessage = ReceivedMessage.objects.create(
+                request = req,
+                username = req.username,
+                sender = eachmail[0],
+                title = eachmail[1],
+                content = eachmail[2],
+                timestamp = eachmail[3]
+          )
+          newNotification = Notification.objects.create(
+            request=req,
+            received_message = newReceivedMessage
+          )
 
   threading.Timer(3, checking).start()
 
@@ -325,7 +325,7 @@ def each(request, id):
       #templated email로 이미지 넘겨주는 함수 
         
       send_templated_mail( 
-          template_name='output',
+          template_name='basic',
           from_email= 'jangjangman5546@gmail.com',
           recipient_list=[receiver],
           context={
