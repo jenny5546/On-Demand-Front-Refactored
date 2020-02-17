@@ -33,6 +33,11 @@ a{
         text-align: center;
         &_menu{
             padding: 30px;
+            button{
+                cursor: pointer;
+                border: none;
+                color: none;
+            }
         }
         &_count1{
             position:absolute;
@@ -54,7 +59,8 @@ a{
             display: none;
             position: absolute;
             flex-direction: column;
-            border: 1px black solid;
+            z-index: 9999;
+            border: 1px rgb(121, 121, 121) solid;
             border-radius: 10px;
             top: 80%;
             right: 5%;
@@ -66,6 +72,10 @@ a{
             background-color: rgba(255, 255, 255, 1.0);
             p{
                 margin : auto;
+            }
+            a{
+                text-decoration: none;
+                color: black;
             }
             ul{
                 display: inline;
