@@ -50,6 +50,21 @@ a{
             @extend .header--nav_count1;
             right: 3%; 
         }
+        &_notice{
+            position: absolute;
+            top: 80%;
+            right: 8%;
+            width: 180px;
+            max-height: 150px;
+            overflow-y: scroll;
+            background-color: red;
+            ul{
+                display: inline;
+            }
+            li{
+                list-style: none;
+            }
+        }
     }
 }
 
