@@ -92,6 +92,9 @@ def check_mail_imap(user, password):
           if part.get_content_type() == 'text/html':
             body = part.get_payload(decode=True)
             message_content = BeautifulSoup(body.decode('UTF-8'), "html.parser")
+            for script in message_content(["script", "style"]):
+              script.extract()
+
             mail_struct.append(message_content.get_text())
             mail_struct.append(message_timestamp)
     
