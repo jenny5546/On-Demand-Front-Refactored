@@ -25,12 +25,14 @@ from django.core.mail import send_mail, EmailMessage
 from django.template.loader import render_to_string
 from django.conf import settings
 
-def send_html_email(to_list, subject, template_name, context, sender=settings.DEFAULT_FROM_EMAIL, att_list= None):
+def send_html_email(to_list, subject, template_name, context, sender=settings.DEFAULT_FROM_EMAIL, attachments=[]):
     msg_html = render_to_string(template_name, context)
     msg = EmailMessage(subject=subject, body=msg_html, from_email=sender, bcc=to_list, attachments=att_list)
     msg.content_subtype = "html"  # Main content is now text/html
+    for att in attachments:
+      msg.attach(att.name, att.read(), att.content_type)
+    
     return msg.send()
-
 
 # email parsing 함수
 def decode_mime_words(s):
@@ -329,19 +331,18 @@ def each(request, id):
       att_list = request.FILES.getlist('msg_attachments')
       attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list)
     if (message_content != ''):
+      
+
       send_html_email(
-
         [receiver,'jenny5546@naver.com'], # receiver list 
-
         ' Thank you for using Archisketch On Demand ',  # subject
-
         'email_reply.html',  # email template 
         { # context
           'username': arequest.username,
           'content' : message_content,
         },
         'jangjangman5546@gmail.com', # sender
-        attachments
+        att_list,
       )
 
       newSentMessage = SentMessage.objects.create(
