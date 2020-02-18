@@ -19,6 +19,8 @@
 
 - User page (React)
 
+  <code>$ cd User </code>
+
   <code>$ npm install </code>
 
   > If "node_modules"  is already installed, you should run these commands first.
