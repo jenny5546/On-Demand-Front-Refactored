@@ -87,6 +87,20 @@
             }
         });
     }
+    function confirmOutput() {
+        swal({
+            title: "Are you sure?",
+            icon: "warning",
+            buttons:{ text: "Confirm", cancel: "Cancel"},
+            dangerMode: true,
+            })
+            .then((willOutput) => {
+            if (willOutput) {
+                window.location.href = action='/adminpage/{{ arequest.id }}/output/';
+                return loading()
+            }
+        });
+    }
 </script>
 
 {% now "Y/m/d" as todays_date %}
@@ -98,7 +112,7 @@
 <div class="eachRequest">
     <div class = "eachRequest--request" >
         <div class= "eachRequest--request--btnwrapper">
-            <a class="eachRequest--sendbtn" href= "http://localhost:8000/{{arequest.id}}/output">Output <i class="fas fa-paper-plane"></i> </a>
+            <a class="eachRequest--sendbtn" onclick=confirmOutput()>Output <i class="fas fa-paper-plane"></i> </a>
             <a class="eachRequest--editbtn" href='/adminpage/{{arequest.id}}/edit'>
                 Edit
             </a>
@@ -286,12 +300,21 @@
             <div class= "chat">
                 {% for msg in message_list %}
                     {% if msg.sender == 'admin' %}
-                    <div class="msg_me">
-                        <div>
-                            <p1>{{msg.content}}</p1>
-                            <p2 class="chat_time">{{msg.timestamp|timesince}} 전</p2>
+                        {% if msg.content == "ondemand output"%}
+                        <div class="msg_me" style="background-color : #499fb6; ">
+                            <div>
+                                <p1><i class="fas fa-flag-checkered" size="7x"></i> Output</p1>
+                                <p2 class="chat_time">{{msg.timestamp|timesince}} 전</p2>
+                            </div>
                         </div>
-                    </div>
+                        {% else %}
+                        <div class="msg_me">
+                            <div>
+                                <p1>{{msg.content}}</p1>
+                                <p2 class="chat_time">{{msg.timestamp|timesince}} 전</p2>
+                            </div>
+                        </div>
+                        {% endif %}
                     {% else %}
                     <div style="display:flex;">
                         <div><img style="width:40px; height:40px" src="{% static 'profile_pic.png' %}"/></div>
