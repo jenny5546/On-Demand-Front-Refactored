@@ -136,6 +136,9 @@ def request(request):
       floor_address = floor_address,
       add_request = add_request
     )
+    newNotification = Notification.objects.create(
+      request=newRequest
+    )
 
     #file 처리 
     for afile in request.FILES.getlist('floor_plan'):
