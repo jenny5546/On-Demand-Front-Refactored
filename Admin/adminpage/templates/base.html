@@ -30,7 +30,7 @@
                         </button>
                         <div class="header--nav_notice">
                         {% if notifications.count == 0 %}
-                        <p> no alert </p>
+                        <p> <i class="far fa-folder-open"> </i> no alert </p>
                         {% else %}
                         {% for msg in notifications %}
                             <ul>
