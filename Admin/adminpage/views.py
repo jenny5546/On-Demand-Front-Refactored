@@ -354,11 +354,8 @@ def each(request, id):
         #     attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),   
         # )
       send_html_email(
-
         [receiver,'jenny5546@naver.com'], # receiver list 
-
         ' Thank you for using Archisketch On Demand ',  # subject
-
         'email_reply.html',  # email template 
         { # context
           'username': arequest.username,
