@@ -9,6 +9,7 @@ import json, os, time, threading
 from itertools import chain
 from bs4 import BeautifulSoup
 
+
 # email
 import smtplib, imaplib, email
 import email.header
@@ -18,7 +19,17 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase 
 from templated_email import send_templated_mail, InlineImage
 
-# from mail_templated import send_mail
+
+# <html-email>
+from django.core.mail import send_mail, EmailMessage
+from django.template.loader import render_to_string
+from django.conf import settings
+
+def send_html_email(to_list, subject, template_name, context, sender=settings.DEFAULT_FROM_EMAIL):
+    msg_html = render_to_string(template_name, context)
+    msg = EmailMessage(subject=subject, body=msg_html, from_email=sender, bcc=to_list)
+    msg.content_subtype = "html"  # Main content is now text/html
+    return msg.send()
 
 
 # email parsing 함수
@@ -323,33 +334,46 @@ def each(request, id):
     if (message_content != ''):
       
       #logo template 넘기기 위한 경로
-      module_dir = os.path.dirname(__file__)
-      logo_path = os.path.join(module_dir, 'static/Logo.png')
-      bg_path = os.path.join(module_dir, 'static/email-header.png')
+      # module_dir = os.path.dirname(__file__)
+      # bg_path = os.path.join(module_dir, 'static/email-header.png')
       #templated email로 이미지 넘겨주는 함수 
       # with open(logo_path, 'rb') as logo: 
       #   inline_logo = InlineImage(filename="Logo.png", content=logo.read())
 
-      with open(bg_path, 'rb') as bg: 
-        inline_bg = InlineImage(filename="email-header.png", content=bg.read())
+      # with open(bg_path, 'rb') as bg: 
+      #   inline_bg = InlineImage(filename="email-header.png", content=bg.read())
       
-        send_templated_mail( 
+        # send_templated_mail( 
 
-            template_name='basic',
-            from_email= 'jangjangman5546@gmail.com',
-            recipient_list=[receiver, 'jenny5546@naver.com'],
-            context={
-                'username': arequest.username,
-                'content' : message_content,
-                'bg': inline_bg,
-            },
-            attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),   
-        )
+        #     template_name='basic',
+        #     from_email= 'jangjangman5546@gmail.com',
+        #     recipient_list=[receiver, 'jenny5546@naver.com'],
+        #     context={
+        #         'username': arequest.username,
+        #         'content' : message_content,
+        #         'bg': inline_bg,
+        #     },
+        #     attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),   
+        # )
+      send_html_email(
 
-        newSentMessage = SentMessage.objects.create(
-          request = arequest,
-          content = message_content
-        )
+        [receiver,'jenny5546@naver.com'], # receiver list 
+
+        ' Thank you for using Archisketch On Demand ',  # subject
+
+        'email_reply.html',  # email template 
+        { # context
+          'username': arequest.username,
+          'content' : message_content,
+        },
+        'jangjangman5546@gmail.com' # sender
+
+      )
+
+      newSentMessage = SentMessage.objects.create(
+        request = arequest,
+        content = message_content
+      )
 
     arequest.due_at = due_at
     arequest.progress = progress
@@ -408,6 +432,7 @@ def output(request, id):
   elif request.method == 'POST':
 
       receiver = arequest.useremail
+      
       # content = request.POST.get('content', '') #텍스트 내용 
       # attachments = [] 
       # inline= None
@@ -417,18 +442,28 @@ def output(request, id):
       #   image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
       #   inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
 
-      send_templated_mail( 
-          template_name='output',
-          from_email= 'jangjangman5546@gmail.com',
-          recipient_list=[receiver],
-          context={
-              'username': arequest.username,
-              # 'content' : content,
-              # 'image' : inline,
-          },
-          # attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), attachments),
-      )
+      # send_templated_mail( 
+      #     template_name='output',
+      #     from_email= 'jangjangman5546@gmail.com',
+      #     recipient_list=[receiver],
+      #     context={
+      #         'username': arequest.username,
+      #         # 'content' : content,
+      #         # 'image' : inline,
+      #     },
+      #     # attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), attachments),
+      # )
 
+      send_html_email(
+        [receiver], # receiver list 
+        '[Archisketch] Your request has been Completed',  # subject
+        'email_output.html',  # email template 
+        { # context
+          'username': arequest.username,
+        },
+        'jangjangman5546@gmail.com' # sender
+      )
+      
       return redirect('/'+str(id))
 
   

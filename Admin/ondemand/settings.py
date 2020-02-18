@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'adminpage.apps.AdminpageConfig',
     'corsheaders',
     'sass_processor',
-    # 'templated_email',
-    'mail_templated',
-    # 'django_premailer',
+    'templated_email',
+     'django_premailer',
+
 ]
 
 MIDDLEWARE = [
@@ -103,6 +103,9 @@ TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBacke
 TEMPLATED_EMAIL_TEMPLATE_DIR = 'templated_email/' #use '' for top level template dir, ensure there is a trailing slash
 TEMPLATED_EMAIL_FILE_EXTENSION = 'email'
 
+TEMPLATE_EMAIL_INLINE_CSS = True
+TEMPLATE_EMAIL_USE_CONTEXT_PROCESSORS = True
+
 secret_file = os.path.join(BASE_DIR, 'secret.json') # email address & password
 with open(secret_file) as f:
   secret = json.loads(f.read())
@@ -116,6 +119,7 @@ EMAIL_HOST_USER = user
 EMAIL_HOST_PASSWORD =password
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL  = 'jangjangman5546@gmail.com'
+
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
