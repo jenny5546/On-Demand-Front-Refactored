@@ -332,27 +332,6 @@ def each(request, id):
 
     if (message_content != ''):
       
-      #logo template 넘기기 위한 경로
-      # module_dir = os.path.dirname(__file__)
-      # bg_path = os.path.join(module_dir, 'static/email-header.png')
-      #templated email로 이미지 넘겨주는 함수 
-      # with open(logo_path, 'rb') as logo: 
-      #   inline_logo = InlineImage(filename="Logo.png", content=logo.read())
-
-      # with open(bg_path, 'rb') as bg: 
-      #   inline_bg = InlineImage(filename="email-header.png", content=bg.read())
-      
-        # send_templated_mail( 
-        #     template_name='basic',
-        #     from_email= 'jangjangman5546@gmail.com',
-        #     recipient_list=[receiver, 'jenny5546@naver.com'],
-        #     context={
-        #         'username': arequest.username,
-        #         'content' : message_content,
-        #         'bg': inline_bg,
-        #     },
-        #     attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),   
-        # )
       send_html_email(
         [receiver,'jenny5546@naver.com'], # receiver list 
         ' Thank you for using Archisketch On Demand ',  # subject
