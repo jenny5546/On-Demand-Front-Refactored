@@ -19,6 +19,8 @@
 
 - User page (React)
 
+  <code>$ cd User </code>
+
   <code>$ npm install </code>
 
   > If "node_modules"  is already installed, you should run these commands first.
@@ -28,6 +30,8 @@
   > <code>$ rm -rf node_modules</code> 
 
 - Admin page (Django, python 3.6)
+
+  <code>$ cd Admin </code>
 
   <code>$ pip install -r requirements.txt </code>
 

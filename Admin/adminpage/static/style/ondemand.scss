@@ -33,6 +33,12 @@ a{
         text-align: center;
         &_menu{
             padding: 30px;
+            button{
+                cursor: pointer;
+                background-color: white;
+                border: none;
+                color: none;
+            }
         }
         &_count1{
             position:absolute;
@@ -49,6 +55,41 @@ a{
         &_count2{
             @extend .header--nav_count1;
             right: 3%; 
+        }
+        &_notice{
+            display: none;
+            position: absolute;
+            flex-direction: column;
+            z-index: 9999;
+            border: 1px rgb(121, 121, 121) solid;
+            border-radius: 10px;
+            top: 80%;
+            right: 5%;
+            width: 90%;
+            min-height: 100px;
+            max-height: 250px;
+            overflow-y: scroll;
+            color: black;
+            background-color: rgba(255, 255, 255, 1.0);
+            p{
+                margin : auto;
+            }
+            a{
+                text-decoration: none;
+                color: black;
+            }
+            ul{
+                display: inline;
+                border: 1px, black, solid;
+            }
+            li{
+                padding: 5px;
+                list-style: none;
+                text-align: left;
+            }
+            hr{
+                color: rgba(61, 61, 61, 0.22);
+            }
         }
     }
 }

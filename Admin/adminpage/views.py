@@ -26,9 +26,8 @@ from django.template.loader import render_to_string
 from django.conf import settings
 
 def send_html_email(to_list, subject, template_name, context, sender=settings.DEFAULT_FROM_EMAIL, attachments=[]):
-
     msg_html = render_to_string(template_name, context)
-    msg = EmailMessage(subject=subject, body=msg_html, from_email=sender, bcc=to_list)
+    msg = EmailMessage(subject=subject, body=msg_html, from_email=sender, bcc=to_list, attachments=att_list)
     msg.content_subtype = "html"  # Main content is now text/html
     for att in attachments:
       msg.attach(att.name, att.read(), att.content_type)
@@ -124,7 +123,8 @@ def request(request):
     #연결해야하는 부분 
     #요청한 사람 정보(user)
     username = generate_username(1)[0]
-    useremail = 'piaomj55@naver.com' #연결할때, front에서 들고오기
+    useremail = 'taiyoung1122@naver.com' #연결할때, front에서 들고오기
+
     # print(user)
     floor_type = request.POST.get('floor_type')
     commercial_type = request.POST.get('commercial_type')
@@ -148,6 +148,9 @@ def request(request):
       floor_height_unit = floor_height_unit, 
       floor_address = floor_address,
       add_request = add_request
+    )
+    newNotification = Notification.objects.create(
+      request=newRequest
     )
 
     #file 처리 
@@ -244,7 +247,7 @@ def checking():
           )
           newNotification = Notification.objects.create(
             request=req,
-            received_message = newReceivedMessage
+            received_message = newReceivedMessage,
           )
 
   threading.Timer(3, checking).start()
@@ -321,17 +324,15 @@ def each(request, id):
     receiver = arequest.useremail
     # 첨부파일 처리 
     att_list = [] 
+    attachments = None
     inline= None
 
     if request.FILES:
       att_list = request.FILES.getlist('msg_attachments')
-      #popup
-      #image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
-      #inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
-
-
+      attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list)
     if (message_content != ''):
       
+
       send_html_email(
         [receiver,'jenny5546@naver.com'], # receiver list 
         ' Thank you for using Archisketch On Demand ',  # subject
@@ -401,33 +402,14 @@ def output(request, id):
   arequest = Request.objects.get(id = id)
   
   if request.method == 'GET':
-      return render(request, 'adminpage/output.html', {'arequest': arequest, 'notifications': notifications})
 
-  elif request.method == 'POST':
+
+      newSentMessage = SentMessage.objects.create(
+        request = arequest,
+        content = "ondemand output",
+      )
 
       receiver = arequest.useremail
-      
-      # content = request.POST.get('content', '') #텍스트 내용 
-      # attachments = [] 
-      # inline= None
-
-      # if request.FILES:
-      #   attachments = request.FILES.getlist('attach')  # 첨부해서 가는 파일 
-      #   image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
-      #   inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
-
-      # send_templated_mail( 
-      #     template_name='output',
-      #     from_email= 'jangjangman5546@gmail.com',
-      #     recipient_list=[receiver],
-      #     context={
-      #         'username': arequest.username,
-      #         # 'content' : content,
-      #         # 'image' : inline,
-      #     },
-      #     # attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), attachments),
-      # )
-
       send_html_email(
         [receiver], # receiver list 
         '[Archisketch] Your request has been Completed',  # subject
