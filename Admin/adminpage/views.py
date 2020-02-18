@@ -326,35 +326,8 @@ def each(request, id):
 
     if request.FILES:
       att_list = request.FILES.getlist('msg_attachments')
-      #popup
-      #image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
-      #inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
-
 
     if (message_content != ''):
-      
-      #logo template 넘기기 위한 경로
-      # module_dir = os.path.dirname(__file__)
-      # bg_path = os.path.join(module_dir, 'static/email-header.png')
-      #templated email로 이미지 넘겨주는 함수 
-      # with open(logo_path, 'rb') as logo: 
-      #   inline_logo = InlineImage(filename="Logo.png", content=logo.read())
-
-      # with open(bg_path, 'rb') as bg: 
-      #   inline_bg = InlineImage(filename="email-header.png", content=bg.read())
-      
-        # send_templated_mail( 
-
-        #     template_name='basic',
-        #     from_email= 'jangjangman5546@gmail.com',
-        #     recipient_list=[receiver, 'jenny5546@naver.com'],
-        #     context={
-        #         'username': arequest.username,
-        #         'content' : message_content,
-        #         'bg': inline_bg,
-        #     },
-        #     attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), att_list),   
-        # )
       send_html_email(
 
         [receiver,'jenny5546@naver.com'], # receiver list 
@@ -427,33 +400,14 @@ def output(request, id):
   arequest = Request.objects.get(id = id)
   
   if request.method == 'GET':
-      return render(request, 'adminpage/output.html', {'arequest': arequest, 'notifications': notifications})
 
-  elif request.method == 'POST':
+
+      newSentMessage = SentMessage.objects.create(
+        request = arequest,
+        content = "ondemand output",
+      )
 
       receiver = arequest.useremail
-      
-      # content = request.POST.get('content', '') #텍스트 내용 
-      # attachments = [] 
-      # inline= None
-
-      # if request.FILES:
-      #   attachments = request.FILES.getlist('attach')  # 첨부해서 가는 파일 
-      #   image = request.FILES.get('image', False).read()  # 이미지로 보이는 파일 
-      #   inline = InlineImage(filename="image.png", content=image) # 이미지로 보이는 파일 처리
-
-      # send_templated_mail( 
-      #     template_name='output',
-      #     from_email= 'jangjangman5546@gmail.com',
-      #     recipient_list=[receiver],
-      #     context={
-      #         'username': arequest.username,
-      #         # 'content' : content,
-      #         # 'image' : inline,
-      #     },
-      #     # attachments = map(lambda i: MIMEImage(i.read(), name=os.path.basename(i.name)), attachments),
-      # )
-
       send_html_email(
         [receiver], # receiver list 
         '[Archisketch] Your request has been Completed',  # subject
