@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'sass_processor',
     'templated_email',
+     'django_premailer',
+
 ]
 
 MIDDLEWARE = [
