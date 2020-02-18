@@ -29,6 +29,8 @@
 
 - Admin page (Django, python 3.6)
 
+  <code>$ cd Admin </code>
+
   <code>$ pip install -r requirements.txt </code>
 
   <code>$ python manage.py migrate </code>
