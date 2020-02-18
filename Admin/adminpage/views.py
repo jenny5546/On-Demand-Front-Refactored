@@ -322,6 +322,7 @@ def each(request, id):
     receiver = arequest.useremail
     # 첨부파일 처리 
     att_list = [] 
+    attachments = None
     inline= None
 
     if request.FILES:
