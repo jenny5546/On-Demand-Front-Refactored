@@ -25,12 +25,15 @@ from django.core.mail import send_mail, EmailMessage
 from django.template.loader import render_to_string
 from django.conf import settings
 
-def send_html_email(to_list, subject, template_name, context, sender=settings.DEFAULT_FROM_EMAIL):
+def send_html_email(to_list, subject, template_name, context, sender=settings.DEFAULT_FROM_EMAIL, attachments=[]):
+
     msg_html = render_to_string(template_name, context)
     msg = EmailMessage(subject=subject, body=msg_html, from_email=sender, bcc=to_list)
     msg.content_subtype = "html"  # Main content is now text/html
+    for att in attachments:
+      msg.attach(att.name, att.read(), att.content_type)
+    
     return msg.send()
-
 
 # email parsing 함수
 def decode_mime_words(s):
@@ -340,7 +343,6 @@ def each(request, id):
       #   inline_bg = InlineImage(filename="email-header.png", content=bg.read())
       
         # send_templated_mail( 
-
         #     template_name='basic',
         #     from_email= 'jangjangman5546@gmail.com',
         #     recipient_list=[receiver, 'jenny5546@naver.com'],
@@ -362,8 +364,8 @@ def each(request, id):
           'username': arequest.username,
           'content' : message_content,
         },
-        'jangjangman5546@gmail.com' # sender
-
+        'jangjangman5546@gmail.com', # sender
+        att_list,
       )
 
       newSentMessage = SentMessage.objects.create(
