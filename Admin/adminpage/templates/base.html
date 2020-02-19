@@ -34,11 +34,12 @@
                         {% else %}
                         {% for noti in notifications %}
                             <ul>
+                            
                             {% if noti.received_message == None %}
-                                <li> <a href="/{{noti.request.id}}"><p1 style="font-weight: 600;">{{noti.request.username}}</p1> placed an order </a></li>
+                                <li> <a href="/{{noti.request.id}}"><i class="far fa-user-circle" style="font-size: 20px;"></i> <p1 style="font-weight: 600; color:rgb(4, 4, 80)">{{noti.request.username}}</p1> placed a new order </a></li>
                                 <!-- <hr/> -->
                             {% else %}
-                                <li><a href="/{{noti.received_message.request.id}}">A new message from <p1 style="font-weight: 600;">{{ noti.received_message.username }}</p1></a></li>
+                                <li><a href="/{{noti.received_message.request.id}}"><i class="far fa-user-circle" style="font-size: 20px;"></i> <p1 style="font-weight: 600; color:rgb(4, 4, 80)">{{ noti.received_message.username }}</p1> sent you a new message </a></li>
                                 <!-- <hr/> -->
                             </ul>
                             {% endif %}

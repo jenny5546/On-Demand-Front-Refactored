@@ -85,13 +85,18 @@ a{
             }
             a{
                 text-decoration: none;
-                color: black;
+                color: rgb(63, 63, 63);
+                font-weight: $light;
+                
             }
             ul{
                 display: inline;
                 
                 border: 1px, black, solid;
                 padding: 20px 0 20px 0;
+                &:hover{
+                    background-color: rgba(173, 173, 173, 0.116);
+                }
             }
             li{
                 padding: 5px;
