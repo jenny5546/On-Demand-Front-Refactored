@@ -122,8 +122,12 @@ def request(request):
 
     #연결해야하는 부분 
     #요청한 사람 정보(user)
+    
+    ################## User email info ###################
     username = generate_username(1)[0]
     useremail = 'taiyoung1122@naver.com' #연결할때, front에서 들고오기
+    ######################################################
+
 
     # print(user)
     floor_type = request.POST.get('floor_type')
