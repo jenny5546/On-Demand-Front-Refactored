@@ -61,7 +61,7 @@ class Summary extends Component{
 
         form_data.set('add_req', this.props.values.additionalRequest);
 
-        axios.post(`http://127.0.0.1:8000/adminpage/request/`, form_data, {
+        axios.post(`http://192.168.0.77:8000/adminpage/request/`, form_data, {
                 headers:{
                     'content-type': 'multipart/form-data',
                 },
