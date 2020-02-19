@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 class Summary extends Component{
 
     saveAndContinue = (e) =>{ //얘는 마지막 단계니까 payment 로 이동하게 바꾸기
         e.preventDefault();
-        this.handleSubmit();
-        // demo에서는 여기서 처음으로 돌아가게 함.
-        //this.props.nextStep();
-        this.props.setStep();
+
+        if(this.props.emailCorrect){
+            this.handleSubmit();
+            // demo에서는 여기서 처음으로 돌아가게 함.
+            //this.props.nextStep();
+            this.props.setStep();
+        }
+        else{
+            alert('The format of email address is not correct');
+        }
     }
     back  = (e) => {
         e.preventDefault();
@@ -34,6 +41,7 @@ class Summary extends Component{
         form_data.set('floor_height', this.props.values.floorHeight);
         form_data.set('floor_height_unit', this.props.values.floorHeightUnit);
         form_data.set('floor_address', this.props.values.floorAddress);
+        form_data.set('contact_info', this.props.values.contactInfo);
 
    
         if (this.props.values.floorTheme[0]){
@@ -81,6 +89,17 @@ class Summary extends Component{
             if ((size > 300 && size<= 600 && unit===m) || (size > 3229 && size<= 6458 && unit===ft) ) return(<p1>$299</p1>)
             if ((size > 600 && size <= 900 && unit===m ) || (size > 6458 && size<= 9687 && unit===ft) ) return(<p1>$499</p1>)
             else return(<p1>$699</p1>)
+        }
+    }
+
+    emailChecker=()=>{
+        const emailCorrect = this.props.emailCorrect;
+        console.log(emailCorrect)
+        if(emailCorrect){
+            return(<i><FaCheck/></i>)
+        }
+        else{
+            return (<i><FaTimes/></i>)
         }
     }
 
@@ -184,7 +203,14 @@ class Summary extends Component{
 
                         <div className="summary__contact">
                             <label className="summary__contact-label">Contact Information: &nbsp; </label>
-                            <div className="summary__contact-value">jenny5546@naver.com</div>
+                            <input
+                                className="summary__contact-value"
+                                name = "contactInfo"
+                                value= {this.props.values.contactInfo}
+                                placeholder="Type your email"
+                                onChange={ this.props.emailHandleChange('contactInfo') }
+                            />  
+                            {this.emailChecker()}
                         </div>
 
                         <hr className="summary__division"/>
@@ -200,7 +226,7 @@ class Summary extends Component{
                         {/* </div> */}
                         
                     </div>
-
+                    
                     <div className="summary__confirm">
                         <button className="summary__confirm--btn" onClick={this.saveAndContinue}> Confirm Payment</button>
                     </div> 

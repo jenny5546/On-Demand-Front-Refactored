@@ -35,7 +35,8 @@ class Application extends Component{
         //step 5
         additionalRequest: '', //input
         //step 6
-        contactInfo: '' //input with placeholder of account email
+        contactInfo: '', //input with placeholder of account email
+        emailCorrect : false,
     }
 
     setStep = () => {
@@ -45,7 +46,7 @@ class Application extends Component{
         })
 
         this.props.setStep();
-        console.log("return!!");
+        //console.log("return!!");
     }
 
     nextStep = () => {
@@ -87,6 +88,23 @@ class Application extends Component{
 
     handleChange = input => event => {
         this.setState({ [input] : event.target.value })
+    }
+
+
+    emailHandleChange = input => event => {
+        var validator = require("email-validator");
+        var emailCorrect = validator.validate(event.target.value);
+        if(emailCorrect){
+            this.setState({ [input] : event.target.value });
+            event.target.style.border = "1px solid white";
+            this.setState({ emailCorrect: true })
+        }
+        else{
+            //summary__confirm--btn
+            this.setState({ [input] : event.target.value });
+            event.target.style.border = "1px solid red";
+            this.setState({ emailCorrect: false })
+        }
     }
 
     handleButton = event => {
@@ -171,6 +189,8 @@ class Application extends Component{
                             prevStep={this.prevStep} 
                             setStep={this.setStep}
                             handleChange = {this.handleChange}
+                            emailHandleChange = {this.emailHandleChange}
+                            emailCorrect = {this.state.emailCorrect}
                             values={values}
                         />
             default:

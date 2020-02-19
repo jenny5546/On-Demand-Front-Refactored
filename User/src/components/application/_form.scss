@@ -562,7 +562,9 @@
             @include mixin-sumlabel;
         }
         &-value{
-            @include mixin-sumval;  
+            @include mixin-sumval;
+            width: 200px;  
+
         }
     }
     &__cost{
