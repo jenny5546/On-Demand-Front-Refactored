@@ -30,16 +30,16 @@
                         </button>
                         <div class="header--nav_notice">
                         {% if notifications.count == 0 %}
-                        <p> <i class="far fa-folder-open"> </i> no alert </p>
+                        <p>No notifications </p>
                         {% else %}
-                        {% for msg in notifications %}
+                        {% for noti in notifications %}
                             <ul>
-                            {% if msg.received_message == None %}
-                                <li> <a href="/{{msg.request.id}}"> <i class="far fa-bell"></i> <p1 style="font-weight: 600;">{{msg.request.username}}</p1> place an order </a></li>
-                                <hr/>
+                            {% if noti.received_message == None %}
+                                <li> <a href="/{{noti.request.id}}"><p1 style="font-weight: 600;">{{noti.request.username}}</p1> placed an order </a></li>
+                                <!-- <hr/> -->
                             {% else %}
-                                <li><a href="/{{msg.received_message.request.id}}"> <i class="far fa-envelope" style= "color: black"></i> <p1 style="font-weight: 600;">{{ msg.received_message.username }}</p1>, {{ msg.received_message.title }}</a></li>
-                                <hr/>
+                                <li><a href="/{{noti.received_message.request.id}}">A new message from <p1 style="font-weight: 600;">{{ noti.received_message.username }}</p1></a></li>
+                                <!-- <hr/> -->
                             </ul>
                             {% endif %}
                         {% endfor %}
