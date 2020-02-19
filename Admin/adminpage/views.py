@@ -125,7 +125,8 @@ def request(request):
     
     ################## User email info ###################
     username = generate_username(1)[0]
-    useremail = 'taiyoung1122@naver.com' #연결할때, front에서 들고오기
+    useremail= request.POST.get('contact_info')
+    #useremail = 'taiyoung1122@naver.com' #연결할때, front에서 들고오기
     ######################################################
 
 
