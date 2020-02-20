@@ -426,6 +426,8 @@ a{
         }
 
         .preview{
+            max-height: 80%;
+            overflow-y: scroll;
             .list{
                 &_item{
                     display: flex;
