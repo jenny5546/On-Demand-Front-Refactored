@@ -375,9 +375,9 @@ def edit(request, id):
 def download(request, req_id, file_id):
   arequest= Request.objects.get(id = req_id)
   afile = arequest.floor_plan.get(id = file_id)
-  fs = FileSystemStorage('../On-Demand-Back/media')
+  fs = FileSystemStorage('./media')
   response = FileResponse(fs.open(str(afile.photo), 'rb'), content_type='application/force-download')
-  response['Content-Disposition'] = 'attachment; filename= floorplan.png'
+  response['Content-Disposition'] = 'attachment; filename= {}'.format(afile.photo)
   return response
 
 

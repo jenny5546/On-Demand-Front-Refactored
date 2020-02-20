@@ -193,7 +193,7 @@
                         {% for plan in arequest.floor_plan.all %}
                         <li>
                             <img class="eachRequest--plan_img" src="{{ plan.photo.url }}">
-                            <a class="eachRequest--plan_btn" style = "text-decoration: none;" href= "/{{arequest.id}}/{{plan.id}}/download" >
+                            <a class="eachRequest--plan_btn" style = "text-decoration: none;" href= "{{plan.id}}/download" >
                                 <i class="fas fa-file-download"></i> Press to Download
                             </a>
                         </li>
