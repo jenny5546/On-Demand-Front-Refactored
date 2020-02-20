@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Request, Plan, SelectedTheme, UploadedTheme, SentMessage, ReceivedMessage, Notification
+from .models import Request, Plan, SelectedTheme, UploadedTheme, UploadedFile, SentMessage, ReceivedMessage, Notification
 from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect, FileResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from random_username.generate import generate_username
@@ -313,7 +313,7 @@ def each(request, id):
         chain(sentMessages,receivedMessages),
         key = lambda message: message.timestamp, reverse=False
       )
-      return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list, 'notifications': notifications})
+      return render(request, 'adminpage/request.html', {'arequest': arequest, 'message_list': message_list, 'notifications': notifications, 'sentMessages': sentMessages})
   
   # 수정하기 + 메세지 보내기
   elif request.method == 'POST':
@@ -334,7 +334,7 @@ def each(request, id):
 
     if request.FILES:
       att_list = request.FILES.getlist('msg_attachments')
-      
+
     if (message_content != ''):
       
       send_html_email(
@@ -348,11 +348,18 @@ def each(request, id):
         'jangjangman5546@gmail.com', # sender
         att_list,
       )
-
       newSentMessage = SentMessage.objects.create(
         request = arequest,
-        content = message_content
+        content = message_content,
       )
+
+      for afile in request.FILES.getlist('msg_attachments'):
+        files = UploadedFile()
+        files.attach = afile
+        files.save()
+        newSentMessage.attachment_file.add(files)
+        newSentMessage.save()
+        print(afile)
 
     arequest.due_at = due_at
     arequest.progress = progress

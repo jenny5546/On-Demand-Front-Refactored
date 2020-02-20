@@ -64,9 +64,6 @@
         
         });
     });
-
-    
-
 </script>
 <script>
     function confirmDelete() {
@@ -311,6 +308,10 @@
                         {% else %}
                         <div class="msg_me">
                             <div>
+                                {% for att in msg.attachment_file.all %}
+                                <!--<p1>{{ att.attach }}</p1>-->
+                                <img class="att_file" src="../../media/{{att.attach}}" style="width: 100%" />
+                                {% endfor %}
                                 <p1>{{msg.content}}</p1>
                                 <p2 class="chat_time">{{msg.timestamp|timesince}} 전</p2>
                             </div>
@@ -434,7 +435,7 @@
             list.appendChild(listItem);
             }
         }
-    }
+    } 
 
     const fileTypes = [
         'image/jpeg',
