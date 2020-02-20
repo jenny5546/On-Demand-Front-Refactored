@@ -1,15 +1,13 @@
-import React from 'react';
-import Header from './components/header/header';
-import Page from './components/page/page';
-import './App.scss';
+import React from "react";
+import { OndemandProvider } from "./context/OndemandContext";
+import Ondemand from "./pages/0_ondemand/ondemand";
 
 function App() {
-  return (
-    <div className="App">
-      <Header />
-      <Page />
-    </div>
-  );
+    return (
+        <OndemandProvider>
+            <Ondemand />
+        </OndemandProvider>
+    );
 }
 
 export default App;
