@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
 import Tutorial from "./Tutorial/Tutorial";
-import Floortype from "../pages/2_floorType/2_floorType";
-import FloorTypeDetail from "../pages/3_floorTypeDetail/3_floorTypeDetail";
-import FloorInfo from "../pages/4_floorInfo/4_floorInfo";
-import FloorStyle from "../pages/5_floorStyle/5_floorStyle";
-import AdditionalRequests from "../pages/6_addReq/6_addReq";
-import Summary from "../pages/7_summary/7_summary";
+import Floortype from "../pages/1_floorType/1_floorType";
+import FloorTypeDetail from "../pages/2_floorTypeDetail/2_floorTypeDetail";
+import FloorInfo from "../pages/3_floorInfo/3_floorInfo";
+import FloorStyle from "../pages/4_floorTheme/4_floorTheme";
+import AdditionalRequests from "../pages/5_addReq/5_addReq";
+import Summary from "../pages/6_summary/6_summary";
 
 /*
 
