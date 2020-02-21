@@ -57,6 +57,9 @@ const FloorTypeStyle = styled.main`
             fill: #383e44;
         }
     }
+    .FloorType__BackLink {
+        text-decoration: none;
+    }
 
     .FloorType__BtnBack {
         margin: auto;
@@ -124,7 +127,7 @@ const FloorTypeCard = styled.div`
     .FloorType__Desc {
         width: 240px;
         margin: auto;
-        margin-top: 24px;
+        margin-top: 8px;
         font-size: 14px;
         color: #4b4b4b;
         text-align: center;

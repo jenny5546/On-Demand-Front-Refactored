@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Tutorial from "../pages/1_tutorial/1_tutorial";
+
+import Tutorial from "./Tutorial/Tutorial";
 import Floortype from "../pages/2_floorType/2_floorType";
 import FloorTypeDetail from "../pages/3_floorTypeDetail/3_floorTypeDetail";
 import FloorInfo from "../pages/4_floorInfo/4_floorInfo";
@@ -14,12 +15,16 @@ Ondemand의 각 섹션들이 등장하는 Step을 관리하는 Page
 */
 
 class Application extends Component {
+
     state = {
         step: 1,
+
         //step 2_1
         floorType: "",
+
         //step 2_2
         commercialType: "", //button
+
         //step 3
         floorPlan: null, //input
         floorPlanUrl: "",
@@ -29,15 +34,18 @@ class Application extends Component {
         floorHeight: "", //input
         floorHeightUnit: null, //select
         floorAddress: "", //input
+
         //step 4
         floorSelectedTheme: [],
         floorTheme: null, //button
         floorThemeUrl: "",
+
         //step 5
         additionalRequest: "", //input
         //step 6
         contactInfo: "" //input with placeholder of account email
     };
+
 
     nextStep = () => {
         this.setState({
@@ -137,18 +145,18 @@ class Application extends Component {
         };
 
         switch (step) {
+            // case 1:
+            //     if (this.props.openModal === false) {
+            //         return null;
+            //     }
+            //     return <Tutorial nextStep={this.nextStep} />;
             case 1:
-                if (this.props.openModal === false) {
-                    return null;
-                }
-                return <Tutorial nextStep={this.nextStep} />;
-            case 2:
-                if (this.props.openModal === false) {
-                    this.setState({
-                        step: 1
-                    });
-                    return null;
-                }
+                // if (this.props.openModal === false) {
+                //     this.setState({
+                //         step: 1
+                //     });
+                //     return null;
+                // }
                 return (
                     <Floortype
                         nextStep={this.nextStep}
@@ -157,13 +165,14 @@ class Application extends Component {
                         handleFloorType={this.handleFloorType}
                     />
                 );
-            case 3:
-                if (this.props.openModal === false) {
-                    this.setState({
-                        step: 1
-                    });
-                    return null;
-                }
+
+            case 2:
+                // if (this.props.openModal === false) {
+                //     this.setState({
+                //         step: 1
+                //     });
+                //     return null;
+                // }
                 return (
                     <FloorTypeDetail
                         nextStep={this.nextStep}
@@ -172,13 +181,14 @@ class Application extends Component {
                         handleFloorDetailType={this.handleFloorDetailType}
                     />
                 );
-            case 4:
-                if (this.props.openModal === false) {
-                    this.setState({
-                        step: 1
-                    });
-                    return null;
-                }
+
+            case 3:
+                // if (this.props.openModal === false) {
+                //     this.setState({
+                //         step: 1
+                //     });
+                //     return null;
+                // }
                 return (
                     <FloorInfo
                         nextStep={this.nextStep}
@@ -189,13 +199,14 @@ class Application extends Component {
                         values={values}
                     />
                 );
-            case 5:
-                if (this.props.openModal === false) {
-                    this.setState({
-                        step: 1
-                    });
-                    return null;
-                }
+
+            case 4:
+                // if (this.props.openModal === false) {
+                //     this.setState({
+                //         step: 1
+                //     });
+                //     return null;
+                // }
                 return (
                     <FloorStyle
                         nextStep={this.nextStep}
@@ -205,13 +216,14 @@ class Application extends Component {
                         values={values}
                     />
                 );
-            case 6:
-                if (this.props.openModal === false) {
-                    this.setState({
-                        step: 1
-                    });
-                    return null;
-                }
+
+            case 5:
+                // if (this.props.openModal === false) {
+                //     this.setState({
+                //         step: 1
+                //     });
+                //     return null;
+                // }
                 return (
                     <AdditionalRequests
                         nextStep={this.nextStep}
@@ -220,13 +232,14 @@ class Application extends Component {
                         values={values}
                     />
                 );
-            case 7:
-                if (this.props.openModal === false) {
-                    this.setState({
-                        step: 1
-                    });
-                    return null;
-                }
+
+            case 6:
+                // if (this.props.openModal === false) {
+                //     this.setState({
+                //         step: 1
+                //     });
+                //     return null;
+                // }
                 return (
                     <Summary
                         nextStep={this.nextStep}
@@ -235,10 +248,11 @@ class Application extends Component {
                         values={values}
                     />
                 );
+
             default:
-                if (this.props.show === false) {
-                    return null;
-                }
+                // if (this.props.show === false) {
+                //     return null;
+                // }
                 return (
                     <Tutorial
                         nextStep={this.nextStep}
