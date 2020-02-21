@@ -300,10 +300,11 @@ def show(request):
     onrunRequests = Request.objects.exclude(progress = 5) #on run: filter (step 5 이하, step 5이면 제외)
     totalRequests = Request.objects.all()
     notifications= Notification.objects.all()
-
+    '''
     if(thread_num < 1):
       checking()
       thread_num += 1
+    '''
 
     if request.is_ajax():
       unread = Notification.objects.all().count() #당시의 알람 개수
@@ -322,9 +323,12 @@ def each(request, id):
   global thread_num
   if request.method == 'GET':
 
+    '''
     if(thread_num < 1):
       checking()
       thread_num += 1
+    '''
+
 
     if request.is_ajax():
       unread = Notification.objects.all().count() #당시의 알람 개수
