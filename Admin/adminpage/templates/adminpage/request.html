@@ -323,7 +323,7 @@
                         <div class="msg_client">
                             <div>
                                 {% for att in msg.attachment_file.all %}
-                                <p>{{att.attach}}</p>
+                                <!--<p>{{att.attach}}</p>-->
                                 <img class="att_file" src="../../{{att.attach}}" style="width: 100%" />
                                 {% endfor %}
                                 <p1>{{msg.content}}</p1>
