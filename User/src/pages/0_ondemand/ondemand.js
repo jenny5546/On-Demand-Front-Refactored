@@ -1,13 +1,15 @@
+/* LANDING PAGE 처음에 딱 키자마자 보이는 부분  */
 import React, { Component } from "react";
-import Mainform from "../../components/mainform";
+import Application from "../../components/ApplicationControl";
+import Tutorial from "../../components/Tutorial/Tutorial";
 import OndemandStyle from "./style.js";
-
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { OndemandConsumer } from "../../context/OndemandContext";
 
 /*
 
  Archisketch Web Front -> Ondemand Page
-
+  
 */
 
 class Page extends Component {
@@ -89,7 +91,16 @@ class Page extends Component {
                                 ></iframe>
                             </section> */}
                         </OndemandStyle>
-                        <Mainform openModal={value.openModal} />
+
+                        {/* <Mainform openModal={value.openModal} /> */}
+                        {/* Tutorial 로 바꿔주기. */}
+                        
+                        <Router>
+                            <Tutorial openModal={value.openModal}/>
+                            <Route path = "/application" component={Application} />
+                        </Router>
+                        
+
                     </>
                 )}
             </OndemandConsumer>

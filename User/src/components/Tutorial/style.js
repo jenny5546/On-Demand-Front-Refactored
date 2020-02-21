@@ -103,7 +103,6 @@ const TutoContent = styled.section`
     .TutoContent__Img {
         width: 240px;
         height: 240px;
-        background: #eee;
         margin: auto;
     }
 

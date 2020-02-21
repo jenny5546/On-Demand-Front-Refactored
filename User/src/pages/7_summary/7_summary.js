@@ -9,6 +9,7 @@ import {
 } from "./style";
 
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 class Summary extends Component {
     handleNextStep = e => {
@@ -111,21 +112,25 @@ class Summary extends Component {
             <OndemandConsumer>
                 {value => (
                     <SummaryStyle>
-                        <div
-                            className="Summary__BtnClose"
-                            onClick={e => {
-                                value.handleOpenModal();
-                            }}
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
+                        <Link to= "/">
+
+                            <div
+                                className="Summary__BtnClose"
+                                // onClick={e => {
+                                //     value.handleOpenModal();
+                                // }}
                             >
-                                <path d="M16.192 6.344L11.949 10.586 7.707 6.344 6.293 7.758 10.535 12 6.293 16.242 7.707 17.656 11.949 13.414 16.192 17.656 17.606 16.242 13.364 12 17.606 7.758z" />
-                            </svg>
-                        </div>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path d="M16.192 6.344L11.949 10.586 7.707 6.344 6.293 7.758 10.535 12 6.293 16.242 7.707 17.656 11.949 13.414 16.192 17.656 17.606 16.242 13.364 12 17.606 7.758z" />
+                                </svg>
+                            </div>
+
+                        </Link>
 
                         <main className="SummaryWrap">
                             <div className="Summary__Title">Order Summary</div>

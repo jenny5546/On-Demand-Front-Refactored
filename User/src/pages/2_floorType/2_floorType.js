@@ -3,8 +3,10 @@ import { FloorTypeStyle, FloorTypeCard } from "./style";
 
 import { Tab__FloorType } from "../../constant";
 import { OndemandConsumer } from "../../context/OndemandContext";
+import { Link } from 'react-router-dom';
 
 class FloorType extends Component {
+    
     handleTypeSelected = value => {
         if (value === Tab__FloorType.Residential) {
             this.props.next2Step();
@@ -14,32 +16,31 @@ class FloorType extends Component {
         }
     };
 
-    handleBtnBack = e => {
-        e.preventDefault();
-        this.props.prevStep();
-    };
-
     render() {
         console.log(this.props.floorType);
         return (
             <OndemandConsumer>
                 {value => (
                     <FloorTypeStyle>
-                        <div
-                            className="FloorType__BtnClose"
-                            onClick={e => {
-                                value.handleOpenModal();
-                            }}
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
+                        {/* 닫기 버튼은 그냥 다시 Mainpage로 돌아가게끔 라우팅 */}
+                        <Link to= "/">
+                            <div
+                                className="FloorType__BtnClose"
+                                // onClick={e => {
+                                //     value.handleOpenModal();
+                                // }}
                             >
-                                <path d="M16.192 6.344L11.949 10.586 7.707 6.344 6.293 7.758 10.535 12 6.293 16.242 7.707 17.656 11.949 13.414 16.192 17.656 17.606 16.242 13.364 12 17.606 7.758z" />
-                            </svg>
-                        </div>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path d="M16.192 6.344L11.949 10.586 7.707 6.344 6.293 7.758 10.535 12 6.293 16.242 7.707 17.656 11.949 13.414 16.192 17.656 17.606 16.242 13.364 12 17.606 7.758z" />
+                                </svg>
+
+                            </div>
+                        </Link>
 
                         <main className="FloorTypeWrap">
                             <div className="FloorType__Title">
@@ -61,7 +62,12 @@ class FloorType extends Component {
                                         );
                                     }}
                                 >
-                                    <div className="FloorType__Img"></div>
+                                    <img
+                                        className="FloorType__Img"
+                                        src={"Residential@3x.jpg"}
+                                        alt={"Residential"}
+                                    />
+
                                     <div className="FloorType__Name">
                                         Residential
                                     </div>
@@ -82,7 +88,11 @@ class FloorType extends Component {
                                         );
                                     }}
                                 >
-                                    <div className="FloorType__Img"></div>
+                                    <img
+                                        className="FloorType__Img"
+                                        src={"/Commercial@3x.jpg"}
+                                        alt={"Commercial"}
+                                    />
                                     <div className="FloorType__Name">
                                         Commercial
                                     </div>
@@ -95,12 +105,16 @@ class FloorType extends Component {
                                 </FloorTypeCard>
                             </section>
 
-                            <div
-                                className="FloorType__BtnBack"
-                                onClick={this.handleBtnBack}
-                            >
-                                Back to Tutorial
-                            </div>
+                                
+                            <Link className= "FloorType__BackLink" to="/">
+                                <div
+                                    className="FloorType__BtnBack"
+                                    onClick={value.handleOpenModal}
+                                >
+                                    Back to Tutorial
+                                </div>
+                            </Link>
+
                         </main>
                     </FloorTypeStyle>
                 )}
