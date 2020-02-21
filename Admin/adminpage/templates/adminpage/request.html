@@ -322,6 +322,10 @@
                         <div><img style="width:40px; height:40px" src="{% static 'profile_pic.png' %}"/></div>
                         <div class="msg_client">
                             <div>
+                                {% for att in msg.attachment_file.all %}
+                                <p>{{att.attach}}</p>
+                                <img class="att_file" src="../../{{att.attach}}" style="width: 100%" />
+                                {% endfor %}
                                 <p1>{{msg.content}}</p1>
                                 <p2 class="chat_time">{{msg.timestamp|timesince}} 전</p2>
                             </div>

@@ -6,13 +6,15 @@ from django.utils.translation import gettext_lazy as _
 class SelectedTheme(models.Model):
   option = models.TextField(blank=True, null=True)
 
-
 class UploadedTheme(models.Model):
   photo = models.FileField(upload_to='floor_theme', blank=True, null=True)
 
 class UploadedFile(models.Model):
   attach = models.FileField(upload_to='sent_file', blank=True, null=True)
-  
+
+class ReceivedFile(models.Model):
+  attach = models.CharField(max_length=50, default = None)
+
 class Plan(models.Model):
   photo = models.FileField(upload_to='floor_plan', blank=True, null=True)
 
@@ -118,6 +120,7 @@ class ReceivedMessage(models.Model):
   )
   title = models.TextField(default='')
   content = models.TextField()
+  attachment_file = models.ManyToManyField(ReceivedFile, blank=True)
   timestamp = models.DateTimeField(default=timezone.now)
 
 
