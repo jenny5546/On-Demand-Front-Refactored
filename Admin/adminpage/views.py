@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Request, Plan, SelectedTheme, UploadedTheme, UploadedFile, SentMessage, ReceivedMessage, Notification
+from .models import Request, Plan, SelectedTheme, UploadedTheme, UploadedFile, ReceivedFile, SentMessage, ReceivedMessage, Notification
 from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect, FileResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from random_username.generate import generate_username
@@ -18,6 +18,8 @@ from email.mime.image import MIMEImage
 from email.mime.text import MIMEText 
 from email.mime.base import MIMEBase 
 from templated_email import send_templated_mail, InlineImage
+from email.header import decode_header
+import base64
 
 
 # <html-email>
@@ -78,9 +80,10 @@ def check_mail_imap(user, password):
     for each_mail in id_list:
 
         mail_struct = []
+        filenames_list = []
         result, data = imapserver.fetch(each_mail, "(RFC822)")
         msg = email.message_from_bytes(data[0][1])
-        # print(msg)
+
         message_subject = decode_mime_words(str(msg['Subject']))
         from_address = email.utils.parseaddr(msg['From'])[1]
         mail_struct.append(from_address)
@@ -96,7 +99,6 @@ def check_mail_imap(user, password):
         email_message = email.message_from_string(raw_email_string)
 
         for part in email_message.walk():
-
           if part.get_content_type() == 'text/html':
             body = part.get_payload(decode=True)
             message_content = BeautifulSoup(body.decode('UTF-8'), "html.parser")
@@ -105,7 +107,31 @@ def check_mail_imap(user, password):
 
             mail_struct.append(message_content.get_text())
             mail_struct.append(message_timestamp)
-    
+            print(mail_struct)
+
+
+        mail_struct.append([])
+        #print(mail_struct)
+        for part in email_message.walk():
+          if part.get_content_disposition() == 'attachment':
+            filename = part.get_filename()
+            if decode_header(filename)[0][1] is not None:
+
+              #print(str(decode_header(filename)[0][0]))
+              
+              #filename = str(decode_header(filename)[0][0])
+              filename = decode_header(filename)[0][0]
+              filename = filename.decode()
+              #print(filename)
+              att_path = os.path.join('./media/received_file', str(filename))
+              
+              mail_struct[4].append(att_path)
+              
+              if not os.path.isfile(att_path):
+                  fp = open(att_path, 'wb')
+                  fp.write(part.get_payload(decode=True))
+                  fp.close()
+        print(mail_struct)
         # update
         details.append(mail_struct)
           
@@ -250,6 +276,13 @@ def checking():
                 content = eachmail[2],
                 timestamp = eachmail[3]
           )
+          for att in eachmail[4]:
+            filenames = ReceivedFile()
+            filenames.attach = att
+            filenames.save()
+            newReceivedMessage.attachment_file.add(filenames)
+            newReceivedMessage.save()
+    
           newNotification = Notification.objects.create(
             request=req,
             received_message = newReceivedMessage,
@@ -358,8 +391,9 @@ def each(request, id):
         files.attach = afile
         files.save()
         newSentMessage.attachment_file.add(files)
+        print(newSentMessage.attachment_file)
         newSentMessage.save()
-        print(afile)
+        print(type(afile))
 
     arequest.due_at = due_at
     arequest.progress = progress
