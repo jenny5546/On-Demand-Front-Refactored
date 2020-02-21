@@ -34,8 +34,22 @@
 
     function loading(){
         $('.loading').append("<img src='{% static 'loading.gif' %}'/>")
-        console.log("loading...")
     }
+
+    
+    $(document).ready(function(){
+        var times = 0;
+        $('.submit').on("click", function(){
+            if(times == 0){
+                loading();
+                $(this).css({
+                    "pointer-events": "none",
+                })
+                times+=1;
+            }
+            console.log(times)
+        })
+    })
 
     $(document).ready(function() { 
         var status = {{ arequest.progress }}
@@ -348,7 +362,7 @@
                     <input class="fileinput" id="fileinput" type="file" name="msg_attachments" accept=".jpg, .jpeg, .png" multiple>
                     <textarea class="textinput" placeholder= "Enter your message" name="msg_content"></textarea>
                 </div>
-                <input class="submit" type="submit" onclick= "return loading();" value="Send"/>
+                <button class="submit">Send</button>
             </form>
             <div class="loading"></div>
         </div>
