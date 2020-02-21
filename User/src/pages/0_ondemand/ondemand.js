@@ -82,12 +82,12 @@ class Page extends Component {
                                 </div>
                             </section>
 
-                            <section className="Ondemand__Right">
+                            {/* <section className="Ondemand__Right">
                                 <iframe
                                     title="Ondemand_Demo"
                                     src={`https://plan.archisketch.com/?mode=0&port_id=3349`}
                                 ></iframe>
-                            </section>
+                            </section> */}
                         </OndemandStyle>
                         <Mainform openModal={value.openModal} />
                     </>

@@ -4,6 +4,7 @@ import { FloorThemeStyle, BtnBottom } from "./style";
 import { OndemandConsumer } from "../../context/OndemandContext";
 
 class FloorTheme extends Component {
+    
     pickedThemes = value => {
         let srclist = [];
         for (var i = 0; i < value.length; i++) {
