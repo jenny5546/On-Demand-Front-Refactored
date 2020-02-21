@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'sass_processor',
     'templated_email',
-     'django_premailer',
+    'django_premailer',
 
 ]
 
