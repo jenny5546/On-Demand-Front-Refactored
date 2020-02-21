@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { OndemandConsumer } from "../../context/OndemandContext";
 import { TutorialStyle, TutoContent, TutoBtn } from "./style";
 import { Link } from 'react-router-dom';
+
 /*
 
 Ondemand 버튼 클릭시, 등장하는 최초
@@ -98,10 +99,8 @@ class Tutorial extends Component {
 
                                                         <img
                                                             className="TutoContent__Img"
-                                                            src={
-                                                                "Ondemand_01@3x.png"
-                                                            }
-                                                            alt={"Ondemand_01"}
+                                                            src= { process.env.PUBLIC_URL+ "assets/tutorial/step1.png" }
+                                                            alt={"Ondemand_Step1"}
                                                         />
                                                         <span className="TutoContent__desc">
                                                             First. Upload Your Floor
@@ -148,10 +147,8 @@ class Tutorial extends Component {
 
                                                         <img
                                                             className="TutoContent__Img"
-                                                            src={
-                                                                "Ondemand_02@3x.png"
-                                                            }
-                                                            alt={"Ondemand_02"}
+                                                            src= { process.env.PUBLIC_URL+ "assets/tutorial/step2.png" }
+                                                            alt={"Ondemand_Step2"}
                                                         />
                                                         <span className="TutoContent__desc">
                                                             Second. Choose Your
@@ -182,10 +179,8 @@ class Tutorial extends Component {
                                                         </TutoBtn>
                                                         <img
                                                             className="TutoContent__Img"
-                                                            src={
-                                                                "Ondemand_03@3x.png"
-                                                            }
-                                                            alt={"Ondemand_03"}
+                                                            src= { process.env.PUBLIC_URL+ "assets/tutorial/step3.png" }
+                                                            alt={"Ondemand_Step3"}
                                                         />
                                                         <span className="TutoContent__desc">
                                                             Third. Tell us whatever
@@ -215,9 +210,7 @@ class Tutorial extends Component {
                                                         </TutoBtn>
                                                         <img
                                                             className="TutoContent__Img"
-                                                            src={
-                                                                "Ondemand_01@3x.png"
-                                                            }
+                                                            src= { process.env.PUBLIC_URL + "assets/tutorial/step1.png" }
                                                             alt={"Ondemand_01"}
                                                         />
                                                         <span className="TutoContent__desc">
