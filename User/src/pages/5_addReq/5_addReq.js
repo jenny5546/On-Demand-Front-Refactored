@@ -4,11 +4,12 @@ import { AddReqStyle, AddReqTextarea, BtnBottom } from "./style";
 import { Link } from 'react-router-dom';
 
 class AdditionalRequests extends Component {
+
     handleNextStep = e => {
         e.preventDefault();
         this.props.nextStep();
     };
-    hanldeBtnBack = e => {
+    handleBtnBack = e => {
         e.preventDefault();
         this.props.prevStep();
     };
@@ -22,9 +23,6 @@ class AdditionalRequests extends Component {
 
                             <div
                                 className="AddReq__BtnClose"
-                                // onClick={e => {
-                                //     value.handleOpenModal();
-                                // }}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -50,15 +48,15 @@ class AdditionalRequests extends Component {
 
                             <AddReqTextarea
                                 name="additionalRequest"
-                                value={this.props.values.additionalRequest}
+                                value={value.val.additionalRequest}
                                 placeholder="Type in any other requests you would like us to know, just press next to skip"
-                                onChange={this.props.handleChange(
+                                onChange={value.handleChange(
                                     "additionalRequest"
                                 )}
                             />
 
                             <section className="AddReq__Bottom">
-                                <BtnBottom btnBack onClick={this.hanldeBtnBack}>
+                                <BtnBottom btnBack onClick={this.handleBtnBack}>
                                     Back
                                 </BtnBottom>
 

@@ -7,7 +7,11 @@ import { Link } from 'react-router-dom';
 
 class FloorType extends Component {
     
+    /* *----------------------------------------------------* 
+            Residential, Commercial에 따라 다음 Step 조정 
+    *----------------------------------------------------* */
     handleTypeSelected = value => {
+        
         if (value === Tab__FloorType.Residential) {
             this.props.next2Step();
         }
@@ -22,13 +26,10 @@ class FloorType extends Component {
             <OndemandConsumer>
                 {value => (
                     <FloorTypeStyle>
-                        {/* 닫기 버튼은 그냥 다시 Mainpage로 돌아가게끔 라우팅 */}
+                        
                         <Link to= "/">
                             <div
                                 className="FloorType__BtnClose"
-                                // onClick={e => {
-                                //     value.handleOpenModal();
-                                // }}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -54,10 +55,13 @@ class FloorType extends Component {
                                 <FloorTypeCard
                                     id="Residential"
                                     onClick={e => {
+                                        //다음 Step 결정 
                                         this.handleTypeSelected(
                                             Tab__FloorType.Residential
                                         );
-                                        this.props.handleFloorType(
+
+                                        //context 넘겨주기
+                                        value.handleFloorType(
                                             Tab__FloorType.Residential
                                         );
                                     }}
@@ -80,10 +84,12 @@ class FloorType extends Component {
                                 <FloorTypeCard
                                     id="Commercial"
                                     onClick={e => {
+                                        //다음 Step 결정 
                                         this.handleTypeSelected(
                                             Tab__FloorType.Commercial
                                         );
-                                        this.props.handleFloorType(
+                                        //context 넘겨주기
+                                        value.handleFloorType(
                                             Tab__FloorType.Commercial
                                         );
                                     }}

@@ -10,12 +10,11 @@ import { OndemandConsumer } from "../../context/OndemandContext";
 import { Link } from 'react-router-dom';
 
 class SubFloorType extends Component {
+
     handleNextStep = () => {
         this.props.nextStep();
     };
-
-    // : alert("Please Choose or Specify the Commercial Type");
-
+    
     hanldeBtnBack = e => {
         e.preventDefault();
         this.props.prevStep();
@@ -30,9 +29,6 @@ class SubFloorType extends Component {
                         <Link to= "/">
                             <div
                                 className="FloorDetail__BtnClose"
-                                // onClick={e => {
-                                //     value.handleOpenModal();
-                                // }}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +49,7 @@ class SubFloorType extends Component {
                             <section className="FloorDetail__ListWrap">
                                 <FloorTypeList
                                     onClick={async e => {
-                                        await this.props.handleFloorDetailType(
+                                        await value.handleFloorDetailType(
                                             Tab__FloorTypeDetail.Office
                                         );
                                         this.handleNextStep();
@@ -64,7 +60,7 @@ class SubFloorType extends Component {
 
                                 <FloorTypeList
                                     onClick={async e => {
-                                        await this.props.handleFloorDetailType(
+                                        await value.handleFloorDetailType(
                                             Tab__FloorTypeDetail.Restaurant
                                         );
                                         this.handleNextStep();
@@ -75,7 +71,7 @@ class SubFloorType extends Component {
 
                                 <FloorTypeList
                                     onClick={async e => {
-                                        await this.props.handleFloorDetailType(
+                                        await value.handleFloorDetailType(
                                             Tab__FloorTypeDetail.Shops
                                         );
                                         this.handleNextStep();
@@ -86,7 +82,7 @@ class SubFloorType extends Component {
 
                                 <FloorTypeList
                                     onClick={async e => {
-                                        await this.props.handleFloorDetailType(
+                                        await value.handleFloorDetailType(
                                             Tab__FloorTypeDetail.Hotel
                                         );
                                         this.handleNextStep();
@@ -101,7 +97,7 @@ class SubFloorType extends Component {
                                         <input
                                             type="text"
                                             placeholder="Type in yourself"
-                                            onChange={this.props.handleChange(
+                                            onChange={value.handleChange(
                                                 "commercialType"
                                             )}
                                         />
