@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Request, Plan, SelectedTheme, UploadedTheme, UploadedFile, ReceivedFile, SentMessage, ReceivedMessage, Notification
+from .models import Request, Plan, SelectedTheme, UploadedTheme, SentFile, ReceivedFile, SentMessage, ReceivedMessage, Notification
 from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect, FileResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from random_username.generate import generate_username
@@ -113,13 +113,12 @@ def check_mail_imap(user, password):
         mail_struct.append([])
         #print(mail_struct)
         for part in email_message.walk():
+
           if part.get_content_disposition() == 'attachment':
             filename = part.get_filename()
+
             if decode_header(filename)[0][1] is not None:
 
-              #print(str(decode_header(filename)[0][0]))
-              
-              #filename = str(decode_header(filename)[0][0])
               filename = decode_header(filename)[0][0]
               filename = filename.decode()
               #print(filename)
@@ -131,6 +130,7 @@ def check_mail_imap(user, password):
                   fp = open(att_path, 'wb')
                   fp.write(part.get_payload(decode=True))
                   fp.close()
+                  
         print(mail_struct)
         # update
         details.append(mail_struct)
@@ -148,18 +148,17 @@ def request(request):
 
     #연결해야하는 부분 
     #요청한 사람 정보(user)
-    
+    print('gotit')
     ################## User email info ###################
     username = generate_username(1)[0]
-    useremail= request.POST.get('contact_info')
-    #useremail = 'taiyoung1122@naver.com' #연결할때, front에서 들고오기
+    # useremail= request.POST.get('contact_info')
+    useremail = 'jenny5546@naver.com' #연결할때, front에서 들고오기
     ######################################################
 
 
     # print(user)
     floor_type = request.POST.get('floor_type')
     commercial_type = request.POST.get('commercial_type')
-    floor_number = request.POST.get('floor_number')
     floor_size = request.POST.get('floor_size')
     floor_size_unit = request.POST.get('floor_size_unit')
     floor_height = request.POST.get('floor_height')
@@ -168,17 +167,18 @@ def request(request):
     add_request = request.POST.get('add_req')
 
     newRequest = Request.objects.create(
+
       username = username,
       useremail = useremail,
       floor_type = floor_type,
       commercial_type = commercial_type,
-      floor_number = floor_number,
       floor_size = floor_size,
       floor_size_unit = floor_size_unit,
       floor_height = floor_height,
       floor_height_unit = floor_height_unit, 
       floor_address = floor_address,
       add_request = add_request
+
     )
     newNotification = Notification.objects.create(
       request=newRequest
@@ -391,7 +391,7 @@ def each(request, id):
       )
 
       for afile in request.FILES.getlist('msg_attachments'):
-        files = UploadedFile()
+        files = SentFile()
         files.attach = afile
         files.save()
         newSentMessage.attachment_file.add(files)

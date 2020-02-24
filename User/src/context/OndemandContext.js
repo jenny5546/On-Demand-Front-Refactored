@@ -24,9 +24,9 @@ class OndemandProvider extends Component {
         floorPlan: [], 
         floorPlanUrl: [],
         floorSize: 0, 
-        floorSizeUnit: null,
+        floorSizeUnit: "m",
         floorHeight: 0,
-        floorHeightUnit: null,
+        floorHeightUnit: "m",
         floorAddress: "",
         floorSelectedTheme: [],
         floorUploadedTheme: [], 
@@ -100,10 +100,10 @@ class OndemandProvider extends Component {
     handleSubmit= () => {
 
         let form_data = new FormData();
-
+        console.log(this.state.floorSizeUnit)
         form_data.set("floor_type", this.state.floorType);
         form_data.set("commercial_type", this.state.commercialType);
-
+        
         const plan = this.state.floorPlan;
         for (var file of plan) {
             form_data.append("floor_plan", file);
@@ -132,9 +132,9 @@ class OndemandProvider extends Component {
         }
 
         form_data.set("add_req", this.state.additionalRequest);
-
+        console.log(form_data)
         axios
-            .post(`http://127.0.0.1:8000/adminpage/request/`, form_data, {
+            .post(`http://localhost:8000/adminpage/request/`, form_data, {
                 headers: {
                     "content-type": "multipart/form-data"
                 }

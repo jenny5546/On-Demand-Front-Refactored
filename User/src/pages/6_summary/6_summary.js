@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { OndemandContext, OndemandConsumer } from "../../context/OndemandContext";
 import { Tab__FloorType } from "../../constant";
+import Carousel from 'nuka-carousel';
 
 import {
     SummaryStyle,
@@ -17,11 +18,16 @@ const Summary = props => {
 
     const contextType = useContext(OndemandContext);
     
-    const handleNextStep = e => {
+    const handleConfirm = e => {
         //얘는 마지막 단계니까 payment 로 이동하게 바꾸기
         e.preventDefault();
-        contextType.handleSubmit(); //POST
-        props.nextStep();
+        contextType.handleSubmit(); //ADMIN PAGE로 포스트 하는 부분 
+
+
+        /* *-------------------------------------------------------------------* 
+                    이 부분은 앞으로 결제 창으로 넘어가도록 바꾸어야 하는 부분 
+        *-------------------------------------------------------------------* */
+        // window.location.replace("http://localhost:3000");
     };
     const handleBtnBack = e => {
         e.preventDefault();
@@ -64,6 +70,8 @@ const Summary = props => {
             else return <p1>$699</p1>;
         }
     };
+    
+    
 
         return (
             <OndemandConsumer>
@@ -117,19 +125,22 @@ const Summary = props => {
                                     </section>
 
                                     <section className="Summary__Content">
-                                        
-                                        {value.val.floorPlanUrl.map(
-                                            items => {
-                                                return (
-                                                    <img
-                                                        src={items}
-                                                        className="Content__Floor"
-                                                        alt="floorplan-summary"
-                                                    />
-                                                );
-                                            }
-                                        )}
-
+                                        <Carousel>
+                                            {value.val.floorPlanUrl.map(
+                                                items => {
+                                                    return (
+                                                        <img
+                                                            src={items}
+                                                            className="Content__Floor"
+                                                            alt="floorplan-summary"
+                                                            key = {items}
+                                                            
+                                                        />
+                                                    );
+                                                }
+                                            )}  
+                                        </Carousel>
+                                                                                  
                                         {/* <img
                                             className="Content__Floor"
                                             
@@ -186,6 +197,7 @@ const Summary = props => {
                                                                 src={items}
                                                                 className="Content__Img"
                                                                 alt="selected-style"
+                                                                key = {items}
                                                             />
                                                         );
                                                     }
@@ -199,6 +211,7 @@ const Summary = props => {
                                                             src={items}
                                                             className="Content__Img"
                                                             alt="uploaded-style"
+                                                            key = {items}
                                                         />
                                                     );
                                                 }
@@ -253,7 +266,7 @@ const Summary = props => {
                                     Edit Application
                                 </BtnBottom>
 
-                                <BtnBottom onClick={handleNextStep}>
+                                <BtnBottom onClick={handleConfirm}>
                                     Confirm Payment
                                 </BtnBottom>
                             </section>

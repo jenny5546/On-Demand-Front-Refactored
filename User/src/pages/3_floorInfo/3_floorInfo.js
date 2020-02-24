@@ -131,11 +131,12 @@ const FloorPlanInfo = props => {
                             <select
                                 name="floorSizeUnit"
                                 onChange={value.handleChange("floorSizeUnit")}
+                                defaultValue = "m"
                             >
                                 <option value="m">m &sup2;</option>
                                 <option value="ft">feet &sup2;</option>
                             </select>
-                            <div class="select__arrow" />
+                            <div className="select__arrow" />
                         </FloorInfoInput>
 
                         <FloorInfoInput
@@ -153,11 +154,12 @@ const FloorPlanInfo = props => {
                             <select
                                 name="floorHeightUnit"
                                 onChange={value.handleChange("floorHeightUnit")}
+                                defaultValue = "m"
                             >
                                 <option value="m">m</option>
                                 <option value="ft">feet</option>
                             </select>
-                            <div class="select__arrow" />
+                            <div className="select__arrow" />
                         </FloorInfoInput>
 
                         <FloorInfoInput
