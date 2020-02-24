@@ -19,6 +19,7 @@
     "react-perfect-scrollbar": "^1.5.8",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
+    "require-context": "^1.1.0",
     "styled-components": "^5.0.1"
   },
   "scripts": {
