@@ -12,7 +12,7 @@ import { OndemandConsumer } from "../../context/OndemandContext";
   
 */
 
-class Page extends Component {
+class MainPage extends Component {
     render() {
         return (
             <OndemandConsumer>
@@ -108,4 +108,4 @@ class Page extends Component {
     }
 }
 
-export default Page;
+export default MainPage;

@@ -64,7 +64,7 @@ class FloorType extends Component {
                                 >
                                     <img
                                         className="FloorType__Img"
-                                        src={"Residential@3x.jpg"}
+                                        src= { process.env.PUBLIC_URL+ "assets/floortype/Residential.jpg" }
                                         alt={"Residential"}
                                     />
 
@@ -90,7 +90,7 @@ class FloorType extends Component {
                                 >
                                     <img
                                         className="FloorType__Img"
-                                        src={"/Commercial@3x.jpg"}
+                                        src= { process.env.PUBLIC_URL+ "assets/floortype/Commercial.jpg" }
                                         alt={"Commercial"}
                                     />
                                     <div className="FloorType__Name">

@@ -23,6 +23,14 @@ import img18 from "../../../static/img/floor_themes/residential/ex18.jpg";
 import img19 from "../../../static/img/floor_themes/residential/ex19.jpg";
 import img20 from "../../../static/img/floor_themes/residential/ex20.jpg";
 
+// function importAll(r) {
+//     let images = {};
+//     r.keys().map((item, index) => images[item.replace('./', '')] = r(item))  
+//     return images;
+// }
+
+// const imageList = importAll(require.context('/assets/floortheme', false, /\.(png|jpe?g|svg)$/));
+
 const imageList = [
     img1,
     img2,
