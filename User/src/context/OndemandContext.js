@@ -8,7 +8,10 @@ const { Provider, Consumer: OndemandConsumer } = OndemandContext;
 
 
 
-// Provider 에서 state 를 사용하기 위해서 컴포넌트를 새로 만들어줍니다.
+/* *-------------------------------------------------------------------* 
+            Context 전체 관리 (modal open-close 및 폼 입력 값들 )
+            + 폼 받아서 마지막에 Admin 으로 넘기는 과정까지 
+*-------------------------------------------------------------------* */
 
 class OndemandProvider extends Component {
 
@@ -18,16 +21,16 @@ class OndemandProvider extends Component {
         
         floorType: "",
         commercialType: "", 
-        floorPlan: null, 
-        floorPlanUrl: "",
+        floorPlan: [], 
+        floorPlanUrl: [],
         floorSize: 0, 
         floorSizeUnit: null,
         floorHeight: 0,
         floorHeightUnit: null,
         floorAddress: "",
         floorSelectedTheme: [],
-        floorUploadedTheme: null, 
-        floorUploadedThemeUrl: "",
+        floorUploadedTheme: [], 
+        floorUploadedThemeUrl: [],
         additionalRequest: "", 
         contactInfo: "" 
 
@@ -57,20 +60,31 @@ class OndemandProvider extends Component {
     /* Floor plan upload 할 때 처리  */
     handlePlanFile = e => {
         if (e.target.files[0]) {
-            this.setState({ floorPlan: e.target.files[0] });
-            this.setState({
-                floorPlanUrl: URL.createObjectURL(e.target.files[0])
-            });
+            this.setState({ floorPlan: [...this.state.floorPlan, ...e.target.files] }) //admin으로 보내는 애
+            
+            const urls = [] 
+            const files = Object.values(e.target.files)
+
+            files.map(
+                f => urls.push(URL.createObjectURL(f))
+            )
+            this.setState({ floorPlanUrl: urls }) //summary에서 보여주는 애
         }
     };
 
     /* Theme 직접 upload 할 때 처리  */
     handleUploadedTheme = e => {
         if (e.target.files[0]) {
-            this.setState({ floorUploadedTheme: e.target.files[0] });
-            this.setState({
-                floorUploadedThemeUrl: URL.createObjectURL(e.target.files[0])
-            });
+            this.setState({ floorUploadedTheme: [...this.state.floorUploadedTheme, ...e.target.files] }) //admin으로 보내는 애 
+           
+            const urls = [];
+            const files = Object.values(e.target.files);
+
+            files.map(
+                f => urls.push(URL.createObjectURL(f))
+            )
+
+            this.setState({ floorUploadedThemeUrl: urls }) //summary에서 보여주는 애
         }
     };
 

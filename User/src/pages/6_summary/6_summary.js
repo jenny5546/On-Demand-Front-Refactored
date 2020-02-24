@@ -117,12 +117,25 @@ const Summary = props => {
                                     </section>
 
                                     <section className="Summary__Content">
-                                        <img
+                                        
+                                        {value.val.floorPlanUrl.map(
+                                            items => {
+                                                return (
+                                                    <img
+                                                        src={items}
+                                                        className="Content__Floor"
+                                                        alt="floorplan-summary"
+                                                    />
+                                                );
+                                            }
+                                        )}
+
+                                        {/* <img
                                             className="Content__Floor"
                                             
                                             src={value.val.floorPlanUrl}
                                             alt="floorplan-summary"
-                                        />
+                                        /> */}
 
                                         <SummaryDivision />
 
@@ -167,25 +180,29 @@ const Summary = props => {
                                         {value.val.floorSelectedTheme
                                             .length !== 0 ? (
                                                 value.val.floorSelectedTheme.map(
+                                                    items => {
+                                                        return (
+                                                            <img
+                                                                src={items}
+                                                                className="Content__Img"
+                                                                alt="selected-style"
+                                                            />
+                                                        );
+                                                    }
+                                                )
+                                        ) : (
+                                            
+                                            value.val.floorUploadedThemeUrl.map(
                                                 items => {
                                                     return (
                                                         <img
                                                             src={items}
                                                             className="Content__Img"
-                                                            alt="selected-style"
+                                                            alt="uploaded-style"
                                                         />
                                                     );
                                                 }
                                             )
-                                        ) : (
-                                            <img
-                                                className="Content__Img"
-                                                src={
-                                                    value.val
-                                                        .floorThemeUrl
-                                                }
-                                                alt="uploaded-style"
-                                            />
                                         )}
                                     </section>
 
