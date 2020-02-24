@@ -27,7 +27,7 @@ const Summary = props => {
         /* *-------------------------------------------------------------------* 
                     이 부분은 앞으로 결제 창으로 넘어가도록 바꾸어야 하는 부분 
         *-------------------------------------------------------------------* */
-        window.location.replace("http://localhost:3000");
+        // window.location.replace("http://localhost:3000");
     };
     const handleBtnBack = e => {
         e.preventDefault();
@@ -133,6 +133,8 @@ const Summary = props => {
                                                             src={items}
                                                             className="Content__Floor"
                                                             alt="floorplan-summary"
+                                                            key = {items}
+                                                            
                                                         />
                                                     );
                                                 }
@@ -195,6 +197,7 @@ const Summary = props => {
                                                                 src={items}
                                                                 className="Content__Img"
                                                                 alt="selected-style"
+                                                                key = {items}
                                                             />
                                                         );
                                                     }
@@ -208,6 +211,7 @@ const Summary = props => {
                                                             src={items}
                                                             className="Content__Img"
                                                             alt="uploaded-style"
+                                                            key = {items}
                                                         />
                                                     );
                                                 }
