@@ -18,11 +18,16 @@ const Summary = props => {
 
     const contextType = useContext(OndemandContext);
     
-    const handleNextStep = e => {
+    const handleConfirm = e => {
         //얘는 마지막 단계니까 payment 로 이동하게 바꾸기
         e.preventDefault();
-        contextType.handleSubmit(); //POST
-        props.nextStep();
+        contextType.handleSubmit(); //ADMIN PAGE로 포스트 하는 부분 
+
+
+        /* *-------------------------------------------------------------------* 
+                    이 부분은 앞으로 결제 창으로 넘어가도록 바꾸어야 하는 부분 
+        *-------------------------------------------------------------------* */
+        window.location.replace("http://localhost:3000");
     };
     const handleBtnBack = e => {
         e.preventDefault();
@@ -257,7 +262,7 @@ const Summary = props => {
                                     Edit Application
                                 </BtnBottom>
 
-                                <BtnBottom onClick={handleNextStep}>
+                                <BtnBottom onClick={handleConfirm}>
                                     Confirm Payment
                                 </BtnBottom>
                             </section>
