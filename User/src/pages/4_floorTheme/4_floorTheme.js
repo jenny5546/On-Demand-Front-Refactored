@@ -65,16 +65,16 @@ const FloorTheme = props => {
 
                         <div className="floortheme__body-imageuploader-wrap">
                             <div>
-                                {value.val.floorTheme ? (
+                                {value.val.floorUploadedTheme.length > 0 ? (
                                     <img
                                         src={
-                                            value.val.floorThemeUrl
+                                            value.val.floorUploadedThemeUrl
                                         }
                                         style={{
                                             maxWidth: "100px",
                                             maxHeight: "50px"
                                         }}
-                                        alt="floortheme"
+                                        alt = "floorplan"
                                     ></img>
                                 ) : (
                                     <div></div>
