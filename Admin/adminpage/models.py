@@ -9,11 +9,11 @@ class SelectedTheme(models.Model):
 class UploadedTheme(models.Model):
   photo = models.FileField(upload_to='floor_theme', blank=True, null=True)
 
-class UploadedFile(models.Model):
+class SentFile(models.Model):
   attach = models.FileField(upload_to='sent_file', blank=True, null=True)
 
 class ReceivedFile(models.Model):
-  attach = models.CharField(max_length=50, default = None)
+  attach = models.FileField(max_length=50, default = None)
 
 class Plan(models.Model):
   photo = models.FileField(upload_to='floor_plan', blank=True, null=True)
@@ -59,10 +59,6 @@ class Request(models.Model):
     Plan, 
     blank=False, 
     related_name='plan_image'
-  )
-
-  floor_number = models.IntegerField(
-    default = 1
   )
 
   floor_size = models.IntegerField(
@@ -130,7 +126,7 @@ class SentMessage(models.Model):
   sender = models.CharField(max_length = 10, default='admin')
   request = models.ForeignKey(Request, null=True, on_delete = models.CASCADE)
   content = models.TextField()
-  attachment_file = models.ManyToManyField(UploadedFile, blank=True)
+  attachment_file = models.ManyToManyField(SentFile, blank=True)
   timestamp = models.DateTimeField(default=timezone.now)
 
 class Notification(models.Model):
