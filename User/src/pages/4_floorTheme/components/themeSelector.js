@@ -11,7 +11,8 @@ function importAll(r) {
     return images;
 }
 
-const imported = importAll(require.context('../../../static/img/floor_themes/residential', false, /\.(png|jpe?g|svg)$/));
+const imported = importAll(require.context('../../../../public/assets/floortheme', false, /\.(png|jpe?g|svg)$/));
+
 const imageList = Object.values(imported)
 
 class ThemeSelector extends Component {

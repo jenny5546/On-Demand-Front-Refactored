@@ -64,7 +64,7 @@ class FloorType extends Component {
                                 >
                                     <img
                                         className="FloorType__Img"
-                                        src= { process.env.PUBLIC_URL+ "assets/floortype/Residential.jpg" }
+                                        src= { process.env.PUBLIC_URL + "assets/floortype/Residential.jpg" }
                                         alt={"Residential"}
                                     />
 
