@@ -1,6 +1,8 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import { OndemandConsumer } from "../../context/OndemandContext";
+import { OndemandContext, OndemandConsumer } from "../../context/OndemandContext";
+import { Tab__FloorType } from "../../constant";
+
 import {
     SummaryStyle,
     SummaryContent,
@@ -8,71 +10,27 @@ import {
     BtnBottom
 } from "./style";
 
-import axios from "axios";
+
 import { Link } from 'react-router-dom';
 
-class Summary extends Component {
-    handleNextStep = e => {
+const Summary = props => {
+
+    const contextType = useContext(OndemandContext);
+    
+    const handleNextStep = e => {
         //얘는 마지막 단계니까 payment 로 이동하게 바꾸기
         e.preventDefault();
-        this.handleSubmit();
-        this.props.nextStep();
+        contextType.handleSubmit(); //POST
+        props.nextStep();
     };
-    hanldeBtnBack = e => {
+    const handleBtnBack = e => {
         e.preventDefault();
-        this.props.prevStep();
+        props.prevStep();
     };
 
-    handleSubmit() {
-        let form_data = new FormData();
-
-        form_data.set("floor_type", this.props.values.floorType);
-        form_data.set("commercial_type", this.props.values.commercialType);
-
-        const plan = this.props.values.floorPlan;
-        for (var file of plan) {
-            form_data.append("floor_plan", file);
-            console.log(file);
-        }
-
-        form_data.set("floor_number", this.props.values.floorNumber);
-        form_data.set("floor_size", this.props.values.floorSize);
-        form_data.set("floor_size_unit", this.props.values.floorSizeUnit);
-        form_data.set("floor_height", this.props.values.floorHeight);
-        form_data.set("floor_height_unit", this.props.values.floorHeightUnit);
-        form_data.set("floor_address", this.props.values.floorAddress);
-
-        if (this.props.values.floorTheme[0]) {
-            const theme = this.props.values.floorTheme;
-            for (var img of theme) {
-                form_data.append("uploaded_theme", img);
-                // console.log(img);
-            }
-        }
-        if (this.props.values.floorSelectedTheme[0]) {
-            const theme = this.props.values.floorSelectedTheme;
-            for (var opt of theme) {
-                form_data.append("selected_theme", opt);
-                // console.log(opt);
-            }
-        }
-
-        form_data.set("add_req", this.props.values.additionalRequest);
-
-        axios
-            .post(`http://127.0.0.1:8000/adminpage/request/`, form_data, {
-                headers: {
-                    "content-type": "multipart/form-data"
-                }
-            })
-            .then(res => {
-                console.log(res.data);
-            })
-            .catch(err => console.log(err));
-    }
-
-    calculateCost = (type, size) => {
-        const unit = this.props.values.floorSizeUnit;
+    
+    const calculateCost = (type, size) => {
+        const unit = contextType.val.floorSizeUnit;
         const m = "m";
         const ft = "ft";
 
@@ -107,7 +65,6 @@ class Summary extends Component {
         }
     };
 
-    render() {
         return (
             <OndemandConsumer>
                 {value => (
@@ -116,9 +73,6 @@ class Summary extends Component {
 
                             <div
                                 className="Summary__BtnClose"
-                                // onClick={e => {
-                                //     value.handleOpenModal();
-                                // }}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -145,20 +99,19 @@ class Summary extends Component {
                                         <div className="Content__Title">
                                             Floor Type:
                                             <span className="Content__Desc">
-                                                Commercial
-                                                {this.props.values.floorType}
-                                                {/* {this.props.values.floorType ===
-                                        "Commercial"
+                                                {value.val.floorType}
+                                                {value.val.floorType ===
+                                        Tab__FloorType.Commercial
                                             ? "( "
                                             : ""}
-                                        {this.props.values.floorType ===
-                                        "Commercial"
-                                            ? this.props.values.commercialType
+                                        {value.val.floorType ===
+                                        Tab__FloorType.Commercial
+                                            ? value.val.commercialType
                                             : ""}
-                                        {this.props.values.floorType ===
-                                        "Commercial"
+                                        {value.val.floorType ===
+                                        Tab__FloorType.Commercial
                                             ? " )"
-                                            : ""} */}
+                                            : ""}
                                             </span>
                                         </div>
                                     </section>
@@ -166,10 +119,8 @@ class Summary extends Component {
                                     <section className="Summary__Content">
                                         <img
                                             className="Content__Floor"
-                                            src={
-                                                "https://images.unsplash.com/photo-1542287343796-5bc81a6df440?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80"
-                                            }
-                                            // src={this.props.values.floorPlanUrl}
+                                            
+                                            src={value.val.floorPlanUrl}
                                             alt="floorplan-summary"
                                         />
 
@@ -179,34 +130,33 @@ class Summary extends Component {
                                             Number of Floors:
                                         </div>
                                         <div className="Content__Desc">
-                                            Null
-                                            {/* {this.props.values.floorNumber} */}
+                                            {/* Null */}
+                                            {value.val.floorNumber}
                                         </div>
 
                                         <div className="Content__Title">
                                             Size of Floor:
                                         </div>
                                         <div className="Content__Desc">
-                                            Null
-                                            {/* {this.props.values.floorSize}{" "}
-                                        {this.props.values.floorSizeUnit} */}
+                                            {/* Null */}
+                                            {value.val.floorSize}{" "}
+                                        {value.val.floorSizeUnit}
                                         </div>
 
                                         <div className="Content__Title">
                                             Height of Floor:
                                         </div>
                                         <div className="Content__Desc">
-                                            Null
-                                            {/* {this.props.values.floorHeight}{" "}
-                                        {this.props.values.floorHeightUnit} */}
+                                            {/* Null */}
+                                            {value.val.floorHeight}{" "}
+                                        {value.val.floorHeightUnit}
                                         </div>
 
                                         <div className="Content__Title">
                                             Address of Floor:
                                         </div>
                                         <div className="Content__Desc">
-                                            Null
-                                            {/* {this.props.values.floorAddress} */}
+                                            {value.val.floorAddress}
                                         </div>
                                     </section>
 
@@ -214,9 +164,9 @@ class Summary extends Component {
                                         <div className="Content__Title">
                                             Floor Themes:
                                         </div>
-                                        {this.props.values.floorSelectedTheme
+                                        {value.val.floorSelectedTheme
                                             .length !== 0 ? (
-                                            this.props.values.floorSelectedTheme.map(
+                                                value.val.floorSelectedTheme.map(
                                                 items => {
                                                     return (
                                                         <img
@@ -231,7 +181,7 @@ class Summary extends Component {
                                             <img
                                                 className="Content__Img"
                                                 src={
-                                                    this.props.values
+                                                    value.val
                                                         .floorThemeUrl
                                                 }
                                                 alt="uploaded-style"
@@ -246,7 +196,7 @@ class Summary extends Component {
 
                                         <div className="Content__TextArea">
                                             {
-                                                this.props.values
+                                                value.val
                                                     .additionalRequest
                                             }
                                         </div>
@@ -268,13 +218,13 @@ class Summary extends Component {
                                         </div>
 
                                         <div className="Content__Cost">
-                                            {this.calculateCost(
-                                                this.props.values.floorType,
-                                                this.props.values.floorSize
+                                            {calculateCost(
+                                                value.val.floorType,
+                                                value.val.floorSize
                                             )}
-                                            ({this.props.values.floorType},{" "}
-                                            {this.props.values.floorSize}{" "}
-                                            {this.props.values.floorSizeUnit}{" "}
+                                            ({value.val.floorType},{" "}
+                                            {value.val.floorSize}{" "}
+                                            {value.val.floorSizeUnit}{" "}
                                             &sup2; )
                                         </div>
                                     </section>
@@ -282,11 +232,11 @@ class Summary extends Component {
                             </SummaryContent>
 
                             <section className="Summary__Bottom">
-                                <BtnBottom btnBack onClick={this.hanldeBtnBack}>
+                                <BtnBottom btnBack onClick={handleBtnBack}>
                                     Edit Application
                                 </BtnBottom>
 
-                                <BtnBottom onClick={this.handleNextStep}>
+                                <BtnBottom onClick={handleNextStep}>
                                     Confirm Payment
                                 </BtnBottom>
                             </section>
@@ -295,7 +245,7 @@ class Summary extends Component {
                 )}
             </OndemandConsumer>
         );
-    }
+    
 }
 
 export default Summary;

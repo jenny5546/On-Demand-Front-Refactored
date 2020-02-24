@@ -14,6 +14,7 @@ import { Map } from "immutable";
 2. 이미지는 {0: 'url', 1: 'url'...}으로 담겨온다. 
 3. 이미지 크기는 320*480 혹은 480*320
 *-------------------------------------------------------------------* */
+
 function importAll(r) {
     let images = {};
     r.keys().map((item,index) => images[index] = r(item))  

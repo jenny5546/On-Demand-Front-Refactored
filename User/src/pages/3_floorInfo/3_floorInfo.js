@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import { FloorInfoStyle, FloorInfoInput, BtnBottom } from "./style";
-import { OndemandConsumer } from "../../context/OndemandContext";
+import { OndemandContext, OndemandConsumer } from "../../context/OndemandContext";
 import { Link } from 'react-router-dom';
 
 const getColor = props => {
@@ -54,27 +54,22 @@ const Container = styled.div`
 `;
 
 const FloorPlanInfo = props => {
+
+    const contextType = useContext(OndemandContext);
+    
     const handleNextStep = e => {
         e.preventDefault();
-
         //error handling
-        if (props.values.floorSize === 0)
+        if (contextType.val.floorSize === 0)
             alert("Please fill in the required questions properly");
-        // else if (
-        //     props.values.floorSizeUnit === null ||
-        //     (props.values.floorHeight !== "" &&
-        //         props.values.floorHeightUnit === null)
-        // )
-        //     alert("Please specify the unit of your floor plan");
         else {
             props.nextStep();
-            // this.handlePlanSubmit();
         }
     };
 
     const hanldeBtnBack = e => {
         e.preventDefault();
-        props.values.floorType === "Residential"
+        contextType.val.floorType === "Residential"
             ? props.prev2Step()
             : props.prevStep();
     };
@@ -96,9 +91,6 @@ const FloorPlanInfo = props => {
 
                         <div
                             className="FloorInfo__BtnClose"
-                            // onClick={e => {
-                            //     value.handleOpenModal();
-                            // }}
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -129,16 +121,16 @@ const FloorPlanInfo = props => {
                                 min="1"
                                 type="text"
                                 name="floorSize"
-                                onChange={props.handleChange("floorSize")}
+                                onChange={value.handleChange("floorSize")}
                                 value={
-                                    props.values.floorSize === 0
+                                    value.val.floorSize === 0
                                         ? ""
-                                        : props.values.floorSize
+                                        : value.val.floorSize
                                 }
                             />
                             <select
                                 name="floorSizeUnit"
-                                onChange={props.handleChange("floorSizeUnit")}
+                                onChange={value.handleChange("floorSizeUnit")}
                             >
                                 <option value="m">m &sup2;</option>
                                 <option value="ft">feet &sup2;</option>
@@ -155,12 +147,12 @@ const FloorPlanInfo = props => {
                                 min="1"
                                 type="text"
                                 name="floorHeight"
-                                onChange={props.handleChange("floorHeight")}
-                                value={props.values.floorHeight}
+                                onChange={value.handleChange("floorHeight")}
+                                value={value.val.floorHeight}
                             />
                             <select
                                 name="floorHeightUnit"
-                                onChange={props.handleChange("floorHeightUnit")}
+                                onChange={value.handleChange("floorHeightUnit")}
                             >
                                 <option value="m">m</option>
                                 <option value="ft">feet</option>
@@ -176,8 +168,8 @@ const FloorPlanInfo = props => {
                             <input
                                 type="text"
                                 name="floorAddress"
-                                onChange={props.handleChange("floorAddress")}
-                                value={props.values.floorAddress}
+                                onChange={value.handleChange("floorAddress")}
+                                value={value.val.floorAddress}
                             />
                         </FloorInfoInput>
 
@@ -190,7 +182,10 @@ const FloorPlanInfo = props => {
                                     isDragReject
                                 })}
                             >
-                                <input {...getInputProps()} />
+                                <input 
+                                    {...getInputProps()} 
+                                    onChange={ value.handlePlanFile } 
+                                />
                                 <p>
                                     Upload Your Floor Plan (files in .pdf or
                                     .jpg, .png format)

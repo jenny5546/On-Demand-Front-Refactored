@@ -6,11 +6,9 @@ import OndemandStyle from "./style.js";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { OndemandConsumer } from "../../context/OndemandContext";
 
-/*
-
- Archisketch Web Front -> Ondemand Page
-  
-*/
+/* *-----------------------------------------------------------------* 
+                키자마자 보이는 On DemandMain Page
+*-----------------------------------------------------------------* */
 
 class MainPage extends Component {
     render() {
@@ -92,9 +90,12 @@ class MainPage extends Component {
                             </section> */}
                         </OndemandStyle>
 
-                        {/* <Mainform openModal={value.openModal} /> */}
-                        {/* Tutorial 로 바꿔주기. */}
-                        
+
+                        {/* 
+                            Tutorial 은 Modal 로 처리,
+                            Application 시작부터는 /application 으로 롸우팅.
+                        */}
+
                         <Router>
                             <Tutorial openModal={value.openModal}/>
                             <Route path = "/application" component={Application} />
