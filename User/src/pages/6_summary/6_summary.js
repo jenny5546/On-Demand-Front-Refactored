@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { OndemandContext, OndemandConsumer } from "../../context/OndemandContext";
 import { Tab__FloorType } from "../../constant";
+import Carousel from 'nuka-carousel';
 
 import {
     SummaryStyle,
@@ -64,6 +65,8 @@ const Summary = props => {
             else return <p1>$699</p1>;
         }
     };
+    
+    
 
         return (
             <OndemandConsumer>
@@ -117,19 +120,20 @@ const Summary = props => {
                                     </section>
 
                                     <section className="Summary__Content">
-                                        
-                                        {value.val.floorPlanUrl.map(
-                                            items => {
-                                                return (
-                                                    <img
-                                                        src={items}
-                                                        className="Content__Floor"
-                                                        alt="floorplan-summary"
-                                                    />
-                                                );
-                                            }
-                                        )}
-
+                                        <Carousel>
+                                            {value.val.floorPlanUrl.map(
+                                                items => {
+                                                    return (
+                                                        <img
+                                                            src={items}
+                                                            className="Content__Floor"
+                                                            alt="floorplan-summary"
+                                                        />
+                                                    );
+                                                }
+                                            )}  
+                                        </Carousel>
+                                                                                  
                                         {/* <img
                                             className="Content__Floor"
                                             
