@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ThemeSelector from "./components/themeSelector";
+import ThemeSelector from "./ThemeSelector";
 import { FloorThemeStyle, BtnBottom } from "./style";
 import { OndemandConsumer } from "../../context/OndemandContext";
 import { Link } from 'react-router-dom';
