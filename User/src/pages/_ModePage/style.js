@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const FloorTypeStyle = styled.main`
+const ModeTypeStyle = styled.main`
     position: fixed;
     top: 0;
     left: 0;
@@ -9,40 +9,15 @@ const FloorTypeStyle = styled.main`
     height: 100vh;
     z-index: 1;
 
-    .FloorType__BtnClose {
-        float: right;
-        margin: 16px;
 
-        width: 40px;
-        height: 40px;
-        border-radius: 4px;
-        background: #fbfbfb;
-
-        padding: 8px;
-        box-sizing: border-box;
-        transition: all 0.32s ease;
-        user-select: none;
-        cursor: pointer;
-
-        &:hover {
-            background: #ebebeb;
-        }
-        &:acitve {
-            background: #dbdbdb;
-        }
-        svg {
-            fill: #383e44;
-        }
-    }
-
-    .FloorTypeWrap {
+    .ModeTypeWrap {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         user-select: none;
 
-        .FloorType__Title {
+        .ModeType__Title {
             font-size: 24px;
             font-weight: 700;
             color: #2b2b2b;
@@ -50,7 +25,7 @@ const FloorTypeStyle = styled.main`
             text-align: center;
         }
 
-        .FloorType__Subtitle {
+        .ModeType__Subtitle {
             font-size: 16px;
             color: #4b4b4b;
             margin-bottom: 64px;
@@ -58,41 +33,18 @@ const FloorTypeStyle = styled.main`
         }
     }
 
-    .FloorType__CardWrap {
+    .ModeType__CardWrap {
         min-width: 560px;
     }
 
-    .FloorType__BackLink {
+    .ModeType__BackLink {
         text-decoration: none;
     }
 
-    .FloorType__BtnBack {
-        margin: auto;
-        margin-top: 32px;
-        text-align: center;
-
-        width: 320px;
-        height: 48px;
-        border: 1px solid #d9e7e9;
-
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 48px;
-        color: #499fb6;
-
-        transition: all 0.32s ease;
-        cursor: pointer;
-
-        &:hover {
-            background: #e7f2f4;
-        }
-        &:active {
-            background: #d9e7e9;
-        }
-    }
+    
 `;
 
-const FloorTypeCard = styled.div`
+const ModeTypeCard = styled.div`
     display: inline-block;
     width: 272px;
     height: 356px;
@@ -114,14 +66,14 @@ const FloorTypeCard = styled.div`
         background: #d9e7e9;
     }
 
-    .FloorType__Img {
+    .ModeType__Img {
         margin: 16px;
         width: 240px;
         height: 200px;
         background: #b4b4b4;
     }
 
-    .FloorType__Name {
+    .ModeType__Name {
         margin-top: 8px;
         font-size: 16px;
         font-weight: 700;
@@ -129,14 +81,14 @@ const FloorTypeCard = styled.div`
         text-align: center;
     }
 
-    .FloorType__Desc {
+    .ModeType__Desc {
         width: 240px;
         margin: auto;
         margin-top: 8px;
-        font-size: 14px;
+        font-size: 10px;
         color: #4b4b4b;
         text-align: center;
     }
 `;
 
-export { FloorTypeStyle, FloorTypeCard };
+export { ModeTypeStyle, ModeTypeCard };

@@ -223,7 +223,7 @@ class Tutorial extends Component {
                                     })()}
 
                                     {/* --------------- Tuto Contents --------------- */}
-                                    <Link to="/application">
+                                    <Link to="/ondemand-form">
 
                                         <div
                                             className={
