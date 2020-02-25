@@ -149,14 +149,14 @@ class MainPage extends Component {
                         </OndemandStyle>
 
                         {/* 
-                            Tutorial 은 Modal 로 처리,
-                            Application 시작부터는 /application 으로 롸우팅.
+                            ******* ROUTER 처리 부분 ******
                         */}
-
+                        
+                        
                         <Router>
                             <Tutorial openModal={value.openModal} />
                             <Route
-                                path="/application"
+                                path="/ondemand-form"
                                 component={Application}
                             />
                         </Router>

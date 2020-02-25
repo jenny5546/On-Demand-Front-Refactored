@@ -1,129 +1,99 @@
 import React, { Component } from "react";
-import { FloorTypeStyle, FloorTypeCard } from "./style";
-
-import { Tab__FloorType } from "../../constant";
-import { OndemandConsumer } from "../../context/OndemandContext";
 import { Link } from "react-router-dom";
+import { ModeTypeStyle, ModeTypeCard } from "./style";
 
 class ModeType extends Component {
-    /* *----------------------------------------------------* 
-            Residential, Commercial에 따라 다음 Step 조정 
-    *----------------------------------------------------* */
-    handleTypeSelected = value => {
-        if (value === Tab__FloorType.Residential) {
-            this.props.next2Step();
-        }
-        if (value === Tab__FloorType.Commercial) {
-            this.props.nextStep();
-        }
-    };
 
-    render() {
-        return (
-            <OndemandConsumer>
-                {value => (
-                    <FloorTypeStyle>
-                        <Link to="/">
-                            <div className="FloorType__BtnClose">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path d="M16.192 6.344L11.949 10.586 7.707 6.344 6.293 7.758 10.535 12 6.293 16.242 7.707 17.656 11.949 13.414 16.192 17.656 17.606 16.242 13.364 12 17.606 7.758z" />
-                                </svg>
+    render(){
+        return(
+            <ModeTypeStyle>
+                <main className="ModeTypeWrap">
+                    <div className="ModeType__Title">
+                        Choose Your Floor Plan Type
+                    </div>
+                    <div className="ModeType__Subtitle">
+                        Tell us the purpose of your floor
+                    </div>
+
+                    <section className="ModeType__CardWrap">
+
+                        <ModeTypeCard
+                            id="Search"
+                        >
+                            <img
+                                className="ModeType__Img"
+                                src={
+                                    process.env.PUBLIC_URL +
+                                    "assets/mode/search_floorplan.jpg"
+                                }
+                                alt={"Search"}
+                            />
+
+                            <div className="ModeType__Name">
+                                Search My Home
                             </div>
-                        </Link>
-
-                        <main className="FloorTypeWrap">
-                            <div className="FloorType__Title">
-                                Choose Your Floor Plan Type
+                            <div className="ModeType__Desc">
+                                Find your home's floor plan by searching our 
+                                database with the apartment name, address, or region. (Korea only)
                             </div>
-                            <div className="FloorType__Subtitle">
-                                Tell us the purpose of your floor
+                        </ModeTypeCard>
+
+                        <ModeTypeCard
+                            id="Draw"
+                        >
+                            <img
+                                className="ModeType__Img"
+                                src={
+                                    process.env.PUBLIC_URL +
+                                    "assets/mode/newProject_floorplan.jpg"
+                                }
+                                alt={"Draw"}
+                            />
+
+                            <div className="ModeType__Name">
+                                Draw New Floor Plan
                             </div>
-
-                            <section className="FloorType__CardWrap">
-                                <FloorTypeCard
-                                    id="Residential"
-                                    onClick={e => {
-                                        //다음 Step 결정
-                                        this.handleTypeSelected(
-                                            Tab__FloorType.Residential
-                                        );
-
-                                        //context 넘겨주기
-                                        value.handleFloorType(
-                                            Tab__FloorType.Residential
-                                        );
-                                    }}
-                                >
-                                    <img
-                                        className="FloorType__Img"
-                                        src={
-                                            process.env.PUBLIC_URL +
-                                            "assets/floortype/Residential.jpg"
-                                        }
-                                        alt={"Residential"}
-                                    />
-
-                                    <div className="FloorType__Name">
-                                        Residential
-                                    </div>
-                                    <div className="FloorType__Desc">
-                                        Single, Multi-Family Homes, Dormatories,
-                                        Townhouses and Condominiums
-                                    </div>
-                                </FloorTypeCard>
-
-                                <FloorTypeCard
-                                    id="Commercial"
-                                    onClick={e => {
-                                        //다음 Step 결정
-                                        this.handleTypeSelected(
-                                            Tab__FloorType.Commercial
-                                        );
-                                        //context 넘겨주기
-                                        value.handleFloorType(
-                                            Tab__FloorType.Commercial
-                                        );
-                                    }}
-                                >
-                                    <img
-                                        className="FloorType__Img"
-                                        src={
-                                            process.env.PUBLIC_URL +
-                                            "assets/floortype/Commercial.jpg"
-                                        }
-                                        alt={"Commercial"}
-                                    />
-                                    <div className="FloorType__Name">
-                                        Commercial
-                                    </div>
-                                    <div className="FloorType__Desc">
-                                        Offices, Restaurant/Cafes, Shops,
-                                        Hotels, or special purpose buildings{" "}
-                                        <br />
-                                        (schools, hospitals and etc)
-                                    </div>
-                                </FloorTypeCard>
-                            </section>
-
-                            <Link className="FloorType__BackLink" to="/">
-                                <div
-                                    className="FloorType__BtnBack"
-                                    onClick={value.handleOpenModal}
-                                >
-                                    Back to Tutorial
+                            <div className="ModeType__Desc">
+                                Draw your own floor plan using our Archisketch Editor
+                            </div>
+                        </ModeTypeCard>
+                        
+                        <Link to='/ondemand'>
+                            <ModeTypeCard
+                                id="Ondemand"
+                            >
+                                <img
+                                    className="ModeType__Img"
+                                    src={
+                                        process.env.PUBLIC_URL +
+                                        "assets/mode/ondemand_floorplan.jpg"
+                                    }
+                                    alt={"Ondemand"}
+                                />
+                                <div className="ModeType__Name">
+                                    Order Floor Plan
                                 </div>
-                            </Link>
-                        </main>
-                    </FloorTypeStyle>
-                )}
-            </OndemandConsumer>
-        );
+                                <div className="ModeType__Desc">
+                                Order & Receive 3D contents including 3D floor plan, 
+                                realistic render images, and immersive 720 tour within 24 hours.
+                                </div>
+                            </ModeTypeCard>
+                        </Link>
+                        
+                    </section>
+
+                    
+                </main>
+            </ModeTypeStyle>
+            
+
+        )
     }
+    
+
+    
+
+    
 }
 
 export default ModeType;
