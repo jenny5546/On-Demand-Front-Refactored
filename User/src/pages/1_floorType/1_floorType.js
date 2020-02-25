@@ -21,7 +21,7 @@ class FloorType extends Component {
     };
 
     render() {
-        console.log(this.props.floorType);
+        
         return (
             <OndemandConsumer>
                 {value => (

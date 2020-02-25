@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useDropzone } from "react-dropzone";
+// import DropzoneComponent from 'react-dropzone-component';
 import styled from "styled-components";
 import { FloorInfoStyle, FloorInfoInput, BtnBottom } from "./style";
 import { OndemandContext, OndemandConsumer } from "../../context/OndemandContext";
@@ -17,6 +18,8 @@ const getColor = props => {
     }
     return "#eeeeee";
 };
+
+
 
 const Container = styled.div`
     margin-top: 8px;
@@ -175,6 +178,7 @@ const FloorPlanInfo = props => {
                             />
                         </FloorInfoInput>
 
+                        
                         <div className="FloorInfo__Drop">
                             *Upload Floor Plan
                             <Container

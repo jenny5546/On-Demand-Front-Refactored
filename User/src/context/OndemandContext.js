@@ -100,7 +100,7 @@ class OndemandProvider extends Component {
     handleSubmit= () => {
 
         let form_data = new FormData();
-        console.log(this.state.floorSizeUnit)
+        
         form_data.set("floor_type", this.state.floorType);
         form_data.set("commercial_type", this.state.commercialType);
         
@@ -132,9 +132,14 @@ class OndemandProvider extends Component {
         }
 
         form_data.set("add_req", this.state.additionalRequest);
-        console.log(form_data)
+        form_data.set("contact_info", this.state.contactInfo);
+
+        for (var value of form_data.values()) {
+            console.log(value);
+        }
+        
         axios
-            .post(`http://localhost:8000/adminpage/request/`, form_data, {
+            .post(`http://0.0.0.0:8000/adminpage/request/`, form_data, {
                 headers: {
                     "content-type": "multipart/form-data"
                 }

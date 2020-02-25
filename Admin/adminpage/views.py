@@ -150,9 +150,9 @@ def request(request):
     #요청한 사람 정보(user)
     print('gotit')
     ################## User email info ###################
-    username = generate_username(1)[0]
-    # useremail= request.POST.get('contact_info')
-    useremail = 'jenny5546@naver.com' #연결할때, front에서 들고오기
+    username = generate_username(1)[0] #임시로 더미 만들기
+    useremail= request.POST.get('contact_info')
+    # useremail = 'jenny5546@naver.com' #연결할때, front에서 들고오기
     ######################################################
 
 
@@ -233,6 +233,7 @@ def dashboard(request):
       notifications = Notification.objects.all()
       queryset = Request.objects.order_by('-progress')[:]
       onrunRequests = Request.objects.exclude(progress = 5) 
+      unreadMails = Notification.objects.filter(received_message__isnull=False).count()
       
       progress = [0]*5
 
@@ -255,6 +256,7 @@ def dashboard(request):
         'labels': labels,
         'data': data,
         'line_data' : line_data,
+        'unread_mails': unreadMails,
         'notifications': notifications,
       })
 
