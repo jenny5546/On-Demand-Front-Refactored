@@ -2,8 +2,8 @@
 import React, { Component } from "react";
 import Application from "../../components/ApplicationControl";
 import Tutorial from "../../components/Tutorial/Tutorial";
-import OndemandStyle from "./style.js";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { OndemandStyle, OndemandIframe, OndemandStartBtn } from "./style.js";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { OndemandConsumer } from "../../context/OndemandContext";
 
 /* *-----------------------------------------------------------------* 
@@ -11,7 +11,21 @@ import { OndemandConsumer } from "../../context/OndemandContext";
 *-----------------------------------------------------------------* */
 
 class MainPage extends Component {
+    constructor() {
+        super();
+        this.state = {
+            iFrame: true
+        };
+    }
+
+    handleIframe = () => {
+        this.setState({
+            iFrame: !this.state.iFrame
+        });
+    };
+
     render() {
+        const { iFrame } = this.state;
         return (
             <OndemandConsumer>
                 {value => (
@@ -71,25 +85,68 @@ class MainPage extends Component {
                                         digital spaces.
                                     </div>
 
-                                    <div
+                                    <OndemandStartBtn
+                                        active
                                         className="Left__Btn"
                                         onClick={e => {
                                             value.handleOpenModal();
                                         }}
                                     >
                                         <span>Click to Get Started</span>
-                                    </div>
+                                    </OndemandStartBtn>
+
+                                    <OndemandStartBtn className="Left__Btn">
+                                        <span>Back</span>
+                                    </OndemandStartBtn>
                                 </div>
                             </section>
 
-                            {/* <section className="Ondemand__Right">
-                                <iframe
-                                    title="Ondemand_Demo"
-                                    src={`https://plan.archisketch.com/?mode=0&port_id=3349`}
-                                ></iframe>
-                            </section> */}
-                        </OndemandStyle>
+                            <section
+                                className="Ondemand__Right"
+                                onClick={this.handleIframe}
+                            >
+                                {iFrame === true ? (
+                                    <OndemandIframe>
+                                        <div className="iframe_Contetns_Wrap">
+                                            <svg
+                                                className="iframe__logo"
+                                                width="80"
+                                                height="79"
+                                                viewBox="0 0 80 79"
+                                            >
+                                                <g
+                                                    fill="none"
+                                                    fillRule="evenodd"
+                                                >
+                                                    <circle
+                                                        cx="39.943"
+                                                        cy="39.214"
+                                                        r="39.13"
+                                                        fill="#383E44"
+                                                    />
+                                                    <path
+                                                        fill="#FAFAFA"
+                                                        fillRule="nonzero"
+                                                        d="M32.116934,29.0792014 L32.116934,49.3486061 C32.116934,50.894246 33.8190945,51.833369 35.1299537,50.9920713 L51.0559144,40.857369 C52.2689483,40.0943316 52.2689483,38.3334759 51.0559144,37.5508734 L35.1299537,27.4357362 C33.8190945,26.5944385 32.116934,27.5335615 32.116934,29.0792014 Z"
+                                                    />
+                                                </g>
+                                            </svg>
 
+                                            <img
+                                                src="assets/OndemandiFrame.png"
+                                                alt="OndemandiFrame"
+                                            />
+                                            <span>Click the Demo Viewer</span>
+                                        </div>
+                                    </OndemandIframe>
+                                ) : (
+                                    <iframe
+                                        title="Ondemand_Demo"
+                                        src={`https://plan.archisketch.com/?mode=0&port_id=3349`}
+                                    ></iframe>
+                                )}
+                            </section>
+                        </OndemandStyle>
 
                         {/* 
                             Tutorial 은 Modal 로 처리,
@@ -97,11 +154,12 @@ class MainPage extends Component {
                         */}
 
                         <Router>
-                            <Tutorial openModal={value.openModal}/>
-                            <Route path = "/application" component={Application} />
+                            <Tutorial openModal={value.openModal} />
+                            <Route
+                                path="/application"
+                                component={Application}
+                            />
                         </Router>
-                        
-
                     </>
                 )}
             </OndemandConsumer>
