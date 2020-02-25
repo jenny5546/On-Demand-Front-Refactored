@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-// import DropzoneComponent from 'react-dropzone-component';
 import styled from "styled-components";
 import { FloorInfoStyle, FloorInfoInput, BtnBottom } from "./style";
 import { OndemandContext, OndemandConsumer } from "../../context/OndemandContext";
@@ -256,7 +255,7 @@ const FloorPlanInfo = props => {
                                 })}
                             >
                                 <input 
-                                    // onChange={ value.handlePlanFile }
+                                    
                                     {...getInputProps({onChange: value.handlePlanFile})}   
                                 />
                                 <p>
