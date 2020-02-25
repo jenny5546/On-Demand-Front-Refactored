@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-// import DropzoneComponent from 'react-dropzone-component';
 import styled from "styled-components";
 import { FloorInfoStyle, FloorInfoInput, BtnBottom } from "./style";
 import {
@@ -118,7 +117,11 @@ const FloorPlanInfo = props => {
     const handleNextStep = e => {
         e.preventDefault();
         //error handling
-        if (contextType.val.floorSize === 0)
+        if (
+            contextType.val.floorSize === 0 ||
+            contextType.val.floorHeight === 0 ||
+            contextType.val.floorPlan.length === 0
+        )
             alert("Please fill in the required questions properly");
         else {
             props.nextStep();
@@ -207,7 +210,7 @@ const FloorPlanInfo = props => {
                             inputWidth={"268px"}
                             paddingRight={"72px"}
                         >
-                            Floor Height
+                            * Floor Height
                             <input
                                 min="1"
                                 type="text"
