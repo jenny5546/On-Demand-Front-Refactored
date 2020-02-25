@@ -30,25 +30,25 @@
                         </button>
                         <div class="header--nav_notice">
                         {% if notifications.count == 0 %}
-                        <p>No notifications </p>
+                            <p>No notifications </p>
                         {% else %}
-                        {% for noti in notifications %}
-                            <ul>
-                            
-                            {% if noti.received_message == None %}
-                                <li> <a href="/{{noti.request.id}}"><i class="far fa-user-circle" style="font-size: 20px;"></i> <p1 style="font-weight: 600; color:rgb(4, 4, 80)">{{noti.request.username}}</p1> placed a new order </a></li>
-                                <!-- <hr/> -->
-                            {% else %}
-                                <li><a href="/{{noti.received_message.request.id}}"><i class="far fa-user-circle" style="font-size: 20px;"></i> <p1 style="font-weight: 600; color:rgb(4, 4, 80)">{{ noti.received_message.username }}</p1> sent you a new message </a></li>
-                                <!-- <hr/> -->
-                            </ul>
-                            {% endif %}
-                        {% endfor %}
+                            {% for noti in notifications %}
+                                <ul>
+                                
+                                {% if noti.received_message == None %}
+                                    <li> <a href="/{{noti.request.id}}"><i class="far fa-user-circle" style="font-size: 20px;"></i> <p1 style="font-weight: 600; color:rgb(4, 4, 80)">{{noti.request.username}}</p1> placed a new order </a></li>
+                                    <!-- <hr/> -->
+                                {% else %}
+                                    <li><a href="/{{noti.received_message.request.id}}"><i class="far fa-user-circle" style="font-size: 20px;"></i> <p1 style="font-weight: 600; color:rgb(4, 4, 80)">{{ noti.received_message.username }}</p1> sent you a new message </a></li>
+                                    <!-- <hr/> -->
+                                </ul>
+                                {% endif %}
+                            {% endfor %}
                         {% endif %}
                         </div>
                     </li>
                     <li class="header--nav_menu">
-                        <a href="http://192.168.0.67:8000/messages/">
+                        <a href="/messages/">
                             <i class="fas fa-envelope" style= "color: rgb(103, 105, 109);font-size: 25px;"></i>
                             <div class="header--nav_count2"><p>{{ notifications.count }}</p></div>
                         </a>

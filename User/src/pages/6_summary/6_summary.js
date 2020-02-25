@@ -17,17 +17,27 @@ import { Link } from 'react-router-dom';
 const Summary = props => {
 
     const contextType = useContext(OndemandContext);
+
+    async function refresh() {
+        try {
+          await contextType.handleSubmit();
+          window.location.replace('http://192.168.0.40:3000/')
+        }
+        catch (err) {
+          console.log('fetch failed', err);
+        }
+    }
     
     const handleConfirm = e => {
         //얘는 마지막 단계니까 payment 로 이동하게 바꾸기
         e.preventDefault();
-        contextType.handleSubmit(); //ADMIN PAGE로 포스트 하는 부분 
-
-
+        contextType.val.contactInfo === "" ? alert('테스팅을 위한 이메일 입력 바람') 
         /* *-------------------------------------------------------------------* 
                     이 부분은 앞으로 결제 창으로 넘어가도록 바꾸어야 하는 부분 
         *-------------------------------------------------------------------* */
-        // window.location.replace("http://localhost:3000");
+        // : contextType.handleSubmit()
+        : refresh()
+        
     };
     const handleBtnBack = e => {
         e.preventDefault();
@@ -238,7 +248,16 @@ const Summary = props => {
                                         </div>
 
                                         <div className="Content__Desc">
-                                            jenny5546@naver.com
+                                            {/* 임시로 qa를 위해 집어넣은 항목 */}
+                                            <input
+                                                name="contactInfo"
+                                                value={value.val.contactInfo}
+                                                placeholder="테스팅을 위해 이메일 입력"
+                                                onChange={value.handleChange(
+                                                    "contactInfo"
+                                                )}
+                                            >
+                                            </input>
                                         </div>
                                     </section>
 

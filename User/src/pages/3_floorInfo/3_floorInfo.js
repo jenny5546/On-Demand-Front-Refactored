@@ -1,9 +1,50 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
+// import DropzoneComponent from 'react-dropzone-component';
 import styled from "styled-components";
 import { FloorInfoStyle, FloorInfoInput, BtnBottom } from "./style";
 import { OndemandContext, OndemandConsumer } from "../../context/OndemandContext";
 import { Link } from 'react-router-dom';
+
+/* *-----------------------------------------------------------------* 
+                        Drag and Drop Preview 관리 
+*-----------------------------------------------------------------* */
+
+const thumbsContainer = {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 16,
+};
+  
+const thumb = {
+    display: 'inline-flex',
+    borderRadius: 2,
+    border: '1px solid #eaeaea',
+    marginBottom: 8,
+    marginRight: 8,
+    width: 100,
+    height: 100,
+    padding: 4,
+    boxSizing: 'border-box'
+};
+  
+const thumbInner = {
+    display: 'flex',
+    minWidth: 0,
+    overflow: 'hidden'
+};
+  
+const img = {
+    display: 'block',
+    width: 'auto',
+    height: '100%'
+};
+
+/* *-----------------------------------------------------------------* */ 
+
+
+
 
 const getColor = props => {
     if (props.isDragAccept) {
@@ -18,13 +59,15 @@ const getColor = props => {
     return "#eeeeee";
 };
 
+
+
 const Container = styled.div`
     margin-top: 8px;
     position: relative;
     text-align: center;
     height: 192px;
     flex: 1;
-    display: flex;
+    display: flex ;
     flex-direction: column;
     align-items: center;
     padding: 20px;
@@ -55,6 +98,24 @@ const Container = styled.div`
 
 const FloorPlanInfo = props => {
 
+    const [files, setFiles] = useState([]);
+    const thumbs = files.map(file => (
+        <div style={thumb} key={file.name}>
+          <div style={thumbInner}>
+            <img
+              src={file.preview}
+              style={img}
+              alt= "preview"
+            />
+          </div>
+        </div>
+    ));
+    useEffect(() => () => {
+        // Make sure to revoke the data uris to avoid memory leaks
+        files.forEach(file => URL.revokeObjectURL(file.preview));
+    }, [files]);
+
+
     const contextType = useContext(OndemandContext);
     
     const handleNextStep = e => {
@@ -80,7 +141,14 @@ const FloorPlanInfo = props => {
         isDragActive,
         isDragAccept,
         isDragReject
-    } = useDropzone({ accept: "image/*" });
+    } = useDropzone({ 
+        accept: "image/*", 
+        onDrop: acceptedFiles => {
+            setFiles(acceptedFiles.map(file => Object.assign(file, {
+              preview: URL.createObjectURL(file)
+            })));
+        }
+    });
 
     return (
         <OndemandConsumer>
@@ -175,6 +243,7 @@ const FloorPlanInfo = props => {
                             />
                         </FloorInfoInput>
 
+                        
                         <div className="FloorInfo__Drop">
                             *Upload Floor Plan
                             <Container
@@ -185,15 +254,21 @@ const FloorPlanInfo = props => {
                                 })}
                             >
                                 <input 
-                                    {...getInputProps()} 
-                                    onChange={ value.handlePlanFile } 
+                                    // onChange={ value.handlePlanFile }
+                                    {...getInputProps({onChange: value.handlePlanFile})}   
                                 />
                                 <p>
                                     Upload Your Floor Plan (files in .pdf or
                                     .jpg, .png format)
                                 </p>
+                                
                             </Container>
+                            <div style={thumbsContainer}>
+                                {thumbs}
+                            </div>
+                            
                         </div>
+                        
 
                         <section className="FloorInfo__Bottom">
                             <BtnBottom btnBack onClick={hanldeBtnBack}>
