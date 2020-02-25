@@ -122,11 +122,11 @@ const FloorPlanInfo = props => {
     const handleNextStep = e => {
         e.preventDefault();
         //error handling
-        // if (contextType.val.floorSize === 0 || contextType.val.floorHeight === 0 || contextType.val.floorPlan.length === 0)
-        //     alert("Please fill in the required questions properly");
-        // else {
+        if (contextType.val.floorSize === 0 || contextType.val.floorHeight === 0 || contextType.val.floorPlan.length === 0)
+            alert("Please fill in the required questions properly");
+        else {
             props.nextStep();
-        // }
+        }
     };
 
     const hanldeBtnBack = e => {
@@ -255,7 +255,7 @@ const FloorPlanInfo = props => {
                                 })}
                             >
                                 <input 
-                                    // onChange={ value.handlePlanFile }
+                                    
                                     {...getInputProps({onChange: value.handlePlanFile})}   
                                 />
                                 <p>
