@@ -50,6 +50,20 @@ const Popup = styled.div`
 `
 
 const UploadBtn = styled.button`
+    border:0;
+    padding: 10px;
+    border-radius: 10px;
+    background: #499fb6;
+    color: white;
+    font-weight: 600;
+    
+    &:hover {
+        background: #6db2c5;
+    }
+    
+`
+
+const ReturnBtn = styled.button`
     border: 1px solid #d9e7e9;
     padding: 10px;
     border-radius: 10px;
@@ -57,6 +71,7 @@ const UploadBtn = styled.button`
         background: #e7f2f4;
     }
 `
+
 const thumbsContainer = {
     display: 'flex',
     flexDirection: 'row',
@@ -196,12 +211,12 @@ const FloorTheme = props => {
                         <div className="FloorTheme__SubTitle">
 
                             {open? 
-                                <UploadBtn onClick = {()=> setOpen(false)}>
+                                <ReturnBtn onClick = {()=> setOpen(false)}>
                                     Return to <span>Interior Choices</span>
-                                </UploadBtn>
+                                </ReturnBtn>
                                 :
                                 <UploadBtn onClick = {()=> setOpen(!open)}>
-                                    <span>Or</span> Upload your Own Style
+                                    <p1>Or</p1> Upload your Own Style
                                 </UploadBtn> 
                             }
                             
