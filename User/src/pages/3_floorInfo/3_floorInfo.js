@@ -15,6 +15,8 @@ const thumbsContainer = {
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 16,
+    maxHeight: 100,
+    overflow: 'auto',
 };
   
 const thumb = {
