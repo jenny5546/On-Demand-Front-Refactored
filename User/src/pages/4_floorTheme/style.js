@@ -59,6 +59,7 @@ const FloorThemeStyle = styled.main`
             span {
                 font-weight: 700;
                 color: #499fb6;
+                // font-size: 18px;
             }
         }
 
