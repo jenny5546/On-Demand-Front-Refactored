@@ -161,14 +161,6 @@ const Summary = props => {
                                         <SummaryDivision />
 
                                         <div className="Content__Title">
-                                            Number of Floors:
-                                        </div>
-                                        <div className="Content__Desc">
-                                            {/* Null */}
-                                            {value.val.floorNumber}
-                                        </div>
-
-                                        <div className="Content__Title">
                                             Size of Floor:
                                         </div>
                                         <div className="Content__Desc">
@@ -185,13 +177,22 @@ const Summary = props => {
                                             {value.val.floorHeight}{" "}
                                         {value.val.floorHeightUnit}
                                         </div>
-
                                         <div className="Content__Title">
-                                            Address of Floor:
+                                                Address of Floor:
                                         </div>
-                                        <div className="Content__Desc">
-                                            {value.val.floorAddress}
-                                        </div>
+                                        {value.val.floorAddress !== "" ? (
+                                            <div className="Content__Desc">
+                                                {value.val.floorAddress}
+                                            </div>
+                                        ):
+                                        (
+                                            <div className="Content__Desc">
+                                                -
+                                            </div>
+                                        )
+                                        
+                                        }
+                                        
                                     </section>
 
                                     <section className="Summary__Content">
