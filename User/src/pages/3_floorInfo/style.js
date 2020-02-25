@@ -139,12 +139,12 @@ const FloorInfoInput = styled.label`
         top: 26px;
         right: 0;
         color: #8b8b8b;
-        font-size: 16px;
+        font-size: 14px;
 
         display: inline-block;
         width: 64px;
         height: 40px;
-        padding: 10px 15px;
+        padding: 10px 8px;
         outline: 0;
         border: 0;
         border-radius: 0;

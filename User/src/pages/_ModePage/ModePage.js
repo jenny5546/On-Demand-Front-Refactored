@@ -5,7 +5,7 @@ import { Tab__FloorType } from "../../constant";
 import { OndemandConsumer } from "../../context/OndemandContext";
 import { Link } from "react-router-dom";
 
-class FloorType extends Component {
+class ModeType extends Component {
     /* *----------------------------------------------------* 
             Residential, Commercial에 따라 다음 Step 조정 
     *----------------------------------------------------* */
@@ -126,4 +126,4 @@ class FloorType extends Component {
     }
 }
 
-export default FloorType;
+export default ModeType;

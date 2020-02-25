@@ -2,50 +2,50 @@ import React, { useContext, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import { FloorInfoStyle, FloorInfoInput, BtnBottom } from "./style";
-import { OndemandContext, OndemandConsumer } from "../../context/OndemandContext";
-import { Link } from 'react-router-dom';
+import {
+    OndemandContext,
+    OndemandConsumer
+} from "../../context/OndemandContext";
+import { Link } from "react-router-dom";
 
 /* *-----------------------------------------------------------------* 
                         Drag and Drop Preview 관리 
 *-----------------------------------------------------------------* */
 
 const thumbsContainer = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
     marginTop: 16,
     maxHeight: 100,
-    overflow: 'auto',
+    overflow: "auto"
 };
-  
+
 const thumb = {
-    display: 'inline-flex',
+    display: "inline-flex",
     borderRadius: 2,
-    border: '1px solid #eaeaea',
+    border: "1px solid #eaeaea",
     marginBottom: 8,
     marginRight: 8,
     width: 100,
     height: 100,
     padding: 4,
-    boxSizing: 'border-box'
+    boxSizing: "border-box"
 };
-  
+
 const thumbInner = {
-    display: 'flex',
+    display: "flex",
     minWidth: 0,
-    overflow: 'hidden'
+    overflow: "hidden"
 };
-  
+
 const img = {
-    display: 'block',
-    width: 'auto',
-    height: '100%'
+    display: "block",
+    width: "auto",
+    height: "100%"
 };
 
-/* *-----------------------------------------------------------------* */ 
-
-
-
+/* *-----------------------------------------------------------------* */
 
 const getColor = props => {
     if (props.isDragAccept) {
@@ -60,15 +60,13 @@ const getColor = props => {
     return "#eeeeee";
 };
 
-
-
 const Container = styled.div`
     margin-top: 8px;
     position: relative;
     text-align: center;
     height: 192px;
     flex: 1;
-    display: flex ;
+    display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
@@ -98,31 +96,32 @@ const Container = styled.div`
 `;
 
 const FloorPlanInfo = props => {
-
     const [files, setFiles] = useState([]);
     const thumbs = files.map(file => (
         <div style={thumb} key={file.name}>
-          <div style={thumbInner}>
-            <img
-              src={file.preview}
-              style={img}
-              alt= "preview"
-            />
-          </div>
+            <div style={thumbInner}>
+                <img src={file.preview} style={img} alt="preview" />
+            </div>
         </div>
     ));
-    useEffect(() => () => {
-        // Make sure to revoke the data uris to avoid memory leaks
-        files.forEach(file => URL.revokeObjectURL(file.preview));
-    }, [files]);
-
+    useEffect(
+        () => () => {
+            // Make sure to revoke the data uris to avoid memory leaks
+            files.forEach(file => URL.revokeObjectURL(file.preview));
+        },
+        [files]
+    );
 
     const contextType = useContext(OndemandContext);
-    
+
     const handleNextStep = e => {
         e.preventDefault();
         //error handling
-        if (contextType.val.floorSize === 0 || contextType.val.floorHeight === 0 || contextType.val.floorPlan.length === 0)
+        if (
+            contextType.val.floorSize === 0 ||
+            contextType.val.floorHeight === 0 ||
+            contextType.val.floorPlan.length === 0
+        )
             alert("Please fill in the required questions properly");
         else {
             props.nextStep();
@@ -142,12 +141,16 @@ const FloorPlanInfo = props => {
         isDragActive,
         isDragAccept,
         isDragReject
-    } = useDropzone({ 
-        accept: "image/*", 
+    } = useDropzone({
+        accept: "image/*",
         onDrop: acceptedFiles => {
-            setFiles(acceptedFiles.map(file => Object.assign(file, {
-              preview: URL.createObjectURL(file)
-            })));
+            setFiles(
+                acceptedFiles.map(file =>
+                    Object.assign(file, {
+                        preview: URL.createObjectURL(file)
+                    })
+                )
+            );
         }
     });
 
@@ -155,12 +158,8 @@ const FloorPlanInfo = props => {
         <OndemandConsumer>
             {value => (
                 <FloorInfoStyle>
-
-                    <Link to= "/">
-
-                        <div
-                            className="FloorInfo__BtnClose"
-                        >
+                    <Link to="/">
+                        <div className="FloorInfo__BtnClose">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -170,7 +169,6 @@ const FloorPlanInfo = props => {
                                 <path d="M16.192 6.344L11.949 10.586 7.707 6.344 6.293 7.758 10.535 12 6.293 16.242 7.707 17.656 11.949 13.414 16.192 17.656 17.606 16.242 13.364 12 17.606 7.758z" />
                             </svg>
                         </div>
-
                     </Link>
 
                     <main className="FloorInfoWrap">
@@ -200,7 +198,7 @@ const FloorPlanInfo = props => {
                             <select
                                 name="floorSizeUnit"
                                 onChange={value.handleChange("floorSizeUnit")}
-                                defaultValue = "m"
+                                defaultValue="m"
                             >
                                 <option value="m">m &sup2;</option>
                                 <option value="ft">feet &sup2;</option>
@@ -223,7 +221,7 @@ const FloorPlanInfo = props => {
                             <select
                                 name="floorHeightUnit"
                                 onChange={value.handleChange("floorHeightUnit")}
-                                defaultValue = "m"
+                                defaultValue="m"
                             >
                                 <option value="m">m</option>
                                 <option value="ft">feet</option>
@@ -244,7 +242,6 @@ const FloorPlanInfo = props => {
                             />
                         </FloorInfoInput>
 
-                        
                         <div className="FloorInfo__Drop">
                             *Upload Floor Plan
                             <Container
@@ -254,22 +251,19 @@ const FloorPlanInfo = props => {
                                     isDragReject
                                 })}
                             >
-                                <input 
-                                    
-                                    {...getInputProps({onChange: value.handlePlanFile})}   
+                                <input
+                                    // onChange={ value.handlePlanFile }
+                                    {...getInputProps({
+                                        onChange: value.handlePlanFile
+                                    })}
                                 />
                                 <p>
                                     Upload Your Floor Plan (files in .pdf or
                                     .jpg, .png format)
                                 </p>
-                                
                             </Container>
-                            <div style={thumbsContainer}>
-                                {thumbs}
-                            </div>
-                            
+                            <div style={thumbsContainer}>{thumbs}</div>
                         </div>
-                        
 
                         <section className="FloorInfo__Bottom">
                             <BtnBottom btnBack onClick={hanldeBtnBack}>
