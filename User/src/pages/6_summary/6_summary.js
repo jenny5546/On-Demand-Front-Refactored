@@ -254,9 +254,9 @@ const Summary = props => {
                                                 name="contactInfo"
                                                 value={value.val.contactInfo}
                                                 placeholder="테스팅을 위해 이메일 입력"
-                                                onChange={value.handleChange(
-                                                    "contactInfo"
-                                                )}
+                                                onChange={
+                                                    value.handleChange("contactInfo")
+                                                }
                                             >
                                             </input>
                                         </div>
