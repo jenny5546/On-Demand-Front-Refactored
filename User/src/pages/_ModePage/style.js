@@ -85,7 +85,7 @@ const ModeTypeCard = styled.div`
         
         margin: auto;
         margin-top: 8px;
-        font-size: 10px;
+        font-size: 12px;
         color: #4b4b4b;
         text-align: center;
     }
