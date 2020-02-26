@@ -17,16 +17,6 @@ import { Link } from 'react-router-dom';
 const Summary = props => {
 
     const contextType = useContext(OndemandContext);
-
-    async function refresh() {
-        try {
-          await contextType.handleSubmit();
-          window.location.replace('http://192.168.0.40:3000/')
-        }
-        catch (err) {
-          console.log('fetch failed', err);
-        }
-    }
     
     const handleConfirm = e => {
         //얘는 마지막 단계니까 payment 로 이동하게 바꾸기
@@ -35,8 +25,8 @@ const Summary = props => {
         /* *-------------------------------------------------------------------* 
                     이 부분은 앞으로 결제 창으로 넘어가도록 바꾸어야 하는 부분 
         *-------------------------------------------------------------------* */
-        // : contextType.handleSubmit()
-        : refresh()
+        : props.nextStep();
+       
         
     };
     const handleBtnBack = e => {

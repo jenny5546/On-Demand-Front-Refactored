@@ -110,7 +110,7 @@ class FloorType extends Component {
                                 </FloorTypeCard>
                             </section>
 
-                            <Link className="FloorType__BackLink" to="/">
+                            <Link className="FloorType__BackLink" to="/ondemand">
                                 <div
                                     className="FloorType__BtnBack"
                                     onClick={value.handleOpenModal}
