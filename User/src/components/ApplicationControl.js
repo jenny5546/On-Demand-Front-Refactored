@@ -14,7 +14,7 @@ import Complete from "../pages/8_complete/8_complete";
 
 class Application extends Component {
     state = {
-        step: 7
+        step: 1
     };
 
     nextStep = () => {
