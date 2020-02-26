@@ -6,6 +6,7 @@ import FloorStyle from "../pages/4_floorTheme/4_floorTheme";
 import AdditionalRequests from "../pages/5_addReq/5_addReq";
 import Summary from "../pages/6_summary/6_summary";
 import Payment from "../pages/7_payment/7_payment";
+import Complete from "../pages/8_complete/8_complete";
 
 /* *-----------------------------------------------------------------* 
             Application 의 각 섹션들이 등장하는 Step을 관리하는 Page
@@ -97,6 +98,14 @@ class Application extends Component {
             case 7:
                 return (
                     <Payment
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                    />
+                );
+
+            case 8:
+                return (
+                    <Complete
                         prevStep={this.prevStep}
                     />
                 );

@@ -19,7 +19,7 @@ class AdditionalRequests extends Component {
             <OndemandConsumer>
                 {value => (
                     <AddReqStyle>
-                        <Link to= "/">
+                        <Link to= "/ondemand">
 
                             <div
                                 className="AddReq__BtnClose"

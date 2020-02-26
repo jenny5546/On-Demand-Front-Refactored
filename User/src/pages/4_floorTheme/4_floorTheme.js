@@ -163,7 +163,7 @@ const FloorTheme = props => {
         <OndemandConsumer>
             {value => (
                 <FloorThemeStyle>
-                    <Link to= "/">
+                    <Link to= "/ondemand">
 
                         <div
                             className="FloorTheme__BtnClose"

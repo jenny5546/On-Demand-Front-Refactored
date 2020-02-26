@@ -19,12 +19,9 @@ const Summary = props => {
     const contextType = useContext(OndemandContext);
     
     const handleConfirm = e => {
-        //얘는 마지막 단계니까 payment 로 이동하게 바꾸기
+        
         e.preventDefault();
         contextType.val.contactInfo === "" ? alert('테스팅을 위한 이메일 입력 바람') 
-        /* *-------------------------------------------------------------------* 
-                    이 부분은 앞으로 결제 창으로 넘어가도록 바꾸어야 하는 부분 
-        *-------------------------------------------------------------------* */
         : props.nextStep();
        
         
@@ -77,7 +74,7 @@ const Summary = props => {
             <OndemandConsumer>
                 {value => (
                     <SummaryStyle>
-                        <Link to= "/">
+                        <Link to= "/ondemand">
 
                             <div
                                 className="Summary__BtnClose"
