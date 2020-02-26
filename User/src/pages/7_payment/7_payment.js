@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { OndemandContext, OndemandConsumer } from "../../context/OndemandContext";
-import { PaymentStyle, PaymentTextarea, BtnBottom } from "./style";
+import { PaymentStyle, BtnBottom } from "./style";
 import { Link } from 'react-router-dom';
 
 const Payment = props => {
 
+   
     const contextType = useContext(OndemandContext);
 
     // async function refresh() {
@@ -53,22 +54,13 @@ const Payment = props => {
 
                     <main className="PaymentWrap">
                         <div className="Payment__Title">
-                            난사실 payment
+                            Payment
                         </div>
                         <div className="Payment__SubTitle">
                             Feel Free to tell us any other{" "}
                             <span>requests</span>
                         </div>
                         <div className="Payment__UnderBar" />
-
-                        {/* <PaymentTextarea
-                            name="additionalRequest"
-                            value={value.val.additionalRequest}
-                            placeholder="Type in any other requests you would like us to know, just press next to skip"
-                            onChange={value.handleChange(
-                                "additionalRequest"
-                            )}
-                        /> */}
 
                         <section className="Payment__Bottom">
                             <BtnBottom btnBack onClick={handleBtnBack}>
