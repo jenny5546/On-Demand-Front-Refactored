@@ -158,7 +158,7 @@ const FloorPlanInfo = props => {
         <OndemandConsumer>
             {value => (
                 <FloorInfoStyle>
-                    <Link to="/">
+                    <Link to="/ondemand">
                         <div className="FloorInfo__BtnClose">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

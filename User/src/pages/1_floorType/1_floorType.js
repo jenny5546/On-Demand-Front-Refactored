@@ -23,7 +23,7 @@ class FloorType extends Component {
             <OndemandConsumer>
                 {value => (
                     <FloorTypeStyle>
-                        <Link to="/">
+                        <Link to="/ondemand">
                             <div className="FloorType__BtnClose">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

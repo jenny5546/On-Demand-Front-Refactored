@@ -26,7 +26,7 @@ class SubFloorType extends Component {
                 {value => (
                     <FloorDetailStyle>
                         {/* 닫기 버튼은 그냥 다시 Mainpage로 돌아가게끔 라우팅 */}
-                        <Link to= "/">
+                        <Link to= "/ondemand">
                             <div
                                 className="FloorDetail__BtnClose"
                             >
