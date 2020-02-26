@@ -2,46 +2,47 @@ import React, { useState } from "react";
 import { OndemandConsumer } from "../../context/OndemandContext";
 import { PaymentStyle, BtnBottom } from "./style";
 import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
+import {loadStripe, customer} from '@stripe/stripe-js';
+// import stripe, { customers, subscriptions, invoices, coupons } from '@stripe/stripe-js';
 import { Link } from 'react-router-dom';
 import CheckoutForm from './PaymentComponents/CheckoutForm';
 
 const Payment = props => {
 
+
+    /* *-----------------------------------------------------------------* 
+       Payment Intent status가 success이면 next 버튼 클릭 가능, 아니면 클릭 안됨 
+    *-----------------------------------------------------------------* */
     const [enable, setEnable] = useState(false);
     
+    
+
     // const STRIPE_KEY = process.env.REACT_APP_STRIPE_TEST_KEY;
     // console.log(STRIPE_KEY)
-
-
-    const stripePromise = loadStripe('{REACT_APP_STRIPE_TEST_KEY}');
-    // const contextType = useContext(OndemandContext);
-
-    // async function refresh() {
-
-    //     try {
-    //       await contextType.handleSubmit();
-    //       window.location.replace('http://192.168.0.40:3000/')
-    //     }
-    //     catch (err) {
-    //       console.log('fetch failed', err);
-    //     }
-    // }
-
+    const stripePromise = loadStripe('');
+    
+    
     const handleNextStep = e => {
         e.preventDefault();
-        enable ? props.nextStep(): alert('pay properly')
-        // props.nextStep();
+        enable ? props.nextStep(): alert('pay properly'); //만약 success면 다음 step인 complete화면으로 넘어가기 가능.
+        
     };
 
     const handleBtnBack = e => {
         e.preventDefault();
         props.prevStep();
     };
-    
+    const createOndemendPayment=()=>{
 
-    
-
+        let customeer = stripePromise.customeer.create({
+            name : 'name',
+            email : 'email',
+            source : 'token.id'
+        })
+        //1. customer create
+        //2. product info 
+        //3. invoice 
+    }
     return (
         <OndemandConsumer>
             {value => (
