@@ -85,6 +85,7 @@ const BtnBottom = styled.div`
     width: 240px;
     height: 48px;
     border: 1px solid ${props => (props.btnBack ? "#dbdbdb" : "#d9e7e9")};
+    
     box-sizing: border-box;
 
     font-size: 14px;

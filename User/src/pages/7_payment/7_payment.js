@@ -1,12 +1,21 @@
-import React, { useContext } from "react";
-import { OndemandContext, OndemandConsumer } from "../../context/OndemandContext";
+import React, { useState } from "react";
+import { OndemandConsumer } from "../../context/OndemandContext";
 import { PaymentStyle, BtnBottom } from "./style";
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 import { Link } from 'react-router-dom';
+import CheckoutForm from './PaymentComponents/CheckoutForm';
 
 const Payment = props => {
 
-   
-    const contextType = useContext(OndemandContext);
+    const [enable, setEnable] = useState(false);
+    
+    // const STRIPE_KEY = process.env.REACT_APP_STRIPE_TEST_KEY;
+    // console.log(STRIPE_KEY)
+
+
+    const stripePromise = loadStripe('{TEST_KEY}');
+    // const contextType = useContext(OndemandContext);
 
     // async function refresh() {
 
@@ -21,19 +30,21 @@ const Payment = props => {
 
     const handleNextStep = e => {
         e.preventDefault();
-        props.nextStep();
+        enable ? props.nextStep(): alert('pay properly')
+        // props.nextStep();
     };
 
     const handleBtnBack = e => {
         e.preventDefault();
         props.prevStep();
     };
+    
 
     
 
     return (
         <OndemandConsumer>
-            {value => (
+            {/* {value => ( */}
                 <PaymentStyle>
                     <Link to= "/ondemand">
 
@@ -57,23 +68,28 @@ const Payment = props => {
                             Payment
                         </div>
                         <div className="Payment__SubTitle">
-                            Feel Free to tell us any other{" "}
-                            <span>requests</span>
+                            Card details
                         </div>
                         <div className="Payment__UnderBar" />
+                        <div>
+                            <Elements stripe={stripePromise}>
+                                <CheckoutForm setEnable={setEnable}/>
+                            </Elements>
+                        </div>
+                        
 
                         <section className="Payment__Bottom">
                             <BtnBottom btnBack onClick={handleBtnBack}>
                                 Back
                             </BtnBottom>
-
+                            {/* style={{ pointerEvents:  enable ? 'auto': 'none' }}   */}
                             <BtnBottom onClick={handleNextStep}>
                                 Next
                             </BtnBottom>
                         </section>
                     </main>
                 </PaymentStyle>
-            )}
+            {/* )} */}
         </OndemandConsumer>
     )
 }
