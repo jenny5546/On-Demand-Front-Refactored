@@ -9,10 +9,10 @@ class ModeType extends Component {
             <ModeTypeStyle>
                 <main className="ModeTypeWrap">
                     <div className="ModeType__Title">
-                        Choose Your Floor Plan Type
+                        New Project
                     </div>
                     <div className="ModeType__Subtitle">
-                        Tell us the purpose of your floor
+                        Subtitle
                     </div>
 
                     <section className="ModeType__CardWrap">
