@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const ModeTypeStyle = styled.main`
+
     position: fixed;
     top: 0;
     left: 0;
@@ -9,15 +10,17 @@ const ModeTypeStyle = styled.main`
     height: 100vh;
     z-index: 1;
 
-
     .ModeTypeWrap {
+
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         user-select: none;
+        
 
         .ModeType__Title {
+
             font-size: 24px;
             font-weight: 700;
             color: #2b2b2b;
@@ -35,16 +38,15 @@ const ModeTypeStyle = styled.main`
 
     .ModeType__CardWrap {
         min-width: 560px;
+        display: flex;
     }
 
-    .ModeType__BackLink {
-        text-decoration: none;
-    }
-
+    
     
 `;
 
 const ModeTypeCard = styled.div`
+
     display: inline-block;
     width: 272px;
     height: 356px;
@@ -55,9 +57,6 @@ const ModeTypeCard = styled.div`
     transition: all 0.32s ease;
     cursor: pointer;
 
-    &:nth-child(2) {
-        margin-right: 0;
-    }
 
     &:hover {
         background: #e7f2f4;
@@ -83,6 +82,7 @@ const ModeTypeCard = styled.div`
 
     .ModeType__Desc {
         width: 240px;
+        
         margin: auto;
         margin-top: 8px;
         font-size: 10px;

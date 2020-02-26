@@ -36,6 +36,7 @@ const CompleteStyle = styled.main`
     }
 
     .CompleteWrap {
+
         position: absolute;
         top: 50%;
         left: 50%;
@@ -49,6 +50,10 @@ const CompleteStyle = styled.main`
             font-weight: 700;
             color: #2b2b2b;
             text-align: center;
+            span {
+                font-weight: 700;
+                color: #499fb6;
+            }
         }
 
         .Complete__SubTitle {
@@ -56,10 +61,7 @@ const CompleteStyle = styled.main`
             color: #4b4b4b;
             margin: 16px auto;
             text-align: center;
-            span {
-                font-weight: 700;
-                color: #499fb6;
-            }
+            
         }
 
         .Complete__UnderBar {
@@ -76,13 +78,14 @@ const CompleteStyle = styled.main`
 `;
 
 const BtnBottom = styled.div`
+
     display: inline-block;
     margin-right: 16px;
-    width: 240px;
+    width: 100%;
     height: 48px;
     border: 1px solid ${props => (props.btnBack ? "#dbdbdb" : "#d9e7e9")};
     box-sizing: border-box;
-
+    text-align: center;
     font-size: 14px;
     font-weight: 700;
     line-height: 48px;
@@ -103,15 +106,5 @@ const BtnBottom = styled.div`
     }
 `;
 
-// const AddReqTextarea = styled.textarea`
-//     width: 560px;
-//     height: 240px;
-//     box-sizing: border-box;
-//     border: 1px solid #dbdbdb;
-//     padding: 16px;
-
-//     font-size: 14px;
-//     color: #4b4b4b;
-// `;
 
 export { CompleteStyle, BtnBottom };
