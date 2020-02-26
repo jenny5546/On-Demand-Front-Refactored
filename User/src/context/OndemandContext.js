@@ -6,34 +6,29 @@ const OndemandContext = createContext();
 
 const { Provider, Consumer: OndemandConsumer } = OndemandContext;
 
-
-
 /* *-------------------------------------------------------------------* 
             Context 전체 관리 (modal open-close 및 폼 입력 값들 )
             + 폼 받아서 마지막에 Admin 으로 넘기는 과정까지 
 *-------------------------------------------------------------------* */
 
 class OndemandProvider extends Component {
-
     state = {
-
         openModal: false,
-        
+
         floorType: "",
-        commercialType: "", 
-        floorPlan: [], 
+        commercialType: " ",
+        floorPlan: [],
         floorPlanUrl: [],
-        floorSize: 0, 
+        floorSize: 0,
         floorSizeUnit: "m",
         floorHeight: 0,
         floorHeightUnit: "m",
         floorAddress: "",
         floorSelectedTheme: [],
-        floorUploadedTheme: [], 
+        floorUploadedTheme: [],
         floorUploadedThemeUrl: [],
-        additionalRequest: "", 
-        contactInfo: "" 
-
+        additionalRequest: "",
+        contactInfo: ""
     };
 
     handleOpenModal = () => {
@@ -60,31 +55,34 @@ class OndemandProvider extends Component {
     /* Floor plan upload 할 때 처리  */
     handlePlanFile = e => {
         if (e.target.files[0]) {
-            this.setState({ floorPlan: [...this.state.floorPlan, ...e.target.files] }) //admin으로 보내는 애
-            
-            const urls = [] 
-            const files = Object.values(e.target.files)
+            this.setState({
+                floorPlan: [...this.state.floorPlan, ...e.target.files]
+            }); //admin으로 보내는 애
 
-            files.map(
-                f => urls.push(URL.createObjectURL(f))
-            )
-            this.setState({ floorPlanUrl: urls }) //summary에서 보여주는 애
+            const urls = [];
+            const files = Object.values(e.target.files);
+
+            files.map(f => urls.push(URL.createObjectURL(f)));
+            this.setState({ floorPlanUrl: urls }); //summary에서 보여주는 애
         }
     };
 
     /* Theme 직접 upload 할 때 처리  */
     handleUploadedTheme = e => {
         if (e.target.files[0]) {
-            this.setState({ floorUploadedTheme: [...this.state.floorUploadedTheme, ...e.target.files] }) //admin으로 보내는 애 
-           
+            this.setState({
+                floorUploadedTheme: [
+                    ...this.state.floorUploadedTheme,
+                    ...e.target.files
+                ]
+            }); //admin으로 보내는 애
+
             const urls = [];
             const files = Object.values(e.target.files);
 
-            files.map(
-                f => urls.push(URL.createObjectURL(f))
-            )
+            files.map(f => urls.push(URL.createObjectURL(f)));
 
-            this.setState({ floorUploadedThemeUrl: urls }) //summary에서 보여주는 애
+            this.setState({ floorUploadedThemeUrl: urls }); //summary에서 보여주는 애
         }
     };
 
@@ -97,13 +95,12 @@ class OndemandProvider extends Component {
                     | Back 에 POST 날리는 부분 |
     *-------------------------------------------------------------------* */
 
-    handleSubmit= () => {
-
+    handleSubmit = () => {
         let form_data = new FormData();
-        
+
         form_data.set("floor_type", this.state.floorType);
         form_data.set("commercial_type", this.state.commercialType);
-        
+
         const plan = this.state.floorPlan;
         for (var file of plan) {
             form_data.append("floor_plan", file);
@@ -137,7 +134,7 @@ class OndemandProvider extends Component {
         for (var value of form_data.values()) {
             console.log(value);
         }
-        
+
         axios
             .post(`http://0.0.0.0:8000/adminpage/request/`, form_data, {
                 headers: {
@@ -148,17 +145,15 @@ class OndemandProvider extends Component {
                 console.log(res.data);
             })
             .catch(err => console.log(err));
-    }
-
+    };
 
     render() {
-
         const {
             floorType,
             commercialType,
             floorPlan,
             floorPlanUrl,
-            floorSize, 
+            floorSize,
             floorSizeUnit,
             floorHeight,
             floorHeightUnit,
@@ -167,7 +162,7 @@ class OndemandProvider extends Component {
             floorUploadedTheme,
             floorUploadedThemeUrl,
             additionalRequest,
-            contactInfo,
+            contactInfo
         } = this.state;
 
         const val = {
@@ -175,7 +170,7 @@ class OndemandProvider extends Component {
             commercialType,
             floorPlan,
             floorPlanUrl,
-            floorSize, 
+            floorSize,
             floorSizeUnit,
             floorHeight,
             floorHeightUnit,
@@ -184,9 +179,9 @@ class OndemandProvider extends Component {
             floorUploadedTheme,
             floorUploadedThemeUrl,
             additionalRequest,
-            contactInfo,
+            contactInfo
         };
-        
+
         return (
             <Provider
                 value={{
@@ -199,11 +194,10 @@ class OndemandProvider extends Component {
                     handleUploadedTheme: this.handleUploadedTheme,
                     handleSelectedTheme: this.handleSelectedTheme,
                     handleSubmit: this.handleSubmit,
-                    val: val,
+                    val: val
                 }}
             >
-                {this.props.children} 
-
+                {this.props.children}
             </Provider>
         );
     }
