@@ -5,6 +5,7 @@ import Tutorial from "../../components/Tutorial/Tutorial";
 import { OndemandStyle, OndemandIframe, OndemandStartBtn } from "./style.js";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { OndemandConsumer } from "../../context/OndemandContext";
+import { Link } from "react-router-dom";
 
 /* *-----------------------------------------------------------------* 
                 키자마자 보이는 On DemandMain Page
@@ -95,9 +96,14 @@ class MainPage extends Component {
                                         <span>Click to Get Started</span>
                                     </OndemandStartBtn>
 
-                                    <OndemandStartBtn className="Left__Btn">
-                                        <span>Back</span>
-                                    </OndemandStartBtn>
+                                    <Link to="/" style={{textDecoration: 'none'}}>
+                                        
+                                        <OndemandStartBtn className="Left__Btn">
+                                            <span>Back</span>
+                                        </OndemandStartBtn>
+
+                                    </Link>
+                                    
                                 </div>
                             </section>
 

@@ -14,7 +14,7 @@ const Payment = props => {
     // console.log(STRIPE_KEY)
 
 
-    const stripePromise = loadStripe('{TEST_KEY}');
+    const stripePromise = loadStripe('{REACT_APP_STRIPE_TEST_KEY}');
     // const contextType = useContext(OndemandContext);
 
     // async function refresh() {
@@ -44,7 +44,8 @@ const Payment = props => {
 
     return (
         <OndemandConsumer>
-            {/* {value => ( */}
+            {value => (
+                <>
                 <PaymentStyle>
                     <Link to= "/ondemand">
 
@@ -88,8 +89,10 @@ const Payment = props => {
                             </BtnBottom>
                         </section>
                     </main>
+
                 </PaymentStyle>
-            {/* )} */}
+                </>
+            )}
         </OndemandConsumer>
     )
 }
