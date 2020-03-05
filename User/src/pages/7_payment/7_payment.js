@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { OndemandConsumer } from "../../context/OndemandContext";
 import { PaymentStyle, BtnBottom } from "./style";
 import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe, customer} from '@stripe/stripe-js';
+import { loadStripe, customer } from '@stripe/stripe-js';
 // import stripe, { customers, subscriptions, invoices, coupons } from '@stripe/stripe-js';
 import { Link } from 'react-router-dom';
 import CheckoutForm from './PaymentComponents/CheckoutForm';
@@ -34,7 +34,7 @@ const Payment = props => {
     };
     const createOndemendPayment=()=>{
 
-        let customeer = stripePromise.customeer.create({
+        let customer = stripePromise.customer.create({
             name : 'name',
             email : 'email',
             source : 'token.id'

@@ -98,7 +98,8 @@ class Request(models.Model):
 
   add_request = models.TextField(
     null = True,
-    blank = True
+    blank = True,
+    default =''
   )
 
 # Client 에게 받은 email

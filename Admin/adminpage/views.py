@@ -151,12 +151,13 @@ def request(request):
     print('gotit')
     ################## User email info ###################
     username = generate_username(1)[0] #임시로 더미 만들기
-    useremail= request.POST.get('contact_info')
     # useremail = 'jenny5546@naver.com' #연결할때, front에서 들고오기
     ######################################################
 
 
     # print(user)
+    useremail= request.POST.get('contact_info')
+    print(useremail)
     floor_type = request.POST.get('floor_type')
     commercial_type = request.POST.get('commercial_type')
     floor_size = request.POST.get('floor_size')
